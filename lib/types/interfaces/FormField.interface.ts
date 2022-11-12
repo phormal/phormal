@@ -3,6 +3,7 @@ import {VNode} from 'maquette'
 
 export default interface FormFieldInterface {
   type: FormFieldType;
+  name: string;
   value?: string | number;
   defaultValue?: string | number;
   label?: string;

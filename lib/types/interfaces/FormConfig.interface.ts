@@ -2,13 +2,13 @@ import {FormFieldType} from '../globals'
 import {Hook, HookReturnValue} from './Hook.interface'
 
 export default interface FormConfig {
-  fields: ConfigFormField[];
+  fields: { [key: string]: ConfigFormField };
   el: string;
 }
 
 export interface ConfigFormField {
-  type: FormFieldType;
-  defaultValue?: string | number;
+  type?: FormFieldType;
+  value?: string;
   label?: string;
   placeholder?: string;
   required?: boolean;

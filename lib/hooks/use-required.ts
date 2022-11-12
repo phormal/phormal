@@ -2,11 +2,12 @@ import {Hook} from '../types/interfaces/Hook.interface'
 
 export const useRequired: Hook = () => {
   return {
-    validateFunctions: {
+    validators: {
       checkRequired() {
         const isValid = !!this.value || this.value === '0'
 
-        if (!this.errors.includes('required')) this.errors.push('required')
+        if (!this.errors.includes('required') && !isValid) this.errors.push('required')
+        if (this.errors.includes('required') && isValid) this.errors.splice(this.errors.indexOf('required'), 1)
 
         return isValid
       }

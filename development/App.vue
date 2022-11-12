@@ -2,18 +2,41 @@
 import SuperForm from '../lib'
 import {useRequired} from '../lib/hooks/use-required'
 import {useLength} from '../lib/hooks/use-length'
+import {useAutoCapitalize} from '../lib/hooks/use-auto-capitalize'
 
 export default {
 	name: 'App',
+	
+	data() {
+		return {
+			form: new SuperForm({
+				fields: {
+					firstName: {
+						label: 'First name',
+						hooks: [useRequired(), useLength(1, 155), useAutoCapitalize()],
+						value: 'John'
+					},
+					lastName: {
+						label: 'Last name',
+						hooks: [useRequired(), useLength(1, 155)],
+						value: 'Doe'
+					},
+				},
+				el: '#super-form'
+			}),
+		}
+	},
 
 	mounted() {
-		new SuperForm({
-			fields: [
-				{ placeholder: 'First name', type: 'text', hooks: [useRequired(), useLength(1, 155)] },
-				{ placeholder: 'Last name', type: 'text', hooks: [useRequired(), useLength(1, 155)] }
-			],
-			el: '#super-form'
-		}).init()
+		this.form.init()
+
+		console.log(this.form.values())
+	},
+
+	methods: {
+		runValidation() {
+			this.form.validate()
+		}
 	}
 }
 
@@ -24,9 +47,11 @@ export default {
 		<h1>SuperForm</h1>
 	</div>
 	<div id="super-form"></div>
+
+	<button @click="runValidation">Validate</button>
 </template>
 
-<style scoped>
+<style>
 .logo {
 	height: 6em;
 	padding: 1.5em;

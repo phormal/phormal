@@ -105,7 +105,7 @@ export class FormField implements FormFieldInterface {
 
   rerender() {
     const thisElement = document.getElementById(this.id)
-    if (!thisElement) return
+    if (!(thisElement instanceof Element)) return
 
     this.projector.replace(thisElement, () => this.render())
   }

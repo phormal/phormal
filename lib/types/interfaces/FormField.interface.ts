@@ -1,10 +1,12 @@
 import { FormFieldType } from '../globals'
 import {VNode} from 'maquette'
+import SuperForm from '../../index'
 
 export default interface FormFieldInterface {
+  form: SuperForm | undefined;
+
   type: FormFieldType;
   name: string;
-  value?: string | number;
   defaultValue?: string | number;
   label?: string;
   placeholder?: string;

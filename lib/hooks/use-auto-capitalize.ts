@@ -6,7 +6,7 @@ export const useAutoCapitalize = (): HookReturnValue => {
       onInputCallback(event?: { target: HTMLInputElement }) {
         const words = (event instanceof InputEvent
           ? event.target.value
-          : this.value).split(' ')
+          : this.form.getValue(this.name)).split(' ')
 
         console.log(words)
 

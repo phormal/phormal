@@ -1,12 +1,12 @@
-import {FormFieldType} from '../globals'
+import {FormFieldType, ValidationType} from '../globals'
 import {Hook, HookReturnValue} from './Hook.interface'
 
 export default interface FormConfig {
-  fields: { [key: string]: ConfigFormField };
   el: string;
+  validation?: ValidationType;
 }
 
-export interface ConfigFormField {
+export interface FormFieldConfig {
   type?: FormFieldType;
   value?: string;
   label?: string;

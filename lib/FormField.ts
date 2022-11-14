@@ -1,15 +1,18 @@
 import FormFieldInterface from './types/interfaces/FormField.interface'
 import {FormFieldType} from './types/globals'
-import {ConfigFormField} from './types/interfaces/FormConfig.interface'
+import {FormFieldConfig} from './types/interfaces/FormConfig.interface'
 import {createProjector, h, Projector, VNode} from 'maquette'
 import uniqid from 'uniqid';
+import SuperForm from './index'
+import ErrorMessage from './components/error-message'
 
 export class FormField implements FormFieldInterface {
+  form: SuperForm;
   type: FormFieldType = 'text';
   errors: string[] = []
   id = 'super-form-field-' + uniqid()
   inputId = 'super-form-field-input-' + uniqid()
-  value: string = ''
+  errorMsgId = 'super-form-field-error-' + uniqid()
   label: string = ''
   placeholder: string = ''
   name: string = ''
@@ -18,11 +21,11 @@ export class FormField implements FormFieldInterface {
 
   constructor(
     name: string,
-    formField: ConfigFormField
+    formField: FormFieldConfig,
+    form: SuperForm
   ) {
-    Object.assign(this, {[name]: () => this.value})
+    this.form = form
     this.placeholder = formField.placeholder ? formField.placeholder : ''
-    this.value = formField.value ? formField.value : ''
     this.label = formField.label ? formField.label : ''
     this.type = formField.type ? formField.type : 'text'
     this.name = name
@@ -33,10 +36,9 @@ export class FormField implements FormFieldInterface {
           Object.assign(this.validators, {...hook.validators})
         }
       }
-
-      console.log(this.name)
-      console.log(this.validators)
     }
+
+    this.form.getValue(this.name)
   }
 
   onClick() {
@@ -55,8 +57,9 @@ export class FormField implements FormFieldInterface {
   }
 
   onInput(event: Event) {
-    this.value = (event.target as HTMLInputElement).value
+    this.setValue((event.target as HTMLInputElement).value)
     this.runAllValidators()
+    this.updateDOM()
   }
 
   /**
@@ -65,10 +68,41 @@ export class FormField implements FormFieldInterface {
    * @param {String} value
    * */
   setValue(value: string) {
-    this.value = value
-    const thisElement: HTMLInputElement | null | HTMLElement = document.getElementById(this.inputId)
+    this.form.setValue(this.name, value)
+    const inputElement: HTMLInputElement | null | HTMLElement = document.getElementById(this.inputId)
+    if (inputElement instanceof HTMLInputElement) inputElement.value = value
+  }
 
-    if (thisElement instanceof HTMLInputElement) thisElement.value = value
+  updateDOM() {
+    // Only update the DOM on input, if the validation type is active
+    if (this.form.formConfig.validation !== 'active') return
+
+    const errorsElement: HTMLElement | null = document.getElementById(this.errorMsgId)
+
+    // Remove error message, if the input was corrected
+    if (errorsElement instanceof HTMLElement && !this.errors.length) {
+      errorsElement.remove()
+    }
+
+    if (!this.errors.length) return
+
+    const newErrorMsg = new ErrorMessage(this.errorMsgId, this.errors).render()
+
+    // If the error message is already rendered, replace it
+    if (errorsElement instanceof HTMLElement) {
+      return this.projector.replace(errorsElement, () => newErrorMsg)
+    }
+
+    // If the error message is not rendered, render it
+    const fieldContainer: HTMLElement | null = document.getElementById(this.id)
+    if (fieldContainer instanceof HTMLElement) {
+      this.projector.append(fieldContainer, () => newErrorMsg)
+    }
+  }
+
+
+  getValue() {
+    return this.form.getValue(this.name)
   }
 
   runAllValidators() {
@@ -80,10 +114,10 @@ export class FormField implements FormFieldInterface {
   render() {
     const inputLabel = this.label ? h('label', {for: this.inputId}, [this.label]) : null;
     const inputErrorMsg = this.errors.length
-      ? h('div', {}, ['Error! ' + this.errors.join(', ')])
+      ? new ErrorMessage(this.errorMsgId, this.errors).render()
       : null
 
-    return h('div', {id: this.id}, [
+    return h('div', { id: this.id }, [
       inputLabel,
       h(
         'input',
@@ -91,7 +125,7 @@ export class FormField implements FormFieldInterface {
           id: this.inputId,
           placeholder: this.placeholder,
           type: this.type,
-          value: this.value,
+          value: this.getValue(),
           oninput: this.onInput.bind(this),
           onblur: this.onBlur.bind(this),
           onfocus: this.onFocus.bind(this),

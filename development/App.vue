@@ -6,11 +6,11 @@ import {useAutoCapitalize} from '../lib/hooks/use-auto-capitalize'
 
 export default {
 	name: 'App',
-	
+
 	data() {
 		return {
-			form: new SuperForm({
-				fields: {
+			form: new SuperForm(
+				{
 					firstName: {
 						label: 'First name',
 						hooks: [useRequired(), useLength(1, 155), useAutoCapitalize()],
@@ -22,8 +22,11 @@ export default {
 						value: 'Doe'
 					},
 				},
-				el: '#super-form'
-			}),
+				{
+					el: '#super-form',
+					validation: 'passive'
+				}
+			)
 		}
 	},
 
@@ -36,8 +39,15 @@ export default {
 	methods: {
 		runValidation() {
 			this.form.validate()
+		},
+
+		getValues() {
+			console.log(this.form.values())
+
+			// console.log(this.form.firstName)
+			// console.log(this.form.lastName)
 		}
-	}
+	},
 }
 
 </script>
@@ -49,6 +59,7 @@ export default {
 	<div id="super-form"></div>
 
 	<button @click="runValidation">Validate</button>
+	<button @click="getValues">Get values</button>
 </template>
 
 <style>

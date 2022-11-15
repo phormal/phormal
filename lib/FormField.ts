@@ -58,8 +58,11 @@ export class FormField implements FormFieldInterface {
 
   onInput(event: Event) {
     this.setValue((event.target as HTMLInputElement).value)
+
+    if (this.form.formConfig.validation !== 'active') return
+
     this.runAllValidators()
-    this.updateDOM()
+    this.updateErrorMessageInDOM()
   }
 
   /**
@@ -73,10 +76,9 @@ export class FormField implements FormFieldInterface {
     if (inputElement instanceof HTMLInputElement) inputElement.value = value
   }
 
-  updateDOM() {
+  updateErrorMessageInDOM() {
+    console.log('updateErrorMessageInDOM')
     // Only update the DOM on input, if the validation type is active
-    if (this.form.formConfig.validation !== 'active') return
-
     const errorsElement: HTMLElement | null = document.getElementById(this.errorMsgId)
 
     // Remove error message, if the input was corrected
@@ -112,10 +114,10 @@ export class FormField implements FormFieldInterface {
   }
 
   render() {
+    const previousErrorMsg = document.getElementById(this.errorMsgId)
+    if (previousErrorMsg instanceof HTMLElement) previousErrorMsg.remove()
+
     const inputLabel = this.label ? h('label', {for: this.inputId}, [this.label]) : null;
-    const inputErrorMsg = this.errors.length
-      ? new ErrorMessage(this.errorMsgId, this.errors).render()
-      : null
 
     return h('div', { id: this.id }, [
       inputLabel,
@@ -133,14 +135,6 @@ export class FormField implements FormFieldInterface {
           onchange: this.onChange.bind(this)
         }
       ),
-      inputErrorMsg,
     ])
-  }
-
-  rerender() {
-    const thisElement = document.getElementById(this.id)
-    if (!(thisElement instanceof Element)) return
-
-    this.projector.replace(thisElement, () => this.render())
   }
 }

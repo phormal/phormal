@@ -32,8 +32,6 @@ export default {
 
 	mounted() {
 		this.form.init()
-
-		console.log(this.form.values())
 	},
 
 	methods: {

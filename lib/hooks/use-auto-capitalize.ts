@@ -8,8 +8,6 @@ export const useAutoCapitalize = (): HookReturnValue => {
           ? event.target.value
           : this.form.getValue(this.name)).split(' ')
 
-        console.log(words)
-
         for (let i = 0; i < words.length; i++) {
           if (!words[i]) continue
 

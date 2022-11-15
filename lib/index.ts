@@ -68,7 +68,7 @@ export default class SuperForm {
   validate() {
     for (const field of Object.values(this.fields)) {
       field.runAllValidators()
-      field.rerender()
+      field.updateErrorMessageInDOM()
     }
   }
 

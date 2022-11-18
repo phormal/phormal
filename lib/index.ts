@@ -2,7 +2,8 @@ import FormConfig, {FormFieldConfig} from './types/interfaces/FormConfig.interfa
 import FormFieldInterface from './types/interfaces/FormField.interface'
 import {FormField} from './FormField'
 import {VNode, Projector, createProjector} from 'maquette'
-import {ValidationType} from './types/globals'
+import {MultiSelect} from './fields/MultiSelect'
+import {Checkbox} from './fields/Checkbox'
 
 export default class SuperForm {
   formConfig: FormConfig;
@@ -29,7 +30,11 @@ export default class SuperForm {
       // Set the field's value to the default value if it exists
       Object.assign(this, {[fieldName]: field.value})
 
-      this.fields[fieldName] = new FormField(
+      let FormFieldClass = FormField
+      if (field.type === 'select') FormFieldClass = MultiSelect
+      if (field.type === 'checkbox') FormFieldClass = Checkbox
+
+      this.fields[fieldName] = new FormFieldClass(
         fieldName,
         field,
         this,
@@ -56,7 +61,7 @@ export default class SuperForm {
 
   values() {
     const fieldNames = Object.keys(this.fields)
-    type returnValueType = { [key: string]: string }
+    type returnValueType = { [key: string]: string|boolean }
 
     return fieldNames.reduce((acc, fieldName) => {
       acc[fieldName] = this.getValue(fieldName)
@@ -72,13 +77,13 @@ export default class SuperForm {
     }
   }
 
-  setValue(fieldName: string, value: string) {
+  setValue(fieldName: string, value: string|boolean) {
     Object.assign(this, {[fieldName]: value})
   }
 
   getValue(fieldName: string): string {
     const val = this[fieldName as keyof SuperForm]
-    if (typeof val === 'string') return val
+    if (typeof val === 'string' || typeof val === 'boolean') return val
 
     return ''
   }

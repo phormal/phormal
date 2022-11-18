@@ -9,28 +9,57 @@ export default {
 
 	data() {
 		return {
-			form: new SuperForm(
-				{
-					firstName: {
-						label: 'First name',
-						hooks: [useRequired(), useLength(1, 155), useAutoCapitalize()],
-						value: 'John'
-					},
-					lastName: {
-						label: 'Last name',
-						hooks: [useRequired(), useLength(1, 155)],
-						value: 'Doe'
+			form: undefined,
+
+			formFields: {
+				firstName: {
+					label: 'First name',
+					hooks: [useRequired(), useLength(1, 155), useAutoCapitalize()],
+					value: 'John',
+					handleOnBlur: () => {
+						this.firstNameBlurN++
+					}
+				},
+				lastName: {
+					label: 'Last name',
+					hooks: [useRequired(), useLength(1, 155)],
+					value: 'Doe',
+					handleOnFocus: (event, field) => {
+						console.log('onFocus', event)
+						this.lastNameFocusN += 1;
+						console.log(field)
 					},
 				},
-				{
-					el: '#super-form',
-					validation: 'passive'
-				}
-			)
+				country: {
+					type: 'select',
+					label: 'Country',
+					hooks: [useRequired()],
+					value: 'US',
+					options: [
+						{value: 'US', label: 'United States'},
+						{value: 'CA', label: 'Canada'},
+						{value: 'MX', label: 'Mexico'}
+					],
+				},
+				newsletter: {
+					type: 'checkbox',
+					label: 'Newsletter',
+					hooks: [],
+					value: true,
+				},
+			},
+
+			lastNameFocusN: 0,
+			firstNameBlurN: 0,
 		}
 	},
 
 	mounted() {
+		this.form = new SuperForm(this.formFields, {
+			el: '#super-form',
+			validation: 'passive'
+		})
+
 		this.form.init()
 	},
 
@@ -53,6 +82,9 @@ export default {
 <template>
 	<div>
 		<h1>SuperForm</h1>
+
+		<h2>First name was blurred {{ firstNameBlurN }} times</h2>
+		<h2>Last name was focus {{ lastNameFocusN }} times</h2>
 	</div>
 	<div id="super-form"></div>
 

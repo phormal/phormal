@@ -1,4 +1,4 @@
-import { FormFieldType } from '../globals'
+import {EventHandler, FormFieldType} from '../globals'
 import {VNode} from 'maquette'
 import SuperForm from '../../index'
 
@@ -22,11 +22,11 @@ export default interface FormFieldInterface {
   onFocus: (event: Event) => void;
   onInput: (event: Event) => void;
 
-  handleOnClick?: (...args: any) => any;
-  handleOnChange?: (...args: any) => any;
-  handleOnBlur?: (...args: any) => any;
-  handleOnFocus?: (...args: any) => any;
-  handleOnInput?: (...args: any) => any;
+  onClickHandlers: EventHandler[];
+  onChangeHandlers: EventHandler[];
+  onBlurHandlers: EventHandler[];
+  onFocusHandlers: EventHandler[];
+  onInputHandlers: EventHandler[];
 
   // Allow extensibility
   [key: string]: any;

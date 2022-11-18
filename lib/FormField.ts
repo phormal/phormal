@@ -1,7 +1,7 @@
 import FormFieldInterface from './types/interfaces/FormField.interface'
-import {FormFieldType} from './types/globals'
+import {EventHandler, FormFieldType} from './types/globals'
 import {FormFieldConfig} from './types/interfaces/FormConfig.interface'
-import {createProjector, h, Projector, VNode} from 'maquette'
+import {createProjector, h, Projector} from 'maquette'
 import uniqid from 'uniqid';
 import SuperForm from './index'
 import ErrorMessage from './components/error-message'
@@ -19,6 +19,12 @@ export class FormField implements FormFieldInterface {
   projector: Projector = createProjector()
   validators: { [key: string]: any } = {}
 
+  onClickHandlers: EventHandler[] = []
+  onChangeHandlers: EventHandler[] = []
+  onBlurHandlers: EventHandler[] = []
+  onFocusHandlers: EventHandler[] = []
+  onInputHandlers: EventHandler[] = []
+
   constructor(
     name: string,
     formField: FormFieldConfig,
@@ -29,6 +35,12 @@ export class FormField implements FormFieldInterface {
     this.label = formField.label ? formField.label : ''
     this.type = formField.type ? formField.type : 'text'
     this.name = name
+
+    if (formField.handleOnClick) this.onClickHandlers.push(formField.handleOnClick)
+    if (formField.handleOnChange) this.onChangeHandlers.push(formField.handleOnChange)
+    if (formField.handleOnBlur) this.onBlurHandlers.push(formField.handleOnBlur)
+    if (formField.handleOnFocus) this.onFocusHandlers.push(formField.handleOnFocus)
+    if (formField.handleOnInput) this.onInputHandlers.push(formField.handleOnInput)
 
     if (formField.hooks) {
       for (const hook of formField.hooks) {
@@ -41,23 +53,25 @@ export class FormField implements FormFieldInterface {
     this.form.getValue(this.name)
   }
 
-  onClick() {
-
+  onClick(event: Event) {
+    for (const cb of this.onClickHandlers) cb(event, this)
   }
 
   onChange(event: Event) {
+    for (const cb of this.onChangeHandlers) cb(event, this)
   }
 
-  onBlur() {
-
+  onBlur(event: Event) {
+    for (const cb of this.onBlurHandlers) cb(event, this)
   }
 
-  onFocus() {
-
+  onFocus(event: Event) {
+    for (const cb of this.onFocusHandlers) cb(event, this)
   }
 
   onInput(event: Event) {
     this.setValue((event.target as HTMLInputElement).value)
+    for (const cb of this.onInputHandlers) cb(event, this)
 
     if (this.form.formConfig.validation !== 'active') return
 
@@ -77,8 +91,6 @@ export class FormField implements FormFieldInterface {
   }
 
   updateErrorMessageInDOM() {
-    console.log('updateErrorMessageInDOM')
-    // Only update the DOM on input, if the validation type is active
     const errorsElement: HTMLElement | null = document.getElementById(this.errorMsgId)
 
     // Remove error message, if the input was corrected
@@ -114,9 +126,6 @@ export class FormField implements FormFieldInterface {
   }
 
   render() {
-    const previousErrorMsg = document.getElementById(this.errorMsgId)
-    if (previousErrorMsg instanceof HTMLElement) previousErrorMsg.remove()
-
     const inputLabel = this.label ? h('label', {for: this.inputId}, [this.label]) : null;
 
     return h('div', { id: this.id }, [

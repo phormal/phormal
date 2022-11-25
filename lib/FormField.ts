@@ -2,7 +2,6 @@ import FormFieldInterface from './types/interfaces/FormField.interface'
 import {EventHandler, FormFieldType} from './types/globals'
 import {FormFieldConfig} from './types/interfaces/FormConfig.interface'
 import {createProjector, h, Projector} from 'maquette'
-import uniqid from 'uniqid';
 import SuperForm from './index'
 import ErrorMessage from './components/error-message'
 
@@ -10,9 +9,6 @@ export class FormField implements FormFieldInterface {
   form: SuperForm;
   type: FormFieldType = 'text';
   errors: string[] = []
-  id = 'super-form-field-' + uniqid()
-  inputId = 'super-form-field-input-' + uniqid()
-  errorMsgId = 'super-form-field-error-' + uniqid()
   label: string = ''
   placeholder: string = ''
   name: string = ''
@@ -51,6 +47,18 @@ export class FormField implements FormFieldInterface {
     }
 
     this.form.getValue(this.name)
+  }
+
+  get id() {
+    return 'super-form-field-' + this.name
+  }
+
+  get inputId() {
+    return 'super-form-field-input-' + this.name
+  }
+
+  get errorMsgId() {
+    return 'super-form-field-error-' + this.name
   }
 
   onClick(event: Event) {
@@ -113,7 +121,6 @@ export class FormField implements FormFieldInterface {
       this.projector.append(fieldContainer, () => newErrorMsg)
     }
   }
-
 
   getValue() {
     return this.form.getValue(this.name)

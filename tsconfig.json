@@ -11,13 +11,17 @@
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
-    "noEmit": true
+    "noEmit": true,
+	"types": ["vite/client", "cypress"]
   },
   "include": [
 	"lib/**/*.ts",
 	"lib/**/*.d.ts",
 	"lib/**/*.tsx",
-	"lib/**/*.vue"
+	"lib/**/*.vue",
+	"cypress/**/*.cy.ts",
+	"node_modules/cypress/types/mocha/index.d.ts",
+	"node_modules/cypress/types/cypress-global-vars.d.ts",
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

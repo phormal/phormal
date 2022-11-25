@@ -1,109 +1,12 @@
 <script lang="ts">
-import SuperForm from '../lib'
-import {useRequired} from '../lib/hooks/use-required'
-import {useLength} from '../lib/hooks/use-length'
-import {useAutoCapitalize} from '../lib/hooks/use-auto-capitalize'
+import {defineComponent} from 'vue'
 
-export default {
+export default defineComponent({
 	name: 'App',
-
-	data() {
-		return {
-			form: undefined,
-
-			formFields: {
-				firstName: {
-					label: 'First name',
-					hooks: [useRequired(), useLength(1, 155), useAutoCapitalize()],
-					value: 'John',
-					handleOnBlur: () => {
-						this.firstNameBlurN++
-					}
-				},
-				lastName: {
-					label: 'Last name',
-					hooks: [useRequired(), useLength(1, 155)],
-					value: 'Doe',
-					handleOnFocus: (event, field) => {
-						console.log('onFocus', event)
-						this.lastNameFocusN += 1;
-						console.log(field)
-					},
-				},
-				country: {
-					type: 'select',
-					label: 'Country',
-					hooks: [useRequired()],
-					value: 'US',
-					options: [
-						{value: 'US', label: 'United States'},
-						{value: 'CA', label: 'Canada'},
-						{value: 'MX', label: 'Mexico'}
-					],
-				},
-				newsletter: {
-					type: 'checkbox',
-					label: 'Newsletter',
-					hooks: [],
-					value: true,
-				},
-			},
-
-			lastNameFocusN: 0,
-			firstNameBlurN: 0,
-		}
-	},
-
-	mounted() {
-		this.form = new SuperForm(this.formFields, {
-			el: '#super-form',
-			validation: 'passive'
-		})
-
-		this.form.init()
-	},
-
-	methods: {
-		runValidation() {
-			this.form.validate()
-		},
-
-		getValues() {
-			console.log(this.form.values())
-
-			// console.log(this.form.firstName)
-			// console.log(this.form.lastName)
-		}
-	},
-}
+})
 
 </script>
 
 <template>
-	<div>
-		<h1>SuperForm</h1>
-
-		<h2>First name was blurred {{ firstNameBlurN }} times</h2>
-		<h2>Last name was focus {{ lastNameFocusN }} times</h2>
-	</div>
-	<div id="super-form"></div>
-
-	<button @click="runValidation">Validate</button>
-	<button @click="getValues">Get values</button>
+	<router-view></router-view>
 </template>
-
-<style>
-.logo {
-	height: 6em;
-	padding: 1.5em;
-	will-change: filter;
-}
-
-.logo:hover {
-	filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.vue:hover {
-	filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>

@@ -15,7 +15,7 @@ export default class ErrorMessage implements MaquetteComponent {
   render() {
     return h(
       'div',
-      { id: this.errorMsgId },
+      { id: this.errorMsgId, styles: { color: 'red' } },
       ['Error! ' + this.errors.join(', ')])
   }
 }

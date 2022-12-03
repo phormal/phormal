@@ -15,6 +15,7 @@ export class FormField implements FormFieldInterface {
   projector: Projector = createProjector()
   validators: { [key: string]: any } = {}
   _form: SuperForm;
+  _errorMessages = {}
 
   _onClickHandlers: EventHandler[] = []
   _onChangeHandlers: EventHandler[] = []
@@ -42,15 +43,29 @@ export class FormField implements FormFieldInterface {
 
     if (formField.hooks) {
       for (const hook of formField.hooks) {
+        // 1. Merge validators into the field
         if (hook.validators) {
           Object.assign(this.validators, {...hook.validators})
         }
 
+        // 2. Merge event handlers into the field
         if (typeof hook.handleOnInput === 'function') this._onInputHandlers.push(hook.handleOnInput)
+        if (typeof hook.handleOnClick === 'function') this._onClickHandlers.push(hook.handleOnClick)
+        if (typeof hook.handleOnChange === 'function') this._onChangeHandlers.push(hook.handleOnChange)
+        if (typeof hook.handleOnBlur === 'function') this._onBlurHandlers.push(hook.handleOnBlur)
+        if (typeof hook.handleOnFocus === 'function') this._onFocusHandlers.push(hook.handleOnFocus)
+
+        // 3. Merge error messages into the field
+        if (hook.errorMessages) {
+          this._errorMessages = {
+            ...this._errorMessages,
+            ...hook.errorMessages,
+          }
+        }
       }
     }
 
-    this._form.getValue(this.name)
+    this._form._getValue(this.name)
   }
 
   get id() {
@@ -78,7 +93,12 @@ export class FormField implements FormFieldInterface {
 
     if (!this.errors.length) return
 
-    const newErrorMsg = new ErrorMessage(this.errorMsgId, this.errors).render()
+    const newErrorMsg = new ErrorMessage(
+      this.errorMsgId,
+      this.errors,
+      this._errorMessages,
+      this._form._config.language || 'en'
+    ).render()
 
     // If the error message is already rendered, replace it
     if (errorsElement instanceof HTMLElement) {
@@ -93,7 +113,7 @@ export class FormField implements FormFieldInterface {
   }
 
   getValue() {
-    return this._form.getValue(this.name)
+    return this._form._getValue(this.name)
   }
 
   /**
@@ -102,7 +122,7 @@ export class FormField implements FormFieldInterface {
    * @param {String} value
    * */
   setValue(value: string) {
-    this._form.setValue(this.name, value)
+    this._form._setValue(this.name, value)
     const inputElement: HTMLInputElement | null | HTMLElement = document.getElementById(this.inputId)
     if (inputElement instanceof HTMLInputElement) inputElement.value = value
   }
@@ -147,7 +167,7 @@ export class FormField implements FormFieldInterface {
     this.setValue((event.target as HTMLInputElement).value)
     for (const cb of this._onInputHandlers) cb(event, this)
 
-    if (this._form.formConfig.validation !== 'active') return
+    if (this._form._config.validation !== 'active') return
 
     this.runAllValidators()
     this.updateErrorMessageInDOM()

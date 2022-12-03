@@ -40,7 +40,7 @@ export default {
         },
         zip: {
           label: 'ZIP code',
-          hooks: [useRequired(), useLength(1, 155), useValidZip()],
+          hooks: [useRequired(), useValidZip()],
           // value: '51378',
         },
         newsletter: {
@@ -59,7 +59,8 @@ export default {
   mounted() {
     this.form = new SuperForm(this.formFields, {
       el: '#super-form',
-      validation: 'active'
+      validation: 'active',
+      language: 'de',
     })
 
     this.form.init()

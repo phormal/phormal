@@ -7,6 +7,7 @@ import EventHandlers from './EventHandlers'
 export default interface FormConfig {
   el: string;
   validation?: ValidationType;
+  language?: string;
   theme?: 'base';
 }
 

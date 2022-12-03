@@ -17,6 +17,7 @@ export default interface FormFieldInterface {
   setValue(value: string | number): void;
 
   _form: SuperForm | undefined;
+  _errorMessages?: { [key: string]: string | object };
 
   _onClick: (event: Event) => void;
   _onChange: (event: Event) => void;

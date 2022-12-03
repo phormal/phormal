@@ -5,7 +5,7 @@ export class Checkbox extends FormField {
   _onInput(event: Event) {
     this.setValue((event.target as HTMLInputElement).checked)
 
-    if (this._form.formConfig.validation !== 'active') return
+    if (this._form._config.validation !== 'active') return
 
     this.runAllValidators()
     this.updateErrorMessageInDOM()
@@ -17,7 +17,7 @@ export class Checkbox extends FormField {
    * @param {String} value
    * */
   setValue(value: string|boolean) {
-    this._form.setValue(this.name, value)
+    this._form._setValue(this.name, value)
     const inputElement: HTMLInputElement | null | HTMLElement = document.getElementById(this.inputId)
     if (inputElement instanceof HTMLInputElement) inputElement.checked = Boolean(value)
   }

@@ -11,7 +11,7 @@
 
   .sflib__field-wrapper {
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 1em;
   }
 
   .sflib__checkbox-wrapper {
@@ -25,11 +25,12 @@
     display: block;
     width: 100%;
     font-size: 1rem;
-    padding: .75rem;
+    padding: 0 .75rem;
+    line-height: 2.75rem;
     border: 1px solid $colorBorder;
     border-radius: 0.5rem;
     background-color: rgb(249, 250, 251);
-    margin-bottom: 10px;
+    margin-bottom: 0.5rem;
     -webkit-appearance: none;
     -moz-appearance: none;
 
@@ -37,7 +38,6 @@
       border-color: $colorPrimary;
       outline: $colorPrimary solid 1px;
       background-color: $colorPrimaryLight;
-      padding-left: 1rem;
     }
 
     &:disabled {
@@ -57,7 +57,7 @@
     background-color: #fff;
     margin: {
       top: 0;
-      right: 10px;
+      right: 1em;
       bottom: 0;
       left: 0;
     };
@@ -90,22 +90,40 @@
     transform: scale(1);
   }
 
-  .sflib__field-label {
+  @mixin labelBase {
     font-size: 1rem;
     color: rgb(17, 24, 39);
     font-weight: 600;
+  }
+
+  .sflib__field-label {
+    @include labelBase;
     display: block;
     margin-bottom: 5px;
   }
 
   .sflib__checkbox-label {
-    font-size: 1rem;
-    color: rgb(17, 24, 39);
-    font-weight: 600;
+    @include labelBase;
   }
 
   .sflib__error-message {
     margin-bottom: 10px;
     font-size: .9rem;
+
+    ul {
+      margin: 0;
+      padding-left: 0;
+      list-style-type: none;
+    }
+
+    li {
+      margin-bottom: 0.25rem;
+
+      &:before {
+        content: "–";
+        text-indent: -5px;
+        margin-right: 0.5rem;
+      }
+    }
   }
 }

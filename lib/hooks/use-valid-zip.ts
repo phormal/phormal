@@ -9,21 +9,63 @@ import {FormField} from "../FormField";
  * of any ISO 3166 Alpha-2 Code: https://www.iso.org/obp/ui/#search/code/
  * */
 export const useValidZip: Hook = (): HookReturnValue => {
+  const ERROR_NAME = 'zip'
+
   return {
     validators: {
       checkZipCode(field: FormField) {
         const currentValue = field.getValue()
-        const currentCountryValue = field._form.getValue('country')
+        const currentCountryValue = field._form._getValue('country')
         const countryHasPattern = zipCodePatterns.hasOwnProperty(currentCountryValue)
         const isValid = countryHasPattern ? zipCodePatterns[currentCountryValue].test(currentValue) : true
 
-        const errorName = 'zip'
-        if (!field.errors.includes(errorName) && !isValid) field.errors.push(errorName)
-        if (field.errors.includes(errorName) && isValid) field.errors.splice(field.errors.indexOf(errorName), 1)
-
-        return isValid
+        if (!field.errors.includes(ERROR_NAME) && !isValid) field.errors.push(ERROR_NAME)
+        if (field.errors.includes(ERROR_NAME) && isValid) field.errors.splice(field.errors.indexOf(ERROR_NAME), 1)
       }
     },
+
+    errorMessages: {
+      [ERROR_NAME]: {
+        en: 'Invalid zip code',
+        es: 'Código postal inválido',
+        de: 'Ungültige Postleitzahl',
+        fr: 'Code postal invalide',
+        it: 'Codice postale non valido',
+        pt: 'Código postal inválido',
+        ru: 'Неверный почтовый индекс',
+        zh: '邮政编码无效',
+        ja: '無効な郵便番号',
+        ko: '잘못된 우편 번호',
+        nl: 'Ongeldige postcode',
+        pl: 'Nieprawidłowy kod pocztowy',
+        sv: 'Ogiltigt postnummer',
+        tr: 'Geçersiz posta kodu',
+        vi: 'Mã bưu chính không hợp lệ',
+        ar: 'رمز بريد غير صالح',
+        el: 'Μη έγκυρος ταχυδρομικός κώδικας',
+        hi: 'अमान्य ज़िप कोड',
+        ms: 'Kod Zip tidak sah',
+        th: 'รหัสไปรษณีย์ไม่ถูกต้อง',
+        id: 'Kode pos tidak valid',
+        hu: 'Érvénytelen irányítószám',
+        fa: 'کد پستی نامعتبر است',
+        ca: 'Codi postal no vàlid',
+        da: 'Ugyldig postnummer',
+        fi: 'Virheellinen postinumero',
+        nb: 'Ugyldig postnummer',
+        uk: 'Невірний поштовий індекс',
+        ro: 'Cod poștal nevalid',
+        cs: 'Neplatné PSČ',
+        sk: 'Neplatné PSČ',
+        bg: 'Невалиден пощенски код',
+        et: 'Vigane postiindeks',
+        lt: 'Neteisingas pašto kodas',
+        lv: 'Nederīgs pasta indekss',
+        sr: 'Neispravan poštanski broj',
+        hr: 'Neispravan poštanski broj',
+        sl: 'Neveljaven poštni številka',
+      }
+    }
   }
 }
 

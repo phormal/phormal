@@ -1,13 +1,11 @@
 import {FormField} from '../FormField'
-import {FormFieldConfig} from '../types/interfaces/FormConfig.interface'
-import SuperForm from '../index'
 import {h} from 'maquette'
 
 export class Checkbox extends FormField {
-  onInput(event: Event) {
+  _onInput(event: Event) {
     this.setValue((event.target as HTMLInputElement).checked)
 
-    if (this.form.formConfig.validation !== 'active') return
+    if (this._form.formConfig.validation !== 'active') return
 
     this.runAllValidators()
     this.updateErrorMessageInDOM()
@@ -19,30 +17,34 @@ export class Checkbox extends FormField {
    * @param {String} value
    * */
   setValue(value: string|boolean) {
-    this.form.setValue(this.name, value)
+    this._form.setValue(this.name, value)
     const inputElement: HTMLInputElement | null | HTMLElement = document.getElementById(this.inputId)
     if (inputElement instanceof HTMLInputElement) inputElement.checked = Boolean(value)
   }
 
-  render() {
-    const inputLabel = this.label ? h('label', {for: this.inputId}, [this.label]) : null;
+  render(mountingEl: HTMLElement) {
+    const inputLabel = this.getCheckboxLabel()
+    const wrapperProperties = { id: this.id, class: 'sflib__field-wrapper sflib__checkbox-wrapper' }
 
-    return h('div', { id: this.id }, [
-      inputLabel,
-      h(
-        'input',
-        {
-          id: this.inputId,
-          placeholder: this.placeholder,
-          type: this.type,
-          checked: Boolean(this.getValue()),
-          oninput: this.onInput.bind(this),
-          onblur: this.onBlur.bind(this),
-          onfocus: this.onFocus.bind(this),
-          onclick: this.onClick.bind(this),
-          onchange: this.onChange.bind(this)
-        }
-      ),
-    ])
+    this.projector.append(mountingEl, () => {
+      return h('div', wrapperProperties, [
+        h(
+          'input',
+          {
+              checked: Boolean(this.getValue()),
+              ...this._getGlobalInputProperties(),
+          }
+        ),
+        inputLabel,
+      ])
+    })
+  }
+
+  private getCheckboxLabel() {
+    return h(
+      'label',
+      { for: this.inputId, class: 'sflib__checkbox-label' },
+      [this.label]
+    );
   }
 }

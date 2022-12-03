@@ -2,20 +2,20 @@ import {HookReturnValue} from '../types/interfaces/Hook.interface'
 
 export const useAutoCapitalize = (): HookReturnValue => {
   return {
-    validators: {
-      onInputCallback(event?: { target: HTMLInputElement }) {
-        const words = (event instanceof InputEvent
-          ? event.target.value
-          : this.form.getValue(this.name)).split(' ')
+    handleOnInput(event: Event, field) {
+      if (!(event.target instanceof HTMLInputElement)) return
 
-        for (let i = 0; i < words.length; i++) {
-          if (!words[i]) continue
+      const words = (event instanceof InputEvent
+        ? event.target.value
+        : field.form.getValue(field.name)).split(' ')
 
-          words[i] = words[i][0].toUpperCase() + words[i].substring(1);
-        }
+      for (let i = 0; i < words.length; i++) {
+        if (!words[i]) continue
 
-        this.setValue(words.join(' '))
+        words[i] = words[i][0].toUpperCase() + words[i].substring(1);
       }
+
+      field.setValue(words.join(' '))
     }
   }
 }

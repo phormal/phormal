@@ -1,109 +1,109 @@
 <script lang="ts">
-import SuperForm from '../lib'
-import {useRequired} from '../lib/hooks/use-required'
-import {useLength} from '../lib/hooks/use-length'
-import {useAutoCapitalize} from '../lib/hooks/use-auto-capitalize'
-import {useValidZip} from '../lib/hooks/use-valid-zip'
+import {SuperForm} from '../lib'
+import {useRequired} from '../lib'
+import {useLength} from '../lib'
+import {useAutoCapitalize} from '../lib'
+import {useValidZip} from '../lib'
 
 export default {
-	name: 'App',
+  name: 'App',
 
-	data() {
-		return {
-			form: undefined,
+  data() {
+    return {
+      form: undefined,
 
-			formFields: {
-				firstName: {
-					label: 'First name',
-					hooks: [useRequired(), useLength(1, 155), useAutoCapitalize()],
-					value: 'John',
-					// handleOnBlur: () => this.firstNameBlurN++,
-				},
-				lastName: {
-					label: 'Last name',
-					hooks: [useRequired(), useLength(1, 155)],
-					value: 'Doe',
-					// handleOnFocus: (event, field) => this.lastNameFocusN += 1,
-				},
-				country: {
-					type: 'select',
-					label: 'Country',
-					hooks: [useRequired()],
-					value: 'US',
-					options: [
-						{value: 'US', label: 'United States'},
-						{value: 'CA', label: 'Canada'},
-						{value: 'MX', label: 'Mexico'},
-						{value: 'FR', label: 'France'},
-						{value: 'DE', label: 'Germany'},
-					],
-				},
-				zip: {
-					label: 'ZIP code',
-					hooks: [useRequired(), useLength(1, 155), useValidZip()],
-					// value: '51378',
-				},
-				newsletter: {
-					type: 'checkbox',
-					label: 'Newsletter',
-					hooks: [],
-					value: true,
-				},
-			},
+      formFields: {
+        firstName: {
+          label: 'First name',
+          hooks: [useRequired(), useLength(1, 155), useAutoCapitalize()],
+          value: 'John',
+          handleOnBlur: () => this.firstNameBlurN++,
+        },
+        lastName: {
+          label: 'Last name',
+          hooks: [useRequired(), useLength(1, 155)],
+          value: 'Doe',
+          handleOnFocus: () => this.lastNameFocusN += 1,
+        },
+        country: {
+          type: 'select',
+          label: 'Country',
+          hooks: [useRequired()],
+          value: 'US',
+          options: [
+            {value: 'US', label: 'United States'},
+            {value: 'CA', label: 'Canada'},
+            {value: 'MX', label: 'Mexico'},
+            {value: 'FR', label: 'France'},
+            {value: 'DE', label: 'Germany'},
+          ],
+        },
+        zip: {
+          label: 'ZIP code',
+          hooks: [useRequired(), useLength(1, 155), useValidZip()],
+          // value: '51378',
+        },
+        newsletter: {
+          type: 'checkbox',
+          label: 'Newsletter',
+          hooks: [],
+          value: true,
+        },
+      },
 
-			lastNameFocusN: 0,
-			firstNameBlurN: 0,
-		}
-	},
+      lastNameFocusN: 0,
+      firstNameBlurN: 0,
+    }
+  },
 
-	mounted() {
-		this.form = new SuperForm(this.formFields, {
-			el: '#super-form',
-			validation: 'active'
-		})
+  mounted() {
+    this.form = new SuperForm(this.formFields, {
+      el: '#super-form',
+      validation: 'active'
+    })
 
-		this.form.init()
-	},
+    this.form.init()
+  },
 
-	methods: {
-		runValidation() {
-			this.form.validate()
-		},
+  methods: {
+    runValidation() {
+      this.form.validate()
+    },
 
-		getValues() {
-			console.log(this.form.values())
-			// console.log(this.form.firstName)
-			// console.log(this.form.lastName)
-		}
-	},
+    getValues() {
+      console.log(this.form.values())
+      // console.log(this.form.firstName)
+      // console.log(this.form.lastName)
+    }
+  },
 }
 </script>
 
 <template>
-	<div>
-		<h1>SuperForm</h1>
+  <div>
+    <h1>SuperForm</h1>
+  </div>
+  <div id="super-form"></div>
 
-		<h2>First name was blurred {{ firstNameBlurN }} times</h2>
-		<h2>Last name was focus {{ lastNameFocusN }} times</h2>
-	</div>
-	<div id="super-form"></div>
+  <button @click="runValidation">Validate</button>
+  <button @click="getValues">Get values</button>
 
-	<button @click="runValidation">Validate</button>
-	<button @click="getValues">Get values</button>
+  <p>First name was blurred {{ firstNameBlurN }} times</p>
+  <p>Last name was focused {{ lastNameFocusN }} times</p>
 </template>
 
 <style>
 .logo {
-	height: 6em;
-	padding: 1.5em;
-	will-change: filter;
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
 }
 
 .logo:hover {
-	filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #646cffaa);
 }
 
 .logo.vue:hover {
-	filter: drop-shadow(0 0 2em #42b883aa);
+  filter: drop-shadow(0 0 2em #42b883aa);
 }
 </style>

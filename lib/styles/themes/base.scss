@@ -1,0 +1,111 @@
+.sflib-base {
+  $colorPrimary: #007bff;
+  $colorPrimaryLight: #e9f2ff;
+  $colorError: #dc3545;
+  $colorErrorLight: #f8d7da;
+  $colorBorder: rgb(209, 213, 219);
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .sflib__field-wrapper {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .sflib__checkbox-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .sflib__input-text,
+  .sflib__input-textarea,
+  .sflib__input-select, {
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    padding: .75rem;
+    border: 1px solid $colorBorder;
+    border-radius: 0.5rem;
+    background-color: rgb(249, 250, 251);
+    margin-bottom: 10px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    &:focus {
+      border-color: $colorPrimary;
+      outline: $colorPrimary solid 1px;
+      background-color: $colorPrimaryLight;
+      padding-left: 1rem;
+    }
+
+    &:disabled {
+      background-color: #e9ecef;
+      border-color: #e9ecef;
+      cursor: not-allowed;
+    }
+
+    &.sflib__field-error {
+      border-color: $colorError;
+      background-color: $colorErrorLight;
+    }
+  }
+
+  input[type="checkbox"] {
+    appearance: none;
+    background-color: #fff;
+    margin: {
+      top: 0;
+      right: 10px;
+      bottom: 0;
+      left: 0;
+    };
+    font: inherit;
+    color: currentColor;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 0.15rem solid $colorBorder;
+    border-radius: 0.15rem;
+    transform: translateY(-0.075rem);
+    display: grid;
+    place-content: center;
+  }
+
+  input[type="checkbox"]::before {
+    content: "";
+    width: 0.9em;
+    height: 0.9em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em $colorPrimary;
+    /* Windows High Contrast Mode */
+    background-color: CanvasText;
+
+    transform-origin: bottom left;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  }
+
+  input[type="checkbox"]:checked::before {
+    transform: scale(1);
+  }
+
+  .sflib__field-label {
+    font-size: 1rem;
+    color: rgb(17, 24, 39);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .sflib__checkbox-label {
+    font-size: 1rem;
+    color: rgb(17, 24, 39);
+    font-weight: 600;
+  }
+
+  .sflib__error-message {
+    margin-bottom: 10px;
+    font-size: .9rem;
+  }
+}

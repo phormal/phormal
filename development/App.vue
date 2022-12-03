@@ -8,5 +8,15 @@ export default defineComponent({
 </script>
 
 <template>
-	<router-view></router-view>
+	<div id="container">
+		<router-view></router-view>
+	</div>
 </template>
+
+<style>
+#container {
+	width: 100%;
+	max-width: 500px;
+	margin: 0 auto;
+}
+</style>

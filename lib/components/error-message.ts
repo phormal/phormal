@@ -6,7 +6,7 @@ export default class ErrorMessage implements MaquetteComponent {
 
   constructor(
     id: string,
-    errors: string[]
+    errors: string[],
   ) {
     this.errorMsgId = id
     this.errors = errors
@@ -15,7 +15,11 @@ export default class ErrorMessage implements MaquetteComponent {
   render() {
     return h(
       'div',
-      { id: this.errorMsgId, styles: { color: 'red' } },
+      {
+        id: this.errorMsgId,
+        styles: { color: 'red' },
+        class: 'sflib__error-message'
+      },
       ['Error! ' + this.errors.join(', ')])
   }
 }

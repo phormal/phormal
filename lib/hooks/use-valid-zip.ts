@@ -1,4 +1,5 @@
 import {Hook, HookReturnValue} from '../types/interfaces/Hook.interface'
+import {FormField} from "../FormField";
 
 /**
  * This hook requires:
@@ -10,15 +11,15 @@ import {Hook, HookReturnValue} from '../types/interfaces/Hook.interface'
 export const useValidZip: Hook = (): HookReturnValue => {
   return {
     validators: {
-      checkZipCode() {
-        const currentValue = this.getValue()
-        const currentCountryValue = this.form.getValue('country')
+      checkZipCode(field: FormField) {
+        const currentValue = field.getValue()
+        const currentCountryValue = field._form.getValue('country')
         const countryHasPattern = zipCodePatterns.hasOwnProperty(currentCountryValue)
         const isValid = countryHasPattern ? zipCodePatterns[currentCountryValue].test(currentValue) : true
 
         const errorName = 'zip'
-        if (!this.errors.includes(errorName) && !isValid) this.errors.push(errorName)
-        if (this.errors.includes(errorName) && isValid) this.errors.splice(this.errors.indexOf(errorName), 1)
+        if (!field.errors.includes(errorName) && !isValid) field.errors.push(errorName)
+        if (field.errors.includes(errorName) && isValid) field.errors.splice(field.errors.indexOf(errorName), 1)
 
         return isValid
       }

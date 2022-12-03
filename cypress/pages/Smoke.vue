@@ -1,10 +1,10 @@
 <script lang="ts">
 
-import {useRequired} from '../../lib/hooks/use-required'
-import {useLength} from '../../lib/hooks/use-length'
-import {useAutoCapitalize} from '../../lib/hooks/use-auto-capitalize'
-import {useValidZip} from '../../lib/hooks/use-valid-zip'
-import SuperForm from '../../lib'
+import {useRequired} from '../../lib'
+import {useLength} from '../../lib'
+import {useAutoCapitalize} from '../../lib'
+import {useValidZip} from '../../lib'
+import {SuperForm} from '../../lib'
 
 export default {
 	name: 'App',

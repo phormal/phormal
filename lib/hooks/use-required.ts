@@ -1,13 +1,14 @@
 import {Hook} from '../types/interfaces/Hook.interface'
+import {FormField} from "../FormField";
 
 export const useRequired: Hook = () => {
   return {
     validators: {
-      checkRequired() {
-        const isValid = !!this.getValue() || this.getValue() === '0'
+      checkRequired(field: FormField) {
+        const isValid = !!field.getValue() || field.getValue() === '0'
 
-        if (!this.errors.includes('required') && !isValid) this.errors.push('required')
-        if (this.errors.includes('required') && isValid) this.errors.splice(this.errors.indexOf('required'), 1)
+        if (!field.errors.includes('required') && !isValid) field.errors.push('required')
+        if (field.errors.includes('required') && isValid) field.errors.splice(field.errors.indexOf('required'), 1)
 
         return isValid
       }

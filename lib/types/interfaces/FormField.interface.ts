@@ -1,10 +1,7 @@
 import {EventHandler, FormFieldType} from '../globals'
-import {VNode} from 'maquette'
-import SuperForm from '../../index'
+import {SuperForm} from '../../index'
 
 export default interface FormFieldInterface {
-  form: SuperForm | undefined;
-
   type: FormFieldType;
   name: string;
   defaultValue?: string | number;
@@ -14,19 +11,24 @@ export default interface FormFieldInterface {
   disabled?: boolean;
   errors?: string[];
 
-  render(): VNode;
+  render(mountingEl: HTMLElement): void;
+  runAllValidators(): void;
+  getValue(): string | number | undefined;
+  setValue(value: string | number): void;
 
-  onClick: (event: Event) => void;
-  onChange: (event: Event) => void;
-  onBlur: (event: Event) => void;
-  onFocus: (event: Event) => void;
-  onInput: (event: Event) => void;
+  _form: SuperForm | undefined;
 
-  onClickHandlers: EventHandler[];
-  onChangeHandlers: EventHandler[];
-  onBlurHandlers: EventHandler[];
-  onFocusHandlers: EventHandler[];
-  onInputHandlers: EventHandler[];
+  _onClick: (event: Event) => void;
+  _onChange: (event: Event) => void;
+  _onBlur: (event: Event) => void;
+  _onFocus: (event: Event) => void;
+  _onInput: (event: Event) => void;
+
+  _onClickHandlers: EventHandler[];
+  _onChangeHandlers: EventHandler[];
+  _onBlurHandlers: EventHandler[];
+  _onFocusHandlers: EventHandler[];
+  _onInputHandlers: EventHandler[];
 
   // Allow extensibility
   [key: string]: any;

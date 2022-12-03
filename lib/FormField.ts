@@ -2,51 +2,55 @@ import FormFieldInterface from './types/interfaces/FormField.interface'
 import {EventHandler, FormFieldType} from './types/globals'
 import {FormFieldConfig} from './types/interfaces/FormConfig.interface'
 import {createProjector, h, Projector} from 'maquette'
-import SuperForm from './index'
+import {SuperForm} from './SuperForm'
 import ErrorMessage from './components/error-message'
 
 export class FormField implements FormFieldInterface {
-  form: SuperForm;
   type: FormFieldType = 'text';
   errors: string[] = []
   label: string = ''
   placeholder: string = ''
   name: string = ''
+  disabled: boolean = false
   projector: Projector = createProjector()
   validators: { [key: string]: any } = {}
+  _form: SuperForm;
 
-  onClickHandlers: EventHandler[] = []
-  onChangeHandlers: EventHandler[] = []
-  onBlurHandlers: EventHandler[] = []
-  onFocusHandlers: EventHandler[] = []
-  onInputHandlers: EventHandler[] = []
+  _onClickHandlers: EventHandler[] = []
+  _onChangeHandlers: EventHandler[] = []
+  _onBlurHandlers: EventHandler[] = []
+  _onFocusHandlers: EventHandler[] = []
+  _onInputHandlers: EventHandler[] = []
 
   constructor(
     name: string,
     formField: FormFieldConfig,
     form: SuperForm
   ) {
-    this.form = form
+    this._form = form
     this.placeholder = formField.placeholder ? formField.placeholder : ''
     this.label = formField.label ? formField.label : ''
     this.type = formField.type ? formField.type : 'text'
     this.name = name
+    this.disabled = formField.disabled ? formField.disabled : false
 
-    if (formField.handleOnClick) this.onClickHandlers.push(formField.handleOnClick)
-    if (formField.handleOnChange) this.onChangeHandlers.push(formField.handleOnChange)
-    if (formField.handleOnBlur) this.onBlurHandlers.push(formField.handleOnBlur)
-    if (formField.handleOnFocus) this.onFocusHandlers.push(formField.handleOnFocus)
-    if (formField.handleOnInput) this.onInputHandlers.push(formField.handleOnInput)
+    if (formField.handleOnClick) this._onClickHandlers.push(formField.handleOnClick)
+    if (formField.handleOnChange) this._onChangeHandlers.push(formField.handleOnChange)
+    if (formField.handleOnBlur) this._onBlurHandlers.push(formField.handleOnBlur)
+    if (formField.handleOnFocus) this._onFocusHandlers.push(formField.handleOnFocus)
+    if (formField.handleOnInput) this._onInputHandlers.push(formField.handleOnInput)
 
     if (formField.hooks) {
       for (const hook of formField.hooks) {
         if (hook.validators) {
           Object.assign(this.validators, {...hook.validators})
         }
+
+        if (typeof hook.handleOnInput === 'function') this._onInputHandlers.push(hook.handleOnInput)
       }
     }
 
-    this.form.getValue(this.name)
+    this._form.getValue(this.name)
   }
 
   get id() {
@@ -61,46 +65,12 @@ export class FormField implements FormFieldInterface {
     return 'super-form-field-error-' + this.name
   }
 
-  onClick(event: Event) {
-    for (const cb of this.onClickHandlers) cb(event, this)
-  }
-
-  onChange(event: Event) {
-    for (const cb of this.onChangeHandlers) cb(event, this)
-  }
-
-  onBlur(event: Event) {
-    for (const cb of this.onBlurHandlers) cb(event, this)
-  }
-
-  onFocus(event: Event) {
-    for (const cb of this.onFocusHandlers) cb(event, this)
-  }
-
-  onInput(event: Event) {
-    this.setValue((event.target as HTMLInputElement).value)
-    for (const cb of this.onInputHandlers) cb(event, this)
-
-    if (this.form.formConfig.validation !== 'active') return
-
-    this.runAllValidators()
-    this.updateErrorMessageInDOM()
-  }
-
-  /**
-   * Set value field, and update the value in the DOM
-   *
-   * @param {String} value
-   * */
-  setValue(value: string) {
-    this.form.setValue(this.name, value)
-    const inputElement: HTMLInputElement | null | HTMLElement = document.getElementById(this.inputId)
-    if (inputElement instanceof HTMLInputElement) inputElement.value = value
+  get inputClass() {
+    return `sflib__input-${this.type}`
   }
 
   updateErrorMessageInDOM() {
     const errorsElement: HTMLElement | null = document.getElementById(this.errorMsgId)
-
     // Remove error message, if the input was corrected
     if (errorsElement instanceof HTMLElement && !this.errors.length) {
       errorsElement.remove()
@@ -123,34 +93,94 @@ export class FormField implements FormFieldInterface {
   }
 
   getValue() {
-    return this.form.getValue(this.name)
+    return this._form.getValue(this.name)
+  }
+
+  /**
+   * Set value field, and update the value in the DOM
+   *
+   * @param {String} value
+   * */
+  setValue(value: string) {
+    this._form.setValue(this.name, value)
+    const inputElement: HTMLInputElement | null | HTMLElement = document.getElementById(this.inputId)
+    if (inputElement instanceof HTMLInputElement) inputElement.value = value
   }
 
   runAllValidators() {
     for (const fn of Object.values(this.validators)) {
-      fn.call(this, event)
+      fn(this)
     }
   }
 
-  render() {
-    const inputLabel = this.label ? h('label', {for: this.inputId}, [this.label]) : null;
+  render(mountingEl: HTMLElement) {
+    const inputLabel = this._getInputLabel()
+    const inputEl = this.getInputElement()
 
-    return h('div', { id: this.id }, [
-      inputLabel,
-      h(
-        'input',
-        {
-          id: this.inputId,
-          placeholder: this.placeholder,
-          type: this.type,
-          value: this.getValue(),
-          oninput: this.onInput.bind(this),
-          onblur: this.onBlur.bind(this),
-          onfocus: this.onFocus.bind(this),
-          onclick: this.onClick.bind(this),
-          onchange: this.onChange.bind(this)
-        }
-      ),
-    ])
+    this.projector.append(mountingEl, () => h(
+      'div',
+      {id: this.id, class: 'sflib__field-wrapper'},
+      [
+        inputLabel,
+        inputEl,
+      ]
+    ))
+  }
+
+  _onClick(event: Event) {
+    for (const cb of this._onClickHandlers) cb(event, this)
+  }
+
+  _onChange(event: Event) {
+    for (const cb of this._onChangeHandlers) cb(event, this)
+  }
+
+  _onBlur(event: Event) {
+    for (const cb of this._onBlurHandlers) cb(event, this)
+  }
+
+  _onFocus(event: Event) {
+    for (const cb of this._onFocusHandlers) cb(event, this)
+  }
+
+  _onInput(event: Event) {
+    this.setValue((event.target as HTMLInputElement).value)
+    for (const cb of this._onInputHandlers) cb(event, this)
+
+    if (this._form.formConfig.validation !== 'active') return
+
+    this.runAllValidators()
+    this.updateErrorMessageInDOM()
+  }
+
+  _getInputLabel() {
+    return this.label
+      ? h('label', {for: this.inputId, class: 'sflib__field-label'}, [this.label])
+      : null;
+  }
+
+  /***/
+  _getGlobalInputProperties() {
+    return {
+      id: this.inputId,
+      class: this.inputClass,
+      type: this.type,
+      oninput: this._onInput.bind(this),
+      onblur: this._onBlur.bind(this),
+      onfocus: this._onFocus.bind(this),
+      onclick: this._onClick.bind(this),
+      onchange: this._onChange.bind(this)
+    }
+  }
+
+  private getInputElement() {
+    return h(
+      'input',
+      {
+        placeholder: this.placeholder,
+        value: this.getValue(),
+        ...this._getGlobalInputProperties(),
+      }
+    )
   }
 }

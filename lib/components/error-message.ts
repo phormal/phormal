@@ -1,4 +1,4 @@
-import {h, MaquetteComponent} from 'maquette'
+import {h, MaquetteComponent, VNodeChild} from 'maquette'
 import {ErrorMessageObject} from "../types/globals";
 
 export default class ErrorMessage implements MaquetteComponent {
@@ -19,7 +19,19 @@ export default class ErrorMessage implements MaquetteComponent {
     this.language = language
   }
 
-  listOfErrors = () => {
+  render() {
+    return h(
+      'div',
+      {
+        id: this.errorMsgId,
+        styles: { color: 'red' },
+        class: 'sflib__error-message'
+      },
+      [this.listOfErrors() as VNodeChild]
+    )
+  }
+
+  private listOfErrors() {
     return h('ul', {}, this.errors.map(error => {
       let errorMsg = this.errorMessages[error]
       if (typeof errorMsg === 'object') {
@@ -29,19 +41,7 @@ export default class ErrorMessage implements MaquetteComponent {
       }
       if (typeof errorMsg === 'undefined') errorMsg = this.errorMessages[error]
 
-      return h('li', {}, [errorMsg])
+      return h('li', {}, [errorMsg as VNodeChild])
     }))
-  }
-
-  render() {
-    return h(
-      'div',
-      {
-        id: this.errorMsgId,
-        styles: { color: 'red' },
-        class: 'sflib__error-message'
-      },
-      [this.listOfErrors()]
-    )
   }
 }

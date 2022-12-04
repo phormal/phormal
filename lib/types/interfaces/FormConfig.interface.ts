@@ -18,6 +18,7 @@ type FormFieldConfigBase = {
   placeholder?: string;
   required?: boolean;
   disabled?: boolean;
+  dependencies?: string[];
 
   // For select fields
   options?: MultiSelectOption[];

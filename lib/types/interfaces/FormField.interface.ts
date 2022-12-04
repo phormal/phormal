@@ -10,6 +10,8 @@ export default interface FormFieldInterface {
   required?: boolean;
   disabled?: boolean;
   errors?: string[];
+  dependencies?: string[];
+  dependants?: string[];
 
   render(mountingEl: HTMLElement): void;
   runAllValidators(): void;

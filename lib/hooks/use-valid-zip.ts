@@ -12,6 +12,8 @@ export const useValidZip: Hook = (): HookReturnValue => {
   const ERROR_NAME = 'zip'
 
   return {
+    dependencies: ['country'],
+
     validators: {
       checkZipCode(field: FormField) {
         const currentValue = field.getValue()
@@ -73,4 +75,6 @@ const zipCodePatterns: { [key: string]: RegExp } = {
   'US': /^\d{5}(-\d{4})?$/,
   'DE': /^\d{5}$/,
   'MX': /^\d{5}$/,
+  'FR': /^\d{5}$/,
+  'CA': /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/,
 }

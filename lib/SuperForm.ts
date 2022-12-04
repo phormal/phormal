@@ -7,7 +7,7 @@ import {Checkbox} from './fields/Checkbox'
 export class SuperForm {
   _config: FormConfig;
   private readonly _unprocessedFields: { [key: string]: FormFieldConfig }
-  private _fields: { [key: string]: FormFieldInterface }  = {}
+  _fields: { [key: string]: FormFieldInterface }  = {}
 
   constructor(
     fields: { [key: string]: FormFieldConfig },

@@ -4,6 +4,8 @@ import {FormFieldConfig} from './types/interfaces/FormConfig.interface'
 import {createProjector, h, Projector} from 'maquette'
 import {SuperForm} from './SuperForm'
 import ErrorMessage from './components/error-message'
+import {FieldHooksResolver} from "./util/field-hooks-resolver";
+import {FieldDependencyResolver} from "./util/field-dependency-resolver";
 
 export class FormField implements FormFieldInterface {
   type: FormFieldType = 'text';
@@ -14,6 +16,9 @@ export class FormField implements FormFieldInterface {
   disabled: boolean = false
   projector: Projector = createProjector()
   validators: { [key: string]: any } = {}
+  dependencies: string[] = []
+  dependants: string[] = []
+
   _form: SuperForm;
   _errorMessages = {}
 
@@ -34,6 +39,7 @@ export class FormField implements FormFieldInterface {
     this.type = formField.type ? formField.type : 'text'
     this.name = name
     this.disabled = formField.disabled ? formField.disabled : false
+    this.dependencies = formField.dependencies ? formField.dependencies : []
 
     if (formField.handleOnClick) this._onClickHandlers.push(formField.handleOnClick)
     if (formField.handleOnChange) this._onChangeHandlers.push(formField.handleOnChange)
@@ -41,31 +47,8 @@ export class FormField implements FormFieldInterface {
     if (formField.handleOnFocus) this._onFocusHandlers.push(formField.handleOnFocus)
     if (formField.handleOnInput) this._onInputHandlers.push(formField.handleOnInput)
 
-    if (formField.hooks) {
-      for (const hook of formField.hooks) {
-        // 1. Merge validators into the field
-        if (hook.validators) {
-          Object.assign(this.validators, {...hook.validators})
-        }
-
-        // 2. Merge event handlers into the field
-        if (typeof hook.handleOnInput === 'function') this._onInputHandlers.push(hook.handleOnInput)
-        if (typeof hook.handleOnClick === 'function') this._onClickHandlers.push(hook.handleOnClick)
-        if (typeof hook.handleOnChange === 'function') this._onChangeHandlers.push(hook.handleOnChange)
-        if (typeof hook.handleOnBlur === 'function') this._onBlurHandlers.push(hook.handleOnBlur)
-        if (typeof hook.handleOnFocus === 'function') this._onFocusHandlers.push(hook.handleOnFocus)
-
-        // 3. Merge error messages into the field
-        if (hook.errorMessages) {
-          this._errorMessages = {
-            ...this._errorMessages,
-            ...hook.errorMessages,
-          }
-        }
-      }
-    }
-
-    this._form._getValue(this.name)
+    new FieldHooksResolver(this, formField.hooks || [])
+    new FieldDependencyResolver(this)
   }
 
   get id() {
@@ -125,6 +108,18 @@ export class FormField implements FormFieldInterface {
     this._form._setValue(this.name, value)
     const inputElement: HTMLInputElement | null | HTMLElement = document.getElementById(this.inputId)
     if (inputElement instanceof HTMLInputElement) inputElement.value = value
+    if (this.dependants.length && this._form._config.validation === 'active') this.updateDependants()
+  }
+
+  updateDependants() {
+    for (const dependant of this.dependants) {
+      this._form._fields[dependant].update()
+    }
+  }
+
+  update() {
+    this.runAllValidators()
+    this.updateErrorMessageInDOM()
   }
 
   runAllValidators() {
@@ -179,7 +174,6 @@ export class FormField implements FormFieldInterface {
       : null;
   }
 
-  /***/
   _getGlobalInputProperties() {
     return {
       id: this.inputId,

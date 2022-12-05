@@ -6,6 +6,7 @@ import {SuperForm} from './SuperForm'
 import ErrorMessage from './components/error-message'
 import {FieldHooksResolver} from "./util/field-hooks-resolver";
 import {FieldDependencyResolver} from "./util/field-dependency-resolver";
+import {FormFieldResolver} from "./util/form-field-resolver";
 
 export class FormField implements FormFieldInterface {
   type: FormFieldType = 'text';
@@ -30,42 +31,21 @@ export class FormField implements FormFieldInterface {
 
   constructor(
     name: string,
-    formField: FormFieldConfig,
+    formFieldConfig: FormFieldConfig,
     form: SuperForm
   ) {
     this._form = form
-    this.placeholder = formField.placeholder ? formField.placeholder : ''
-    this.label = formField.label ? formField.label : ''
-    this.type = formField.type ? formField.type : 'text'
     this.name = name
-    this.disabled = formField.disabled ? formField.disabled : false
-    this.dependencies = formField.dependencies ? formField.dependencies : []
 
-    if (formField.handleOnClick) this._onClickHandlers.push(formField.handleOnClick)
-    if (formField.handleOnChange) this._onChangeHandlers.push(formField.handleOnChange)
-    if (formField.handleOnBlur) this._onBlurHandlers.push(formField.handleOnBlur)
-    if (formField.handleOnFocus) this._onFocusHandlers.push(formField.handleOnFocus)
-    if (formField.handleOnInput) this._onInputHandlers.push(formField.handleOnInput)
-
-    new FieldHooksResolver(this, formField.hooks || [])
+    new FormFieldResolver(this, formFieldConfig)
+    new FieldHooksResolver(this, formFieldConfig.hooks || [])
     new FieldDependencyResolver(this)
   }
 
-  get id() {
-    return 'super-form-field-' + this.name
-  }
-
-  get inputId() {
-    return 'super-form-field-input-' + this.name
-  }
-
-  get errorMsgId() {
-    return 'super-form-field-error-' + this.name
-  }
-
-  get inputClass() {
-    return `sflib__input-${this.type}`
-  }
+  get id() { return 'super-form-field-' + this.name }
+  get inputId() { return 'super-form-field-input-' + this.name }
+  get errorMsgId() { return 'super-form-field-error-' + this.name }
+  get inputClass() { return `sflib__input-${this.type}` }
 
   updateErrorMessageInDOM() {
     const errorsElement: HTMLElement | null = document.getElementById(this.errorMsgId)

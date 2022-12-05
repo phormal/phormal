@@ -9,3 +9,5 @@ export type MultiSelectOption = { label: string, value: any };
 export type EventHandler = (event: Event, field: FormFieldInterface) => void;
 
 export type ErrorMessageObject = string | { en: string, [key: string]: string };
+
+export type disabledIf = { [key: string]: RegExp | boolean | string };

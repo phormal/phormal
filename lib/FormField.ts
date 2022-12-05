@@ -15,10 +15,13 @@ export class FormField implements FormFieldInterface {
   placeholder: string = ''
   name: string = ''
   disabled: boolean = false
+  disabledIf = {}
   projector: Projector = createProjector()
   validators: { [key: string]: any } = {}
   dependencies: string[] = []
   dependants: string[] = []
+  config: FormFieldConfig|undefined
+  inputDOMElement: HTMLInputElement | null = null
 
   _form: SuperForm;
   _errorMessages = {}
@@ -36,10 +39,20 @@ export class FormField implements FormFieldInterface {
   ) {
     this._form = form
     this.name = name
+    this.config = formFieldConfig
 
     new FormFieldResolver(this, formFieldConfig)
     new FieldHooksResolver(this, formFieldConfig.hooks || [])
+  }
+
+  resolveDependencies() {
     new FieldDependencyResolver(this)
+
+    if (this.config?.disabledIf) {
+      for (const [dep, depValue] of Object.entries(this.config.disabledIf)) {
+        this._form._fields[dep].dependants?.push(this.name)
+      }
+    }
   }
 
   get id() { return 'super-form-field-' + this.name }
@@ -88,7 +101,7 @@ export class FormField implements FormFieldInterface {
     this._form._setValue(this.name, value)
     const inputElement: HTMLInputElement | null | HTMLElement = document.getElementById(this.inputId)
     if (inputElement instanceof HTMLInputElement) inputElement.value = value
-    if (this.dependants.length && this._form._config.validation === 'active') this.updateDependants()
+    if (this.dependants.length) this.updateDependants()
   }
 
   updateDependants() {
@@ -98,8 +111,34 @@ export class FormField implements FormFieldInterface {
   }
 
   update() {
+    this.checkValueDependencies()
+
+    if (this._form._config.validation !== 'active') return
+
     this.runAllValidators()
     this.updateErrorMessageInDOM()
+  }
+
+  checkValueDependencies() {
+    for (let [dep, providedDepValue] of Object.entries(this.disabledIf)) {
+      let depValue = this._form._getValue(dep)
+
+      if (typeof providedDepValue === 'boolean') {
+        this.disabled = providedDepValue === this._form._getValue(dep)
+      }
+
+      else if (typeof providedDepValue === 'string' && providedDepValue === 'empty') {
+        this.disabled = this._form._getValue(dep) === ''
+      }
+
+      else if (providedDepValue instanceof RegExp && typeof depValue === 'string') {
+        depValue = depValue as string
+
+        this.disabled = providedDepValue.test(depValue)
+      }
+
+      (this.inputDOMElement as HTMLInputElement).disabled = this.disabled
+    }
   }
 
   runAllValidators() {
@@ -120,6 +159,8 @@ export class FormField implements FormFieldInterface {
         inputEl,
       ]
     ))
+
+    this.inputDOMElement = document.getElementById(this.inputId) as HTMLInputElement
   }
 
   _onClick(event: Event) {
@@ -159,11 +200,12 @@ export class FormField implements FormFieldInterface {
       id: this.inputId,
       class: this.inputClass,
       type: this.type,
+      disabled: this.disabled,
       oninput: this._onInput.bind(this),
       onblur: this._onBlur.bind(this),
       onfocus: this._onFocus.bind(this),
       onclick: this._onClick.bind(this),
-      onchange: this._onChange.bind(this)
+      onchange: this._onChange.bind(this),
     }
   }
 
@@ -172,7 +214,7 @@ export class FormField implements FormFieldInterface {
       'input',
       {
         placeholder: this.placeholder,
-        value: this.getValue(),
+        value: String(this.getValue()),
         ...this._getGlobalInputProperties(),
       }
     )

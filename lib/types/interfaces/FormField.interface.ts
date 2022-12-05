@@ -1,22 +1,27 @@
-import {EventHandler, FormFieldType} from '../globals'
+import {disabledIf, EventHandler, FormFieldType} from '../globals'
 import {SuperForm} from '../../index'
+import {FormFieldConfig} from "./FormConfig.interface";
 
 export default interface FormFieldInterface {
-  type: FormFieldType;
-  name: string;
-  defaultValue?: string | number;
-  label?: string;
-  placeholder?: string;
+  readonly type: FormFieldType;
+  readonly name: string;
+  readonly defaultValue?: string | number;
+  readonly label?: string;
+  readonly placeholder?: string;
   required?: boolean;
   disabled?: boolean;
   errors?: string[];
-  dependencies?: string[];
+  dependencies?: ReadonlyArray<string>;
   dependants?: string[];
+  readonly disabledIf?: disabledIf;
+  config: FormFieldConfig|undefined;
 
   render(mountingEl: HTMLElement): void;
   runAllValidators(): void;
-  getValue(): string | number | undefined;
+  getValue(): string | number | undefined | boolean;
   setValue(value: string | number): void;
+  resolveDependencies(): void;
+  checkValueDependencies(): void;
 
   _form: SuperForm | undefined;
   _errorMessages?: { [key: string]: string | object };

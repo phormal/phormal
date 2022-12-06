@@ -1,5 +1,5 @@
 import FormFieldInterface from './types/interfaces/FormField.interface'
-import {EventHandler, FormFieldType} from './types/globals'
+import {EventHandler, FieldCondition, FormFieldType} from './types/globals'
 import {FormFieldConfig} from './types/interfaces/FormConfig.interface'
 import {createProjector, h, Projector} from 'maquette'
 import {SuperForm} from './SuperForm'
@@ -15,14 +15,17 @@ export class FormField implements FormFieldInterface {
   placeholder: string = ''
   name: string = ''
   disabled: boolean = false
+  disabledIf = {}
+  hideIf = {}
   projector: Projector = createProjector()
   validators: { [key: string]: any } = {}
   dependencies: string[] = []
   dependants: string[] = []
-
+  config: FormFieldConfig|undefined
+  inputDOMElement: HTMLInputElement | null = null
+  isHidden = false
   _form: SuperForm;
   _errorMessages = {}
-
   _onClickHandlers: EventHandler[] = []
   _onChangeHandlers: EventHandler[] = []
   _onBlurHandlers: EventHandler[] = []
@@ -36,10 +39,33 @@ export class FormField implements FormFieldInterface {
   ) {
     this._form = form
     this.name = name
+    this.config = formFieldConfig
 
     new FormFieldResolver(this, formFieldConfig)
     new FieldHooksResolver(this, formFieldConfig.hooks || [])
+  }
+
+  resolveDependencies() {
     new FieldDependencyResolver(this)
+    const conditions: ReadonlyArray<FieldCondition|undefined> = [
+      this.config?.disabledIf,
+      this.config?.hideIf,
+    ]
+
+    for (const condition of conditions) {
+      if (condition) {
+        for (const [dep,] of Object.entries(condition)) {
+          this._form._fields[dep].addDependant(this.name)
+        }
+      }
+    }
+  }
+
+  /**
+   * Add a dependant, if it does not already exist
+   * */
+  addDependant(dependant: string) {
+    if (!this.dependants.includes(dependant)) this.dependants.push(dependant)
   }
 
   get id() { return 'super-form-field-' + this.name }
@@ -88,7 +114,7 @@ export class FormField implements FormFieldInterface {
     this._form._setValue(this.name, value)
     const inputElement: HTMLInputElement | null | HTMLElement = document.getElementById(this.inputId)
     if (inputElement instanceof HTMLInputElement) inputElement.value = value
-    if (this.dependants.length && this._form._config.validation === 'active') this.updateDependants()
+    if (this.dependants.length) this.updateDependants()
   }
 
   updateDependants() {
@@ -98,8 +124,52 @@ export class FormField implements FormFieldInterface {
   }
 
   update() {
+    this.checkValueDependencies()
+
+    if (this._form._config.validation !== 'active') return
+
     this.runAllValidators()
     this.updateErrorMessageInDOM()
+  }
+
+  checkValueDependencies() {
+    // The following two-dimensional array lists all conditions to be tested for the field
+    // Each inner array has two positions: [0] for the condition, [1] for the property to be mutated on this field
+    const conditions = [
+      [this.disabledIf, 'disabled'],
+      [this.hideIf, 'isHidden'],
+    ]
+
+    for (const [condition, internalProperty] of conditions) {
+      for (let [dep, depValueToTest] of Object.entries(condition)) {
+        let actualDepValue = this._form._getValue(dep)
+        let result = false
+
+        // 1. Set the new value of the internal property
+        if (typeof depValueToTest === 'boolean') {
+          result = depValueToTest === this._form._getValue(dep)
+        } else if (depValueToTest === 'empty') {
+          result = this._form._getValue(dep) === ''
+        } else if (depValueToTest === 'not-empty') {
+          result = this._form._getValue(dep) !== ''
+        } else if (depValueToTest instanceof RegExp && typeof actualDepValue === 'string') {
+          actualDepValue = actualDepValue as string
+          result = depValueToTest.test(actualDepValue)
+        }
+
+        // 2. Update the internal property
+        if (internalProperty === 'disabled') {
+          this.disabled = result;
+          (this.inputDOMElement as HTMLInputElement).disabled = result
+        } else if (internalProperty === 'isHidden') {
+          this.isHidden = result;
+          const fieldContainer: HTMLElement | null = document.getElementById(this.id)
+          if (fieldContainer instanceof HTMLElement) {
+            fieldContainer.style.display = result ? 'none' : 'block'
+          }
+        }
+      }
+    }
   }
 
   runAllValidators() {
@@ -120,6 +190,8 @@ export class FormField implements FormFieldInterface {
         inputEl,
       ]
     ))
+
+    this.inputDOMElement = document.getElementById(this.inputId) as HTMLInputElement
   }
 
   _onClick(event: Event) {
@@ -159,11 +231,12 @@ export class FormField implements FormFieldInterface {
       id: this.inputId,
       class: this.inputClass,
       type: this.type,
+      disabled: this.disabled,
       oninput: this._onInput.bind(this),
       onblur: this._onBlur.bind(this),
       onfocus: this._onFocus.bind(this),
       onclick: this._onClick.bind(this),
-      onchange: this._onChange.bind(this)
+      onchange: this._onChange.bind(this),
     }
   }
 
@@ -172,7 +245,7 @@ export class FormField implements FormFieldInterface {
       'input',
       {
         placeholder: this.placeholder,
-        value: this.getValue(),
+        value: String(this.getValue()),
         ...this._getGlobalInputProperties(),
       }
     )

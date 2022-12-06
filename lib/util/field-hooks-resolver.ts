@@ -27,6 +27,8 @@ export class FieldHooksResolver {
         }
       }
 
+      // TODO: merge in conditions, disabledIf, hideIf, etc.
+
       // 4. Mix in dependencies
       if (hook.dependencies) field.dependencies.push(...hook.dependencies)
     }

@@ -9,3 +9,10 @@ export type MultiSelectOption = { label: string, value: any };
 export type EventHandler = (event: Event, field: FormFieldInterface) => void;
 
 export type ErrorMessageObject = string | { en: string, [key: string]: string };
+
+/**
+ * Used to describe a condition for a field, for example for disabling or hiding it
+ * */
+// The types of the values that can be used in a condition
+type FieldConditionValue = RegExp | boolean | string;
+export type FieldCondition = Record<string, FieldConditionValue>;

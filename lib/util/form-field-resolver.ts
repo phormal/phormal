@@ -7,6 +7,8 @@ export class FormFieldResolver {
     field.label = formFieldConfig.label ? formFieldConfig.label : ''
     field.type = formFieldConfig.type ? formFieldConfig.type : 'text'
     field.disabled = formFieldConfig.disabled ? formFieldConfig.disabled : false
+    field.disabledIf = formFieldConfig.disabledIf ? formFieldConfig.disabledIf : {}
+    field.hideIf = formFieldConfig.hideIf ? formFieldConfig.hideIf : {}
     field.dependencies = formFieldConfig.dependencies ? formFieldConfig.dependencies : []
 
     if (formFieldConfig.handleOnClick) field._onClickHandlers.push(formFieldConfig.handleOnClick)

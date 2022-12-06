@@ -9,7 +9,7 @@ export class FieldDependencyResolver {
       if (!field._form._fields[dependency]) continue // Skip, if the field does not exist
       if (field._form._fields[dependency].dependants?.includes(field.name)) continue // Skip, if the targeted field already has this field as a dependant
 
-      field._form._fields[dependency].dependants?.push(field.name)
+      field._form._fields[dependency].addDependant(field.name)
     }
   }
 }

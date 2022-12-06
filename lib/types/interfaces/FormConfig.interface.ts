@@ -1,4 +1,4 @@
-import {EventHandler, FormFieldType, MultiSelectOption, ValidationType} from '../globals'
+import {FieldCondition, EventHandler, FormFieldType, MultiSelectOption, ValidationType} from '../globals'
 import {Hook, HookReturnValue} from './Hook.interface'
 import {FormField} from '../../FormField'
 import FormFieldInterface from './FormField.interface'
@@ -18,6 +18,8 @@ type FormFieldConfigBase = {
   placeholder?: string;
   required?: boolean;
   disabled?: boolean;
+  disabledIf?: FieldCondition;
+  hideIf?: FieldCondition;
   dependencies?: string[];
 
   // For select fields

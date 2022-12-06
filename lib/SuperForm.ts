@@ -5,7 +5,7 @@ import {MultiSelect} from './fields/MultiSelect'
 import {Checkbox} from './fields/Checkbox'
 
 export class SuperForm {
-  _config: FormConfig;
+  readonly _config: FormConfig;
   private readonly _unprocessedFields: { [key: string]: FormFieldConfig }
   _fields: { [key: string]: FormFieldInterface }  = {}
 
@@ -48,6 +48,16 @@ export class SuperForm {
     for (const [, field] of Object.entries(this._fields)) {
       field.render(mountingElement)
     }
+
+    // 3. Resolve all dependencies between fields
+    for (const [, field] of Object.entries(this._fields)) {
+      field.resolveDependencies()
+    }
+
+    // 4. Check all value dependencies
+    for (const [, field] of Object.entries(this._fields)) {
+      field.checkValueDependencies()
+    }
   }
 
   values() {
@@ -78,7 +88,7 @@ export class SuperForm {
   /**
    * Internal API
    * */
-  _getValue(fieldName: string): string {
+  _getValue(fieldName: string): string|boolean {
     const val = this[fieldName as keyof SuperForm]
     if (typeof val === 'string' || typeof val === 'boolean') return val
 

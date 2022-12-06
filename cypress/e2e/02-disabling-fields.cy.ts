@@ -33,4 +33,19 @@ describe('Smoke', () => {
     cy.get('#super-form-field-input-field2')
       .should('be.disabled')
   })
+
+  it('Should disable a field through the disabledIf API, using the "not-empty" value', () => {
+    cy
+      .get('#super-form-field-input-disableIfField1IsNotEmpty')
+      .should('exist')
+      .should('be.disabled')
+
+    cy
+      .get('#super-form-field-input-field1')
+      .clear()
+
+    cy
+      .get('#super-form-field-input-disableIfField1IsNotEmpty')
+      .should('not.be.disabled')
+  })
 })

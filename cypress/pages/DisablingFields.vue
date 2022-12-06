@@ -33,7 +33,14 @@ export default {
         field3: {
           label: 'Disabled field',
           disabled: true,
-        }
+        },
+
+        disableIfField1IsNotEmpty: {
+          label: 'Disabled if field1 is empty',
+          disabledIf: {
+            field1: 'not-empty'
+          }
+        },
       },
     }
   },

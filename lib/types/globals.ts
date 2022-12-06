@@ -10,4 +10,7 @@ export type EventHandler = (event: Event, field: FormFieldInterface) => void;
 
 export type ErrorMessageObject = string | { en: string, [key: string]: string };
 
-export type disabledIf = { [key: string]: RegExp | boolean | string };
+/**
+ * Used to describe a condition for a field, for example for disabling or hiding it
+ * */
+export type FieldCondition = { [key: string]: RegExp | boolean | string };

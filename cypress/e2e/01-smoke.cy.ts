@@ -44,4 +44,14 @@ describe('Smoke', () => {
       .blur()
       .should('exist')
   })
+
+  it('Should display multiple fields in a row', () => {
+    cy
+      .get('.sflib__multiple-fields-row')
+      // assert that there is only one row
+      .should('have.length', 1)
+      // assert that there are 3 fields in the row
+      .find('.sflib__field-wrapper')
+      .should('have.length', 3)
+  })
 })

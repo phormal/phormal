@@ -1,5 +1,5 @@
 import FormFieldInterface from './types/interfaces/FormField.interface'
-import {EventHandler, FieldCondition, FormFieldType} from './types/globals'
+import {EventHandler, FieldCondition, FormFieldType, GenericFunction} from './types/globals'
 import {FormFieldConfig} from './types/interfaces/FormConfig.interface'
 import {createProjector, h, Projector} from 'maquette'
 import {SuperForm} from './SuperForm'
@@ -18,10 +18,11 @@ export class FormField implements FormFieldInterface {
   disabledIf = {}
   hideIf = {}
   projector: Projector = createProjector()
-  validators: { [key: string]: any } = {}
+  validators: Record<string, GenericFunction> = {}
   dependencies: string[] = []
   dependants: string[] = []
   config: FormFieldConfig|undefined
+  row = ''
   inputDOMElement: HTMLInputElement | null = null
   isHidden = false
   _form: SuperForm;

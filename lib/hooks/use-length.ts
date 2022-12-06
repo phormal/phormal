@@ -7,7 +7,7 @@ export const useLength = (minLength: number, maxLength: number): HookReturnValue
   return {
     validators: {
       checkLength(field: FormField) {
-        const thisValue = field.getValue()
+        const thisValue = field.getValue() as string
         
         const isValid = (thisValue.length >= minLength && thisValue.length <= maxLength)
 

@@ -79,6 +79,7 @@ export default {
       el: '#super-form',
       validation: 'active',
       language: 'de',
+      theme: 'material',
     })
 
     this.form.init()

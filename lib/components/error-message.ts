@@ -10,7 +10,7 @@ export default class ErrorMessage implements MaquetteComponent {
   constructor(
     id: string,
     errors: string[],
-    errorMessages: { [key: string]: string | ErrorMessageObject },
+    errorMessages: Record<string, string | ErrorMessageObject>,
     language: string,
   ) {
     this.errorMsgId = id

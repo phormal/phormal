@@ -9,6 +9,20 @@
     box-sizing: border-box;
   }
 
+  .sflib__multiple-fields-row {
+    display: flex;
+    grid-gap: 1em;
+    margin-bottom: 1em;
+
+    .sflib__field-wrapper {
+      margin-bottom: 0;
+
+      input {
+        margin-bottom: 0;
+      }
+    }
+  }
+
   .sflib__field-wrapper {
     width: 100%;
     margin-bottom: 1em;

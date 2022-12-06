@@ -6,11 +6,11 @@ import {Checkbox} from './fields/Checkbox'
 
 export class SuperForm {
   readonly _config: FormConfig;
-  private readonly _unprocessedFields: { [key: string]: FormFieldConfig }
-  _fields: { [key: string]: FormFieldInterface }  = {}
+  private readonly _unprocessedFields: Record<string, FormFieldConfig>
+  _fields: Record<string, FormFieldInterface>  = {}
 
   constructor(
-    fields: { [key: string]: FormFieldConfig },
+    fields: Record<string, FormFieldConfig>,
     formConfig: FormConfig
   ) {
     // Set the required defaults of the form config
@@ -26,6 +26,7 @@ export class SuperForm {
     // 1. Initialize all fields
     for (const [fieldName, field] of Object.entries(this._unprocessedFields)) {
       // Set the field's value to the default value if it exists
+      // The value for each field is stored here in the form object, instead of in each field object. This allows for a sleeker API => form.fieldName instead of form.field.fieldName
       Object.assign(this, {[fieldName]: field.value})
 
       let FormFieldClass = FormField
@@ -44,17 +45,52 @@ export class SuperForm {
 
     mountingElement.classList.add(`sflib-${this._config.theme || 'base'}`)
 
-    // 2. Create VNodes for all the fields
-    for (const [, field] of Object.entries(this._fields)) {
-      field.render(mountingElement)
+    // 2. Build a two-dimensional array representation of the form, with one nested array per row
+    const fieldsInRowRepresentation: string[] = []
+    const formRowRepresentation = Object.entries(this._fields).reduce((acc: Array<FormFieldInterface[]>, [fieldName, field]) => {
+      if (fieldsInRowRepresentation.includes(fieldName)) return acc
+
+      const row = []
+      row.push(field)
+      fieldsInRowRepresentation.push(fieldName)
+
+      if (field.row) {
+        for (const [additionalFieldName, additionalFieldInRow] of Object.entries(this._fields)) {
+          if (additionalFieldInRow.row === row[0].row && !fieldsInRowRepresentation.includes(additionalFieldName)) {
+            row.push(additionalFieldInRow)
+            fieldsInRowRepresentation.push(additionalFieldName)
+          }
+        }
+      }
+
+      acc.push(row)
+
+      return acc
+    }, [])
+
+    // 3. Render all fields
+    for (const row of formRowRepresentation) {
+      if (row.length === 1) {
+        row[0].render(mountingElement)
+        continue
+      }
+
+      const rowClass = `sflib__row-${row[0].row}`  // All fields in a row have the same row name
+      const rowElement = document.createElement('div')
+      rowElement.classList.add('sflib__multiple-fields-row', `sflib__row-${rowClass}`)
+      mountingElement.appendChild(rowElement)
+
+      for (const field of row) {
+        field.render(rowElement)
+      }
     }
 
-    // 3. Resolve all dependencies between fields
+    // 4. Resolve all dependencies between fields
     for (const [, field] of Object.entries(this._fields)) {
       field.resolveDependencies()
     }
 
-    // 4. Check all value dependencies
+    // 5. Check all value dependencies
     for (const [, field] of Object.entries(this._fields)) {
       field.checkValueDependencies()
     }
@@ -62,7 +98,7 @@ export class SuperForm {
 
   values() {
     const fieldNames = Object.keys(this._fields)
-    type returnValueType = { [key: string]: string|boolean }
+    type returnValueType = Record<string, string|boolean>
 
     return fieldNames.reduce((acc, fieldName) => {
       acc[fieldName] = this._getValue(fieldName)

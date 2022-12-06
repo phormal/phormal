@@ -12,6 +12,7 @@ export default interface FormFieldInterface {
   readonly dependencies?: ReadonlyArray<string>;
   readonly disabledIf?: FieldCondition;
   readonly hideIf?: FieldCondition;
+  readonly row?: string;
   required?: boolean;
   disabled?: boolean;
   errors?: string[];

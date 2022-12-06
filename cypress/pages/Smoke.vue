@@ -26,6 +26,21 @@ export default {
 					value: 'Doe',
 					handleOnFocus: (event, field) => this.lastNameFocusN += 1,
 				},
+        yyyy: {
+          value: '',
+          label: 'YYYY',
+          row: 'birthdate',
+        },
+        mm: {
+          value: '',
+          label: 'MM',
+          row: 'birthdate',
+        },
+        dd: {
+          value: '',
+          label: 'DD',
+          row: 'birthdate',
+        },
 				country: {
 					type: 'select',
 					label: 'Country',

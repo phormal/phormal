@@ -21,6 +21,7 @@ type FormFieldConfigBase = {
   disabledIf?: FieldCondition;
   hideIf?: FieldCondition;
   dependencies?: string[];
+  row?: string;
 
   // For select fields
   options?: MultiSelectOption[];

@@ -41,6 +41,13 @@ export default {
             field1: 'not-empty'
           }
         },
+
+        hideThisIfField1IsEmpty: {
+          label: 'Hide this if field1 is empty',
+          hideIf: {
+            field1: 'empty'
+          }
+        },
       },
     }
   },

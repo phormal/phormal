@@ -24,10 +24,8 @@ export class FormField implements FormFieldInterface {
   config: FormFieldConfig|undefined
   inputDOMElement: HTMLInputElement | null = null
   isHidden = false
-
   _form: SuperForm;
   _errorMessages = {}
-
   _onClickHandlers: EventHandler[] = []
   _onChangeHandlers: EventHandler[] = []
   _onBlurHandlers: EventHandler[] = []
@@ -172,8 +170,6 @@ export class FormField implements FormFieldInterface {
         }
       }
     }
-
-    console.log(this)
   }
 
   runAllValidators() {

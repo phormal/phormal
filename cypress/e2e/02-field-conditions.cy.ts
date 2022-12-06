@@ -1,7 +1,7 @@
-describe('Smoke', () => {
+describe('Field conditions', () => {
 
   beforeEach(() => {
-    cy.visit('/#/e2e/disabling-fields')
+    cy.visit('/#/e2e/field-conditions')
   })
 
   it('Should disable a field through the "disabled: true"-API', () => {
@@ -47,5 +47,19 @@ describe('Smoke', () => {
     cy
       .get('#super-form-field-input-disableIfField1IsNotEmpty')
       .should('not.be.disabled')
+  })
+
+  it('Should hide a field using the hideIf API', () => {
+    cy
+      .get('#super-form-field-input-hideThisIfField1IsEmpty')
+      .should('exist')
+
+    cy
+      .get('#super-form-field-input-field1')
+      .clear()
+
+    cy
+      .get('#super-form-field-input-hideThisIfField1IsEmpty')
+      .should('not.be.visible')
   })
 })

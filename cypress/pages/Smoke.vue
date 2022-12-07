@@ -2,8 +2,8 @@
 
 import {useRequired} from '../../packages/core/src'
 import {useLength} from '../../packages/core/src'
-import useAutoCapitalize from "../../packages/hooks/use-auto-capitalize/src";
-import useValidZip from "../../packages/hooks/use-valid-zip/src";
+import useAutoCapitalize from "../../packages/use-auto-capitalize/src";
+import useValidZip from "../../packages/use-valid-zip/src";
 import {SuperForm} from '../../packages/core/src'
 
 export default {

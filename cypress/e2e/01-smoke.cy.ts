@@ -55,3 +55,5 @@ describe('Smoke', () => {
       .should('have.length', 3)
   })
 })
+
+export {}

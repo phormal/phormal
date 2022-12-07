@@ -28,7 +28,6 @@
     position: relative;
     margin-bottom: 1em;
     width: 100%;
-    max-width: 280px;
     overflow: hidden;
   }
 
@@ -45,9 +44,9 @@
     width: 100%;
     border: 0;
     font-family: inherit;
-    padding: 16px 12px 0 12px;
-    height: 56px;
-    font-size: 16px;
+    padding: 1rem .75rem 0 .75rem;
+    height: 3.5rem;
+    font-size: 1rem;
     font-weight: 400;
     background: rgba($dark, .02);
     box-shadow: inset 0 -1px 0 rgba($dark, .3);
@@ -87,9 +86,8 @@
 
   .sflib__field-label {
     position: absolute;
-    top: 20px;
-    left: 12px;
-    font-size: 16px;
+    top: 1.25rem;
+    left: .75rem;
     color: rgba($dark, .5);
     font-weight: 500;
     transform-origin: 0 0;

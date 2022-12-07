@@ -185,12 +185,13 @@ export class FormField implements FormFieldInterface {
     let wrapperChildren = [inputLabel, inputEl]
     if (this._form._config.theme === 'material') {
       wrapperChildren = wrapperChildren.reverse()
-      wrapperChildren.push(h('span', { class: 'sflib__material-bg-focus'}))
+      // TODO: repair styles for this element
+      wrapperChildren.push(h('span', { class: 'sflib__material-bg-focus' }))
     }
 
     this.projector.append(mountingEl, () => h(
       'div',
-      {id: this.id, class: 'sflib__field-wrapper'},
+      { id: this.id, class: 'sflib__field-wrapper' },
       wrapperChildren
     ))
 

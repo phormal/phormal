@@ -182,14 +182,17 @@ export class FormField implements FormFieldInterface {
   render(mountingEl: HTMLElement) {
     const inputLabel = this._getInputLabel()
     const inputEl = this.getInputElement()
+    let wrapperChildren = [inputLabel, inputEl]
+    if (this._form._config.theme === 'material') {
+      wrapperChildren = wrapperChildren.reverse()
+      // TODO: repair styles for this element
+      wrapperChildren.push(h('span', { class: 'sflib__material-bg-focus' }))
+    }
 
     this.projector.append(mountingEl, () => h(
       'div',
-      {id: this.id, class: 'sflib__field-wrapper'},
-      [
-        inputLabel,
-        inputEl,
-      ]
+      { id: this.id, class: 'sflib__field-wrapper' },
+      wrapperChildren
     ))
 
     this.inputDOMElement = document.getElementById(this.inputId) as HTMLInputElement
@@ -245,7 +248,9 @@ export class FormField implements FormFieldInterface {
     return h(
       'input',
       {
-        placeholder: this.placeholder,
+        placeholder: this._form._config.theme === 'material'
+          ? '&nbsp;'
+          : this.placeholder,
         value: String(this.getValue()),
         ...this._getGlobalInputProperties(),
       }

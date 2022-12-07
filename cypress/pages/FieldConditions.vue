@@ -1,9 +1,8 @@
 <script lang="ts">
 
-import {useRequired} from '../../lib'
-import {useLength} from '../../lib'
-import {useAutoCapitalize} from '../../lib'
-import {SuperForm} from '../../lib'
+import {useRequired} from '../../packages/core/src'
+import {useLength} from '../../packages/core/src'
+import {SuperForm} from '../../packages/core/src'
 
 export default {
   name: 'App',
@@ -15,7 +14,7 @@ export default {
       formFields: {
         field1: {
           label: 'First name',
-          hooks: [useRequired(), useLength(1, 155), useAutoCapitalize()],
+          hooks: [useRequired(), useLength(1, 155)],
           value: 'John',
           disabledIf: {
             field2: /test/,

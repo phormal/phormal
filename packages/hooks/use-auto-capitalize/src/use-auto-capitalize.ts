@@ -1,4 +1,4 @@
-import {HookReturnValue} from '../types/interfaces/Hook.interface'
+import {HookReturnValue} from "../../../core/src/types/interfaces/Hook.interface";
 
 export const useAutoCapitalize = (): HookReturnValue => {
   return {

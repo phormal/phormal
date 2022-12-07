@@ -1,5 +1,5 @@
-import {Hook, HookReturnValue} from '../types/interfaces/Hook.interface'
-import {FormField} from "../FormField";
+import {Hook, HookReturnValue} from '../../../core/src/types/interfaces/Hook.interface'
+import {FormField} from "../../../core/src";
 
 /**
  * This hook requires:

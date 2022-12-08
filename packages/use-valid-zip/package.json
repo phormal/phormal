@@ -1,6 +1,6 @@
 {
   "name": "@super-form/use-valid-zip",
-  "version": "0.0.2",
+  "version": "0.1.0-alpha.0",
   "type": "module",
   "types": "dist/packages/core/src/index.d.ts",
   "dependencies": {

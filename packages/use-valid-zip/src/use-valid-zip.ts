@@ -9,7 +9,7 @@ import {FormField} from "../../core/src";
  * of any ISO 3166 Alpha-2 Code: https://www.iso.org/obp/ui/#search/code/
  * */
 export const useValidZip: Hook = (): HookReturnValue => {
-  const ERROR_NAME = 'zip'
+  const ERROR_NAME = 'zip';
 
   return {
     dependencies: ['country'],

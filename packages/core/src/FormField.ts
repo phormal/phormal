@@ -10,7 +10,7 @@ import {FormFieldResolver} from "./util/form-field-resolver";
 
 export class FormField implements FormFieldInterface {
   type: FormFieldType = 'text';
-  errors: string[] = []
+  errors: string[] = [];
   label: string = ''
   placeholder: string = ''
   name: string = ''

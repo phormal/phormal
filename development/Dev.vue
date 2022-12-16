@@ -4,6 +4,7 @@ import {useRequired} from '../packages/core/src'
 import {useLength} from '../packages/core/src'
 import useAutoCapitalize from "../packages/use-auto-capitalize/src";
 import useValidZip from "../packages/use-valid-zip/src";
+import useEmail from "../packages/use-email/src";
 
 export default {
   name: 'App',
@@ -60,6 +61,11 @@ export default {
           label: 'ZIP code',
           hooks: [useRequired(), useValidZip()],
           // value: '51378',
+        },
+        email: {
+          label: 'Email',
+          hooks: [useRequired(), useEmail()],
+          value: ''
         },
         newsletter: {
           type: 'checkbox',

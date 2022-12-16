@@ -1,5 +1,5 @@
-import {Hook} from '../types/interfaces/Hook.interface'
-import {FormField} from "../FormField";
+import {Hook} from '@super-form/core/src/types/interfaces/Hook.interface'
+import {FormField} from "@super-form/core/src/FormField";
 
 const ERROR_NAME = 'required';
 export const useRequired: Hook = () => {

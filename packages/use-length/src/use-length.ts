@@ -1,5 +1,5 @@
-import {HookReturnValue} from '../types/interfaces/Hook.interface'
-import {FormField} from "../FormField";
+import {HookReturnValue} from "@super-form/core/src/types/interfaces/Hook.interface";
+import {FormField} from "@super-form/core/src/FormField";
 
 export const useLength = (minLength: number, maxLength: number): HookReturnValue => {
   const ERROR_NAME = 'length'

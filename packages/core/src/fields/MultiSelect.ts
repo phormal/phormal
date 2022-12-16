@@ -30,7 +30,7 @@ export class MultiSelect extends FormField {
             'select',
             {
                 placeholder: this.placeholder,
-                value: this.getValue(),
+                value: String(this.getValue()),
                 ...this._getGlobalInputProperties(),
             },
             options

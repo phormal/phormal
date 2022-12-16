@@ -13,14 +13,6 @@
     "skipLibCheck": true,
     "noEmit": false,
     "declaration": true,
-	"types": ["vite/client", "cypress"]
-  },
-  "include": [
-	"packages/**/*.ts",
-	"packages/**/*.d.ts",
-	"lib/**/*.tsx",
-	"lib/**/*.vue",
-  ],
-    "exclude": ["cypress/**/*.ts"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+    "types": ["vite/client"]
+  }
 }

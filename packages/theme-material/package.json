@@ -1,0 +1,22 @@
+{
+  "name": "@super-form/theme-material",
+  "version": "0.1.0-alpha.1",
+  "type": "module",
+  "scripts": {
+    "build": "sass ./src/index.scss ./dist/index.css"
+  },
+  "exports": {
+    "./dist/index.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
+    }
+  },
+  "devDependencies": {
+    "lerna": "^6.1.0",
+    "sass": "^1.56.1",
+    "vite": "^3.1.8"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}

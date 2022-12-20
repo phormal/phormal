@@ -14,38 +14,18 @@ export default {
       formFields: {
         field1: {
           label: 'First name',
-          hooks: [useRequired(), useLength(1, 155)],
+          hooks: [useLength(undefined, 10)],
           value: 'John',
-          disabledIf: {
-            field2: /test/,
-          }
         },
         field2: {
           label: 'Last name',
-          hooks: [useRequired(), useLength(1, 155)],
+          hooks: [useLength(5)],
           value: '',
-          disabledIf: {
-            field1: 'empty'
-          }
         },
-
         field3: {
-          label: 'Disabled field',
-          disabled: true,
-        },
-
-        disableIfField1IsNotEmpty: {
-          label: 'Disabled if field1 is empty',
-          disabledIf: {
-            field1: 'not-empty'
-          }
-        },
-
-        hideThisIfField1IsEmpty: {
-          label: 'Hide this if field1 is empty',
-          hideIf: {
-            field1: 'empty'
-          }
+          label: 'Hubba bubba',
+          hooks: [useLength(5, 10)],
+          value: '',
         },
       },
     }

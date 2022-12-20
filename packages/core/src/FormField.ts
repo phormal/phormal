@@ -13,7 +13,6 @@ export class FormField implements FormFieldInterface {
   errors: string[] = [];
   label: string = ''
   placeholder: string = ''
-  name: string = ''
   disabled: boolean = false
   disabledIf = {}
   hideIf = {}
@@ -21,11 +20,9 @@ export class FormField implements FormFieldInterface {
   validators: Record<string, GenericFunction> = {}
   dependencies: string[] = []
   dependants: string[] = []
-  config: FormFieldConfig|undefined
   row = ''
   inputDOMElement: HTMLInputElement | null = null
   isHidden = false
-  _form: SuperForm;
   _errorMessages = {}
   _onClickHandlers: EventHandler[] = []
   _onChangeHandlers: EventHandler[] = []
@@ -34,16 +31,12 @@ export class FormField implements FormFieldInterface {
   _onInputHandlers: EventHandler[] = []
 
   constructor(
-    name: string,
-    formFieldConfig: FormFieldConfig,
-    form: SuperForm
+    public name: string = '',
+    public config: FormFieldConfig,
+    public _form: SuperForm
   ) {
-    this._form = form
-    this.name = name
-    this.config = formFieldConfig
-
-    new FormFieldResolver(this, formFieldConfig)
-    new FieldHooksResolver(this, formFieldConfig.hooks || [])
+    new FormFieldResolver(this, config)
+    new FieldHooksResolver(this, config.hooks || [])
   }
 
   resolveDependencies() {

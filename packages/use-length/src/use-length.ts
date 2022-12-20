@@ -1,22 +1,39 @@
 import {HookReturnValue} from "@super-form/core/src/types/interfaces/Hook.interface";
 import {FormField} from "@super-form/core/src/FormField";
 
-export const useLength = (minLength: number, maxLength: number): HookReturnValue => {
-  const ERROR_NAME = 'length'
+export const useLength = (minLength: number|undefined|null, maxLength?: number|undefined): HookReturnValue => {
+  const LENGTH_ERROR_NAME = 'length'
+  const MIN_LENGTH_ERROR_NAME = 'minLength'
+  const MAX_LENGTH_ERROR_NAME = 'maxLength'
 
   return {
     validators: {
       checkLength(field: FormField) {
+        let errorName = LENGTH_ERROR_NAME
+        let isValid = false
         const thisValue = field.getValue() as string
-        
-        const isValid = (thisValue.length >= minLength && thisValue.length <= maxLength)
 
-        if (!field.errors.includes(ERROR_NAME) && !isValid) field.errors.push(ERROR_NAME)
-        if (field.errors.includes(ERROR_NAME) && isValid) field.errors.splice(field.errors.indexOf(ERROR_NAME), 1)
+        if (typeof minLength === 'number' && typeof maxLength === 'number') {
+          errorName = LENGTH_ERROR_NAME
+          isValid = thisValue.length >= minLength && thisValue.length <= maxLength
+        }
+
+        else if (typeof minLength === 'number' && typeof maxLength === 'undefined') {
+          errorName = MIN_LENGTH_ERROR_NAME
+          isValid = thisValue.length >= minLength
+        }
+
+        else if (typeof minLength === 'undefined' && typeof maxLength === 'number') {
+          errorName = MAX_LENGTH_ERROR_NAME
+          isValid = thisValue.length <= maxLength
+        }
+
+        if (!field.errors.includes(errorName) && !isValid) field.errors.push(errorName)
+        if (field.errors.includes(errorName) && isValid) field.errors.splice(field.errors.indexOf(errorName), 1)
       }
     },
     errorMessages: {
-      [ERROR_NAME]: {
+      [LENGTH_ERROR_NAME]: {
         en: `This field must be between ${minLength} and ${maxLength} characters long`,
         de: `Dieses Feld muss zwischen ${minLength} und ${maxLength} Zeichen lang sein`,
         sv: `Detta fält måste vara mellan ${minLength} och ${maxLength} tecken långt`,
@@ -45,6 +62,16 @@ export const useLength = (minLength: number, maxLength: number): HookReturnValue
         et: `See väli peab olema ${minLength} ja ${maxLength} märgi vahel`,
         fa: `این فیلد باید بین ${minLength} و ${maxLength} کاراکتر باشد`,
         he: `שדה זה חייב להיות בין ${minLength} ל ${maxLength} תווים`,
+      },
+
+      [MIN_LENGTH_ERROR_NAME]: {
+        en: `This field must be at least ${minLength} characters long`,
+        de: `Dieses Feld muss mindestens ${minLength} Zeichen lang sein`,
+      },
+
+      [MAX_LENGTH_ERROR_NAME]: {
+        en: `This field must be at most ${maxLength} characters long`,
+        de: `Dieses Feld darf höchstens ${maxLength} Zeichen lang sein`,
       }
     }
   }

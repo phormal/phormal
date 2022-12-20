@@ -24,18 +24,18 @@ export class SuperForm {
 
   init() {
     // 1. Initialize all fields
-    for (const [fieldName, field] of Object.entries(this._unprocessedFields)) {
+    for (const [fieldName, fieldConfig] of Object.entries(this._unprocessedFields)) {
       // Set the field's value to the default value if it exists
       // The value for each field is stored here in the form object, instead of in each field object. This allows for a sleeker API => form.fieldName instead of form.field.fieldName
-      Object.assign(this, {[fieldName]: field.value})
+      Object.assign(this, {[fieldName]: fieldConfig.value})
 
       let FormFieldClass = FormField
-      if (field.type === 'select') FormFieldClass = MultiSelect
-      if (field.type === 'checkbox') FormFieldClass = Checkbox
+      if (fieldConfig.type === 'select') FormFieldClass = MultiSelect
+      if (fieldConfig.type === 'checkbox') FormFieldClass = Checkbox
 
       this._fields[fieldName] = new FormFieldClass(
         fieldName,
-        field,
+        fieldConfig,
         this,
       )
     }

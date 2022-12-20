@@ -1,7 +1,7 @@
 <script lang="ts">
 
-import {useRequired} from '../../packages/core/src'
-import {useLength} from '../../packages/core/src'
+import useRequired from "../../packages/use-required/src";
+import useLength from "../../packages/use-length/src";
 import useAutoCapitalize from "../../packages/use-auto-capitalize/src";
 import useValidZip from "../../packages/use-valid-zip/src";
 import {SuperForm} from '../../packages/core/src'

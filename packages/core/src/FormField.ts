@@ -2,11 +2,13 @@ import FormFieldInterface from './types/interfaces/FormField.interface'
 import {EventHandler, FieldCondition, FormFieldType, GenericFunction} from './types/globals'
 import {FormFieldConfig} from './types/interfaces/FormConfig.interface'
 import {createProjector, h, Projector} from 'maquette'
-import {SuperForm} from './SuperForm'
+import {Phormal} from './Phormal'
 import ErrorMessage from './components/error-message'
 import {FieldHooksResolver} from "./util/field-hooks-resolver";
 import {FieldDependencyResolver} from "./util/field-dependency-resolver";
 import {FormFieldResolver} from "./util/form-field-resolver";
+import InputElement from "./components/input-element";
+import InputLabel from "./components/input-label";
 
 export class FormField implements FormFieldInterface {
   type: FormFieldType = 'text';
@@ -33,7 +35,7 @@ export class FormField implements FormFieldInterface {
   constructor(
     public name: string = '',
     public config: FormFieldConfig,
-    public _form: SuperForm
+    public _form: Phormal
   ) {
     new FormFieldResolver(this, config)
     new FieldHooksResolver(this, config.hooks || [])
@@ -173,8 +175,8 @@ export class FormField implements FormFieldInterface {
   }
 
   render(mountingEl: HTMLElement) {
-    const inputLabel = this._getInputLabel()
-    const inputEl = this.getInputElement()
+    const inputLabel = new InputLabel(this).render()
+    const inputEl = new InputElement(this).render()
     let wrapperChildren = [inputLabel, inputEl]
     if (this._form._config.theme === 'material') {
       wrapperChildren = wrapperChildren.reverse()
@@ -217,12 +219,6 @@ export class FormField implements FormFieldInterface {
     this.updateErrorMessageInDOM()
   }
 
-  _getInputLabel() {
-    return this.label
-      ? h('label', {for: this.inputId, class: 'phlib__field-label'}, [this.label])
-      : null;
-  }
-
   _getGlobalInputProperties() {
     return {
       id: this.inputId,
@@ -235,18 +231,5 @@ export class FormField implements FormFieldInterface {
       onclick: this._onClick.bind(this),
       onchange: this._onChange.bind(this),
     }
-  }
-
-  private getInputElement() {
-    return h(
-      'input',
-      {
-        placeholder: this._form._config.theme === 'material'
-          ? '&nbsp;'
-          : this.placeholder,
-        value: String(this.getValue()),
-        ...this._getGlobalInputProperties(),
-      }
-    )
   }
 }

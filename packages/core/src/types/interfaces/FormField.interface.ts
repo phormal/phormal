@@ -1,5 +1,5 @@
 import {FieldCondition, EventHandler, FormFieldType} from '../globals'
-import {SuperForm} from '../../index'
+import {Phormal} from '../../index'
 import {FormFieldConfig} from "./FormConfig.interface";
 
 export default interface FormFieldInterface {
@@ -27,7 +27,7 @@ export default interface FormFieldInterface {
   checkValueDependencies(): void;
   addDependant(dependant: string): void;
 
-  _form: SuperForm | undefined;
+  _form: Phormal | undefined;
   _errorMessages?: { [key: string]: string | object };
 
   _onClick: (event: Event) => void;

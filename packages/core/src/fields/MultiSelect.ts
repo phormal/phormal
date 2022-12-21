@@ -2,7 +2,8 @@ import {FormField} from '../FormField'
 import {h} from 'maquette'
 import {MultiSelectOption} from '../types/globals'
 import {FormFieldConfig} from '../types/interfaces/FormConfig.interface'
-import {SuperForm} from "../SuperForm";
+import {Phormal} from "../Phormal";
+import InputLabel from "../components/input-label";
 
 export class MultiSelect extends FormField {
   options: MultiSelectOption[] = []
@@ -10,14 +11,14 @@ export class MultiSelect extends FormField {
   constructor(
     name: string,
     formField: FormFieldConfig,
-    form: SuperForm
+    form: Phormal
   ) {
     super(name, formField, form)
     this.options = formField.options ? formField.options : []
   }
 
   render(mountingElement: HTMLElement) {
-    const inputLabel = this._getInputLabel()
+    const inputLabel = new InputLabel(this).render()
 
     const options = this.options.map(option => {
       return h('option', { value: option.value }, [option.label])

@@ -7,13 +7,13 @@ In order to support an intuitive API for accessing field values, the main object
 1.  Implementers can access a field values easily like so:
 
 ```js
-const form = new SuperForm({
-	fields: {
-		firstName: {
-			name: 'firstName',
-			value: 'John',
-		},
-	},
+const form = new Phormal({
+    fields: {
+        firstName: {
+            name: 'firstName',
+            value: 'John',
+        },
+    },
 });
 
 form.firstName; // 'John'

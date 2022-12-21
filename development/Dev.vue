@@ -1,5 +1,5 @@
 <script lang="ts">
-import {SuperForm} from '../packages/core/src'
+import {Phormal} from '../packages/core/src'
 import useRequired from "../packages/use-required/src";
 import useLength from "../packages/use-length/src";
 import useAutoCapitalize from "../packages/use-auto-capitalize/src";
@@ -81,11 +81,11 @@ export default {
   },
 
   mounted() {
-    this.form = new SuperForm(this.formFields, {
+    this.form = new Phormal(this.formFields, {
       el: '#phormal',
       validation: 'active',
       language: 'de',
-      theme: 'material',
+      theme: 'basic',
     })
 
     this.form.init()

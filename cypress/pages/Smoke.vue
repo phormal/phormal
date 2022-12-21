@@ -4,7 +4,7 @@ import useRequired from "../../packages/use-required/src";
 import useLength from "../../packages/use-length/src";
 import useAutoCapitalize from "../../packages/use-auto-capitalize/src";
 import useValidZip from "../../packages/use-valid-zip/src";
-import {SuperForm} from '../../packages/core/src'
+import {Phormal} from '../../packages/core/src'
 
 export default {
 	name: 'App',
@@ -73,7 +73,7 @@ export default {
 	},
 
 	mounted() {
-		this.form = new SuperForm(this.formFields, {
+		this.form = new Phormal(this.formFields, {
 			el: '#phormal',
 			validation: 'active'
 		})

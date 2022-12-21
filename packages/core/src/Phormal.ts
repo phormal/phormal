@@ -4,7 +4,7 @@ import {FormField} from './FormField'
 import {MultiSelect} from './fields/MultiSelect'
 import {Checkbox} from './fields/Checkbox'
 
-export class SuperForm {
+export class Phormal {
   readonly _config: FormConfig;
   private readonly _unprocessedFields: Record<string, FormFieldConfig>
   _fields: Record<string, FormFieldInterface>  = {}
@@ -26,7 +26,7 @@ export class SuperForm {
     // 1. Initialize all fields
     for (const [fieldName, fieldConfig] of Object.entries(this._unprocessedFields)) {
       // Set the field's value to the default value if it exists
-      // The value for each field is stored here in the form object, instead of in each field object. This allows for a sleeker API => form.fieldName instead of form.field.fieldName
+      // The value for each field is stored here in the form object, instead of in each field object. This allows for a sleeker API => form.fieldName instead of form.fields.fieldName
       Object.assign(this, {[fieldName]: fieldConfig.value})
 
       let FormFieldClass = FormField
@@ -39,11 +39,6 @@ export class SuperForm {
         this,
       )
     }
-    const mountingElement = document.querySelector(this._config.el)
-
-    if (!(mountingElement instanceof HTMLElement)) return
-
-    mountingElement.classList.add(`phlib-${this._config.theme || 'base'}`)
 
     // 2. Build a two-dimensional array representation of the form, with one nested array per row
     const fieldsInRowRepresentation: string[] = []
@@ -69,6 +64,12 @@ export class SuperForm {
     }, [])
 
     // 3. Render all fields
+    const mountingElement = document.querySelector(this._config.el)
+
+    if (!(mountingElement instanceof HTMLElement)) return
+
+    mountingElement.classList.add(`phlib-${this._config.theme || 'basic'}`)
+
     for (const row of formRowRepresentation) {
       if (row.length === 1) {
         row[0].render(mountingElement)
@@ -125,7 +126,7 @@ export class SuperForm {
    * Internal API
    * */
   _getValue(fieldName: string): string|boolean {
-    const val = this[fieldName as keyof SuperForm]
+    const val = this[fieldName as keyof Phormal]
     if (typeof val === 'string' || typeof val === 'boolean') return val
 
     return ''

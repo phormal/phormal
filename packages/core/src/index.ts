@@ -1,8 +1,8 @@
 // Export the main Modules and APIs
-import { SuperForm } from './SuperForm'
+import { Phormal } from './Phormal'
 import { FormField } from './FormField'
 
 export {
-  SuperForm,
+  Phormal,
   FormField,
 }

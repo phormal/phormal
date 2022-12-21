@@ -1,5 +1,5 @@
 {
-  "name": "@super-form/use-auto-capitalize",
+  "name": "@phormal/use-auto-capitalize",
   "version": "0.0.2",
   "type": "module",
   "types": "../../dist/types/use-auto-capitalize/src/index.d.ts",

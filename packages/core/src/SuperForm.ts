@@ -43,7 +43,7 @@ export class SuperForm {
 
     if (!(mountingElement instanceof HTMLElement)) return
 
-    mountingElement.classList.add(`sflib-${this._config.theme || 'base'}`)
+    mountingElement.classList.add(`phlib-${this._config.theme || 'base'}`)
 
     // 2. Build a two-dimensional array representation of the form, with one nested array per row
     const fieldsInRowRepresentation: string[] = []
@@ -75,9 +75,9 @@ export class SuperForm {
         continue
       }
 
-      const rowClass = `sflib__row-${row[0].row}`  // All fields in a row have the same row name
+      const rowClass = `phlib__row-${row[0].row}`  // All fields in a row have the same row name
       const rowElement = document.createElement('div')
-      rowElement.classList.add('sflib__multiple-fields-row', `sflib__row-${rowClass}`)
+      rowElement.classList.add('phlib__multiple-fields-row', `phlib__row-${rowClass}`)
       mountingElement.appendChild(rowElement)
 
       for (const field of row) {

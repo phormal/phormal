@@ -1,5 +1,5 @@
 {
-  "name": "@super-form/use-length",
+  "name": "@phormal/use-length",
   "version": "0.0.2",
   "type": "module",
   "types": "../../dist/types/use-length/src/index.d.ts",

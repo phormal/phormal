@@ -1,5 +1,5 @@
 {
-  "name": "@super-form/use-required",
+  "name": "@phormal/use-required",
   "version": "0.0.2",
   "type": "module",
   "types": "../../dist/types/use-required/src/index.d.ts",

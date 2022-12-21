@@ -4,12 +4,12 @@ describe('Smoke', () => {
     cy.visit('/#/e2e/smoke')
   })
 
-  const FIRST_NAME_FIELD = 'input[id="super-form-field-input-firstName"]'
-  const LAST_NAME_FIELD = 'input[id="super-form-field-input-lastName"]'
-  const COUNTRY_SELECT = 'select[id="super-form-field-input-country"]'
-  const ZIP_CODE_FIELD = 'input[id="super-form-field-input-zip"]'
-  const FIRST_NAME_ERROR = 'div[id="super-form-field-error-firstName"]'
-  const ZIP_CODE_ERROR = 'div[id="super-form-field-error-zip"]'
+  const FIRST_NAME_FIELD = 'input[id="phormal-field-input-firstName"]'
+  const LAST_NAME_FIELD = 'input[id="phormal-field-input-lastName"]'
+  const COUNTRY_SELECT = 'select[id="phormal-field-input-country"]'
+  const ZIP_CODE_FIELD = 'input[id="phormal-field-input-zip"]'
+  const FIRST_NAME_ERROR = 'div[id="phormal-field-error-firstName"]'
+  const ZIP_CODE_ERROR = 'div[id="phormal-field-error-zip"]'
 
   it('should render all expected fields', () => {
     cy.get(FIRST_NAME_FIELD).should('exist')
@@ -47,11 +47,11 @@ describe('Smoke', () => {
 
   it('Should display multiple fields in a row', () => {
     cy
-      .get('.sflib__multiple-fields-row')
+      .get('.phlib__multiple-fields-row')
       // assert that there is only one row
       .should('have.length', 1)
       // assert that there are 3 fields in the row
-      .find('.sflib__field-wrapper')
+      .find('.phlib__field-wrapper')
       .should('have.length', 3)
   })
 })

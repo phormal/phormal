@@ -24,7 +24,7 @@ export class MultiSelect extends FormField {
     })
 
     this.projector.append(mountingElement, () => {
-      return h('div', {id: this.id, class: 'sflib__field-wrapper'}, [
+      return h('div', {id: this.id, class: 'phlib__field-wrapper'}, [
         inputLabel,
         h(
             'select',

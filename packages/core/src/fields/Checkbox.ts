@@ -24,7 +24,7 @@ export class Checkbox extends FormField {
 
   render(mountingEl: HTMLElement) {
     const inputLabel = this.getCheckboxLabel()
-    const wrapperProperties = { id: this.id, class: 'sflib__field-wrapper sflib__checkbox-wrapper' }
+    const wrapperProperties = { id: this.id, class: 'phlib__field-wrapper phlib__checkbox-wrapper' }
 
     this.projector.append(mountingEl, () => {
       return h('div', wrapperProperties, [
@@ -43,7 +43,7 @@ export class Checkbox extends FormField {
   private getCheckboxLabel() {
     return h(
       'label',
-      { for: this.inputId, class: 'sflib__checkbox-label' },
+      { for: this.inputId, class: 'phlib__checkbox-label' },
       [this.label]
     );
   }

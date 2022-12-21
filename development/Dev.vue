@@ -82,7 +82,7 @@ export default {
 
   mounted() {
     this.form = new SuperForm(this.formFields, {
-      el: '#super-form',
+      el: '#phormal',
       validation: 'active',
       language: 'de',
       theme: 'material',
@@ -109,7 +109,7 @@ export default {
   <div>
     <h1>SuperForm</h1>
   </div>
-  <div id="super-form"></div>
+  <div id="phormal"></div>
 
   <button @click="runValidation">Validate</button>
   <button @click="getValues">Get values</button>

@@ -1,4 +1,4 @@
-.sflib-base {
+.phlib-base {
   $colorPrimary: #007bff;
   $colorPrimaryLight: #e9f2ff;
   $colorError: #dc3545;
@@ -9,12 +9,12 @@
     box-sizing: border-box;
   }
 
-  .sflib__multiple-fields-row {
+  .phlib__multiple-fields-row {
     display: flex;
     grid-gap: 1em;
     margin-bottom: 1em;
 
-    .sflib__field-wrapper {
+    .phlib__field-wrapper {
       margin-bottom: 0;
 
       input {
@@ -23,19 +23,19 @@
     }
   }
 
-  .sflib__field-wrapper {
+  .phlib__field-wrapper {
     width: 100%;
     margin-bottom: 1em;
   }
 
-  .sflib__checkbox-wrapper {
+  .phlib__checkbox-wrapper {
     display: flex;
     align-items: center;
   }
 
-  .sflib__input-text,
-  .sflib__input-textarea,
-  .sflib__input-select, {
+  .phlib__input-text,
+  .phlib__input-textarea,
+  .phlib__input-select, {
     display: block;
     width: 100%;
     font-size: 1rem;
@@ -60,7 +60,7 @@
       cursor: not-allowed;
     }
 
-    &.sflib__field-error {
+    &.phlib__field-error {
       border-color: $colorError;
       background-color: $colorErrorLight;
     }
@@ -110,17 +110,17 @@
     font-weight: 600;
   }
 
-  .sflib__field-label {
+  .phlib__field-label {
     @include labelBase;
     display: block;
     margin-bottom: 5px;
   }
 
-  .sflib__checkbox-label {
+  .phlib__checkbox-label {
     @include labelBase;
   }
 
-  .sflib__error-message {
+  .phlib__error-message {
     margin-bottom: 10px;
     font-size: .9rem;
 

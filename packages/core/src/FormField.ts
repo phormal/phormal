@@ -62,10 +62,10 @@ export class FormField implements FormFieldInterface {
     if (!this.dependants.includes(dependant)) this.dependants.push(dependant)
   }
 
-  get id() { return 'super-form-field-' + this.name }
-  get inputId() { return 'super-form-field-input-' + this.name }
-  get errorMsgId() { return 'super-form-field-error-' + this.name }
-  get inputClass() { return `sflib__input-${this.type}` }
+  get id() { return 'phormal-field-' + this.name }
+  get inputId() { return 'phormal-field-input-' + this.name }
+  get errorMsgId() { return 'phormal-field-error-' + this.name }
+  get inputClass() { return `phlib__input-${this.type}` }
 
   updateErrorMessageInDOM() {
     const errorsElement: HTMLElement | null = document.getElementById(this.errorMsgId)
@@ -179,12 +179,12 @@ export class FormField implements FormFieldInterface {
     if (this._form._config.theme === 'material') {
       wrapperChildren = wrapperChildren.reverse()
       // TODO: repair styles for this element
-      wrapperChildren.push(h('span', { class: 'sflib__material-bg-focus' }))
+      wrapperChildren.push(h('span', { class: 'phlib__material-bg-focus' }))
     }
 
     this.projector.append(mountingEl, () => h(
       'div',
-      { id: this.id, class: 'sflib__field-wrapper' },
+      { id: this.id, class: 'phlib__field-wrapper' },
       wrapperChildren
     ))
 
@@ -219,7 +219,7 @@ export class FormField implements FormFieldInterface {
 
   _getInputLabel() {
     return this.label
-      ? h('label', {for: this.inputId, class: 'sflib__field-label'}, [this.label])
+      ? h('label', {for: this.inputId, class: 'phlib__field-label'}, [this.label])
       : null;
   }
 

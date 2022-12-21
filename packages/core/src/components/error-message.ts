@@ -25,7 +25,7 @@ export default class ErrorMessage implements MaquetteComponent {
       {
         id: this.errorMsgId,
         styles: { color: 'red' },
-        class: 'sflib__error-message'
+        class: 'phlib__error-message'
       },
       [this.listOfErrors() as VNodeChild]
     )

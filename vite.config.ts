@@ -13,7 +13,7 @@ export default defineConfig({
         'use-length': './packages/use-length/src/index.ts',
         'use-valid-zip': './packages/use-valid-zip/src/index.ts',
       },
-      name: 'super-form',
+      name: 'phormal',
     },
     rollupOptions: {
       external: ['vue', new RegExp('cypress/*')],

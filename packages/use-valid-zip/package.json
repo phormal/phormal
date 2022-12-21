@@ -1,5 +1,5 @@
 {
-  "name": "@super-form/use-valid-zip",
+  "name": "@phormal/use-valid-zip",
   "version": "0.1.0-alpha.0",
   "type": "module",
   "types": "../../dist/types/use-valid-zip/src/index.d.ts",

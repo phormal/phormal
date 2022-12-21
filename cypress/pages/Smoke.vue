@@ -74,7 +74,7 @@ export default {
 
 	mounted() {
 		this.form = new SuperForm(this.formFields, {
-			el: '#super-form',
+			el: '#phormal',
 			validation: 'active'
 		})
 
@@ -102,7 +102,7 @@ export default {
 		<h2>First name was blurred {{ firstNameBlurN }} times</h2>
 		<h2>Last name was focus {{ lastNameFocusN }} times</h2>
 	</div>
-	<div id="super-form"></div>
+	<div id="phormal"></div>
 
 	<button @click="runValidation">Validate</button>
 	<button @click="getValues">Get values</button>

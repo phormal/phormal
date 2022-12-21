@@ -53,7 +53,7 @@ export default {
 
   mounted() {
     this.form = new SuperForm(this.formFields, {
-      el: '#super-form',
+      el: '#phormal',
       validation: 'active'
     })
 
@@ -65,7 +65,7 @@ export default {
 
 
 <template>
-  <div id="super-form"></div>
+  <div id="phormal"></div>
 </template>
 
 <style>

@@ -1,5 +1,5 @@
 {
-  "name": "@super-form/use-email",
+  "name": "@phormal/use-email",
   "version": "0.0.2",
   "type": "module",
   "types": "../../dist/types/use-email/src/index.d.ts",

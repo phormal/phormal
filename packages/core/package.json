@@ -1,5 +1,5 @@
 {
-  "name": "@super-form/core",
+  "name": "@phormal/core",
   "version": "0.1.0-alpha.1",
   "type": "module",
   "types": "dist/packages/core/src/index.d.ts",

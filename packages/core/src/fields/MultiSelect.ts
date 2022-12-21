@@ -25,16 +25,16 @@ export class MultiSelect extends FormField {
 
     this.projector.append(mountingElement, () => {
       return h('div', {id: this.id, class: 'phlib__field-wrapper'}, [
-        inputLabel,
         h(
-            'select',
-            {
-                placeholder: this.placeholder,
-                value: String(this.getValue()),
-                ...this._getGlobalInputProperties(),
-            },
-            options
+          'select',
+          {
+            placeholder: this.placeholder,
+            value: String(this.getValue()),
+            ...this._getGlobalInputProperties(),
+          },
+          options
         ),
+        inputLabel,
       ])
     })
   }

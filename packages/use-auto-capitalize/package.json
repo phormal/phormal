@@ -2,16 +2,17 @@
   "name": "@phormal/use-auto-capitalize",
   "version": "0.0.2",
   "type": "module",
-  "types": "../../dist/types/use-auto-capitalize/src/index.d.ts",
-  "module": "../../dist/use-auto-capitalize.js",
-  "main": "../../dist/use-auto-capitalize.cjs",
-  "scripts": {
-    "build": "tsc --emitDeclarationOnly"
-  },
+  "types": "./dist/use-auto-capitalize/src/index.d.ts",
+  "module": "./dist/use-auto-capitalize.js",
+  "main": "./dist/use-auto-capitalize.cjs.js",
+  "umd": "./dist/use-auto-capitalize.umd.js",
   "devDependencies": {
     "lerna": "^6.1.0",
     "typescript": "^4.6.4",
     "vite": "^3.1.8"
+  },
+  "peerDependencies": {
+    "@phormal/core": "^0.1.0-alpha.1"
   },
   "workspaces": [
     "packages/*"

@@ -2,12 +2,10 @@
   "name": "@phormal/use-email",
   "version": "0.0.2",
   "type": "module",
-  "types": "../../dist/types/use-email/src/index.d.ts",
-  "module": "../../dist/use-email.js",
-  "main": "../../dist/use-email.cjs",
-  "scripts": {
-    "build": "tsc --emitDeclarationOnly"
-  },
+  "types": "./dist/use-email/src/index.d.ts",
+  "module": "./dist/use-email.js",
+  "main": "./dist/use-email.cjs.js",
+  "umd": "./dist/use-email.umd.js",
   "dependencies": {},
   "devDependencies": {
     "lerna": "^6.1.0",

@@ -2,12 +2,10 @@
   "name": "@phormal/use-valid-zip",
   "version": "0.1.0-alpha.0",
   "type": "module",
-  "types": "../../dist/types/use-valid-zip/src/index.d.ts",
-  "module": "../../dist/use-valid-zip.js",
-  "main": "../../dist/use-valid-zip.cjs",
-  "scripts": {
-    "build": "tsc --emitDeclarationOnly"
-  },
+  "types": "./dist/use-valid-zip/src/index.d.ts",
+  "module": "./dist/use-valid-zip.js",
+  "main": "./dist/use-valid-zip.cjs.js",
+  "umd": "./dist/use-valid-zip.umd.js",
   "devDependencies": {
     "lerna": "^6.1.0",
     "typescript": "^4.6.4",

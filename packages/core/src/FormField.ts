@@ -49,10 +49,10 @@ export class FormField implements FormFieldInterface {
     ]
 
     for (const condition of conditions) {
-      if (condition) {
-        for (const [dep,] of Object.entries(condition)) {
-          this._form._fields[dep].addDependant(this.name)
-        }
+      if (!condition) continue
+
+      for (const [dep,] of Object.entries(condition)) {
+        this._form._fields[dep].addDependant(this.name)
       }
     }
   }
@@ -169,9 +169,7 @@ export class FormField implements FormFieldInterface {
   }
 
   runAllValidators() {
-    for (const fn of Object.values(this.validators)) {
-      fn(this)
-    }
+    for (const fn of Object.values(this.validators)) fn(this)
   }
 
   render(mountingEl: HTMLElement) {

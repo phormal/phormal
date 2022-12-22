@@ -1,5 +1,5 @@
-import {Hook, HookReturnValue} from '../../core/src/types/interfaces/Hook.interface'
-import {FormField} from "../../core/src";
+import {Hook, HookReturnValue} from "@phormal/core/src/types/interfaces/Hook.interface";
+import {FormField} from "@phormal/core/src";
 
 export const useEmail: Hook = (): HookReturnValue => {
   const ERROR_NAME = 'email';

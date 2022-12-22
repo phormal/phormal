@@ -1,4 +1,4 @@
-import {Hook} from '@phormal/core/src/types/interfaces/Hook.interface'
+import {Hook} from "@phormal/core/src/types/interfaces/Hook.interface";
 import {FormField} from "@phormal/core/src/FormField";
 
 const ERROR_NAME = 'required';

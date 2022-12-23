@@ -1,5 +1,6 @@
 import {h, MaquetteComponent} from "maquette";
 import {FormField} from "../FormField";
+import FormConfig from "../types/interfaces/FormConfig.interface";
 
 export default class InputElement implements MaquetteComponent {
 
@@ -9,7 +10,7 @@ export default class InputElement implements MaquetteComponent {
     return h(
       'input',
       {
-        placeholder: this.formField._form._config.theme === 'material'
+        placeholder: (this.formField._form._config as FormConfig).theme === 'material'
           ? '&nbsp;'
           : this.formField.placeholder,
         value: String(this.formField.getValue()),

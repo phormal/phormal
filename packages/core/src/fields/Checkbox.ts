@@ -1,11 +1,12 @@
 import {FormField} from '../FormField'
 import {h} from 'maquette'
+import FormConfig from "../types/interfaces/FormConfig.interface";
 
 export class Checkbox extends FormField {
   _onInput(event: Event) {
     this.setValue((event.target as HTMLInputElement).checked)
 
-    if (this._form._config.validation !== 'active') return
+    if ((this._form._config as FormConfig).validation !== 'active') return
 
     this.runAllValidators()
     this.updateErrorMessageInDOM()

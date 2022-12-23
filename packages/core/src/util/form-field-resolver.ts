@@ -1,6 +1,9 @@
 import {FormField} from "../FormField";
 import {FormFieldConfig} from "../types/interfaces/FormConfig.interface";
 
+/**
+ * A utility class for resolving the properties of a FormField
+ * */
 export class FormFieldResolver {
   constructor(field: FormField, formFieldConfig: FormFieldConfig) {
     field.placeholder = formFieldConfig.placeholder ? formFieldConfig.placeholder : ''

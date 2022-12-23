@@ -1,6 +1,6 @@
 import FormFieldInterface from './types/interfaces/FormField.interface'
 import {EventHandler, FieldCondition, FormFieldType, GenericFunction} from './types/globals'
-import {FormFieldConfig} from './types/interfaces/FormConfig.interface'
+import FormConfig, {FormFieldConfig} from './types/interfaces/FormConfig.interface'
 import {createProjector, h, Projector} from 'maquette'
 import {Phormal} from './Phormal'
 import ErrorMessage from './components/error-message'
@@ -82,7 +82,7 @@ export class FormField implements FormFieldInterface {
       this.errorMsgId,
       this.errors,
       this._errorMessages,
-      this._form._config.language || 'en'
+      (this._form._config as FormConfig).language || 'en'
     ).render()
 
     // If the error message is already rendered, replace it
@@ -122,7 +122,7 @@ export class FormField implements FormFieldInterface {
   update() {
     this.checkValueDependencies()
 
-    if (this._form._config.validation !== 'active') return
+    if ((this._form._config as FormConfig).validation !== 'active') return
 
     this.runAllValidators()
     this.updateErrorMessageInDOM()
@@ -176,7 +176,7 @@ export class FormField implements FormFieldInterface {
     const inputLabel = new InputLabel(this).render()
     const inputEl = new InputElement(this).render()
     let wrapperChildren = [inputLabel, inputEl]
-    if (this._form._config.theme === 'material') {
+    if ((this._form._config as FormConfig).theme === 'material') {
       wrapperChildren = wrapperChildren.reverse()
       // TODO: repair styles for this element
       wrapperChildren.push(h('span', { class: 'phlib__material-bg-focus' }))
@@ -211,7 +211,7 @@ export class FormField implements FormFieldInterface {
     this.setValue((event.target as HTMLInputElement).value)
     for (const cb of this._onInputHandlers) cb(event, this)
 
-    if (this._form._config.validation !== 'active') return
+    if ((this._form._config as FormConfig).validation !== 'active') return
 
     this.runAllValidators()
     this.updateErrorMessageInDOM()

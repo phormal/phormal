@@ -1,7 +1,5 @@
-import {FieldCondition, EventHandler, FormFieldType, MultiSelectOption, ValidationType} from '../globals'
-import {Hook, HookReturnValue} from './Hook.interface'
-import {FormField} from '../../FormField'
-import FormFieldInterface from './FormField.interface'
+import {FieldCondition, FormFieldType, MultiSelectOption, ValidationType} from '../globals'
+import {HookReturnValue} from './Hook.interface'
 import EventHandlers from './EventHandlers'
 
 export default interface FormConfig {

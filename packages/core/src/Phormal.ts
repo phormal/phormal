@@ -1,10 +1,8 @@
 import FormConfig, {FormFieldConfig} from './types/interfaces/FormConfig.interface'
 import FormFieldInterface from './types/interfaces/FormField.interface'
-import {FormField} from './FormField'
-import {MultiSelect} from './fields/MultiSelect'
-import {Checkbox} from './fields/Checkbox'
 import {ConfigResolver} from "./util/config-resolver";
 import {FormFieldsFactory} from "./util/form-fields-factory";
+import {ConfigError} from "./errors/config-error";
 
 export class Phormal {
   _config: FormConfig|undefined;
@@ -16,6 +14,15 @@ export class Phormal {
     formConfig: FormConfig
   ) {
     new ConfigResolver(formConfig, this)
+    Object.entries(fields).forEach(field => {
+      const [fieldName,] = field
+      const forbiddenFieldNames = ['init', 'values', 'validate', '_setValue', '_getValue', '_config', '_unprocessedFields', '_fields']
+      if (forbiddenFieldNames.includes(fieldName))
+        throw new ConfigError(
+          'The following words are reserved by the library, and cannot be used as field names: '
+          + forbiddenFieldNames.join(', ')
+        )
+    })
     this._unprocessedFields = fields;
   }
 
@@ -33,9 +40,10 @@ export class Phormal {
       fieldsInRowRepresentation.push(fieldName)
 
       if (field.row) {
-        for (const [additionalFieldName, additionalFieldInRow] of Object.entries(this._fields)) {
-          if (additionalFieldInRow.row === row[0].row && !fieldsInRowRepresentation.includes(additionalFieldName)) {
-            row.push(additionalFieldInRow)
+        // Collect all fields with the same "row" value, in one row
+        for (const [additionalFieldName, additionalField] of Object.entries(this._fields)) {
+          if (additionalField.row === row[0].row && !fieldsInRowRepresentation.includes(additionalFieldName)) {
+            row.push(additionalField)
             fieldsInRowRepresentation.push(additionalFieldName)
           }
         }
@@ -74,7 +82,7 @@ export class Phormal {
       field.resolveDependencies()
     }
 
-    // 5. Check all value dependencies
+    // 5. Run all checks for the newly created dependencies
     for (const [, field] of Object.entries(this._fields)) {
       field.checkValueDependencies()
     }

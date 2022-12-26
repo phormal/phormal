@@ -1,24 +1,42 @@
 import {FormField} from "../FormField";
 import {FormFieldConfig} from "../types/interfaces/FormConfig.interface";
+import {FormFieldError} from "../errors/form-field-error";
+import {formFieldTypes} from "../types/globals";
 
 /**
  * A utility class for resolving the properties of a FormField
  * */
 export class FormFieldResolver {
-  constructor(field: FormField, formFieldConfig: FormFieldConfig) {
-    field.placeholder = formFieldConfig.placeholder ? formFieldConfig.placeholder : ''
-    field.label = formFieldConfig.label ? formFieldConfig.label : ''
-    field.type = formFieldConfig.type ? formFieldConfig.type : 'text'
-    field.disabled = formFieldConfig.disabled ? formFieldConfig.disabled : false
-    field.disabledIf = formFieldConfig.disabledIf ? formFieldConfig.disabledIf : {}
-    field.hideIf = formFieldConfig.hideIf ? formFieldConfig.hideIf : {}
-    field.dependencies = formFieldConfig.dependencies ? formFieldConfig.dependencies : []
-    field.row = formFieldConfig.row ? formFieldConfig.row : ''
+  constructor(
+    private field: FormField,
+    private formFieldConfig: FormFieldConfig
+  ) {
+    this.validateFieldConfig()
+    this.resolveField()
+  }
+  
+  validateFieldConfig() {
+    if (![...formFieldTypes, undefined].includes(this.formFieldConfig.type)) {
+      throw new FormFieldError(
+        'Invalid field type. The following are allowed: ' + formFieldTypes.join(', ')
+      )
+    }
+  }
+  
+  resolveField() {
+    this.field.placeholder = this.formFieldConfig.placeholder ? this.formFieldConfig.placeholder : ''
+    this.field.label = this.formFieldConfig.label ? this.formFieldConfig.label : ''
+    this.field.type = this.formFieldConfig.type ? this.formFieldConfig.type : 'text'
+    this.field.disabled = this.formFieldConfig.disabled ? this.formFieldConfig.disabled : false
+    this.field.disabledIf = this.formFieldConfig.disabledIf ? this.formFieldConfig.disabledIf : {}
+    this.field.hideIf = this.formFieldConfig.hideIf ? this.formFieldConfig.hideIf : {}
+    this.field.dependencies = this.formFieldConfig.dependencies ? this.formFieldConfig.dependencies : []
+    this.field.row = this.formFieldConfig.row ? this.formFieldConfig.row : ''
 
-    if (formFieldConfig.handleOnClick) field._onClickHandlers.push(formFieldConfig.handleOnClick)
-    if (formFieldConfig.handleOnChange) field._onChangeHandlers.push(formFieldConfig.handleOnChange)
-    if (formFieldConfig.handleOnBlur) field._onBlurHandlers.push(formFieldConfig.handleOnBlur)
-    if (formFieldConfig.handleOnFocus) field._onFocusHandlers.push(formFieldConfig.handleOnFocus)
-    if (formFieldConfig.handleOnInput) field._onInputHandlers.push(formFieldConfig.handleOnInput)
+    if (this.formFieldConfig.handleOnClick) this.field._onClickHandlers.push(this.formFieldConfig.handleOnClick)
+    if (this.formFieldConfig.handleOnChange) this.field._onChangeHandlers.push(this.formFieldConfig.handleOnChange)
+    if (this.formFieldConfig.handleOnBlur) this.field._onBlurHandlers.push(this.formFieldConfig.handleOnBlur)
+    if (this.formFieldConfig.handleOnFocus) this.field._onFocusHandlers.push(this.formFieldConfig.handleOnFocus)
+    if (this.formFieldConfig.handleOnInput) this.field._onInputHandlers.push(this.formFieldConfig.handleOnInput)
   }
 }

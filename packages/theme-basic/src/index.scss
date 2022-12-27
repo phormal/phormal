@@ -1,12 +1,17 @@
 .phlib-basic {
-  $colorPrimary: #007bff;
-  $colorPrimaryLight: #e9f2ff;
-  $colorError: #dc3545;
-  $colorErrorLight: #f8d7da;
-  $colorBorder: rgb(209, 213, 219);
+  $color-primary: #007bff;
+  $color-primary-light: #e9f2ff;
+  $color-error: #dc3545;
+  $color-error-light: #f8d7da;
+  $color-border: rgb(209 213 219);
 
   * {
     box-sizing: border-box;
+  }
+
+  .phlib__field-wrapper {
+    width: 100%;
+    margin-bottom: 1em;
   }
 
   .phlib__multiple-fields-row {
@@ -23,11 +28,6 @@
     }
   }
 
-  .phlib__field-wrapper {
-    width: 100%;
-    margin-bottom: 1em;
-  }
-
   .phlib__checkbox-wrapper {
     display: flex;
     align-items: center;
@@ -39,19 +39,18 @@
     display: block;
     width: 100%;
     font-size: 1rem;
-    padding: 0 .75rem;
+    padding: 0 0.75rem;
     line-height: 2.75rem;
-    border: 1px solid $colorBorder;
+    border: 1px solid $color-border;
     border-radius: 0.5rem;
-    background-color: rgb(249, 250, 251);
+    background-color: rgb(249 250 251);
     margin-bottom: 0.5rem;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+    appearance: none;
 
     &:focus {
-      border-color: $colorPrimary;
-      outline: $colorPrimary solid 1px;
-      background-color: $colorPrimaryLight;
+      border-color: $color-primary;
+      outline: $color-primary solid 1px;
+      background-color: $color-primary-light;
     }
 
     &:disabled {
@@ -61,8 +60,8 @@
     }
 
     &.phlib__field-error {
-      border-color: $colorError;
-      background-color: $colorErrorLight;
+      border-color: $color-error;
+      background-color: $color-error-light;
     }
   }
 
@@ -75,11 +74,12 @@
       bottom: 0;
       left: 0;
     };
+
     font: inherit;
-    color: currentColor;
+    color: currentcolor;
     width: 1.5rem;
     height: 1.5rem;
-    border: 0.15rem solid $colorBorder;
+    border: 0.15rem solid $color-border;
     border-radius: 0.15rem;
     transform: translateY(-0.075rem);
     display: grid;
@@ -92,10 +92,10 @@
     height: 0.9em;
     transform: scale(0);
     transition: 120ms transform ease-in-out;
-    box-shadow: inset 1em 1em $colorPrimary;
-    /* Windows High Contrast Mode */
-    background-color: CanvasText;
+    box-shadow: inset 1em 1em $color-primary;
 
+    /* Windows High Contrast Mode */
+    background-color: canvastext;
     transform-origin: bottom left;
     clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
   }
@@ -104,25 +104,26 @@
     transform: scale(1);
   }
 
-  @mixin labelBase {
+  @mixin label-base {
     font-size: 1rem;
-    color: rgb(17, 24, 39);
+    color: rgb(17 24 39);
     font-weight: 600;
   }
 
   .phlib__field-label {
-    @include labelBase;
+    @include label-base;
+
     display: block;
     margin-bottom: 5px;
   }
 
   .phlib__checkbox-label {
-    @include labelBase;
+    @include label-base;
   }
 
   .phlib__error-message {
     margin-bottom: 10px;
-    font-size: .9rem;
+    font-size: 0.9rem;
 
     ul {
       margin: 0;
@@ -133,7 +134,7 @@
     li {
       margin-bottom: 0.25rem;
 
-      &:before {
+      &::before {
         content: "–";
         text-indent: -5px;
         margin-right: 0.5rem;

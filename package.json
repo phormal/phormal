@@ -6,8 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "rollup -c && lerna run build",
-    "lint": "npx eslint .",
-    "lint:fix": "npx eslint . --fix",
+    "lint:ts": "npx eslint -c config/.eslintrc.cjs .",
+    "lint:ts:fix": "npx eslint -c config/.eslintrc.cjs . --fix",
+    "lint:styles": "npx stylelint --config config/.stylelintrc.json \"**/*.scss\"",
+    "lint:styles:fix": "npx stylelint --config config/.stylelintrc.json \"**/*.scss\" --fix",
     "clean:packages": "rm -rf ./packages/*/dist",
     "preview": "vite preview",
     "docs:dev": "cd docs && npm run dev"
@@ -40,6 +42,9 @@
     "rollup-plugin-sourcemaps": "^0.6.3",
     "rollup-plugin-typescript2": "^0.34.1",
     "sass": "^1.56.1",
+    "stylelint": "^14.16.0",
+    "stylelint-config-standard": "^29.0.0",
+    "stylelint-config-standard-scss": "^6.1.0",
     "typescript": "^4.6.4",
     "vite": "^3.2.5",
     "vue": "^3.2.41",

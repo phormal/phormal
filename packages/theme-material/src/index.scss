@@ -1,24 +1,33 @@
 // Based on: https://codepen.io/avstorm/pen/gKGbxo
-@use 'sass:math';
+@use "sass:math";
 
 .phlib-material {
-  $primary: #0077FF;
+  $primary: #07f;
   $dark: #000;
-  $colorError: #dc3545;
-  $colorErrorLight: #f8d7da;
-  $md-checkbox-border-color: rgba(0, 0, 0, 0.54);
-  $md-checkbox-border-color-disabled: rgba(0, 0, 0, 0.26);
-  $md-checkbox-checked-color-disabled: rgba(0, 0, 0, 0.26);
+  $color-error: #dc3545;
+  $color-error-light: #f8d7da;
+  $md-checkbox-border-color: rgb(0 0 0 / 54%);
+  $md-checkbox-border-color-disabled: rgb(0 0 0 / 26%);
+  $md-checkbox-checked-color-disabled: rgb(0 0 0 / 26%);
   $md-checkbox-size: 1.25em;
-  $md-checkbox-padding: .25em;
+  $md-checkbox-padding: 0.25em;
   $md-checkbox-border-width: 2px;
   $md-checkbox-border-radius: 0.125em;
   $md-checkmark-width: 0.125em;
   $md-checkmark-color: #fff;
-  $md-checkbox-label-padding: .75em;
+  $md-checkbox-label-padding: 0.75em;
 
-  *, *:before, *:after {
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
+  }
+
+  .phlib__field-wrapper {
+    position: relative;
+    margin-bottom: 1em;
+    width: 100%;
+    overflow: hidden;
   }
 
   .phlib__multiple-fields-row {
@@ -35,20 +44,12 @@
     }
   }
 
-  .phlib__field-wrapper {
-    position: relative;
-    margin-bottom: 1em;
-    width: 100%;
-    overflow: hidden;
-  }
-
   // Styles from https://codepen.io/hansmaad/pen/qaGMQL
   .phlib__checkbox-wrapper {
     position: relative;
     text-align: left;
 
     label {
-      -webkit-user-select: none;
       user-select: none;
       cursor: pointer;
       display: inline;
@@ -56,18 +57,20 @@
       vertical-align: top;
       clear: both;
       padding-left: 1px;
+
       &:not(:empty) {
         padding-left: $md-checkbox-label-padding;
       }
 
-      &:before, &:after {
+      &::before,
+      &::after {
         content: "";
         position: absolute;
         left: 0;
         top: 0;
       }
 
-      &:before {
+      &::before {
         // box
         width: $md-checkbox-size;
         height: $md-checkbox-size;
@@ -75,10 +78,10 @@
         border: $md-checkbox-border-width solid $md-checkbox-border-color;
         border-radius: $md-checkbox-border-radius;
         cursor: pointer;
-        transition: background .3s;
+        transition: background 0.3s;
       }
 
-      &:after {
+      &::after {
         // checkmark
       }
     }
@@ -93,18 +96,23 @@
       font-size: inherit;
 
       &:checked {
-        + label:before{
+        + label::before {
           background: $primary;
-          border:none;
+          border: none;
         }
-        + label:after {
 
+        + label::after {
           $md-checkmark-size: $md-checkbox-size - 2 * $md-checkbox-padding;
 
-          transform: translate($md-checkbox-padding, math.div($md-checkbox-size, 2) - math.div($md-checkmark-size, 2.6)) rotate(-45deg);
+          transform:
+            translate(
+              $md-checkbox-padding,
+              math.div($md-checkbox-size, 2) - math.div($md-checkmark-size, 2.6)
+            ) rotate(
+              -45deg
+            );
           width: $md-checkmark-size;
           height: math.div($md-checkmark-size, 2);
-
           border: $md-checkmark-width solid $md-checkmark-color;
           border-top-style: none;
           border-right-style: none;
@@ -112,62 +120,14 @@
       }
 
       &:disabled {
-        + label:before{
+        + label::before {
           border-color: $md-checkbox-border-color-disabled;
         }
+
         &:checked {
-          + label:before{
+          + label::before {
             background: $md-checkbox-checked-color-disabled;
           }
-        }
-      }
-    }
-
-  }
-
-  .phlib__input-text,
-  .phlib__input-textarea,
-  .phlib__input-select, {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    border: 0;
-    font-family: inherit;
-    padding: 1rem .75rem 0 .75rem;
-    height: 3.5rem;
-    font-size: 1rem;
-    font-weight: 400;
-    background: rgba($dark, .02);
-    box-shadow: inset 0 -1px 0 rgba($dark, .3);
-    color: $dark;
-    transition: all .15s ease;
-
-    &::placeholder {
-      color: transparent;
-    }
-
-    &:hover {
-      background: rgba($dark, .04);
-      box-shadow: inset 0 -1px 0 rgba($dark, .5);
-    }
-
-    &:not(:placeholder-shown) + .phlib__field-label {
-      color: rgba($dark, .5);
-      transform: translate3d(0, -12px, 0) scale(.75);
-    }
-
-    &:focus {
-      background: rgba($dark, .05);
-      outline: none;
-      box-shadow: inset 0 -2px 0 $primary;
-
-      + .phlib__field-label {
-        color: $primary;
-        transform: translate3d(0, -12px, 0) scale(.75);
-
-        + .phlib__material-bg-focus {
-          transform: scaleX(1);
-          transition: all .1s ease;
         }
       }
     }
@@ -176,23 +136,73 @@
   .phlib__field-label {
     position: absolute;
     top: 1.25rem;
-    left: .75rem;
-    color: rgba($dark, .5);
+    left: 0.75rem;
+    color: rgba($dark, 0.5);
     font-weight: 500;
     transform-origin: 0 0;
     transform: translate3d(0, 0, 0);
-    transition: all .2s ease;
+    transition: all 0.2s ease;
     pointer-events: none;
   }
 
+  &:focus + .phlib__field-label {
+    color: $primary;
+    transform: translate3d(0, -12px, 0) scale(0.75);
+
+    + .phlib__material-bg-focus {
+      transform: scaleX(1);
+      transition: all 0.1s ease;
+    }
+  }
+
+  .phlib__input-text,
+  .phlib__input-textarea,
+  .phlib__input-select, {
+    appearance: none;
+    width: 100%;
+    border: 0;
+    font-family: inherit;
+    padding: 1rem 0.75rem 0;
+    height: 3.5rem;
+    font-size: 1rem;
+    font-weight: 400;
+    background: rgba($dark, 0.02);
+    box-shadow: inset 0 -1px 0 rgba($dark, 0.3);
+    color: $dark;
+    transition: all 0.15s ease;
+
+    &::placeholder {
+      color: transparent;
+    }
+
+    &:hover {
+      background: rgba($dark, 0.04);
+      box-shadow: inset 0 -1px 0 rgba($dark, 0.5);
+    }
+
+    &:focus {
+      background: rgba($dark, 0.05);
+      outline: none;
+      box-shadow: inset 0 -2px 0 $primary;
+    }
+
+    /* stylelint-disable no-descending-specificity */
+    &:not(:placeholder-shown) + .phlib__field-label {
+      color: rgba($dark, 0.5);
+      transform: translate3d(0, -12px, 0) scale(0.75);
+    }
+    /* stylelint-enable no-descending-specificity */
+  }
+
   .phlib__error-message {
-    font-size: .9rem;
+    font-size: 0.9rem;
 
     ul {
       margin: {
         top: 1em;
         bottom: 0;
       };
+
       padding-left: 0;
       list-style-type: none;
     }
@@ -200,7 +210,7 @@
     li {
       margin-bottom: 0.25rem;
 
-      &:before {
+      &::before {
         content: "–";
         text-indent: -5px;
         margin-right: 0.5rem;

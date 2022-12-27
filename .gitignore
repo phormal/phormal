@@ -25,7 +25,5 @@ dist-ssr
 *.sln
 *.sw?
 
-website/docs/.next
-website/docs/node_modules
-
-website/demo/node_modules
+docs/.next
+docs/node_modules

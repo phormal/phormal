@@ -85,7 +85,7 @@ export default {
       el: '#phormal',
       validation: 'active',
       language: 'de',
-      theme: 'basic',
+      theme: 'material',
     })
 
     this.form.init()

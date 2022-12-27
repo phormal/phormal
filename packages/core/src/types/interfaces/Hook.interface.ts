@@ -1,10 +1,9 @@
 import EventHandlers from './EventHandlers'
 import {GenericFunction} from "../globals";
 
-export type Hook = (...args: any) => HookReturnValue
+export type Hook = (...args: unknown[]) => HookReturnValue
 
 type HookReturnValueBase = {
-  [key: string] : any;
   validators?: Record<string, GenericFunction>;
   errorMessages?: { [key: string]: string | object };
   dependencies?: string[];

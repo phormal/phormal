@@ -1,8 +1,6 @@
 import React, {useEffect} from 'react';
 import styles from './demo.module.scss'
 import {Phormal} from "@phormal/core/src/Phormal";
-import useEmail from "@phormal/use-email";
-import useRequired from "@phormal/use-required";
 
 const DemoPage: React.FC = () => {
   const formFields = {

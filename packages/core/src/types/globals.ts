@@ -1,3 +1,5 @@
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+
 import FormFieldInterface from './interfaces/FormField.interface'
 
 export const formFieldTypes = ['zip', 'email', 'password', 'phone', 'number', 'date', 'time', 'datetime', 'textarea', 'select', 'checkbox', 'radio', 'file', 'image', 'custom', 'text']

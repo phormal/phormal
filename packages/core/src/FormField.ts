@@ -13,9 +13,9 @@ import InputLabel from "./components/input-label";
 export class FormField implements FormFieldInterface {
   type: FormFieldType = 'text';
   errors: string[] = [];
-  label: string = ''
-  placeholder: string = ''
-  disabled: boolean = false
+  label = ''
+  placeholder = ''
+  disabled = false
   disabledIf = {}
   hideIf = {}
   projector: Projector = createProjector()
@@ -137,7 +137,7 @@ export class FormField implements FormFieldInterface {
     ]
 
     for (const [condition, internalProperty] of conditions) {
-      for (let [dep, depValueToTest] of Object.entries(condition)) {
+      for (const [dep, depValueToTest] of Object.entries(condition)) {
         let actualDepValue = this._form._getValue(dep)
         let result = false
 

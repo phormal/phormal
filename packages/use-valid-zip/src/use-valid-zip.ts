@@ -17,7 +17,7 @@ export const useValidZip: Hook = (): HookReturnValue => {
       checkZipCode(field: FormField) {
         const currentValue = field.getValue() as string
         const currentCountryValue = field._form._getValue('country') as string
-        const countryHasPattern = zipCodePatterns.hasOwnProperty(currentCountryValue)
+        const countryHasPattern = typeof zipCodePatterns[currentCountryValue] !== 'undefined'
         const isValid = countryHasPattern ? zipCodePatterns[currentCountryValue].test(currentValue) : true
 
         if (!field.errors.includes(ERROR_NAME) && !isValid) field.errors.push(ERROR_NAME)

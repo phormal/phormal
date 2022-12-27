@@ -43,5 +43,6 @@ export default interface FormFieldInterface {
   _onInputHandlers: EventHandler[];
 
   // Allow extensibility
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   [key: string]: any;
 }

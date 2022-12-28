@@ -1,6 +1,6 @@
 {
   "name": "@phormal/use-auto-capitalize",
-  "version": "0.0.2",
+  "version": "0.1.0-alpha.2",
   "type": "module",
   "types": "./dist/use-auto-capitalize/src/index.d.ts",
   "module": "./dist/use-auto-capitalize.js",

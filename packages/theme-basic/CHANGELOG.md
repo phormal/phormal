@@ -5,12 +5,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [0.1.0-alpha.2](https://github.com/tomosterlund/super-form/compare/v0.1.0-alpha.1...v0.1.0-alpha.2) (2022-12-28)
 
-**Note:** Version bump only for package @phormal/use-auto-capitalize
-
-
-
-
-
-## [0.0.2](https://github.com/tomosterlund/phormal/compare/v0.0.1...v0.0.2) (2022-12-07)
-
-**Note:** Version bump only for package @phormal/use-auto-capitalize
+**Note:** Version bump only for package @phormal/theme-basic

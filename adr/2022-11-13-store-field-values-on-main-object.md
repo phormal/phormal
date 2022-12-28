@@ -2,19 +2,19 @@
 Date: 2022-11-13
 
 ## Background
-In order to support an intuitive API for accessing field values, the main object of the library, SuperForm, needs to store the values of the fields. This has two main benefits:
+In order to support an intuitive API for accessing field values, the main object of the library, Phormal, needs to store the values of the fields. This has two main benefits:
 
 1.  Implementers can access a field values easily like so:
 
 ```js
 const form = new Phormal({
-    fields: {
         firstName: {
             name: 'firstName',
             value: 'John',
         },
     },
-});
+    {}
+);
 
 form.firstName; // 'John'
 ```

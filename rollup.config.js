@@ -18,7 +18,6 @@ const __dirname = path.dirname(__filename);
 
 async function getSortedPackages(scope, ignore) {
   const packages = await getPackages(__dirname || process.cwd())
-  // console.log(packages)
   let filtered = filterPackages(packages, scope, ignore, false)
   filtered = filtered.filter(pkg => !pkg.name.startsWith('@phormal/theme-'))
 
@@ -92,17 +91,6 @@ async function build(commandLineArgs) {
           tsconfig: './' + fs.existsSync(`${basePath}/tsconfig.json`)
             ? `${basePath}/tsconfig.json`
             : 'tsconfig.json',
-          // tsconfigOverride: {
-          //   compilerOptions: {
-          //     declaration: true,
-          //     paths: {
-          //       '@phormal/*': ['packages/*/src'],
-          //     },
-          //   },
-          //   include: './' + fs.existsSync(`${basePath}/tsconfig.json`)
-          //     ? []
-          //     : null,
-          // },
         }),
       ],
     })

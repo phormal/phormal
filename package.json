@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --config config/vite.config.ts",
     "build": "rollup -c && lerna run build",
     "test:e2e": "cypress open --e2e --config-file config/cypress.config.ts",
     "lint:ts": "npx eslint -c config/.eslintrc.cjs .",
@@ -12,7 +12,6 @@
     "lint:styles": "npx stylelint --config config/.stylelintrc.json \"**/*.scss\"",
     "lint:styles:fix": "npx stylelint --config config/.stylelintrc.json \"**/*.scss\" --fix",
     "clean:packages": "rm -rf ./packages/*/dist",
-    "preview": "vite preview",
     "docs:dev": "cd docs && npm run dev"
   },
   "dependencies": {

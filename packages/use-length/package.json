@@ -2,10 +2,15 @@
   "name": "@phormal/use-length",
   "version": "0.1.0-alpha.2",
   "type": "module",
+  "license": "MIT",
   "types": "./dist/use-length/src/index.d.ts",
   "module": "./dist/use-length.js",
   "main": "./dist/use-length.cjs.js",
   "umd": "./dist/use-length.umd.js",
+  "files": [
+    "dist",
+    "src"
+  ],
   "devDependencies": {
     "lerna": "^6.1.0",
     "typescript": "^4.6.4",

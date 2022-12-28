@@ -1,11 +1,16 @@
 {
   "name": "@phormal/use-auto-capitalize",
   "version": "0.1.0-alpha.2",
+  "license": "MIT",
   "type": "module",
   "types": "./dist/use-auto-capitalize/src/index.d.ts",
   "module": "./dist/use-auto-capitalize.js",
   "main": "./dist/use-auto-capitalize.cjs.js",
   "umd": "./dist/use-auto-capitalize.umd.js",
+  "files": [
+    "dist",
+    "src"
+  ],
   "devDependencies": {
     "lerna": "^6.1.0",
     "typescript": "^4.6.4",

@@ -12,7 +12,9 @@
     "lint:styles": "npx stylelint --config config/.stylelintrc.json \"**/*.scss\"",
     "lint:styles:fix": "npx stylelint --config config/.stylelintrc.json \"**/*.scss\" --fix",
     "clean:packages": "rm -rf ./packages/*/dist",
-    "docs:dev": "cd docs && npm run dev"
+    "docs:dev": "cd docs && npm run dev",
+    "release": "npm run clean:packages && npm run build && lerna publish",
+    "release:pre": "npm run clean:packages && npm run build && lerna publish"
   },
   "dependencies": {
     "maquette": "^3.5.3"

@@ -1,6 +1,6 @@
 {
   "name": "@phormal/use-length",
-  "version": "0.1.0-alpha.3",
+  "version": "0.1.0-alpha.4",
   "license": "MIT",
   "types": "./dist/use-length/src/index.d.ts",
   "module": "./dist/use-length.js",

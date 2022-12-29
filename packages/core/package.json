@@ -1,6 +1,6 @@
 {
   "name": "@phormal/core",
-  "version": "0.1.0-alpha.3",
+  "version": "0.1.0-alpha.4",
   "license": "MIT",
   "module": "./dist/core.js",
   "main": "./dist/core.cjs.js",

@@ -1,6 +1,6 @@
 {
   "name": "@phormal/use-valid-zip",
-  "version": "0.1.0-alpha.3",
+  "version": "0.1.0-alpha.4",
   "license": "MIT",
   "types": "./dist/use-valid-zip/src/index.d.ts",
   "module": "./dist/use-valid-zip.js",

@@ -1,6 +1,6 @@
 {
   "name": "@phormal/use-auto-capitalize",
-  "version": "0.1.0-alpha.3",
+  "version": "0.1.0-alpha.4",
   "license": "MIT",
   "types": "./dist/use-auto-capitalize/src/index.d.ts",
   "module": "./dist/use-auto-capitalize.js",

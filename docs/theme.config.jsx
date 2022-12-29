@@ -7,4 +7,5 @@ export default {
   feedback: {
     content: null,
   },
+  darkMode: false,
 }

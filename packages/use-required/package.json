@@ -2,7 +2,6 @@
   "name": "@phormal/use-required",
   "version": "0.1.0-alpha.3",
   "license": "MIT",
-  "type": "module",
   "types": "./dist/use-required/src/index.d.ts",
   "module": "./dist/use-required.js",
   "main": "./dist/use-required.cjs.js",

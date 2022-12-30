@@ -1,6 +1,53 @@
 ## The Phormal instance
 
-The Phormal instance is the main class of the library. For basic usage, please refer to [Getting started](/getting-started#step-1-javascript)
+The Phormal instance is the main class of the library. For basic usage, please refer to [Getting started](/getting-started#step-1-javascript).
+
+An instance of Phormal is initialized through the `Phormal` constructor. It takes two arguments:
+
+* [`fields`](#fields), which is an object containing configuration for the fields of the form.
+* [`config`](#config), which is an object containing configuration for the form itself.
+
+For example:
+
+```js
+import {Phormal} from "@phormal/core";
+
+const fields = {/** see #fields section below */}, config = {/** see #config section below */};
+
+new Phormal(fields, config);
+```
+
+#### `fields`
+
+The `fields` argument is an object containing configuration for the fields of the form. The keys of the object are the names of the fields, and the values are the configuration for each field. If we want to create a basic form with two fields, `name` and `email`, the fields argument could look like this:
+
+```js
+const fields = {
+    name: {
+        label: "Name"
+    },
+    birthdate: {
+        label: "Email",
+        placeholder: "john.doe@example.com"
+    },
+    newsletter: {
+        label: "Subscribe to newsletter",
+        type: "checkbox",
+        value: false
+    }
+};
+```
+
+The configuration for each field can take the following properties:
+
+| Property |                                             Type/Possible values                                             |   Default   |
+|:--------:|:------------------------------------------------------------------------------------------------------------:|:-----------:|
+| `type` | See [FormFieldTypes](https://github.com/tomosterlund/phormal/blob/master/packages/core/src/types/globals.ts) | `'text'` |
+| `label` |                                                    string                                                    | `''` |
+| `placeholder` |                                                    string                                                    | `''` |
+| `value` |                                                  string (for most types) or boolean (for checkbox)                                                   | `''` or `false` |
+
+#### `config`
 
 ### Methods
 
@@ -14,4 +61,4 @@ Returns an object with key-value pairs, where each key is the name of the fields
 
 #### `validate()`
 
-Runs all validators for all fields.
+Runs all validators for all fields. Returns `true` if the values of all fields are valid, and `false` otherwise.

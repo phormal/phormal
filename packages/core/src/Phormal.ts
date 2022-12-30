@@ -11,9 +11,9 @@ export class Phormal {
 
   constructor(
     fields: Record<string, FormFieldConfig>,
-    formConfig: FormConfig
+    config: FormConfig
   ) {
-    new ConfigResolver(formConfig, this)
+    new ConfigResolver(config, this)
     Object.entries(fields).forEach(field => {
       const [fieldName,] = field
       const forbiddenFieldNames = ['init', 'values', 'validate', '_setValue', '_getValue', '_config', '_unprocessedFields', '_fields']
@@ -104,6 +104,11 @@ export class Phormal {
       field.runAllValidators()
       field.updateErrorMessageInDOM()
     }
+
+    // Return true if all fields are valid, false otherwise
+    return !Object.entries(this._fields).some(([fieldName, field]) => {
+      return !!field.errors?.length;
+    })
   }
 
   /**

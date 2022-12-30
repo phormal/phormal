@@ -18,7 +18,8 @@ export class Checkbox extends FormField {
    * @param {String} value
    * */
   setValue(value: string|boolean) {
-    this._form._setValue(this.name, value)
+    console.log(value)
+    this._form._setValue(this.name, Boolean(value))
     const inputElement: HTMLInputElement | null | HTMLElement = document.getElementById(this.inputId)
     if (inputElement instanceof HTMLInputElement) inputElement.checked = Boolean(value)
   }
@@ -26,6 +27,7 @@ export class Checkbox extends FormField {
   render(mountingEl: HTMLElement) {
     const inputLabel = this.getCheckboxLabel()
     const wrapperProperties = { id: this.id, class: 'phlib__field-wrapper phlib__checkbox-wrapper' }
+    this.setValue(this._form._getValue(this.name))
 
     this.projector.append(mountingEl, () => {
       return h('div', wrapperProperties, [

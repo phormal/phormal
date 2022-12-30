@@ -1,7 +1,7 @@
 {
-  "name": "docs",
+  "name": "@phormal/docs",
   "version": "1.0.0",
-  "description": "Docs for @phormal",
+  "description": "Docs for Phormal",
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
@@ -14,9 +14,12 @@
     "@next/font": "^13.1.0",
     "@phormal/core": "^0.1.0-alpha.4",
     "@phormal/theme-basic": "^0.1.0-alpha.4",
+    "@phormal/theme-material": "^0.1.0-alpha.4",
+    "@phormal/use-auto-capitalize": "^0.1.0-alpha.4",
     "@phormal/use-email": "^0.1.0-alpha.4",
     "@phormal/use-length": "^0.1.0-alpha.4",
     "@phormal/use-required": "^0.1.0-alpha.4",
+    "@phormal/use-valid-zip": "^0.1.0-alpha.4",
     "next": "^13.0.7",
     "nextra": "^2.0.1",
     "nextra-theme-docs": "^2.0.1",

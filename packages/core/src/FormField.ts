@@ -67,7 +67,12 @@ export class FormField implements FormFieldInterface {
   get id() { return 'phormal-field-' + this.name }
   get inputId() { return 'phormal-field-input-' + this.name }
   get errorMsgId() { return 'phormal-field-error-' + this.name }
-  get inputClass() { return `phlib__input-${this.type}` }
+  get inputClass() {
+    let type = this.type
+    if (['number', 'password', 'email'].includes(type)) type = 'text'
+
+    return `phlib__input-${type}`
+  }
 
   updateErrorMessageInDOM() {
     const errorsElement: HTMLElement | null = document.getElementById(this.errorMsgId)

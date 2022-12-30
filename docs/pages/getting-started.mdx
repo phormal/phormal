@@ -18,21 +18,24 @@ In this basic example, we will create a form with two input fields. The **name**
 
 ### Step 1: JavaScript
 
-```
+```js
 import { Phormal } from '@phormal/core';
+import useEmail from "@phormal/use-email";
+import useRequired from "@phormal/use-required";
+import useLength from "@phormal/use-length";
 
 const form = new Phormal({
     name: {
       label: 'Name',
-      hooks: [useRequired(), useLength(3)],
+      hooks: [useRequired(), useLength(3)]
     },
     email: {
       label: 'Email',
-      hooks: [useRequired(), useEmail()],
-    },
+      hooks: [useRequired(), useEmail()]
+    }
   }, {
     el: '#phormal',
-    theme: 'basic',
+    theme: 'basic'
   })
 
 form.init()

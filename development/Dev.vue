@@ -48,7 +48,7 @@ export default {
           type: 'select',
           label: 'Country',
           hooks: [useRequired()],
-          value: 'US',
+          value: 'DE',
           options: [
             {value: 'US', label: 'United States'},
             {value: 'CA', label: 'Canada'},
@@ -71,7 +71,7 @@ export default {
           type: 'checkbox',
           label: 'Newsletter',
           hooks: [],
-          value: true,
+          // value: true,
         },
       },
 
@@ -93,7 +93,7 @@ export default {
 
   methods: {
     runValidation() {
-      this.form.validate()
+      console.log(this.form.validate())
     },
 
     getValues() {

@@ -1,7 +1,7 @@
 import {FormField} from "../FormField";
 import {FormFieldConfig} from "../types/interfaces/FormConfig.interface";
 import {FormFieldError} from "../errors/form-field-error";
-import {formFieldTypes} from "../types/globals";
+import {FormFieldTypes} from "../types/globals";
 
 /**
  * A utility class for resolving the properties of a FormField
@@ -16,9 +16,9 @@ export class FormFieldResolver {
   }
   
   validateFieldConfig() {
-    if (![...formFieldTypes, undefined].includes(this.formFieldConfig.type)) {
+    if (![...FormFieldTypes, undefined].includes(this.formFieldConfig.type)) {
       throw new FormFieldError(
-        'Invalid field type. The following are allowed: ' + formFieldTypes.join(', ')
+        'Invalid field type. The following are allowed: ' + FormFieldTypes.join(', ')
       )
     }
   }

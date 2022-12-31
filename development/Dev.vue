@@ -80,12 +80,14 @@ export default {
           options: [
             { label: 'Billing', value: 'billing' },
             { label: 'Shipping', value: 'shipping' },
+            { label: 'Packstation', value: 'packstation' },
           ]
         },
       },
 
       lastNameFocusN: 0,
       firstNameBlurN: 0,
+      values: {},
     }
   },
 
@@ -96,6 +98,8 @@ export default {
       language: 'de',
       theme: 'material',
     })
+
+    this.values = this.form.$values()
   },
 
   methods: {
@@ -105,6 +109,7 @@ export default {
 
     getValues() {
       console.log(this.form.$values())
+      this.values = this.form.$values()
     }
   },
 }
@@ -122,6 +127,10 @@ export default {
 
     <p>First name was blurred {{ firstNameBlurN }} times</p>
     <p>Last name was focused {{ lastNameFocusN }} times</p>
+
+    <code>
+      <pre>{{ values }}</pre>
+    </code>
   </div>
 </template>
 
@@ -130,6 +139,12 @@ export default {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
+}
+
+pre {
+  background: #000;
+  color:yellow;
+  padding: 1em;
 }
 
 .wrapper {

@@ -6,6 +6,7 @@
     "dev": "vite --config config/vite.config.ts",
     "build": "rollup -c && lerna run build",
     "test:e2e": "cypress open --e2e --config-file config/cypress.config.ts",
+    "test:e2e:ci": "cypress run --e2e --config-file config/cypress.config.ts",
     "lint:ts": "npx eslint -c config/.eslintrc.cjs .",
     "lint:ts:fix": "npx eslint -c config/.eslintrc.cjs . --fix",
     "lint:styles": "npx stylelint --config config/.stylelintrc.json \"**/*.scss\"",

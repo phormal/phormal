@@ -1,3 +1,5 @@
+@use '../../../common/styles/radio-buttons' as radio-buttons;
+
 .phlib-basic {
   $color-primary: #007bff;
   $color-primary-light: #e9f2ff;
@@ -140,5 +142,11 @@
         margin-right: 0.5rem;
       }
     }
+  }
+
+  @include radio-buttons.index($color-primary, $color-border);
+
+  .phlib__radio-group-label {
+    @include label-base;
   }
 }

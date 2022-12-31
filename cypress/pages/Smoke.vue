@@ -4,28 +4,38 @@ import useRequired from "../../packages/use-required/src";
 import useLength from "../../packages/use-length/src";
 import useAutoCapitalize from "../../packages/use-auto-capitalize/src";
 import useValidZip from "../../packages/use-valid-zip/src";
-import {Phormal} from '../../packages/core/src'
+import {Phormal} from '@phormal/core/src'
 
 export default {
-	name: 'App',
+  name: 'App',
 
-	data() {
-		return {
-			form: undefined,
+  data() {
+    return {
+      form: undefined,
 
-			formFields: {
-				firstName: {
-					label: 'First name',
-					hooks: [useRequired(), useLength(1, 155), useAutoCapitalize()],
-					value: 'John',
-					handleOnBlur: () => this.firstNameBlurN++,
-				},
-				lastName: {
-					label: 'Last name',
-					hooks: [useRequired(), useLength(1, 155)],
-					value: 'Doe',
-					handleOnFocus: (event, field) => this.lastNameFocusN += 1,
-				},
+      formFields: {
+        delivery: {
+          type: 'radiogroup',
+          label: 'Delivery to',
+          value: 'shipping',
+          options: [
+            {label: 'Billing', value: 'billing'},
+            {label: 'Shipping', value: 'shipping'},
+            {label: 'Packstation', value: 'packstation'},
+          ]
+        },
+        firstName: {
+          label: 'First name',
+          hooks: [useRequired(), useLength(1, 155), useAutoCapitalize()],
+          value: 'John',
+          handleOnBlur: () => this.firstNameBlurN++,
+        },
+        lastName: {
+          label: 'Last name',
+          hooks: [useRequired(), useLength(1, 155)],
+          value: 'Doe',
+          handleOnFocus: (event, field) => this.lastNameFocusN += 1,
+        },
         yyyy: {
           value: '',
           label: 'YYYY',
@@ -41,84 +51,84 @@ export default {
           label: 'DD',
           row: 'birthdate',
         },
-				country: {
-					type: 'select',
-					label: 'Country',
-					hooks: [useRequired()],
-					value: 'US',
-					options: [
-						{value: 'US', label: 'United States'},
-						{value: 'CA', label: 'Canada'},
-						{value: 'MX', label: 'Mexico'},
-						{value: 'FR', label: 'France'},
-						{value: 'DE', label: 'Germany'},
-					],
-				},
-				zip: {
-					label: 'ZIP code',
-					hooks: [useRequired(), useLength(1, 155), useValidZip()],
-					value: '51378',
-				},
-				newsletter: {
-					type: 'checkbox',
-					label: 'Newsletter',
-					hooks: [],
-					value: true,
-				},
-			},
+        country: {
+          type: 'select',
+          label: 'Country',
+          hooks: [useRequired()],
+          value: 'US',
+          options: [
+            {value: 'US', label: 'United States'},
+            {value: 'CA', label: 'Canada'},
+            {value: 'MX', label: 'Mexico'},
+            {value: 'FR', label: 'France'},
+            {value: 'DE', label: 'Germany'},
+          ],
+        },
+        zip: {
+          label: 'ZIP code',
+          hooks: [useRequired(), useLength(1, 155), useValidZip()],
+          value: '51378',
+        },
+        newsletter: {
+          type: 'checkbox',
+          label: 'Newsletter',
+          hooks: [],
+          value: true,
+        },
+      },
 
-			lastNameFocusN: 0,
-			firstNameBlurN: 0,
-		}
-	},
+      lastNameFocusN: 0,
+      firstNameBlurN: 0,
+    }
+  },
 
-	mounted() {
-		this.form = new Phormal(this.formFields, {
-			el: '#phormal',
-			validation: 'active'
-		})
-	},
+  mounted() {
+    this.form = new Phormal(this.formFields, {
+      el: '#phormal',
+      validation: 'active'
+    })
+  },
 
-	methods: {
-		runValidation() {
-			this.form.$validate()
-		},
+  methods: {
+    runValidation() {
+      this.form.$validate()
+    },
 
-		getValues() {
-			console.log(this.form.$values())
-			// console.log(this.form.firstName)
-			// console.log(this.form.lastName)
-		}
-	},
+    getValues() {
+      console.log(this.form.$values())
+      // console.log(this.form.firstName)
+      // console.log(this.form.lastName)
+    }
+  },
 }
 
 </script>
 
 
 <template>
-	<div>
-		<h2>First name was blurred {{ firstNameBlurN }} times</h2>
-		<h2>Last name was focus {{ lastNameFocusN }} times</h2>
-	</div>
-	<div id="phormal"></div>
+  <div>
+    <h2>First name was blurred {{ firstNameBlurN }} times</h2>
+    <h2>Last name was focus {{ lastNameFocusN }} times</h2>
+  </div>
+  <div id="phormal"></div>
 
-	<button @click="runValidation">Validate</button>
-	<button @click="getValues">Get values</button>
+  <button @click="runValidation">Validate</button>
+  <button @click="getValues">Get values</button>
 </template>
 
 <style>
 .logo {
-	height: 6em;
-	padding: 1.5em;
-	will-change: filter;
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
 }
 
 .logo:hover {
-	filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #646cffaa);
 }
 
 .logo.vue:hover {
-	filter: drop-shadow(0 0 2em #42b883aa);
+  filter: drop-shadow(0 0 2em #42b883aa);
 }
 </style>
 

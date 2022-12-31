@@ -10,23 +10,27 @@ export default class RadioButton implements MaquetteComponent {
     private globalInputOptions: Record<string, string|boolean|EventHandler> = {}
   ) {}
 
+  get radioButtonId() {
+    return `phlib__radio-button--${this.option.value}`
+  }
+
   render() {
     return h(
       'label',
-      { for: this.option.value, class: 'phlib__radio-button' },
+      { for: this.radioButtonId, class: 'phlib__radio-button' },
       [
         h(
           'input',
           {
             ...this.globalInputOptions,
             value: this.option.value,
-            id: this.option.value,
+            id: this.radioButtonId,
             name: this.groupName,
             checked: this.checked,
             class: 'phlib_radio-hidden',
           }
         ),
-        h('span', { class: 'phlib__radio-button-label' }),
+        h('span', { class: 'phlib__radio-button-label', 'data-cy': this.radioButtonId }),
         this.option.label
       ]
     )

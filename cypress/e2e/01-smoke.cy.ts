@@ -56,6 +56,50 @@ describe('Smoke', () => {
       .find('.' + FIELD_WRAPPER_CLASS)
       .should('have.length', 3)
   })
+
+  it('Should set a default value for a radiogroup', () => {
+    // Check that the value of the radiogroup is 'shipping'
+    cy
+      .get('#phlib__radio-button--shipping')
+      .should('be.checked')
+
+    // Negative checks
+    cy
+      .get('#phlib__radio-button--billing')
+      .should('not.be.checked')
+
+    cy
+      .get('#phlib__radio-button--packstation')
+      .should('not.be.checked')
+  })
+
+  it('Should select a new value in the radio button group', () => {
+    // 1. Select Packstation, and check that the value is set
+    cy
+      .get('[data-cy="phlib__radio-button--packstation"]')
+      .click()
+    cy
+      .get('#phlib__radio-button--packstation')
+      .should('be.checked')
+
+    // 2. Negative checks
+    cy
+      .get('#phlib__radio-button--shipping')
+      .should('not.be.checked')
+
+    cy
+      .get('#phlib__radio-button--billing')
+      .should('not.be.checked')
+
+    // 3. Select Shipping, and check that the value is set
+    cy
+      .get('[data-cy="phlib__radio-button--shipping"]')
+      .click()
+
+    cy
+      .get('#phlib__radio-button--shipping')
+      .should('be.checked')
+  })
 })
 
 export {}

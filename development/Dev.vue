@@ -65,7 +65,11 @@ export default {
         email: {
           label: 'Email',
           hooks: [useRequired(), useEmail()],
-          value: ''
+          value: '',
+          hideIf: {
+            // zip: /US/,
+            newsletter: false,
+          }
         },
         newsletter: {
           type: 'checkbox',

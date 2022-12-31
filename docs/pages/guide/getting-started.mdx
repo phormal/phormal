@@ -1,0 +1,61 @@
+## Tutorial of the basics
+
+For this short tutorial, we will need the core package, as well as some packages for theme and validation:
+
+```
+npm install @phormal/core @phormal/theme-basic @phormal/use-email @phormal/use-required @phormal/use-length
+```
+
+We will create a form with three input fields. The **name** field will be a required field, and have a minimum length of 3 characters. The **email** field will also be required, and has to contain a valid email address. Lastly, there will be a checkbox for subscribing to a newsletter.
+
+### Step 1: JavaScript
+
+```js
+import { Phormal } from '@phormal/core';
+import useEmail from "@phormal/use-email";
+import useRequired from "@phormal/use-required";
+import useLength from "@phormal/use-length";
+
+const formFields = {
+  name: {
+    label: 'Name',
+    hooks: [useRequired(), useLength(3)]
+  },
+  email: {
+    label: 'Email',
+    hooks: [useRequired(), useEmail()]
+  },
+  newsletter: {
+    type: 'checkbox',
+    label: 'Newsletter',
+    value: true
+  }
+}
+
+const formConfig = { el: '#phormal', theme: 'basic' }
+
+const form = new Phormal(formFields, formConfig)
+
+form.init()
+```
+
+### Step 2: HTML
+
+In the configuration object, we have specified the element where the form should be rendered. Your HTML needs an element with the id `phormal`.
+
+### Step 3: CSS
+
+The stylesheet for the basic theme is included in the `@phormal/theme-basic` package. The full path within the node_modules directory would be:
+
+```
+'@phormal/theme-basic/dist/index.css'
+```
+
+How you import this, will then of course vary, depending on the type of application that you are building.
+
+## Result
+
+import BasicDemo from "../../components/BasicDemo";
+
+<BasicDemo />
+

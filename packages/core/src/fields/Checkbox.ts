@@ -18,10 +18,10 @@ export class Checkbox extends FormField {
    * @param {String} value
    * */
   setValue(value: string|boolean) {
-    console.log(value)
     this._form._setValue(this.name, Boolean(value))
     const inputElement: HTMLInputElement | null | HTMLElement = document.getElementById(this.inputId)
     if (inputElement instanceof HTMLInputElement) inputElement.checked = Boolean(value)
+    if (this.dependants.length) this.updateDependants()
   }
 
   render(mountingEl: HTMLElement) {

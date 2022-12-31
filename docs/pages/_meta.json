@@ -1,5 +1,14 @@
 {
-  "index": "Home",
-  "getting-started": "Getting Started",
-  "api-docs": "API"
+  "index": {
+    "type": "page",
+    "title": "Home"
+  },
+  "guide": {
+    "type": "page",
+    "title": "Guide"
+  },
+  "api-docs": {
+    "type": "page",
+    "title": "API"
+  }
 }

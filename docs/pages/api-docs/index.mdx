@@ -1,0 +1,108 @@
+## The Phormal instance
+
+The Phormal instance is the main class of the library. For basic usage, please refer to [Getting started](/guide/getting-started#step-1-javascript).
+
+An instance of Phormal is initialized through the `Phormal` constructor. It takes two arguments:
+
+* [`fields`](#fields), which is an object containing configuration for the fields of the form.
+* [`config`](#config), which is an object containing configuration for the form itself.
+
+For example:
+
+```js
+import {Phormal} from "@phormal/core";
+
+const fields = {/** see #fields section below */}, config = {/** see #config section below */};
+
+new Phormal(fields, config);
+```
+
+### `fields`
+
+The `fields` argument is an object containing configuration for the fields of the form. The keys of the object are the names of the fields, and the values are the configuration for each field. If we want to create a basic form with two fields, `name` and `email`, the fields argument could look like this:
+
+```js
+const fields = {
+    name: {
+        label: "Name"
+    },
+    birthdate: {
+        label: "Email",
+        placeholder: "john.doe@example.com"
+    },
+    newsletter: {
+        label: "Subscribe to newsletter",
+        type: "checkbox",
+        value: false
+    }
+};
+```
+
+The configuration for each field can take the following properties:
+
+|   Property    |                                                              Type/Possible values                                                              |     Default     |
+|:-------------:|:----------------------------------------------------------------------------------------------------------------------------------------------:|:---------------:|
+|    `type`     |                  See [FormFieldTypes](https://github.com/tomosterlund/phormal/blob/master/packages/core/src/types/globals.ts)                  |    `'text'`     |
+|    `label`    |                                                                     string                                                                     |      `''`       |
+| `placeholder` |                                                                     string                                                                     |      `''`       |
+|    `value`    |                                               string (for most types) or boolean (for checkbox)                                                | `''` or `false` |
+|  `disabled`   |                                                                    boolean                                                                     |     `false`     |
+| `disabledIf`  |                                                   See [field conditions](#field-conditions)                                                    |   `undefined`   |
+|   `hideIf`    |                                                   See [field conditions](#field-conditions)                                                    |   `undefined`   |
+|     `row`     | Combine several fields visually into a flex row, by giving them the property `row` and assigning them a common **string** value of your choice |   `undefined`   |
+
+#### Field conditions
+
+Some properties of a form field can be set conditionally, depending on the value of other fields. If, for example, you have a field named **email**, but you only want to display it if the checkbox **newsletter** is checked, this can be achieved the following way:
+
+```js
+const fields = {
+  newsletter: {
+    type: 'checkbox',
+    label: 'Subscribe to newsletter'
+  },
+  email: {
+    label: 'Email',
+    hideIf: {
+      newsletter: false
+    }
+  }
+}
+```
+
+A field condition always consists of key-value pairs, where the key is the name of the field that your field should depend on, and the value is the condition. In this case the condition was a `boolean`. Accepted values of the condition are:
+
+|      Condition       |                                        Purpose                                        |
+|:--------------------:|:-------------------------------------------------------------------------------------:|
+|       `empty`        |                Check if the value of targeted field is an empty string                |
+|     `not-empty`      |          Check if the value of targeted field is a string with a length > 0           |
+| RegEx, e.g. `/^US$/` |                                     Test a regex                                      |
+|       boolean        | Conditionally do something, based on whether a field has the values `true` or `false` |
+
+
+
+
+### `config`
+
+The second parameter of the `Phormal` constructor is the form configuration. These are its available properties:
+
+|   Property   |  type  |                                                                                     Purpose                                                                                      | required | Default  |
+|:------------:|:------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:--------:|:--------:|
+|     `el`     | string |                                                               Selector of HTML element on which to mount the form                                                                |   yes    |    -     |
+|   `theme`    | string |                                                                                  Name of theme                                                                                   |    no    | `basic`  |
+|  `language`  | string | Set the language in which error messages should be shown, for example `'us'` or `'de'`. Should be of [ISO 639-1 standard](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) |    no    |   `en`   |
+| `validation` | string |                                    `active` for automatic validation of form, on all user-input. `passive` for disabling automatic validation                                    |    no    | `active` |
+
+### Methods
+
+#### `init()`
+
+Initializes the Phormal instance, and mounts the form to the DOM.
+
+#### `values()`
+
+Returns an object with key-value pairs, where each key is the name of the fields you specified, and the values are the values of those fields.
+
+#### `validate()`
+
+Runs all validators for all fields. Returns `true` if the values of all fields are valid, and `false` otherwise.

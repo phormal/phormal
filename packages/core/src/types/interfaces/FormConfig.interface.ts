@@ -18,7 +18,6 @@ type FormFieldConfigBase = {
   disabled?: boolean;
   disabledIf?: FieldCondition;
   hideIf?: FieldCondition;
-  dependencies?: string[];
   row?: string;
 
   // For select fields

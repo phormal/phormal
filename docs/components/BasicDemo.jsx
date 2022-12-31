@@ -16,6 +16,11 @@ const BasicDemo = () => {
         label: 'Email',
         hooks: [useRequired(), useEmail()],
       },
+      newsletter: {
+        type: 'checkbox',
+        label: 'Newsletter',
+        value: true
+      }
     }, {
       el: '#phormal',
       theme: 'basic',

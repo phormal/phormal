@@ -22,7 +22,7 @@ export class FormField implements FormFieldInterface {
   validators: Record<string, GenericFunction> = {}
   dependencies: string[] = []
   dependants: string[] = []
-  row = ''
+  row = undefined
   inputDOMElement: HTMLInputElement | null = null
   isHidden = false
   _errorMessages = {}

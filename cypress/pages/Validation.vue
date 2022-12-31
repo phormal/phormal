@@ -36,8 +36,6 @@ export default {
       el: '#phormal',
       validation: 'active'
     })
-
-    this.form.init()
   },
 }
 

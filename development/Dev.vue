@@ -91,19 +91,15 @@ export default {
       language: 'de',
       theme: 'material',
     })
-
-    this.form.init()
   },
 
   methods: {
     runValidation() {
-      console.log(this.form.validate())
+      console.log(this.form.$validate())
     },
 
     getValues() {
-      console.log(this.form.values())
-      // console.log(this.form.firstName)
-      // console.log(this.form.lastName)
+      console.log(this.form.$values())
     }
   },
 }

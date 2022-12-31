@@ -77,17 +77,15 @@ export default {
 			el: '#phormal',
 			validation: 'active'
 		})
-
-		this.form.init()
 	},
 
 	methods: {
 		runValidation() {
-			this.form.validate()
+			this.form.$validate()
 		},
 
 		getValues() {
-			console.log(this.form.values())
+			console.log(this.form.$values())
 			// console.log(this.form.firstName)
 			// console.log(this.form.lastName)
 		}

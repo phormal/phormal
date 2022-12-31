@@ -30,7 +30,6 @@ export class FormFieldResolver {
     this.field.disabled = this.formFieldConfig.disabled ? this.formFieldConfig.disabled : false
     this.field.disabledIf = this.formFieldConfig.disabledIf ? this.formFieldConfig.disabledIf : {}
     this.field.hideIf = this.formFieldConfig.hideIf ? this.formFieldConfig.hideIf : {}
-    this.field.dependencies = this.formFieldConfig.dependencies ? this.formFieldConfig.dependencies : []
     this.field.row = this.formFieldConfig.row ? this.formFieldConfig.row : ''
 
     if (this.formFieldConfig.handleOnClick) this.field._onClickHandlers.push(this.formFieldConfig.handleOnClick)

@@ -1,3 +1,9 @@
+import { Callout } from 'nextra-theme-docs'
+
+<Callout type="info" emoji="ℹ️️">
+  Please note, that this library is still in its alpha-stage. Since its API might still change greatly, we do not recommend using it in production yet.
+</Callout>
+
 ## Library of packages
 
 Phormal is a modular library. It aims to be feature rich, without bloating your bundled code. Therefore, you only need to install as much functionality as needed for your specific use-case. As a minimum, you will need to install the core package of the library:
@@ -8,4 +14,4 @@ npm install @phormal/core
 
 ## Further packages
 
-The other packages of this library are divided into two categories. Packages which provide styling for the forms are named with a **theme-** prefix. Packages that add logic by hooking into different form fields, called **hooks**, are prefixed with **use-**, inspired by React naming conventions. Installation and usage instructions of these packages can be found under [API](/api-docs).
+The other packages of this library are divided into two categories. Packages which provide styling for the forms are named with a **theme-** prefix. Packages that add logic by hooking into different form fields, called **hooks**, are prefixed with **use-**, inspired by React naming conventions. Installation and usage instructions of these packages can be found under [Hooks](/api-docs/hooks) and [Themes](/api-docs/themes).

@@ -1,12 +1,12 @@
 /**
- * A utility class for creating FormField-classes
+ * A utility class for creating FormField-classes on the main Phormal-instance.
  * */
 import {Phormal} from "../Phormal";
 import {FormField} from "../FormField";
 import {MultiSelect} from "../fields/MultiSelect";
 import {Checkbox} from "../fields/Checkbox";
 
-export class FormFieldsFactory {
+export class FormFieldsResolver {
 
   constructor(
     private phormal: Phormal

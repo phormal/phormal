@@ -1,8 +1,8 @@
 import FormConfig, {FormFieldConfig} from './types/interfaces/FormConfig.interface'
 import FormFieldInterface from './types/interfaces/FormField.interface'
 import {ConfigResolver} from "./util/config-resolver";
-import {FormFieldsFactory} from "./util/form-fields-factory";
-import {ConfigError} from "./errors/config-error";
+import {FormFieldsResolver} from "./util/form-fields-resolver";
+import {FormInitializer} from "./util/form-initializer";
 
 export class Phormal {
   _config: FormConfig|undefined;
@@ -13,46 +13,17 @@ export class Phormal {
     fields: Record<string, FormFieldConfig>,
     config: FormConfig
   ) {
-    new ConfigResolver(config, this)
-    Object.entries(fields).forEach(field => {
-      const [fieldName,] = field
-      const forbiddenFieldNames = ['init', 'values', 'validate', '_setValue', '_getValue', '_config', '_unprocessedFields', '_fields']
-      if (forbiddenFieldNames.includes(fieldName))
-        throw new ConfigError(
-          'The following words are reserved by the library, and cannot be used as field names: '
-          + forbiddenFieldNames.join(', ')
-        )
-    })
+    new ConfigResolver(config, fields, this)
     this._unprocessedFields = fields;
+    this._init()
   }
 
-  init() {
+  private _init() {
     // 1. Initialize all fields, saving them in this._fields[fieldName], and their values in this[fieldName]
-    new FormFieldsFactory(this)
+    new FormFieldsResolver(this)
 
-    // 2. Build a two-dimensional array representation of the form, with one nested array per row
-    const fieldsInRowRepresentation: string[] = []
-    const formRowRepresentation = Object.entries(this._fields).reduce((acc: Array<FormFieldInterface[]>, [fieldName, field]) => {
-      if (fieldsInRowRepresentation.includes(fieldName)) return acc
-
-      const row = []
-      row.push(field)
-      fieldsInRowRepresentation.push(fieldName)
-
-      if (field.row) {
-        // Collect all fields with the same "row" value, in one row
-        for (const [additionalFieldName, additionalField] of Object.entries(this._fields)) {
-          if (additionalField.row === row[0].row && !fieldsInRowRepresentation.includes(additionalFieldName)) {
-            row.push(additionalField)
-            fieldsInRowRepresentation.push(additionalFieldName)
-          }
-        }
-      }
-
-      acc.push(row)
-
-      return acc
-    }, [])
+    // 2. Build a two-dimensional array representation of the form, with first dimension being rows, and second dimension being fields
+    const formRows = FormInitializer.getFormRowRepresentation(this._fields)
 
     // 3. Render all fields
     const mountingElement = document.querySelector((this._config as FormConfig).el)
@@ -61,21 +32,7 @@ export class Phormal {
 
     mountingElement.classList.add(`phlib-${(this._config as FormConfig).theme || 'basic'}`)
 
-    for (const row of formRowRepresentation) {
-      if (row.length === 1) {
-        row[0].render(mountingElement)
-        continue
-      }
-
-      const rowClass = `phlib__row-${row[0].row}`  // All fields in a row have the same row name
-      const rowElement = document.createElement('div')
-      rowElement.classList.add('phlib__multiple-fields-row', `phlib__row-${rowClass}`)
-      mountingElement.appendChild(rowElement)
-
-      for (const field of row) {
-        field.render(rowElement)
-      }
-    }
+    FormInitializer.renderAllFields(formRows, mountingElement)
 
     // 4. Resolve all dependencies between fields
     for (const [, field] of Object.entries(this._fields)) {
@@ -88,7 +45,7 @@ export class Phormal {
     }
   }
 
-  values() {
+  $values() {
     const fieldNames = Object.keys(this._fields)
     type returnValueType = Record<string, string|boolean>
 
@@ -99,7 +56,7 @@ export class Phormal {
     }, {} as returnValueType)
   }
 
-  validate() {
+  $validate() {
     for (const field of Object.values(this._fields)) {
       field.runAllValidators()
       field.updateErrorMessageInDOM()

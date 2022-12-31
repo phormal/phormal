@@ -1,4 +1,4 @@
-import FormConfig from "../types/interfaces/FormConfig.interface";
+import FormConfig, {FormFieldConfig} from "../types/interfaces/FormConfig.interface";
 import {ConfigError} from "../errors/config-error";
 import {Phormal} from "../Phormal";
 
@@ -6,6 +6,7 @@ export class ConfigResolver {
 
   constructor(
     private config: FormConfig,
+    private fields: Record<string, FormFieldConfig>,
     private phormal: Phormal
   ) {
     this.validateConfig()
@@ -13,6 +14,16 @@ export class ConfigResolver {
   }
 
   validateConfig() {
+    Object.entries(this.fields).forEach(field => {
+      const [fieldName,] = field
+      const forbiddenFieldNames = ['_init', '$values', '$validate', '_setValue', '_getValue', '_config', '_unprocessedFields', '_fields']
+      if (forbiddenFieldNames.includes(fieldName))
+        throw new ConfigError(
+          'The following words are reserved by the library, and cannot be used as field names: '
+          + forbiddenFieldNames.join(', ')
+        )
+    })
+
     if (!this.config.el)
       throw new ConfigError('Missing required config property "el"')
 

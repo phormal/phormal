@@ -8,4 +8,9 @@ export default {
     content: null,
   },
   darkMode: false,
+  footer: {
+    text: <span>
+      MIT {new Date().getFullYear()} © <a href="https://github.com/tomosterlund" target="_blank">Tom Österlund</a>.
+    </span>,
+  }
 }

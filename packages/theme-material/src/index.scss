@@ -6,7 +6,7 @@
   $dark: #000;
   $color-error: #dc3545;
   $color-error-light: #f8d7da;
-  $md-checkbox-border-color: rgb(0 0 0 / 54%);
+  $md-control-item-border: #c8ccd4;
   $md-checkbox-border-color-disabled: rgb(0 0 0 / 26%);
   $md-checkbox-checked-color-disabled: rgb(0 0 0 / 26%);
   $md-checkbox-size: 1.25em;
@@ -27,7 +27,6 @@
     position: relative;
     margin-bottom: 1em;
     width: 100%;
-    overflow: hidden;
   }
 
   .phlib__multiple-fields-row {
@@ -75,7 +74,7 @@
         width: $md-checkbox-size;
         height: $md-checkbox-size;
         background: #fff;
-        border: $md-checkbox-border-width solid $md-checkbox-border-color;
+        border: $md-checkbox-border-width solid $md-control-item-border;
         border-radius: $md-checkbox-border-radius;
         cursor: pointer;
         transition: background 0.3s;
@@ -155,14 +154,20 @@
     }
   }
 
+  .phlib__input-text {
+    padding: 0 0.75rem;
+  }
+
+  .phlib__input-select {
+    padding: 0 0.75rem;
+  }
+
   .phlib__input-text,
-  .phlib__input-textarea,
   .phlib__input-select, {
     appearance: none;
     width: 100%;
     border: 0;
     font-family: inherit;
-    padding: 1rem 0.75rem 0;
     height: 3.5rem;
     font-size: 1rem;
     font-weight: 400;
@@ -194,6 +199,13 @@
     /* stylelint-enable no-descending-specificity */
   }
 
+  .phlib__has-label {
+    .phlib__input-text,
+    .phlib__input-select {
+      padding-top: 1rem;
+    }
+  }
+
   .phlib__error-message {
     font-size: 0.9rem;
 
@@ -215,6 +227,82 @@
         text-indent: -5px;
         margin-right: 0.5rem;
       }
+    }
+  }
+
+  .phlib__radio-group {
+    display: flex;
+    flex-direction: column;
+
+    .phlib__radio-group-label {
+      color: rgb(0 0 0 / 60%);
+      margin-bottom: 0.5em;
+    }
+
+    .phlib__radio-buttons {
+      display: flex;
+      flex-flow: column;
+    }
+
+    .phlib__radio-button {
+      position: relative;
+      cursor: pointer;
+      line-height: 20px;
+      font-size: 14px;
+      margin: 0.5em 0;
+
+      .phlib__radio-button-label {
+        position: relative;
+        display: block;
+        float: left;
+        margin-right: 10px;
+        width: 20px;
+        height: 20px;
+        border: 2px solid $md-control-item-border;
+        border-radius: 100%;
+        -webkit-tap-highlight-color: transparent;
+
+        &::after {
+          z-index: 1;
+          content: "";
+          position: absolute;
+          top: 3px;
+          left: 3px;
+          width: 10px;
+          height: 10px;
+          border-radius: 100%;
+          background: $primary;
+          transform: scale(0);
+          transition: all 0.2s ease;
+          opacity: 0.08;
+          pointer-events: none;
+        }
+      }
+
+      &:hover {
+        .phlib__radio-button-label {
+          &::after {
+            z-index: 1;
+            transform: scale(3.6);
+          }
+        }
+      }
+    }
+
+    input[type="radio"]:checked {
+      & + .phlib__radio-button-label {
+        border-color: $primary;
+
+        &::after {
+          transform: scale(1);
+          transition: all 0.2s cubic-bezier(0.35, 0.9, 0.4, 0.9);
+          opacity: 1;
+        }
+      }
+    }
+
+    .phlib_radio-hidden {
+      display: none;
     }
   }
 }

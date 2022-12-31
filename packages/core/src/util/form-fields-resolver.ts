@@ -5,6 +5,7 @@ import {Phormal} from "../Phormal";
 import {FormField} from "../FormField";
 import {MultiSelect} from "../fields/MultiSelect";
 import {Checkbox} from "../fields/Checkbox";
+import {RadioGroup} from "../fields/RadioGroup";
 
 export class FormFieldsResolver {
 
@@ -19,6 +20,7 @@ export class FormFieldsResolver {
       let FormFieldClass = FormField
       if (fieldConfig.type === 'select') FormFieldClass = MultiSelect
       if (fieldConfig.type === 'checkbox') FormFieldClass = Checkbox
+      if (fieldConfig.type === 'radiogroup') FormFieldClass = RadioGroup
 
       this.phormal._fields[fieldName] = new FormFieldClass(
         fieldName,

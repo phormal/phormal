@@ -1,3 +1,5 @@
+import {FIELD_WRAPPER_CLASS} from "@phormal/core/src/constants/css-selectors";
+
 describe('Smoke', () => {
 
   beforeEach(() => {
@@ -51,7 +53,7 @@ describe('Smoke', () => {
       // assert that there is only one row
       .should('have.length', 1)
       // assert that there are 3 fields in the row
-      .find('.phlib__field-wrapper')
+      .find('.' + FIELD_WRAPPER_CLASS)
       .should('have.length', 3)
   })
 })

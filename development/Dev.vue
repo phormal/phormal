@@ -14,8 +14,14 @@ export default {
       form: undefined,
 
       formFields: {
+        newsletter: {
+          type: 'checkbox',
+          label: 'Newsletter',
+          hooks: [],
+          // value: true,
+        },
         firstName: {
-          label: 'First name',
+          // label: 'First name',
           hooks: [useRequired(), useLength(1, 155), useAutoCapitalize()],
           value: 'John',
           handleOnBlur: () => this.firstNameBlurN++,
@@ -66,16 +72,15 @@ export default {
           label: 'Email',
           hooks: [useRequired(), useEmail()],
           value: '',
-          hideIf: {
-            // zip: /US/,
-            newsletter: false,
-          }
         },
-        newsletter: {
-          type: 'checkbox',
-          label: 'Newsletter',
-          hooks: [],
-          // value: true,
+        delivery: {
+          type: 'radiogroup',
+          label: 'Delivery to',
+          value: 'billing',
+          options: [
+            { label: 'Billing', value: 'billing' },
+            { label: 'Shipping', value: 'shipping' },
+          ]
         },
       },
 
@@ -106,16 +111,18 @@ export default {
 </script>
 
 <template>
-  <div>
-    <h1>SuperForm</h1>
+  <div class="wrapper">
+    <div>
+      <h1>SuperForm</h1>
+    </div>
+    <div id="phormal"></div>
+
+    <button @click="runValidation">Validate</button>
+    <button @click="getValues">Get values</button>
+
+    <p>First name was blurred {{ firstNameBlurN }} times</p>
+    <p>Last name was focused {{ lastNameFocusN }} times</p>
   </div>
-  <div id="phormal"></div>
-
-  <button @click="runValidation">Validate</button>
-  <button @click="getValues">Get values</button>
-
-  <p>First name was blurred {{ firstNameBlurN }} times</p>
-  <p>Last name was focused {{ lastNameFocusN }} times</p>
 </template>
 
 <style>
@@ -123,6 +130,11 @@ export default {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
+}
+
+.wrapper {
+  margin: 0 auto;
+  max-width: 90%;
 }
 
 .logo:hover {

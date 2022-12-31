@@ -1,0 +1,1 @@
+export const FIELD_WRAPPER_CLASS = 'phlib__field-wrapper'

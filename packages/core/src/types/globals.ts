@@ -2,12 +2,14 @@
 
 import FormFieldInterface from './interfaces/FormField.interface'
 
-export const FormFieldTypes = ['email', 'password', 'select', 'checkbox', 'text', 'number']
+export const FormFieldTypes = ['email', 'password', 'select', 'checkbox', 'text', 'number', 'radiogroup']
 export type FormFieldType = typeof FormFieldTypes[number] | string;
 
 export type ValidationType = 'active' | 'passive';
 
 export type MultiSelectOption = { label: string, value: any };
+
+export type RadioButtonOption = { label: string, value: any };
 
 export type EventHandler = (event: Event, field: FormFieldInterface) => void;
 

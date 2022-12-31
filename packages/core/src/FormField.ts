@@ -1,7 +1,7 @@
 import FormFieldInterface from './types/interfaces/FormField.interface'
 import {EventHandler, FieldCondition, FormFieldType, GenericFunction} from './types/globals'
 import FormConfig, {FormFieldConfig} from './types/interfaces/FormConfig.interface'
-import {createProjector, h, Projector} from 'maquette'
+import {createProjector, h, Projector, VNode} from 'maquette'
 import {Phormal} from './Phormal'
 import ErrorMessage from './components/error-message'
 import {FieldHooksResolver} from "./util/field-hooks-resolver";
@@ -9,11 +9,12 @@ import {FieldDependencyResolver} from "./util/field-dependency-resolver";
 import {FormFieldResolver} from "./util/form-field-resolver";
 import InputElement from "./components/input-element";
 import InputLabel from "./components/input-label";
+import {FIELD_WRAPPER_CLASS} from "./constants/css-selectors";
 
 export class FormField implements FormFieldInterface {
   type: FormFieldType = 'text';
   errors: string[] = [];
-  label = ''
+  label = undefined
   placeholder = ''
   disabled = false
   disabledIf = {}
@@ -72,6 +73,13 @@ export class FormField implements FormFieldInterface {
     if (['number', 'password', 'email'].includes(type)) type = 'text'
 
     return `phlib__input-${type}`
+  }
+
+  get wrapperClasses() {
+    const classes = [FIELD_WRAPPER_CLASS]
+    if (this._form._config?.theme === 'material' && this.label) classes.push('phlib__has-label')
+
+    return classes.join(' ')
   }
 
   updateErrorMessageInDOM() {
@@ -189,7 +197,7 @@ export class FormField implements FormFieldInterface {
 
     this.projector.append(mountingEl, () => h(
       'div',
-      { id: this.id, class: 'phlib__field-wrapper' },
+      { id: this.id, class: this.wrapperClasses },
       wrapperChildren
     ))
 

@@ -1,6 +1,6 @@
 {
   "name": "@phormal/theme-material",
-  "version": "0.1.0-alpha.6",
+  "version": "0.1.0-alpha.7",
   "license": "MIT",
   "scripts": {
     "build": "sass ./src/index.scss ./dist/index.css"

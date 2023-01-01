@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.6](https://github.com/tomosterlund/super-form/compare/v0.1.0-alpha.5...v0.1.0-alpha.6) (2023-01-01)
+
+
+### Bug Fixes
+
+* **core:** type error in form-field-resolver.ts ([34f3b2c](https://github.com/tomosterlund/super-form/commit/34f3b2c4a1b6227f7d6449c9223b63745d720b6b))
+
+
+### Features
+
+* **core:** add radio group field ([2684491](https://github.com/tomosterlund/super-form/commit/2684491dbae871e43edbeb1d9e432264781d5c90))
+* **core:** add styles for basic-theme and tests for radio-buttons ([5f20e7e](https://github.com/tomosterlund/super-form/commit/5f20e7e392cad4eb30afd55ac84568e878d9b8d4))
+
+
+
+
+
 # [0.1.0-alpha.5](https://github.com/tomosterlund/super-form/compare/v0.1.0-alpha.4...v0.1.0-alpha.5) (2022-12-31)
 
 **Note:** Version bump only for package phormal

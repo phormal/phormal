@@ -1,6 +1,6 @@
 {
   "name": "@phormal/use-email",
-  "version": "0.1.0-alpha.4",
+  "version": "0.1.0-alpha.8",
   "license": "MIT",
   "types": "./dist/use-email/src/index.d.ts",
   "module": "./dist/use-email.js",

@@ -1,6 +1,6 @@
 {
   "name": "@phormal/component-vue3",
-  "version": "0.1.0-alpha.7",
+  "version": "0.1.0-alpha.8",
   "license": "MIT",
   "types": "./dist/component-vue3/src/index.d.ts",
   "module": "./dist/component-vue3.js",

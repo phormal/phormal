@@ -32,6 +32,14 @@ describe('The Vue 3 integration', () => {
     cy.get('#getvalues').click()
     cy.get('#values').should('contain.text', '"field3": "2"')
   })
+  
+  it('Should use $validate function, and display an error message', () => {
+    cy.get('#validate-button').click()
+    cy.get('#phormal-field-error-field1').should('not.exist')
+    cy.get('#phormal-field-input-field1').clear()
+    cy.get('#validate-button').click()
+    cy.get('#phormal-field-error-field1').should('exist')
+  })
 })
 
 export {}

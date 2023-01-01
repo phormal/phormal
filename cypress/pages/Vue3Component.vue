@@ -60,7 +60,7 @@ export default {
   <PhormalVue3 ref="phormal" :config="config" :fields="formFields" />
 
   <button id="getvalues" @click="getValues">Get values</button>
-  <button @click="validate">Validate</button>
+  <button id="validate-button" @click="validate">Validate</button>
 
   <code>
     <pre id="values">

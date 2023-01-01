@@ -34,10 +34,16 @@ export default defineComponent ({
   },
 
   methods: {
+    /**
+     * Run all validators on all fields
+     * */
     $validate() {
       return this.form?.$validate()
     },
 
+    /**
+     * Get the values of all fields
+     * */
     $values() {
       return this.form?.$values()
     }

@@ -46,16 +46,35 @@ const fields = {
 
 The configuration for each field can take the following properties:
 
-|   Property    |                                                              Type/Possible values                                                              |     Default     |
-|:-------------:|:----------------------------------------------------------------------------------------------------------------------------------------------:|:---------------:|
-|    `type`     |                  See [FormFieldTypes](https://github.com/tomosterlund/phormal/blob/master/packages/core/src/types/globals.ts)                  |    `'text'`     |
-|    `label`    |                                                                     string                                                                     |      `''`       |
-| `placeholder` |                                                                     string                                                                     |      `''`       |
-|    `value`    |                                               string (for most types) or boolean (for checkbox)                                                | `''` or `false` |
-|  `disabled`   |                                                                    boolean                                                                     |     `false`     |
-| `disabledIf`  |                                                   See [field conditions](#field-conditions)                                                    |   `undefined`   |
-|   `hideIf`    |                                                   See [field conditions](#field-conditions)                                                    |   `undefined`   |
-|     `row`     | Combine several fields visually into a flex row, by giving them the property `row` and assigning them a common **string** value of your choice |   `undefined`   |
+|                      Property                      |                                                              Type/Possible values                                                              |     Default     |
+|:--------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------:|:---------------:|
+|                       `type`                       |                                   `text`, `select`, `checkbox`, `radiogroup`, `number`, `email`, `password`                                    |    `'text'`     |
+|                      `label`                       |                                                                     string                                                                     |      `''`       |
+|                   `placeholder`                    |                                                                     string                                                                     |      `''`       |
+|                      `value`                       |                                               string (for most types) or boolean (for checkbox)                                                | `''` or `false` |
+|                     `disabled`                     |                                                                    boolean                                                                     |     `false`     |
+|                    `disabledIf`                    |                                                   See [field conditions](#field-conditions)                                                    |   `undefined`   |
+|                      `hideIf`                      |                                                   See [field conditions](#field-conditions)                                                    |   `undefined`   |
+|                       `row`                        | Combine several fields visually into a flex row, by giving them the property `row` and assigning them a common **string** value of your choice |   `undefined`   |
+| `options` (only for **radiogroup** and **select**) |                                         Array of options with type `{ label: string, value: string }`                                          |      `[]`       |
+
+In some cases, you might need to react to the native events of a field. This is possible through the properties `handleOnClick`, `handleOnInput`, `handleOnChange`, `handleOnFocus` and `handleOnBlur`. These properties take the shape of a function, where the first argument is the event itself. For example:
+
+```js
+new Phormal(
+  {
+    lastName: {
+      label: 'Last name',
+      handleOnFocus: (event, field) => {
+        console.log(event.target.value); // the value of the field
+      }
+    }
+  },
+  { /** form config */ }
+)
+```
+
+In some even more rare cases, you might want to access the internal APIs of a field. Therefore, the above-mentioned event handlers pass the field as the second argument. For available methods on the `field` object, see [FormFieldInterface](https://github.com/tomosterlund/phormal/blob/master/packages/core/src/types/interfaces/FormField.interface.ts).
 
 #### Field conditions
 

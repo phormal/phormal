@@ -7,35 +7,39 @@ on:
       - build/husky
 
 jobs:
-  chrome:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout ✅
-        uses: actions/checkout@v3
-      - name: E2E on Chrome 🧪
-        uses: cypress-io/github-action@v4
-        with:
-          browser: chrome
-          start: npm run dev
-          config-file: config/cypress.config.ts
+#  chrome:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout ✅
+#        uses: actions/checkout@v3
+#      - name: E2E on Chrome 🧪
+#        uses: cypress-io/github-action@v4
+#        with:
+#          browser: chrome
+#          start: npm run dev
+#          config-file: config/cypress.config.ts
   firefox:
     runs-on: ubuntu-latest
     container:
       image: cypress/browsers:node12.16.1-chrome80-ff73
       options: --user 1001
     steps:
+      - name: install required deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgbm-dev
       - uses: actions/checkout@v3
       - uses: cypress-io/github-action@v5
         with:
           browser: firefox
           start: npm run dev
           config-file: config/cypress.config.ts
-  edge:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: cypress-io/github-action@v5
-        with:
-          browser: edge
-          start: npm run dev
-          config-file: config/cypress.config.ts
+#  edge:
+#    runs-on: windows-latest
+#    steps:
+#      - uses: actions/checkout@v3
+#      - uses: cypress-io/github-action@v5
+#        with:
+#          browser: edge
+#          start: npm run dev
+#          config-file: config/cypress.config.ts

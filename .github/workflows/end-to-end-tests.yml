@@ -28,6 +28,8 @@ jobs:
       - uses: cypress-io/github-action@v5
         with:
           browser: firefox
+          start: npm run dev
+          config-file: config/cypress.config.ts
   tests:
     runs-on: windows-latest
     steps:
@@ -35,3 +37,5 @@ jobs:
       - uses: cypress-io/github-action@v5
         with:
           browser: edge
+          start: npm run dev
+          config-file: config/cypress.config.ts

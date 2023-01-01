@@ -2,6 +2,11 @@
   "name": "@phormal/component-vue3",
   "version": "0.1.0-alpha.8",
   "license": "MIT",
+  "author": {
+    "name": "Tom Österlund",
+    "email": "tom@oesterlund.de",
+    "url": "https://github.com/tomosterlund"
+  },
   "types": "./dist/component-vue3/src/index.d.ts",
   "module": "./dist/component-vue3.js",
   "main": "./dist/component-vue3.cjs.js",
@@ -22,5 +27,6 @@
     "type": "git",
     "url": "https://github.com/tomosterlund/phormal",
     "directory": "packages/component-vue3"
-  }
+  },
+  "homepage": "https://phormal.vercel.app"
 }

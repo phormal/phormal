@@ -2,6 +2,11 @@
   "name": "@phormal/use-email",
   "version": "0.1.0-alpha.8",
   "license": "MIT",
+  "author": {
+    "name": "Tom Österlund",
+    "email": "tom@oesterlund.de",
+    "url": "https://github.com/tomosterlund"
+  },
   "types": "./dist/use-email/src/index.d.ts",
   "module": "./dist/use-email.js",
   "main": "./dist/use-email.cjs.js",
@@ -22,5 +27,6 @@
     "type": "git",
     "url": "https://github.com/tomosterlund/phormal",
     "directory": "packages/use-email"
-  }
+  },
+  "homepage": "https://phormal.vercel.app"
 }

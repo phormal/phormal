@@ -2,6 +2,11 @@
   "name": "@phormal/theme-material",
   "version": "0.1.0-alpha.8",
   "license": "MIT",
+  "author": {
+    "name": "Tom Österlund",
+    "email": "tom@oesterlund.de",
+    "url": "https://github.com/tomosterlund"
+  },
   "scripts": {
     "build": "sass ./src/index.scss ./dist/index.css"
   },
@@ -28,5 +33,6 @@
     "type": "git",
     "url": "https://github.com/tomosterlund/phormal",
     "directory": "packages/theme-material"
-  }
+  },
+  "homepage": "https://phormal.vercel.app"
 }

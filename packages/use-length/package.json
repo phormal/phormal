@@ -2,6 +2,11 @@
   "name": "@phormal/use-length",
   "version": "0.1.0-alpha.8",
   "license": "MIT",
+  "author": {
+    "name": "Tom Österlund",
+    "email": "tom@oesterlund.de",
+    "url": "https://github.com/tomosterlund"
+  },
   "types": "./dist/use-length/src/index.d.ts",
   "module": "./dist/use-length.js",
   "main": "./dist/use-length.cjs.js",
@@ -22,5 +27,6 @@
     "type": "git",
     "url": "https://github.com/tomosterlund/phormal",
     "directory": "packages/use-length"
-  }
+  },
+  "homepage": "https://phormal.vercel.app"
 }

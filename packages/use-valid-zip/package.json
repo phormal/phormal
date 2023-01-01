@@ -2,6 +2,11 @@
   "name": "@phormal/use-valid-zip",
   "version": "0.1.0-alpha.8",
   "license": "MIT",
+  "author": {
+    "name": "Tom Österlund",
+    "email": "tom@oesterlund.de",
+    "url": "https://github.com/tomosterlund"
+  },
   "types": "./dist/use-valid-zip/src/index.d.ts",
   "module": "./dist/use-valid-zip.js",
   "main": "./dist/use-valid-zip.cjs.js",
@@ -22,5 +27,6 @@
     "type": "git",
     "url": "https://github.com/tomosterlund/phormal",
     "directory": "packages/use-valid-zip"
-  }
+  },
+  "homepage": "https://phormal.vercel.app"
 }

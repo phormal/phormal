@@ -5,9 +5,14 @@ import useLength from "../packages/use-length/src";
 import useAutoCapitalize from "../packages/use-auto-capitalize/src";
 import useValidZip from "../packages/use-valid-zip/src";
 import useEmail from "../packages/use-email/src";
+import {PhormalVue3} from "../packages/component-vue3/src";
 
 export default {
   name: 'App',
+
+  components: {
+    PhormalVue3,
+  },
 
   data() {
     return {
@@ -83,6 +88,16 @@ export default {
             { label: 'Packstation', value: 'packstation' },
           ]
         },
+        field3: {
+          label: 'Baz',
+          type: 'select',
+          options: [
+            {value: '1', label: 'One'},
+            {value: '2', label: 'Two'},
+            {value: '3', label: 'Three'},
+          ],
+          // value: '',
+        },
       },
 
       lastNameFocusN: 0,
@@ -92,24 +107,31 @@ export default {
   },
 
   mounted() {
-    this.form = new Phormal(this.formFields, {
-      el: '#phormal',
-      validation: 'active',
-      language: 'de',
-      theme: 'material',
-    })
+    // this.form = new Phormal(this.formFields, {
+    //   el: '#phormal',
+    //   validation: 'active',
+    //   language: 'de',
+    //   theme: 'material',
+    // })
 
-    this.values = this.form.$values()
+    // this.values = this.form.$values()
   },
 
   methods: {
     runValidation() {
       console.log(this.form.$validate())
+      if (this.$refs.phormal) {
+        this.$refs.phormal.$validate()
+      }
     },
 
     getValues() {
-      console.log(this.form.$values())
-      this.values = this.form.$values()
+      if (this.$refs.phormal) {
+        this.values = this.$refs.phormal.$values()
+      } else {
+        console.log(this.form.$values())
+        this.values = this.form.$values()
+      }
     }
   },
 }
@@ -120,7 +142,9 @@ export default {
     <div>
       <h1>SuperForm</h1>
     </div>
-    <div id="phormal"></div>
+
+    <PhormalVue3 ref="phormal" :fields="formFields" :config="{ theme: 'basic' }" />
+<!--    <div id="phormal"></div>-->
 
     <button @click="runValidation">Validate</button>
     <button @click="getValues">Get values</button>

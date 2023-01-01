@@ -1,0 +1,20 @@
+{
+  "name": "@phormal/component-vue3",
+  "version": "0.1.0-alpha.4",
+  "license": "MIT",
+  "types": "./dist/component-vue3/src/index.d.ts",
+  "module": "./dist/component-vue3.js",
+  "main": "./dist/component-vue3.cjs.js",
+  "umd": "./dist/component-vue3.umd.js",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "peerDependencies": {
+    "@phormal/core": "^0.1.0-alpha.1",
+    "vue": "^3.0.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}

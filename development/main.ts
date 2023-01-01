@@ -6,6 +6,7 @@ import App from './App.vue'
 import Smoke from '../cypress/pages/Smoke.vue'
 import FieldConditions from '../cypress/pages/FieldConditions.vue'
 import Validation from '../cypress/pages/Validation.vue'
+import Vue3Component from '../cypress/pages/Vue3Component.vue'
 
 const app = createApp(App)
 
@@ -16,6 +17,7 @@ const router = createRouter({
     { path: '/e2e/smoke', component: Smoke },
     { path: '/e2e/field-conditions', component: FieldConditions },
     { path: '/e2e/validation', component: Validation },
+    { path: '/e2e/component-vue3', component: Vue3Component },
   ]
 })
 

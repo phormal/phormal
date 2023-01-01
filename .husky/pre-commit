@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Test building the project, but then remove all dist folders when finished
+npm run build
+npm run clean:packages
+
+# Run linting
+npm run lint:styles:fix
+npm run lint:ts:fix
+
+# Add changes from linting
+git add .

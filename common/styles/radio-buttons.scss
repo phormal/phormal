@@ -1,4 +1,6 @@
-@mixin index ($color-primary, $color-border) {
+// Styles mainly from: https://codepen.io/avstorm/pen/jxjKGj
+
+@mixin index($color-primary, $color-border) {
   .phlib__radio-group {
     display: flex;
     flex-direction: column;

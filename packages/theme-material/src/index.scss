@@ -1,6 +1,6 @@
 // Based on: https://codepen.io/avstorm/pen/gKGbxo
 @use "sass:math";
-@use '../../../common/styles/radio-buttons' as radio-buttons;
+@use "../../../common/styles/radio-buttons" as radio-buttons;
 
 .phlib-material {
   $color-primary: #07f;

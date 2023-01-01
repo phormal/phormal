@@ -1,7 +1,7 @@
 import FormFieldInterface from './types/interfaces/FormField.interface'
 import {EventHandler, FieldCondition, FormFieldType, GenericFunction} from './types/globals'
 import FormConfig, {FormFieldConfig} from './types/interfaces/FormConfig.interface'
-import {createProjector, h, Projector, VNode} from 'maquette'
+import {createProjector, h, Projector} from 'maquette'
 import {Phormal} from './Phormal'
 import ErrorMessage from './components/error-message'
 import {FieldHooksResolver} from "./util/field-hooks-resolver";

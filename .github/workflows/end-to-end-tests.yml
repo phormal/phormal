@@ -17,3 +17,4 @@ jobs:
         with:
           browser: chrome
           start: npm run dev
+          config-file: config/cypress.config.ts

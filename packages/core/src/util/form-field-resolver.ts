@@ -1,14 +1,14 @@
-import {FormField} from "../FormField";
 import {FormFieldConfig} from "../types/interfaces/FormConfig.interface";
 import {FormFieldError} from "../errors/form-field-error";
 import {FormFieldTypes} from "../types/globals";
+import FormFieldInterface from "../types/interfaces/FormField.interface";
 
 /**
  * A utility class for resolving the properties of a FormField
  * */
 export class FormFieldResolver {
   constructor(
-    private field: FormField,
+    private field: FormFieldInterface,
     private formFieldConfig: FormFieldConfig
   ) {
     this.validateFieldConfig()

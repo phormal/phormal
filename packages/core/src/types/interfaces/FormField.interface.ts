@@ -3,16 +3,15 @@ import {Phormal} from '../../index'
 import {FormFieldConfig} from "./FormConfig.interface";
 
 export default interface FormFieldInterface {
-  readonly type: FormFieldType;
-  readonly name: string;
-  readonly config: FormFieldConfig|undefined;
-  readonly defaultValue?: string | number;
-  readonly label?: string;
-  readonly placeholder?: string;
-  readonly dependencies?: ReadonlyArray<string>;
-  readonly disabledIf?: FieldCondition;
-  readonly hideIf?: FieldCondition;
-  readonly row?: string;
+  type: FormFieldType;
+  name: string;
+  config: FormFieldConfig|undefined;
+  label: string | undefined;
+  placeholder?: string;
+  dependencies?: ReadonlyArray<string>;
+  disabledIf?: FieldCondition;
+  hideIf?: FieldCondition;
+  row?: string;
   required?: boolean;
   disabled?: boolean;
   errors?: string[];

@@ -14,7 +14,7 @@ import {FIELD_WRAPPER_CLASS} from "./constants/css-selectors";
 export class FormField implements FormFieldInterface {
   type: FormFieldType = 'text';
   errors: string[] = [];
-  label = undefined
+  label: string|undefined
   placeholder = ''
   disabled = false
   disabledIf = {}

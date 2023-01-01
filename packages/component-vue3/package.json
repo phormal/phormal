@@ -1,6 +1,6 @@
 {
   "name": "@phormal/component-vue3",
-  "version": "0.1.0-alpha.8",
+  "version": "0.1.0-alpha.9",
   "license": "MIT",
   "author": {
     "name": "Tom Österlund",
@@ -29,5 +29,10 @@
     "directory": "packages/component-vue3"
   },
   "homepage": "https://phormal.vercel.app",
-  "keywords": ["form-generator", "form-validation", "form-themes", "vue3"]
+  "keywords": [
+    "form-generator",
+    "form-validation",
+    "form-themes",
+    "vue3"
+  ]
 }

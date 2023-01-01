@@ -4,7 +4,6 @@ import {MultiSelectOption} from '../types/globals'
 import {FormFieldConfig} from '../types/interfaces/FormConfig.interface'
 import {Phormal} from "../Phormal";
 import InputLabel from "../components/input-label";
-import {FIELD_WRAPPER_CLASS} from "../constants/css-selectors";
 
 export class MultiSelect extends FormField {
   options: MultiSelectOption[] = []

@@ -63,7 +63,7 @@ export class Phormal {
     }
 
     // Return true if all fields are valid, false otherwise
-    return !Object.entries(this._fields).some(([fieldName, field]) => {
+    return !Object.entries(this._fields).some(([, field]) => {
       return !!field.errors?.length;
     })
   }

@@ -27,3 +27,5 @@ dist-ssr
 
 docs/.next
 docs/node_modules
+
+husky/_

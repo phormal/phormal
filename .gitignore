@@ -28,4 +28,6 @@ dist-ssr
 docs/.next
 docs/node_modules
 
+cypress/videos
+
 husky/_

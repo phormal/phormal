@@ -33,5 +33,6 @@
     "url": "https://github.com/tomosterlund/phormal",
     "directory": "packages/core"
   },
-  "homepage": "https://phormal.vercel.app"
+  "homepage": "https://phormal.vercel.app",
+  "keywords": ["form-generator", "form-validation", "form-themes", "vue3"]
 }

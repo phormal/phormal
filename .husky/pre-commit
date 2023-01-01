@@ -1,6 +1,10 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+# build all packages, but then remove the dist
+npm run build
+npm run clean:packages
+
 # Run linting
 npm run lint:styles:fix
 npm run lint:ts:fix

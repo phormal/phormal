@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - build/husky
 
 jobs:
   chrome:
@@ -17,3 +18,20 @@ jobs:
           browser: chrome
           start: npm run dev
           config-file: config/cypress.config.ts
+  firefox:
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:node12.16.1-chrome80-ff73
+      options: --user 1001
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cypress-io/github-action@v5
+        with:
+          browser: firefox
+  tests:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cypress-io/github-action@v5
+        with:
+          browser: edge

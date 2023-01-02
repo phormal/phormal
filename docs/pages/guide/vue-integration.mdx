@@ -1,0 +1,48 @@
+# Usage with Vue.js
+
+Below are the two ways of integrating Phormal in a Vue application. Fow now, a component is only available for Vue 3. For Vue 2, you save the Phormal instance directly in a [data property](#as-a-data-property).
+
+## As a component
+
+For a code example, please refer to the Vue 3 example in [Getting started](/guide/getting-started#step-1-javascript).
+
+### Props
+
+|   Prop   | Description                                                                                                                                                        |
+|:--------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `fields` | [See fields argument to Phormal constructor](/api-docs#fields)                                                                                                     |
+| `config` | [config argument to Phormal constructor](/api-docs#config) Please note, that you do not need to specify the `el` config property. The component does this for you. |
+
+### Methods
+
+|    Prop     | Description                                                                                             |
+|:-----------:|:--------------------------------------------------------------------------------------------------------|
+| `$validate` | Runs the validators of all fields. Returns `true` if all fields are valid, otherwise `false`            |
+|  `$values`  | Returns an object with key-value pairs, key being the field name, and the value being its current value |
+
+## As a data property
+
+You can also save an instance of Phormal directly in a data property. If you need to set up watchers for a form field value, this is the preferred approach. First install:
+
+```
+npm install @phormal/core @phormal/theme-basic
+```
+
+Then:
+
+import { Tab, Tabs } from 'nextra-theme-docs'
+import Vue3DataProperty from '../../code-examples/vue-data-property/vue3.mdx'
+import Vue2DataProperty from '../../code-examples/vue-data-property/vue2.mdx'
+
+<Tabs items={['Vue 2', 'Vue 3']}>
+  <Tab>
+    <Vue2DataProperty />
+  </Tab>
+  <Tab>
+    <Vue3DataProperty />
+  </Tab>
+</Tabs>
+
+## Further reading
+
+For more on how to configure the form, and how to use different kinds of inputs, see the [API documentation](/api-docs).

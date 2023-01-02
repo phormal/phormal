@@ -13,8 +13,8 @@
     "lint:styles:fix": "npx stylelint --config config/.stylelintrc.json \"**/*.scss\" --fix",
     "clean:packages": "rm -rf ./packages/*/dist",
     "docs:dev": "cd docs && npm run dev",
-    "release": "npm run clean:packages && npm run build && lerna publish",
-    "release:pre": "npm run clean:packages && npm run build && lerna publish --conventional-commits --conventional-prerelease",
+    "release": "npm run clean:packages && npm run build && lerna publish --no-commit-hooks",
+    "release:pre": "npm run clean:packages && npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-prerelease",
     "prepare": "husky install"
   },
   "dependencies": {

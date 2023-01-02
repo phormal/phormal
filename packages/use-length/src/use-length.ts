@@ -67,11 +67,13 @@ export const useLength = (minLength: number|undefined|null, maxLength?: number|u
       [MIN_LENGTH_ERROR_NAME]: {
         en: `This field must be at least ${minLength} characters long`,
         de: `Dieses Feld muss mindestens ${minLength} Zeichen lang sein`,
+        es: `Este campo debe tener al menos ${minLength} caracteres`,
       },
 
       [MAX_LENGTH_ERROR_NAME]: {
         en: `This field must be at most ${maxLength} characters long`,
         de: `Dieses Feld darf höchstens ${maxLength} Zeichen lang sein`,
+        es: `Este campo debe tener como máximo ${maxLength} caracteres`,
       }
     }
   }

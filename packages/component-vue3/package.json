@@ -1,5 +1,5 @@
 {
-  "name": "@phormal/theme-material",
+  "name": "@phormal/component-vue3",
   "version": "0.1.0-alpha.10",
   "license": "MIT",
   "author": {
@@ -7,23 +7,17 @@
     "email": "tom@oesterlund.de",
     "url": "https://github.com/tomosterlund"
   },
-  "scripts": {
-    "build": "sass ./src/index.scss ./dist/index.css"
-  },
-  "exports": {
-    "./dist/index.css": {
-      "import": "./dist/style.css",
-      "require": "./dist/style.css"
-    }
-  },
+  "types": "./dist/component-vue3/src/index.d.ts",
+  "module": "./dist/component-vue3.js",
+  "main": "./dist/component-vue3.cjs.js",
+  "umd": "./dist/component-vue3.umd.js",
   "files": [
     "dist",
     "src"
   ],
-  "devDependencies": {
-    "lerna": "^6.1.0",
-    "sass": "^1.56.1",
-    "vite": "^3.1.8"
+  "peerDependencies": {
+    "@phormal/core": "^0.1.0-alpha.1",
+    "vue": "^3.0.0"
   },
   "workspaces": [
     "packages/*"
@@ -32,7 +26,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/tomosterlund/phormal",
-    "directory": "packages/theme-material"
+    "directory": "packages/component-vue3"
   },
   "homepage": "https://phormal.vercel.app",
   "keywords": [

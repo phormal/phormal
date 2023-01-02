@@ -5,9 +5,14 @@ import useLength from "../packages/use-length/src";
 import useAutoCapitalize from "../packages/use-auto-capitalize/src";
 import useValidZip from "../packages/use-valid-zip/src";
 import useEmail from "../packages/use-email/src";
+// import {Phormal} from "../packages/component-vue3/src";
 
 export default {
   name: 'App',
+
+  components: {
+    Phormal,
+  },
 
   data() {
     return {
@@ -83,6 +88,16 @@ export default {
             { label: 'Packstation', value: 'packstation' },
           ]
         },
+        field3: {
+          label: 'Baz',
+          type: 'select',
+          options: [
+            {value: '1', label: 'One'},
+            {value: '2', label: 'Two'},
+            {value: '3', label: 'Three'},
+          ],
+          // value: '',
+        },
       },
 
       lastNameFocusN: 0,
@@ -105,11 +120,18 @@ export default {
   methods: {
     runValidation() {
       console.log(this.form.$validate())
+      if (this.$refs.phormal) {
+        this.$refs.phormal.$validate()
+      }
     },
 
     getValues() {
-      console.log(this.form.$values())
-      this.values = this.form.$values()
+      if (this.$refs.phormal) {
+        this.values = this.$refs.phormal.$values()
+      } else {
+        console.log(this.form.$values())
+        this.values = this.form.$values()
+      }
     }
   },
 }
@@ -120,6 +142,8 @@ export default {
     <div>
       <h1>SuperForm</h1>
     </div>
+
+<!--    <Phormal ref="phormal" :fields="formFields" :config="{ theme: 'basic' }" />-->
     <div id="phormal"></div>
 
     <button @click="runValidation">Validate</button>

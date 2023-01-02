@@ -1,7 +1,7 @@
 import {FormField} from '../FormField'
-import {h} from 'maquette'
+import {h, VNode} from 'maquette'
 import {MultiSelectOption} from '../types/globals'
-import {FormFieldConfig} from '../types/interfaces/FormConfig.interface'
+import FormConfig, {FormFieldConfig} from '../types/interfaces/FormConfig.interface'
 import {Phormal} from "../Phormal";
 import InputLabel from "../components/input-label";
 
@@ -11,10 +11,22 @@ export class MultiSelect extends FormField {
   constructor(
     name: string,
     formField: FormFieldConfig,
-    form: Phormal
+    private form: Phormal
   ) {
     super(name, formField, form)
     this.options = formField.options ? formField.options : []
+  }
+
+  getSelectVNode(options: VNode[]) {
+    return h(
+      'select',
+      {
+        placeholder: this.placeholder,
+        value: String(this.getValue()),
+        ...this._getGlobalInputProperties(),
+      },
+      options
+    )
   }
 
   render(mountingElement: HTMLElement) {
@@ -24,19 +36,12 @@ export class MultiSelect extends FormField {
       return h('option', { value: option.value }, [option.label])
     })
 
+    let elements: (VNode|null)[] = []
+    if ((this.form._config as FormConfig).theme === 'basic') elements = [inputLabel, this.getSelectVNode(options)]
+    if ((this.form._config as FormConfig).theme === 'material') elements = [this.getSelectVNode(options), inputLabel]
+
     this.projector.append(mountingElement, () => {
-      return h('div', { id: this.id, class: this.wrapperClasses }, [
-        h(
-          'select',
-          {
-            placeholder: this.placeholder,
-            value: String(this.getValue()),
-            ...this._getGlobalInputProperties(),
-          },
-          options
-        ),
-        inputLabel,
-      ])
+      return h('div', { id: this.id, class: this.wrapperClasses }, elements)
     })
   }
 }

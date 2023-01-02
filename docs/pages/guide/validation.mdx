@@ -1,0 +1,41 @@
+# Validating form input
+
+For validating data, Phormal uses a concept called **hooks**. Instead of making a field required with `required: true`, or giving it a minimum- and maximum length through for example `{ minLength: 3, maxLength: 10 }`, we install hooks. This has one simple reason: this way we keep bundle sizes small. Instead of storing tons of translations for error messages in different languages in the core library, we install our validators one by one.
+
+This way, you neither need to worry about writing validators, nor error messages yourself. Phormal does it for you, and provides multi-language error messages. All you need to do is install your validator, and [configure the language](/api-docs#config).
+
+For example:
+
+```js
+import {Phormal} from "@phormal/core";
+import useEmail from "@phormal/use-email";
+import useRequired from "@phormal/use-required";
+import useLength from "@phormal/use-length";
+
+new Phormal(
+  {
+    name: {
+      label: 'Name',
+      hooks: [useRequired(), useLength(3)]
+    },
+    email: {
+      label: 'Email',
+      hooks: [useRequired(), useEmail()]
+    }
+  },
+  {
+    // ... other config
+    language: 'es'
+  }
+)
+```
+
+would give you the following form. Try typing a little, to see the spanish translations of the error messages.
+
+import DemoWithSpanish from "../../components/DemoWithSpanish";
+
+<DemoWithSpanish />
+
+## Available hooks
+
+A full list of all available hooks, can be found in the [API docs](/api-docs/hooks).

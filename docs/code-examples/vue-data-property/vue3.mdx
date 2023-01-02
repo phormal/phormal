@@ -1,0 +1,56 @@
+```vue copy
+<template>
+  <div id="phormal"></div>
+</template>
+
+<script>
+import {Phormal} from '@phormal/core';
+import {defineComponent} from "vue";
+
+export default defineComponent({
+  data() {
+    return {
+      formFields: {
+        name: {
+          type: 'text',
+          label: 'Name',
+          placeholder: 'Enter your name',
+          value: 'John Doe'
+        },
+      },
+      formConfig: {
+        theme: 'basic',
+        el: '#phormal'
+      },
+      form: null
+    }
+  },
+
+  mounted() {
+    this.form = new Phormal(this.formFields, this.formConfig);
+  },
+
+  methods: {
+    validate() {
+      this.form.$validate();
+    },
+
+    getValues() {
+      return this.form.$values(); // { name: 'John Doe' }
+    }
+  },
+
+  watch: {
+    'form.name': {
+      handler: function (val) {
+        console.log('name changed to', val);
+      },
+    }
+  }
+});
+</script>
+
+<style>
+  @import '@phormal/theme-basic/dist/index.css';
+</style>
+```

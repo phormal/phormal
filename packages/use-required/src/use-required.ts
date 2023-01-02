@@ -17,7 +17,7 @@ export const useRequired: Hook = () => {
       [ERROR_NAME]: {
         en: 'This field is required',
         ru: 'Это поле обязательно для заполнения',
-        de: 'Dieses Feld ist erforderlich',
+        de: 'Dieses Feld ist ein Pflichtfeld',
         fr: 'Ce champ est obligatoire',
         es: 'Este campo es obligatorio',
         it: 'Questo campo è obbligatorio',

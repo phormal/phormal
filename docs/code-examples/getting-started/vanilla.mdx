@@ -1,0 +1,30 @@
+```js copy
+import { Phormal } from '@phormal/core';
+import useEmail from "@phormal/use-email";
+import useRequired from "@phormal/use-required";
+import useLength from "@phormal/use-length";
+
+const formFields = {
+  name: {
+    label: 'Name',
+    hooks: [useRequired(), useLength(3)]
+  },
+  email: {
+    label: 'Email',
+    hooks: [useRequired(), useEmail()]
+  },
+  newsletter: {
+    type: 'checkbox',
+    label: 'Newsletter',
+    value: true
+  }
+}
+
+const formConfig = { el: '#phormal', theme: 'basic' }
+
+const form = new Phormal(formFields, formConfig)
+// Access the input values:
+// form.name = ''
+// form.email = ''
+// form.newsletter = true
+```

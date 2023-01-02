@@ -1,7 +1,12 @@
 {
   "name": "@phormal/use-auto-capitalize",
-  "version": "0.1.0-alpha.4",
+  "version": "0.1.0-alpha.10",
   "license": "MIT",
+  "author": {
+    "name": "Tom Österlund",
+    "email": "tom@oesterlund.de",
+    "url": "https://github.com/tomosterlund"
+  },
   "types": "./dist/use-auto-capitalize/src/index.d.ts",
   "module": "./dist/use-auto-capitalize.js",
   "main": "./dist/use-auto-capitalize.cjs.js",
@@ -20,5 +25,17 @@
   },
   "workspaces": [
     "packages/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomosterlund/phormal",
+    "directory": "packages/use-auto-capitalize"
+  },
+  "homepage": "https://phormal.vercel.app",
+  "keywords": [
+    "form-generator",
+    "form-validation",
+    "form-themes",
+    "vue"
   ]
 }

@@ -1,7 +1,12 @@
 {
   "name": "@phormal/core",
-  "version": "0.1.0-alpha.6",
+  "version": "0.1.0-alpha.10",
   "license": "MIT",
+  "author": {
+    "name": "Tom Österlund",
+    "email": "tom@oesterlund.de",
+    "url": "https://github.com/tomosterlund"
+  },
   "module": "./dist/core.js",
   "main": "./dist/core.cjs.js",
   "umd": "./dist/core.umd.js",
@@ -21,5 +26,18 @@
   },
   "workspaces": [
     "packages/*"
+  ],
+  "gitHead": "20d6849b622722d79a094d105f858f515eb58212",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomosterlund/phormal",
+    "directory": "packages/core"
+  },
+  "homepage": "https://phormal.vercel.app",
+  "keywords": [
+    "form-generator",
+    "form-validation",
+    "form-themes",
+    "vue"
   ]
 }

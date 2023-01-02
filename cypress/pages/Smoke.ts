@@ -1,17 +1,16 @@
-<script lang="ts">
-
 import useRequired from "../../packages/use-required/src";
 import useLength from "../../packages/use-length/src";
 import useAutoCapitalize from "../../packages/use-auto-capitalize/src";
 import useValidZip from "../../packages/use-valid-zip/src";
 import {Phormal} from '@phormal/core/src'
+import {defineComponent, h} from "vue";
 
-export default {
+export default defineComponent({
   name: 'App',
 
   data() {
     return {
-      form: undefined,
+      form: undefined as undefined|Phormal,
 
       formFields: {
         delivery: {
@@ -28,13 +27,11 @@ export default {
           label: 'First name',
           hooks: [useRequired(), useLength(1, 155), useAutoCapitalize()],
           value: 'John',
-          handleOnBlur: () => this.firstNameBlurN++,
         },
         lastName: {
           label: 'Last name',
           hooks: [useRequired(), useLength(1, 155)],
           value: 'Doe',
-          handleOnFocus: (event, field) => this.lastNameFocusN += 1,
         },
         yyyy: {
           value: '',
@@ -89,46 +86,8 @@ export default {
     })
   },
 
-  methods: {
-    runValidation() {
-      this.form.$validate()
-    },
-
-    getValues() {
-      console.log(this.form.$values())
-      // console.log(this.form.firstName)
-      // console.log(this.form.lastName)
-    }
-  },
-}
-
-</script>
-
-
-<template>
-  <div>
-    <h2>First name was blurred {{ firstNameBlurN }} times</h2>
-    <h2>Last name was focus {{ lastNameFocusN }} times</h2>
-  </div>
-  <div id="phormal"></div>
-
-  <button @click="runValidation">Validate</button>
-  <button @click="getValues">Get values</button>
-</template>
-
-<style>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+  render() {
+    return h('div', { id: 'phormal' })
+  }
+})
 

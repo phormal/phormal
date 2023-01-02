@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-# Test building the project, but then remove all dist folders when finished
+# build all packages, but then remove the dist
 npm run build
 npm run clean:packages
 

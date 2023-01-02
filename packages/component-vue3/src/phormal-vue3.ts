@@ -23,8 +23,8 @@ export default defineComponent ({
       form: null as Phormal | null,
 
       formConfig: {
-        el: '#phlib__phormal-wrapper',
         ...this.config,
+        el: '#phlib__phormal-wrapper',
       }
     }
   },

@@ -1,0 +1,127 @@
+# Usage with Vue.js
+
+## As a component
+
+You can also use this library as a Vue.js component.
+
+```
+npm install @phormal/component-vue3 @phormal/theme-basic
+```
+
+Please note, that the theme is still installed separately. This allows you to freely pick and choose which theme to use. And then to use the component:
+
+```vue
+<template>
+  <PhormalVue3 ref="phormal" :fields="formFields" :config="formConfig" />
+</template>
+
+<script>
+import {PhormalVue3} from '@phormal/component-vue3';
+
+export default defineComponent({
+  components: {
+    PhormalVue3,
+  },
+
+  data() {
+    return {
+      formFields: {
+        name: {
+          type: 'text',
+          label: 'Name',
+          placeholder: 'Enter your name',
+          value: 'John Doe'
+        },
+      },
+      formConfig: {
+        theme: 'basic',
+      }
+    }
+  },
+
+  methods: {
+    validate() {
+      this.$refs.phormal.$validate();
+    },
+
+    getValues() {
+      return this.$refs.phormal.$values(); // { name: 'John Doe' }
+    }
+  }
+});
+</script>
+
+<style>
+@import '@phormal/theme-basic/dist/index.css';
+</style>
+```
+
+|   Prop   | Description                                                                                                                                                        |
+|:--------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `fields` | [See fields argument to Phormal constructor](/api-docs#fields)                                                                                                     |
+| `config` | [config argument to Phormal constructor](/api-docs#config) Please note, that you do not need to specify the `el` config property. The component does this for you. |
+
+## As a data property
+
+Or you can save an instance of Phormal directly in a data property. If you need to set up watchers for a form field value, this is the preferred approach. First install:
+
+```
+npm install @phormal/core @phormal/theme-basic
+```
+
+Then:
+```vue
+<template>
+  <div id="phormal"></div>
+</template>
+
+<script>
+import {Phormal} from '@phormal/core';
+
+export default defineComponent({
+  data() {
+    return {
+      formFields: {
+        name: {
+          type: 'text',
+          label: 'Name',
+          placeholder: 'Enter your name',
+          value: 'John Doe'
+        },
+      },
+      formConfig: {
+        theme: 'basic',
+        el: '#phormal'
+      },
+      form: null
+    }
+  },
+
+  mounted() {
+    this.form = new Phormal(this.formFields, this.formConfig);
+  },
+
+  methods: {
+    validate() {
+      this.form.$validate();
+    },
+
+    getValues() {
+      return this.form.$values(); // { name: 'John Doe' }
+    }
+  },
+
+  watch: {
+    'form.name': {
+      handler: function (val) {
+        console.log('name changed to', val);
+      },
+    }
+  }
+});
+</script>
+
+<style>
+@import '@phormal/theme-basic/dist/index.css';
+</style>
+```

@@ -20,6 +20,8 @@ export const useEmail: Hook = (): HookReturnValue => {
     errorMessages: {
       [ERROR_NAME]: {
         en: 'Invalid email',
+        de: 'Ungültige E-Mail',
+        es: 'Correo electrónico no válido',
       }
     }
   }

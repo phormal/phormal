@@ -149,4 +149,34 @@
   .phlib__radio-group-label {
     @include label-base;
   }
+
+  .phlib__select-wrapper {
+    position: relative;
+    height: 100%;
+  }
+
+  .phlib__select-options {
+    z-index: 2;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    display: none;
+    background-color: #fff;
+    box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
+    border-radius: 2px;
+    max-height: 200px;
+    overflow-y: auto;
+
+    li {
+      padding: 0.75em;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #f8f9fa;
+      }
+    }
+  }
 }

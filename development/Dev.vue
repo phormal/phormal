@@ -111,7 +111,7 @@ export default {
       el: '#phormal',
       validation: 'active',
       language: 'de',
-      theme: 'material',
+      theme: 'basic',
     })
 
     this.values = this.form.$values()

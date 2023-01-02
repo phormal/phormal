@@ -5,7 +5,7 @@ import {Phormal} from "@phormal/core/src";
 type AdjustedConfig = Omit<FormConfig, 'el'>
 
 export default defineComponent ({
-  name: "PhormalVue3",
+  name: "Phormal",
 
   props: {
     config: {

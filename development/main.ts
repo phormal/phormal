@@ -3,9 +3,9 @@ import './style.scss'
 import {createRouter, createWebHashHistory} from 'vue-router'
 import Dev from './Dev.vue'
 import App from './App.vue'
-import Smoke from '../cypress/pages/Smoke.vue'
-import FieldConditions from '../cypress/pages/FieldConditions.vue'
-import Validation from '../cypress/pages/Validation.vue'
+import Smoke from '../cypress/pages/Smoke'
+import FieldConditions from '../cypress/pages/FieldConditions'
+import Validation from '../cypress/pages/Validation'
 import Vue3Component from '../cypress/pages/Vue3Component.vue'
 
 const app = createApp(App)

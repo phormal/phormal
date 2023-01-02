@@ -1,0 +1,50 @@
+```vue copy
+<template>
+  <Phormal ref="phormal" :fields="formFields" :config="formConfig" />
+</template>
+
+<script>
+import {Phormal} from '@phormal/component-vue3';
+
+export default defineComponent({
+  components: {
+    Phormal,
+  },
+
+  data() {
+    return {
+      formFields: {
+        name: {
+          label: 'Name',
+          hooks: [useRequired(), useLength(3)]
+        },
+        email: {
+          label: 'Email',
+          hooks: [useRequired(), useEmail()]
+        },
+        newsletter: {
+          type: 'checkbox',
+          label: 'Newsletter',
+          value: true
+        }
+      },
+      formConfig: { theme: 'basic' }
+    }
+  },
+
+  methods: {
+    validate() {
+      this.$refs.phormal.$validate();
+    },
+
+    getValues() {
+      return this.$refs.phormal.$values(); // { name: '', email: '', newsletter: true }
+    }
+  }
+});
+</script>
+
+<style>
+@import '@phormal/theme-basic/dist/index.css';
+</style>
+```

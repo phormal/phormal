@@ -1,5 +1,5 @@
-import PhormalVue3 from "./phormal-vue3";
+import Phormal from "./phormal-vue3";
 
 export {
-  PhormalVue3,
+  Phormal,
 }

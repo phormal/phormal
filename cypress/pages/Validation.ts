@@ -1,15 +1,13 @@
-<script lang="ts">
-
-import useRequired from "../../packages/use-required/src";
 import useLength from "../../packages/use-length/src";
 import {Phormal} from '../../packages/core/src'
+import {defineComponent, h} from "vue";
 
-export default {
+export default defineComponent({
   name: 'App',
 
   data() {
     return {
-      form: undefined,
+      form: undefined as undefined|Phormal,
 
       formFields: {
         field1: {
@@ -37,28 +35,8 @@ export default {
       validation: 'active'
     })
   },
-}
 
-</script>
-
-
-<template>
-  <div id="phormal"></div>
-</template>
-
-<style>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
-
+  render() {
+    return h('div', { id: 'phormal' })
+  }
+})

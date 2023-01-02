@@ -2,13 +2,13 @@
 
 import useRequired from "../../packages/use-required/src";
 import useLength from "../../packages/use-length/src";
-import {PhormalVue3} from "../../packages/component-vue3/src";
+import {Phormal} from "../../packages/component-vue3/src";
 
 export default {
   name: 'Vue3Component',
 
   components: {
-    PhormalVue3,
+    Phormal,
   },
 
   data() {
@@ -57,7 +57,7 @@ export default {
 
 
 <template>
-  <PhormalVue3 ref="phormal" :config="config" :fields="formFields" />
+  <Phormal ref="phormal" :config="config" :fields="formFields" />
 
   <button id="getvalues" @click="getValues">Get values</button>
   <button id="validate-button" @click="validate">Validate</button>

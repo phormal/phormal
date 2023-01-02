@@ -8,6 +8,8 @@ import { Callout } from 'nextra-theme-docs'
 
 The Phormal instance is the main class of the library. For basic usage, please refer to [Getting started](/guide/getting-started#step-1-javascript).
 
+If you're using the [Vue 3 component](/guide/getting-started), the documentation below for `fields` and `config`, match the prop names of the component.
+
 An instance of Phormal is initialized through the `Phormal` constructor. It takes two arguments:
 
 * [`fields`](#fields), which is an object containing configuration for the fields of the form.
@@ -15,7 +17,7 @@ An instance of Phormal is initialized through the `Phormal` constructor. It take
 
 For example:
 
-```js
+```js copy
 import {Phormal} from "@phormal/core";
 
 const fields = {/** see #fields section below */}, config = {/** see #config section below */};
@@ -27,7 +29,7 @@ new Phormal(fields, config);
 
 The `fields` argument is an object containing configuration for the fields of the form. The keys of the object are the names of the fields, and the values are the configuration for each field. If we want to create a basic form with two fields, `name` and `email`, the fields argument could look like this:
 
-```js
+```js copy
 const fields = {
     name: {
         label: "Name"
@@ -60,7 +62,7 @@ The configuration for each field can take the following properties:
 
 In some cases, you might need to react to the native events of a field. This is possible through the properties `handleOnClick`, `handleOnInput`, `handleOnChange`, `handleOnFocus` and `handleOnBlur`. These properties take the shape of a function, where the first argument is the event itself. For example:
 
-```js
+```js copy
 new Phormal(
   {
     lastName: {
@@ -80,7 +82,7 @@ In some even more rare cases, you might want to access the internal APIs of a fi
 
 Some properties of a form field can be set conditionally, depending on the value of other fields. If, for example, you have a field named **email**, but you only want to display it if the checkbox **newsletter** is checked, this can be achieved the following way:
 
-```js
+```js copy
 const fields = {
   newsletter: {
     type: 'checkbox',

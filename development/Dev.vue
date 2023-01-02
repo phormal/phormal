@@ -5,13 +5,13 @@ import useLength from "../packages/use-length/src";
 import useAutoCapitalize from "../packages/use-auto-capitalize/src";
 import useValidZip from "../packages/use-valid-zip/src";
 import useEmail from "../packages/use-email/src";
-import {PhormalVue3} from "../packages/component-vue3/src";
+// import {Phormal} from "../packages/component-vue3/src";
 
 export default {
   name: 'App',
 
   components: {
-    PhormalVue3,
+    Phormal,
   },
 
   data() {
@@ -107,14 +107,14 @@ export default {
   },
 
   mounted() {
-    // this.form = new Phormal(this.formFields, {
-    //   el: '#phormal',
-    //   validation: 'active',
-    //   language: 'de',
-    //   theme: 'material',
-    // })
+    this.form = new Phormal(this.formFields, {
+      el: '#phormal',
+      validation: 'active',
+      language: 'de',
+      theme: 'material',
+    })
 
-    // this.values = this.form.$values()
+    this.values = this.form.$values()
   },
 
   methods: {
@@ -143,8 +143,8 @@ export default {
       <h1>SuperForm</h1>
     </div>
 
-    <PhormalVue3 ref="phormal" :fields="formFields" :config="{ theme: 'basic' }" />
-<!--    <div id="phormal"></div>-->
+<!--    <Phormal ref="phormal" :fields="formFields" :config="{ theme: 'basic' }" />-->
+    <div id="phormal"></div>
 
     <button @click="runValidation">Validate</button>
     <button @click="getValues">Get values</button>

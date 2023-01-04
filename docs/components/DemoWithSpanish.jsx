@@ -21,11 +21,6 @@ const BasicDemo = () => {
       theme: 'basic',
       language: 'es',
     })
-
-    // TODO: remove after 0.1.0-alpha.5
-    if (typeof form.init === 'function') {
-      form.init()
-    }
   }, [])
 
   return <>

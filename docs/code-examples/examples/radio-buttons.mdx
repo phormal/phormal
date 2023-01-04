@@ -1,0 +1,20 @@
+```js copy
+import { Phormal } from '@phormal/core';
+
+const formFields = {
+  paymentMethod: {
+    label: 'Payment method',
+    type: 'radiogroup',
+    value: 'creditcard',
+    options: [
+      {value: 'creditcard', label: 'Credit card'},
+      {value: 'paypal', label: 'PayPal'},
+      {value: 'bitcoin', label: 'Bitcoin'}
+    ]
+  }
+}
+
+const formConfig = { el: '#phormal-radio-buttons', theme: 'basic' }
+
+const form = new Phormal(formFields, formConfig)
+```

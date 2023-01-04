@@ -23,6 +23,7 @@ export default {
           type: 'checkbox',
           label: 'Newsletter',
           hooks: [],
+          // disabled: true,
           // value: true,
         },
         firstName: {
@@ -111,7 +112,7 @@ export default {
       el: '#phormal',
       validation: 'active',
       language: 'de',
-      theme: 'material',
+      theme: 'basic',
     })
 
     this.values = this.form.$values()

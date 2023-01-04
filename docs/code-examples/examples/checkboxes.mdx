@@ -1,0 +1,20 @@
+```js copy
+import { Phormal } from '@phormal/core';
+
+const formFields = {
+  wantsNewsletter: {
+    label: 'Do you want to receive our newsletter?',
+    type: 'checkbox',
+    value: true
+  },
+  acceptsTerms: {
+    label: 'Do you accept our terms and conditions?',
+    type: 'checkbox',
+    value: false
+  }
+}
+
+const formConfig = { el: '#phormal-multiselect', theme: 'basic' }
+
+const form = new Phormal(formFields, formConfig)
+```

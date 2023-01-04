@@ -1,4 +1,5 @@
-@use "../../../common/styles/radio-buttons" as radio-buttons;
+@use "../../../common/styles/partials/radio-buttons" as radio-buttons;
+@use "../../../common/styles/partials/select" as select;
 
 .phlib-basic {
   --color-primary: #007bff;
@@ -150,38 +151,5 @@
     @include label-base;
   }
 
-  .phlib__select-wrapper {
-    position: relative;
-    height: 100%;
-  }
-
-  .phlib__select-options {
-    z-index: 2;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    position: absolute;
-    top: calc(100% + 2px); // 100% + border
-    width: 100%;
-    display: none;
-    background-color: #fff;
-    box-shadow: 0 0 0 1px rgb(233 236 239), 0 2px 4px 0 rgb(0 0 0 / 10%);
-    border-radius: 2px;
-    max-height: 275px;
-    overflow-y: auto;
-
-    li {
-      padding: 0.75em;
-      cursor: pointer;
-
-      &:hover {
-        background-color: #f8f9fa;
-      }
-
-      &:focus {
-        background-color: var(--color-primary);
-        color: #fff;
-      }
-    }
-  }
+  @include select.index(var(--color-primary));
 }

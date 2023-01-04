@@ -1,6 +1,7 @@
 // Based on: https://codepen.io/avstorm/pen/gKGbxo
 @use "sass:math";
-@use "../../../common/styles/radio-buttons" as radio-buttons;
+@use "../../../common/styles/partials/radio-buttons" as radio-buttons;
+@use "../../../common/styles/partials/select" as select;
 
 .phlib-material {
   $color-primary: #07f;
@@ -145,13 +146,15 @@
     pointer-events: none;
   }
 
-  &:focus + .phlib__field-label {
-    color: $color-primary;
-    transform: translate3d(0, -12px, 0) scale(0.75);
+  .phlib__select--small-label {
+    .phlib__field-label {
+      color: $color-primary;
+      transform: translate3d(0, -12px, 0) scale(0.75);
 
-    + .phlib__material-bg-focus {
-      transform: scaleX(1);
-      transition: all 0.1s ease;
+      + .phlib__material-bg-focus {
+        transform: scaleX(1);
+        transition: all 0.1s ease;
+      }
     }
   }
 
@@ -194,7 +197,7 @@
 
     /* stylelint-disable no-descending-specificity */
     &:not(:placeholder-shown) + .phlib__field-label {
-      color: rgba($color-dark, 0.5);
+      color: $color-primary;
       transform: translate3d(0, -12px, 0) scale(0.75);
     }
     /* stylelint-enable no-descending-specificity */
@@ -237,4 +240,6 @@
     color: rgb(0 0 0 / 60%);
     margin-bottom: 0.5em;
   }
+
+  @include select.index($color-primary);
 }

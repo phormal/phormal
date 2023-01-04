@@ -5,14 +5,16 @@
   "scripts": {
     "dev": "vite --config config/vite.config.ts",
     "build": "rollup -c && lerna run build",
-    "test:e2e": "cypress open --e2e --config-file config/cypress.config.ts",
-    "test:e2e:ci": "cypress run --e2e --config-file config/cypress.config.ts",
+    "test:e2e": "cypress open --e2e",
+    "test:e2e:ci": "cypress run --e2e",
+    "test:coverage": "npm run instrument && npm run test:e2e:ci && nyc report",
     "lint:ts": "npx eslint -c config/.eslintrc.cjs .",
     "lint:ts:fix": "npx eslint -c config/.eslintrc.cjs . --fix",
     "lint:styles": "npx stylelint --config config/.stylelintrc.json \"**/*.scss\"",
     "lint:styles:fix": "npx stylelint --config config/.stylelintrc.json \"**/*.scss\" --fix",
     "clean:packages": "rm -rf ./packages/*/dist",
     "docs:dev": "cd docs && npm run dev",
+    "instrument": "npx nyc instrument packages instrumented",
     "release": "npm run clean:packages && npm run build && lerna publish --no-commit-hooks",
     "release:pre": "npm run clean:packages && npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-prerelease",
     "prepare": "husky install"
@@ -23,6 +25,7 @@
   "devDependencies": {
     "@atomico/rollup-plugin-sizes": "^1.1.4",
     "@commitlint/config-conventional": "^17.3.0",
+    "@cypress/code-coverage": "^3.10.0",
     "@lerna/batch-packages": "^3.16.0",
     "@lerna/filter-packages": "^6.2.0",
     "@lerna/project": "^6.2.0",
@@ -30,6 +33,7 @@
     "@rollup/plugin-commonjs": "^24.0.0",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^10.0.1",
+    "@types/node": "^18.11.18",
     "@types/uniqid": "^5.3.2",
     "@typescript-eslint/eslint-plugin": "^5.47.1",
     "@typescript-eslint/parser": "^5.47.1",
@@ -53,6 +57,7 @@
     "stylelint-config-standard-scss": "^6.1.0",
     "typescript": "^4.6.4",
     "vite": "^3.2.5",
+    "vite-plugin-istanbul": "^3.0.4",
     "vue": "^3.2.41",
     "vue-router": "^4.1.6",
     "vue-tsc": "^1.0.9"

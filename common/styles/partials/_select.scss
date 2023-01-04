@@ -1,0 +1,53 @@
+@use "../util/feature-detection" as feature-detection;
+
+@mixin index($color-primary) {
+  .phlib__select-wrapper {
+    position: relative;
+    height: 100%;
+  }
+
+  .phlib__select-arrow {
+    position: absolute;
+    top: 50%;
+    right: 0.5em;
+    transform: translateY(-50%) scale(0.59);
+    transition: transform 0.23s ease-in-out;
+    color: #9ba19e;
+  }
+
+  .phlib__select-options {
+    z-index: 2;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: absolute;
+    top: calc(100% + 2px); // 100% + border
+    width: 100%;
+    display: none;
+    background-color: #fff;
+    box-shadow: 0 0 0 1px rgb(233 236 239), 0 2px 4px 0 rgb(0 0 0 / 10%);
+    border-radius: 2px;
+    max-height: 275px;
+    overflow-y: auto;
+
+    li {
+      padding: 0.75em;
+      cursor: pointer;
+
+      @include feature-detection.has-pointer {
+        &:hover {
+          background-color: #f8f9fa;
+        }
+
+        &:focus {
+          background-color: $color-primary;
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  [aria-expanded="true"] + .phlib__select-arrow {
+    transform: translateY(-50%) scale(0.65) rotate(180deg);
+  }
+}

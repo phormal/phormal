@@ -10,6 +10,7 @@ export class MultiSelect extends FormField {
   optionsElement: HTMLDivElement | null = null
   listItemElements: HTMLLIElement[] = []
   listItemIds: string[] = []
+  private wrapperElement: HTMLDivElement | null = null;
 
   constructor(
     name: string,
@@ -24,6 +25,7 @@ export class MultiSelect extends FormField {
     const elements = this.getSelectElements();
     this.projector.append(mountingElement, () => this.getSelectWrapper(elements))
     this.saveDOMElements();
+    this.addOrRemoveWrapperClass(this.getValue());
   }
 
   private getSelectWrapper(elements: (VNode | null)[]) {
@@ -61,7 +63,10 @@ export class MultiSelect extends FormField {
           }
         ),
         // 2. Then, we render a ul-element, which contains the mock-options, rendered through li-tags
-        options
+        options,
+        // 3. Finally, we need an arrow to indicate, that the options can be opened.
+        // For styling purposes, we need this element to immediately follow the options
+        h('span', { class: 'phlib__select-arrow' }, ['▼']),
       ]
     )
   }
@@ -78,9 +83,10 @@ export class MultiSelect extends FormField {
   private saveDOMElements() {
     this.optionsElement = document.getElementById(this.optionsElementID) as HTMLDivElement
     this.inputDOMElement = document.getElementById(this.inputId) as HTMLInputElement
-    this.listItemIds.forEach((id, index) => {
+    this.listItemIds.forEach(id => {
       this.listItemElements.push(document.getElementById(id) as HTMLLIElement)
     })
+    this.wrapperElement = document.getElementById(this.id) as HTMLDivElement
   }
 
   get selectedOptionLabel() {
@@ -100,6 +106,7 @@ export class MultiSelect extends FormField {
           {
             onclick: this.selectOption.bind(this),
             onkeydown: this.optionKeyDownHandler.bind(this),
+            onmouseenter: () => this.focusOption(optionId),
             'data-value': option.value,
             tabIndex: 0,
             id: optionId,
@@ -114,13 +121,15 @@ export class MultiSelect extends FormField {
    * */
   selectOption(event: MouseEvent|KeyboardEvent) {
     const selectedValue = (event.target as HTMLLIElement).dataset.value
-
-    if (selectedValue) {
-      this.setValue(selectedValue);
-      (this.inputDOMElement as HTMLInputElement).value = this.options.find(option => option.value === selectedValue)?.label || ''
-    }
-
+    this.setValue(selectedValue || '');
+    (this.inputDOMElement as HTMLInputElement).value = this.options.find(option => option.value === selectedValue)?.label || ''
     this.hideOptions()
+    this.addOrRemoveWrapperClass(selectedValue);
+  }
+
+  private addOrRemoveWrapperClass(selectedValue: string|boolean|undefined) {
+    if (selectedValue) this.wrapperElement?.classList.add('phlib__select--small-label')
+    else this.wrapperElement?.classList.remove('phlib__select--small-label')
   }
 
   /**
@@ -183,11 +192,13 @@ export class MultiSelect extends FormField {
     if (nextItem instanceof HTMLLIElement) nextItem.focus();
   }
 
-  private focusFirstOption() {
-    if (document.activeElement?.id !== this.inputId) return
+  private focusOption(indexOrId: number | string) {
+    const optionToFocus = document.getElementById(
+      typeof indexOrId === 'number' ? this.listItemIds[indexOrId] : indexOrId
+    )
 
-    const firstListItem = document.getElementById(this.listItemIds[0])
-    if (firstListItem) setTimeout(() => firstListItem.focus(), 10)
+    if (optionToFocus instanceof HTMLLIElement)
+      setTimeout(() => optionToFocus.focus(), 10)
   }
 
   get optionsElementID() {
@@ -198,8 +209,8 @@ export class MultiSelect extends FormField {
     if (!(this.optionsElement instanceof HTMLUListElement)) return
 
     this.optionsElement.style.display = 'block'
-    this.optionsElement.ariaExpanded = 'true'
-    this.focusFirstOption()
+    this.optionsElement.ariaExpanded = 'true';
+    this.focusOption(0)
     document.addEventListener('click', this.detectClickOutside.bind(this))
   }
 
@@ -215,10 +226,12 @@ export class MultiSelect extends FormField {
   }
 
   private hideOptions() {
-    if (!(this.optionsElement instanceof HTMLUListElement)) return
+    setTimeout(() => {
+      if (!(this.optionsElement instanceof HTMLUListElement)) return
 
-    this.optionsElement.style.display = 'none'
-    this.optionsElement.ariaExpanded = 'false'
+      this.optionsElement.style.display = 'none';
+      this.optionsElement.ariaExpanded = 'false';
+    }, 30)
   }
 
   _onClick(event: Event) {

@@ -28,7 +28,8 @@ describe('The Vue 3 integration', () => {
   it('Should interact with a select', () => {
     cy.get('#getvalues').click()
     cy.get('#values').should('contain.text', '"field3": ""')
-    cy.get('#phormal-field-input-field3').select('2')
+    cy.get('#phormal-field-input-field3').click()
+    cy.get('#phlib__select-option-field3-1').click()
     cy.get('#getvalues').click()
     cy.get('#values').should('contain.text', '"field3": "2"')
   })

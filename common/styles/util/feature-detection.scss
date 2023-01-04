@@ -1,0 +1,5 @@
+@mixin has-pointer {
+  @media (pointer: fine) {
+    @content;
+  }
+}

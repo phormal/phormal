@@ -8,7 +8,7 @@ describe('Smoke', () => {
 
   const FIRST_NAME_FIELD = 'input[id="phormal-field-input-firstName"]'
   const LAST_NAME_FIELD = 'input[id="phormal-field-input-lastName"]'
-  const COUNTRY_SELECT = 'select[id="phormal-field-input-country"]'
+  const COUNTRY_SELECT = 'input[id="phormal-field-input-country"][role="button"]'
   const ZIP_CODE_FIELD = 'input[id="phormal-field-input-zip"]'
   const FIRST_NAME_ERROR = 'div[id="phormal-field-error-firstName"]'
   const ZIP_CODE_ERROR = 'div[id="phormal-field-error-zip"]'
@@ -22,7 +22,7 @@ describe('Smoke', () => {
   it('Should set default values of all fields', () => {
     cy.get(FIRST_NAME_FIELD).should('have.value', 'John')
     cy.get(LAST_NAME_FIELD).should('have.value', 'Doe')
-    cy.get(COUNTRY_SELECT).should('have.value', 'US')
+    cy.get(COUNTRY_SELECT).should('have.value', 'United States')
     cy.get(ZIP_CODE_FIELD).should('have.value', '51378')
   })
 

@@ -1,11 +1,12 @@
-@use "../../../common/styles/radio-buttons" as radio-buttons;
+@use "../../../common/styles/partials/radio-buttons" as radio-buttons;
+@use "../../../common/styles/partials/select" as select;
 
 .phlib-basic {
-  $color-primary: #007bff;
-  $color-primary-light: #e9f2ff;
-  $color-error: #dc3545;
-  $color-error-light: #f8d7da;
-  $color-border: rgb(209 213 219);
+  --color-primary: #007bff;
+  --color-primary-light: #e9f2ff;
+  --color-error: #dc3545;
+  --color-error-light: #f8d7da;
+  --color-border: rgb(209 213 219);
 
   * {
     box-sizing: border-box;
@@ -43,16 +44,16 @@
     font-size: 1rem;
     padding: 0 0.75rem;
     line-height: 2.75rem;
-    border: 1px solid $color-border;
+    border: 1px solid var(--color-border);
     border-radius: 0.5rem;
     background-color: rgb(249 250 251);
     margin-bottom: 0.5rem;
     appearance: none;
 
     &:focus {
-      border-color: $color-primary;
-      outline: $color-primary solid 1px;
-      background-color: $color-primary-light;
+      border-color: var(--color-primary);
+      outline: var(--color-primary) solid 1px;
+      background-color: var(--color-primary-light);
     }
 
     &:disabled {
@@ -62,8 +63,8 @@
     }
 
     &.phlib__field-error {
-      border-color: $color-error;
-      background-color: $color-error-light;
+      border-color: var(--color-error);
+      background-color: var(--color-error-light);
     }
   }
 
@@ -81,7 +82,7 @@
     color: currentcolor;
     width: 1.5rem;
     height: 1.5rem;
-    border: 0.15rem solid $color-border;
+    border: 0.15rem solid var(--color-border);
     border-radius: 0.15rem;
     transform: translateY(-0.075rem);
     display: grid;
@@ -94,7 +95,7 @@
     height: 0.9em;
     transform: scale(0);
     transition: 120ms transform ease-in-out;
-    box-shadow: inset 1em 1em $color-primary;
+    box-shadow: inset 1em 1em var(--color-primary);
 
     /* Windows High Contrast Mode */
     background-color: canvastext;
@@ -144,9 +145,11 @@
     }
   }
 
-  @include radio-buttons.index($color-primary, $color-border);
+  @include radio-buttons.index(var(--color-primary), var(--color-border));
 
   .phlib__radio-group-label {
     @include label-base;
   }
+
+  @include select.index(var(--color-primary));
 }

@@ -28,6 +28,10 @@ dist-ssr
 docs/.next
 docs/node_modules
 
-cypress/videos
+tests/videos
+
+instrumented
+coverage
+.nyc_output
 
 husky/_

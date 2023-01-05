@@ -1,7 +1,7 @@
 import useLength from "../../packages/use-length/src";
 import {Phormal} from '../../packages/core/src'
 import {defineComponent, h} from "vue";
-import useEmail from "../../instrumented/use-email/src";
+import useEmail from "@phormal/use-email/src";
 
 export default defineComponent({
   name: 'App',

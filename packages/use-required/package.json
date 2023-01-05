@@ -28,7 +28,7 @@
     "url": "https://github.com/phormal/phormal",
     "directory": "packages/use-required"
   },
-  "homepage": "https://phormal.vercel.app",
+  "homepage": "https://phormal.dev/",
   "keywords": [
     "form-generator",
     "form-validation",

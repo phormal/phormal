@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.12](https://github.com/phormal/phormal/compare/v0.1.0-alpha.11...v0.1.0-alpha.12) (2023-01-05)
+
+
+### Features
+
+* **theme-material:** add styles for disabled material text field ([f98cff6](https://github.com/phormal/phormal/commit/f98cff65e2ddec3ac746c1d2bdf913cc29a2d165))
+
+
+
+
+
 # [0.1.0-alpha.11](https://github.com/tomosterlund/super-form/compare/v0.1.0-alpha.6...v0.1.0-alpha.11) (2023-01-04)
 
 

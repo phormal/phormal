@@ -27,6 +27,7 @@ export default defineComponent({
           label: 'First name',
           hooks: [useRequired(), useLength(1, 155), useAutoCapitalize()],
           value: 'John',
+          focus: true
         },
         lastName: {
           label: 'Last name',

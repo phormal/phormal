@@ -100,6 +100,12 @@ describe('Smoke', () => {
       .get('#phlib__radio-button--shipping')
       .should('be.checked')
   })
+
+  it('Should focus the yyyy field upon rendering the page', () => {
+    cy
+      .focused()
+      .should('have.attr', 'id', 'phormal-field-input-firstName')
+  })
 })
 
 export {}

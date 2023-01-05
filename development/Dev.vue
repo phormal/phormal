@@ -37,6 +37,7 @@ export default {
           hooks: [useRequired(), useLength(1, 155), useAutoCapitalize()],
           value: 'John',
           handleOnBlur: () => this.firstNameBlurN++,
+          focus: true,
           // hideIf: {
           //   lastName: 'empty'
           // }

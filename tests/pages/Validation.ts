@@ -1,4 +1,5 @@
 import useLength from "../../packages/use-length/src";
+import useRegex from "../../packages/use-regex/src";
 import {Phormal} from '../../packages/core/src'
 import {defineComponent, h} from "vue";
 import useEmail from "@phormal/use-email/src";
@@ -23,13 +24,17 @@ export default defineComponent({
         },
         field3: {
           label: 'Hubba bubba',
-          hooks: [useLength(5, 10)],
+          hooks: [useLength(5, 10), useRegex(/^[a-z]+$/)],
           value: '',
         },
         emailField: {
           label: 'Email',
           hooks: [useEmail()],
           type: 'email',
+        },
+        birthdateField: {
+          label: 'Birthdate',
+          hooks: [useRegex(/^\d{4}-\d{2}-\d{2}$/i, 'YYYY-MM-DD')],
         }
       },
     }

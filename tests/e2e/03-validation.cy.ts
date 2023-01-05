@@ -64,6 +64,49 @@ describe('Validation', () => {
       .get('#phormal-field-error-emailField')
       .should('exist')
   })
+
+  it('Should display an error for a faulty regex', () => {
+    cy
+      .get('#phormal-field-error-field3')
+      .should('not.exist')
+
+    const stringOfNumbers = 'testtest123'
+
+    cy
+      .get('#phormal-field-input-field3')
+      .type(stringOfNumbers)
+
+    cy
+      .get('#phormal-field-error-field3')
+      .should('exist')
+      .should('contain.text', 'Input does not have expected format')
+  })
+
+  it('Should display an error message with a provided format in useRegex', () => {
+    cy
+      .get('#phormal-field-error-birthdateField')
+      .should('not.exist')
+
+    const stringOfNumbers = 'testtest123'
+
+    cy
+      .get('#phormal-field-input-birthdateField')
+      .type(stringOfNumbers)
+
+    cy
+      .get('#phormal-field-error-birthdateField')
+      .should('exist')
+      .should('have.text', 'Input does not have expected format. Expected format: YYYY-MM-DD')
+
+    cy
+      .get('#phormal-field-input-birthdateField')
+      .clear()
+      .type('2020-01-01')
+
+    cy
+      .get('#phormal-field-error-birthdateField')
+      .should('not.exist')
+  })
 })
 
 export {}

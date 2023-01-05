@@ -1,9 +1,9 @@
 export default {
   logo: <span>Phormal</span>,
   project: {
-    link: 'https://github.com/tomosterlund/phormal',
+    link: 'https://github.com/phormal/phormal',
   },
-  docsRepositoryBase: 'https://github.com/tomosterlund/phormal/tree/master/docs',
+  docsRepositoryBase: 'https://github.com/phormal/phormal/tree/master/docs',
   feedback: {
     content: null,
   },

@@ -30,7 +30,7 @@
   "gitHead": "20d6849b622722d79a094d105f858f515eb58212",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tomosterlund/phormal",
+    "url": "https://github.com/phormal/phormal",
     "directory": "packages/core"
   },
   "homepage": "https://phormal.vercel.app",

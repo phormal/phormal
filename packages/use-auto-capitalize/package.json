@@ -28,7 +28,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/tomosterlund/phormal",
+    "url": "https://github.com/phormal/phormal",
     "directory": "packages/use-auto-capitalize"
   },
   "homepage": "https://phormal.vercel.app",

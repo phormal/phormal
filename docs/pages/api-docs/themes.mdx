@@ -1,1 +1,47 @@
-This is just a page stub. Feel free to edit this page by clicking the link in the right sidebar.
+# Themes
+
+There are currently two available themes for the library. Both need to be installed separately in order to be used.
+
+## Installation
+```bash copy
+npm install @phormal/theme-basic
+```
+
+or
+
+```bash copy
+npm install @phormal/theme-material
+```
+
+Examples of how they look can be found on the [examples page](/guide/examples).
+
+## Importing
+
+import {Tabs, Tab} from 'nextra-theme-docs';
+
+<Tabs items={['basic', 'material']}>
+	<Tab>
+		```js copy
+		import '@phormal/theme-basic/dist/index.css';
+		```
+	</Tab>
+
+	<Tab>
+		```js copy
+		import '@phormal/theme-material/dist/index.css';
+		```
+	</Tab>
+</Tabs>
+
+## Configuration
+
+If you're using the `basic` theme, you are now all set up, since this is the default. For using the `material` theme, please enter the following into your configuration object:
+
+```js
+const config = {
+  // .. other config
+  theme: 'material'
+}
+```
+
+For more on configuration of the form, please refer to the [configuration section](/api-docs#config).

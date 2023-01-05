@@ -1,1 +1,68 @@
-This is just a page stub. Feel free to edit this page by clicking the link in the right sidebar.
+# Hooks
+
+This library offers a way of *hooking* into the logic of the form fields. Below follows a list of all official hooks and their documentation. Please note, however, that you can also [write your own hooks](/api-docs/customization) if needed.
+
+## Usage
+
+All hooks are functions, that can take 0 or more arguments. They are returned within the `hooks` property of any form field, such as:
+
+```js
+const formFields = {
+  name: {
+    label: 'Name',
+    hooks: [useAutoCapitalize(), useLength(2, 155), useRequired()]
+  }
+}
+```
+
+For more precise examples on how to use a hook, please refer to the code on [examples page](/guide/examples).
+
+
+## List of hooks
+### useAutoCapitalize
+
+```bash copy
+npm i @phormal/use-auto-capitalize
+```
+
+This hook will automatically capitalize the first letter of each word in the input value. The hook is not configurable.
+
+### useEmail
+
+```bash copy
+npm i @phormal/use-email
+```
+
+This hook will validate that the input is a valid email address. The hook is not configurable.
+
+### useLength
+
+```bash copy
+npm i @phormal/use-length
+```
+
+This hook can validate the minimum and maximum length on the input of a field.
+
+|  Argument   |              Type               |             Description             |
+|:-----------:|:-------------------------------:|:-----------------------------------:|
+| `minLength` | `number`, `undefined` or `null` | Set the minimum length of the input |
+| `maxLength` | `number`, `undefined` or `null` | Set the maximum length of the input |
+
+### useRequired
+
+```bash copy
+npm i @phormal/use-required
+```
+
+This hook will validate that the input is not empty. The hook is not configurable.
+
+### useValidZip
+
+```bash copy
+npm i @phormal/use-valid-zip
+```
+
+This hook will validate that the format of a postal code matches the required format for a given country. The hook is not configurable, but requires 2 things to work properly:
+
+1. It can only be used on a field of type `text`
+2. It needs the presence of another field named `country`. This field needs a value that matches a valid country code, according to the ISO-3166 Alpha-2 standard: https://www.iso.org/obp/ui/#search/code/

@@ -1,6 +1,7 @@
 import useLength from "../../packages/use-length/src";
 import {Phormal} from '../../packages/core/src'
 import {defineComponent, h} from "vue";
+import useEmail from "../../instrumented/use-email/src";
 
 export default defineComponent({
   name: 'App',
@@ -25,6 +26,11 @@ export default defineComponent({
           hooks: [useLength(5, 10)],
           value: '',
         },
+        emailField: {
+          label: 'Email',
+          hooks: [useEmail()],
+          type: 'email',
+        }
       },
     }
   },

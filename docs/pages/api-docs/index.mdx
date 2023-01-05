@@ -59,6 +59,7 @@ The configuration for each field can take the following properties:
 |                      `hideIf`                      |                                                   See [field conditions](#field-conditions)                                                    |   `undefined`   |
 |                       `row`                        | Combine several fields visually into a flex row, by giving them the property `row` and assigning them a common **string** value of your choice |   `undefined`   |
 | `options` (only for **radiogroup** and **select**) |                                         Array of options with type `{ label: string, value: string }`                                          |      `[]`       |
+|                      `hooks`                       |                                                   Array of returned [hooks](/api-docs/hooks)                                                   |                 |
 
 In some cases, you might need to react to the native events of a field. This is possible through the properties `handleOnClick`, `handleOnInput`, `handleOnChange`, `handleOnFocus` and `handleOnBlur`. These properties take the shape of a function, where the first argument is the event itself. For example:
 

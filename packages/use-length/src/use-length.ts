@@ -1,7 +1,7 @@
 import {HookReturnValue} from "@phormal/core/src/types/interfaces/Hook.interface";
 import {FormField} from "@phormal/core/src/FormField";
 
-export const useLength = (minLength: number|undefined|null, maxLength?: number|undefined): HookReturnValue => {
+export const useLength = (minLength: number|undefined|null, maxLength?: number|undefined|null): HookReturnValue => {
   const LENGTH_ERROR_NAME = 'length'
   const MIN_LENGTH_ERROR_NAME = 'minLength'
   const MAX_LENGTH_ERROR_NAME = 'maxLength'

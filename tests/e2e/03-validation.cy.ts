@@ -44,6 +44,26 @@ describe('Validation', () => {
       .get('#phormal-field-error-field2')
       .should('not.exist')
   });
+
+  it('Should display an error for a faulty email', () => {
+    // First a negative check
+    cy
+      .get('#phormal-field-error-emailField')
+      .should('not.exist')
+
+    const faultyEmail = 'test@test'
+    const correctEmail = 'test@test.com'
+
+    // Then type in the faulty email
+    cy
+      .get('#phormal-field-input-emailField')
+      .type(faultyEmail)
+
+    // There should be an error, because the email is faulty
+    cy
+      .get('#phormal-field-error-emailField')
+      .should('exist')
+  })
 })
 
 export {}

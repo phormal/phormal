@@ -9,8 +9,7 @@
   $color-error: #dc3545;
   $color-error-light: #f8d7da;
   $md-control-item-border: #c8ccd4;
-  $md-checkbox-border-color-disabled: rgb(0 0 0 / 26%);
-  $md-checkbox-checked-color-disabled: rgb(0 0 0 / 26%);
+  $md-control-color-disabled: rgb(0 0 0 / 26%);
   $md-checkbox-size: 1.25em;
   $md-checkbox-padding: 0.25em;
   $md-checkbox-border-width: 2px;
@@ -81,10 +80,6 @@
         cursor: pointer;
         transition: background 0.3s;
       }
-
-      &::after {
-        // checkmark
-      }
     }
 
     input[type="checkbox"] {
@@ -122,13 +117,8 @@
 
       &:disabled {
         + label::before {
-          border-color: $md-checkbox-border-color-disabled;
-        }
-
-        &:checked {
-          + label::before {
-            background: $md-checkbox-checked-color-disabled;
-          }
+          background: $md-control-color-disabled;
+          border-color: transparent;
         }
       }
     }
@@ -234,7 +224,7 @@
     }
   }
 
-  @include radio-buttons.index($color-primary, $md-control-item-border);
+  @include radio-buttons.index($color-primary, $md-control-item-border, $md-control-color-disabled);
 
   .phlib__radio-group-label {
     color: rgb(0 0 0 / 60%);

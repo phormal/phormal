@@ -82,12 +82,12 @@ export default {
         delivery: {
           type: 'radiogroup',
           label: 'Delivery to',
-          value: 'billing',
+          value: 'packstation',
           options: [
             { label: 'Billing', value: 'billing' },
             { label: 'Shipping', value: 'shipping' },
             { label: 'Packstation', value: 'packstation' },
-          ]
+          ],
         },
         field3: {
           label: 'Baz',
@@ -112,7 +112,8 @@ export default {
       el: '#phormal',
       validation: 'active',
       language: 'de',
-      theme: 'basic',
+      theme: 'material',
+      // theme: 'basic',
     })
 
     this.values = this.form.$values()

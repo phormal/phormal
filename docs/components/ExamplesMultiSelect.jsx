@@ -4,6 +4,11 @@ import {useEffect} from "react";
 const BasicDemo = () => {
 
   useEffect(() => {
+    if (typeof window === 'undefined' || window.location === 'undefined') return;
+
+    let theme = 'basic'
+    if (window.location.href.includes('theme=material')) theme = 'material'
+
     const form = new Phormal({
       country: {
         label: 'Country',
@@ -33,7 +38,7 @@ const BasicDemo = () => {
       }
     }, {
       el: '#phormal-multiselect',
-      theme: 'basic',
+      theme,
     })
   }, [])
 

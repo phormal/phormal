@@ -16,7 +16,8 @@ export const useValidZip: Hook = (): HookReturnValue => {
     validators: {
       checkZipCode(field: FormField) {
         const currentValue = field.getValue() as string
-        const currentCountryValue = field._form._getValue('country') as string
+        let currentCountryValue = field._form._getValue('country') as string
+        currentCountryValue = currentCountryValue.toLowerCase()
         const countryHasPattern = typeof zipCodePatterns[currentCountryValue] !== 'undefined'
         const isValid = countryHasPattern ? zipCodePatterns[currentCountryValue].test(currentValue) : true
 
@@ -71,9 +72,9 @@ export const useValidZip: Hook = (): HookReturnValue => {
 }
 
 const zipCodePatterns: Record<string, RegExp> = {
-  'US': /^\d{5}(-\d{4})?$/,
-  'DE': /^\d{5}$/,
-  'MX': /^\d{5}$/,
-  'FR': /^\d{5}$/,
-  'CA': /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/,
+  'us': /^\d{5}(-\d{4})?$/,
+  'de': /^\d{5}$/,
+  'mx': /^\d{5}$/,
+  'fr': /^\d{5}$/,
+  'ca': /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/,
 }

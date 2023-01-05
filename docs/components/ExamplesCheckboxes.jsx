@@ -4,6 +4,11 @@ import {useEffect} from "react";
 const BasicDemo = () => {
 
   useEffect(() => {
+    if (typeof window === 'undefined' || window.location === 'undefined') return;
+
+    let theme = 'basic'
+    if (window.location.href.includes('theme=material')) theme = 'material'
+
     const form = new Phormal({
       wantsNewsletter: {
         label: 'Do you want to receive our newsletter?',
@@ -17,7 +22,7 @@ const BasicDemo = () => {
       }
     }, {
       el: '#phormal-checkboxes',
-      theme: 'basic',
+      theme,
     })
   }, [])
 

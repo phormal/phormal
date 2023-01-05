@@ -1,6 +1,6 @@
 // Styles mainly from: https://codepen.io/avstorm/pen/jxjKGj
 
-@mixin index($color-primary, $color-border) {
+@mixin index($color-primary, $color-border, $color-control-disabled) {
   .phlib__radio-group {
     display: flex;
     flex-direction: column;
@@ -55,6 +55,14 @@
       }
     }
 
+    input[type="radio"]:active + .phlib__radio-button-label,
+    input[type="radio"]:focus + .phlib__radio-button-label {
+      &::after {
+        z-index: 1;
+        transform: scale(3.6);
+      }
+    }
+
     input[type="radio"]:checked {
       & + .phlib__radio-button-label {
         border-color: $color-primary;
@@ -67,8 +75,37 @@
       }
     }
 
+    input[type="radio"]:disabled {
+      & + .phlib__radio-button-label {
+        border-color: $color-control-disabled;
+
+        &::after {
+          transition: all 0.2s cubic-bezier(0.35, 0.9, 0.4, 0.9);
+          opacity: 1;
+          background: $color-control-disabled;
+        }
+      }
+
+      &:not(:checked) {
+        & + .phlib__radio-button-label {
+          background-color: $color-control-disabled;
+          border-color: transparent;
+        }
+      }
+
+      &:hover {
+        & + .phlib__radio-button-label {
+          &::after {
+            display: none;
+          }
+        }
+      }
+    }
+
     .phlib_radio-hidden {
-      display: none;
+      opacity: 0;
+      width: 0;
+      margin: 0;
     }
   }
 }

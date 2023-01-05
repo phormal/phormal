@@ -8,6 +8,11 @@ import useAutoCapitalize from "@phormal/use-auto-capitalize";
 const BasicDemo = () => {
 
   useEffect(() => {
+    if (typeof window === 'undefined' || window.location === 'undefined') return;
+
+    let theme = 'basic'
+    if (window.location.href.includes('theme=material')) theme = 'material'
+
     const form = new Phormal({
       firstName: {
         label: 'First name',
@@ -52,7 +57,7 @@ const BasicDemo = () => {
       }
     }, {
       el: '#phormal',
-      theme: 'basic',
+      theme,
     })
   }, [])
 

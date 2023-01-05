@@ -7,6 +7,7 @@
   --color-error: #dc3545;
   --color-error-light: #f8d7da;
   --color-border: rgb(209 213 219);
+  --color-control-disabled: rgb(0 0 0 / 26%);
 
   * {
     box-sizing: border-box;
@@ -68,6 +69,20 @@
     }
   }
 
+  input[type="checkbox"]::before {
+    content: "";
+    width: 0.9em;
+    height: 0.9em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--color-primary);
+
+    /* Windows High Contrast Mode */
+    background-color: canvastext;
+    transform-origin: bottom left;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  }
+
   input[type="checkbox"] {
     appearance: none;
     background-color: #fff;
@@ -87,20 +102,17 @@
     transform: translateY(-0.075rem);
     display: grid;
     place-content: center;
-  }
 
-  input[type="checkbox"]::before {
-    content: "";
-    width: 0.9em;
-    height: 0.9em;
-    transform: scale(0);
-    transition: 120ms transform ease-in-out;
-    box-shadow: inset 1em 1em var(--color-primary);
+    &:disabled {
+      appearance: unset;
+      background-color: var(--color-control-disabled);
+      border-color: transparent;
+      cursor: not-allowed;
+    }
 
-    /* Windows High Contrast Mode */
-    background-color: canvastext;
-    transform-origin: bottom left;
-    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    &:disabled::before {
+      box-shadow: inset 1em 1em #fff;
+    }
   }
 
   input[type="checkbox"]:checked::before {
@@ -145,7 +157,7 @@
     }
   }
 
-  @include radio-buttons.index(var(--color-primary), var(--color-border));
+  @include radio-buttons.index(var(--color-primary), var(--color-border), var(--color-control-disabled));
 
   .phlib__radio-group-label {
     @include label-base;

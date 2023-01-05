@@ -9,7 +9,7 @@ export type ValidationType = 'active' | 'passive';
 
 export type MultiSelectOption = { label: string, value: any };
 
-export type RadioButtonOption = { label: string, value: any };
+export type RadioButtonOption = { label: string, value: any, disabled?: boolean };
 
 export type EventHandler = (event: Event, field: FormFieldInterface) => void;
 

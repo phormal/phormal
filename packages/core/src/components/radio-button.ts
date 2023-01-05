@@ -28,6 +28,8 @@ export default class RadioButton implements MaquetteComponent {
             name: this.groupName,
             checked: this.checked,
             class: 'phlib_radio-hidden',
+            disabled: this.option.disabled,
+            tabIndex: this.option.disabled ? -1 : 0,
           }
         ),
         h('span', { class: 'phlib__radio-button-label', 'data-cy': this.radioButtonId }),

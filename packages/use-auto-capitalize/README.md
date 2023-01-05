@@ -4,4 +4,4 @@ Phormal is a library for generating forms, giving them beautiful styles and vali
 
 ## Documentation
 
-The documentation site is currently under construction, and will be available at: https://phormal.vercel.app/
+The documentation site is currently under construction, and will be available at: https://phormal.dev/

@@ -21,10 +21,16 @@ export default {
       formFields: {
         newsletter: {
           type: 'checkbox',
-          label: 'Newsletter',
+          label: 'Do you want to receive our newsletter?',
           hooks: [],
-          // disabled: true,
-          // value: true,
+          hideIf: { acceptTerms: false },
+          disabled: true,
+          value: true,
+        },
+        acceptTerms: {
+          type: 'checkbox',
+          label: 'Accept Terms & conditions for this site',
+          value: true,
         },
         firstName: {
           // label: 'First name',
@@ -38,8 +44,9 @@ export default {
         lastName: {
           label: 'Last name',
           hooks: [useRequired(), useLength(1, 155)],
-          value: 'Doe',
+          value: '',
           handleOnFocus: () => this.lastNameFocusN += 1,
+          disabled: true,
         },
         yyyy: {
           value: '',

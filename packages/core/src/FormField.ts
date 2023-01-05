@@ -174,7 +174,7 @@ export class FormField implements FormFieldInterface {
           this.isHidden = result;
           const fieldContainer: HTMLElement | null = document.getElementById(this.id)
           if (fieldContainer instanceof HTMLElement) {
-            fieldContainer.style.display = result ? 'none' : 'block'
+            fieldContainer.style.display = result ? 'none' : 'flex'
           }
         }
       }

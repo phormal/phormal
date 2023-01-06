@@ -26,11 +26,11 @@ export class Phormal {
     const formRows = FormInitializer.getFormRowRepresentation(this._fields)
 
     // 3. Render all fields
-    const mountingElement = document.querySelector((this._config as FormConfig).el)
+    const mountingElement = document.querySelector((this._config as FormConfig).el) as HTMLElement
 
     if (!(mountingElement instanceof HTMLElement)) return
 
-    mountingElement.classList.add(`phlib-${(this._config as FormConfig).theme || 'basic'}`)
+    mountingElement.classList.add('phlib', `phlib-${(this._config as FormConfig).theme || 'basic'}`)
 
     FormInitializer.renderAllFields(formRows, mountingElement)
 

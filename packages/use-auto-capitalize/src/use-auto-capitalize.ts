@@ -3,11 +3,7 @@ import {HookReturnValue} from "@phormal/core/src/types/interfaces/Hook.interface
 export const useAutoCapitalize = (): HookReturnValue => {
   return {
     handleOnInput(event: Event, field) {
-      if (!(event.target instanceof HTMLInputElement)) return
-
-      const words = (event instanceof InputEvent
-        ? event.target.value
-        : field.form.getValue(field.name)).split(' ')
+      const words = (field.getValue() as string).split(' ')
 
       for (let i = 0; i < words.length; i++) {
         if (!words[i]) continue

@@ -60,6 +60,7 @@ export default defineComponent({
             {value: 'MX', label: 'Mexico'},
             {value: 'FR', label: 'France'},
             {value: 'DE', label: 'Germany'},
+            {value: 'HK', label: 'Hong Kong'},
           ],
         },
         zip: {
@@ -81,9 +82,18 @@ export default defineComponent({
   },
 
   mounted() {
+    const url = window.location.href
+    const themeQueryString = url.match(/theme=(\w+)/)
+
+    const theme = !themeQueryString || !themeQueryString.length
+      ? 'basic'
+      : (themeQueryString[0].split('=')[1]) as 'basic' | 'material'
+
     this.form = new Phormal(this.formFields, {
       el: '#phormal',
-      validation: 'active'
+      language: 'en',
+      validation: 'active',
+      theme,
     })
   },
 

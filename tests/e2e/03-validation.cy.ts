@@ -45,15 +45,17 @@ describe('Validation', () => {
       .should('not.exist')
   });
 
-  it('Should display an error for a faulty email', () => {
+  const faultyEmail = 'test@test'
+  const correctEmail = 'test@test.com'
+
+  const testEmailErrorDoesNotExist = () => {
     // First a negative check
     cy
       .get('#phormal-field-error-emailField')
       .should('not.exist')
+  }
 
-    const faultyEmail = 'test@test'
-    const correctEmail = 'test@test.com'
-
+  const testEmailIsFaulty = () => {
     // Then type in the faulty email
     cy
       .get('#phormal-field-input-emailField')
@@ -63,6 +65,27 @@ describe('Validation', () => {
     cy
       .get('#phormal-field-error-emailField')
       .should('exist')
+  }
+
+  it('Should display an error for a faulty email', () => {
+    testEmailErrorDoesNotExist()
+    testEmailIsFaulty()
+  })
+
+  it('Removes the email error when the email is corrected', () => {
+    testEmailErrorDoesNotExist()
+    testEmailIsFaulty()
+
+    // Correct the email
+    cy
+      .get('#phormal-field-input-emailField')
+      .clear()
+      .type(correctEmail)
+
+    // There should be no error, because the email is correct
+    cy
+      .get('#phormal-field-error-emailField')
+      .should('not.exist')
   })
 
   it('Should display an error for a faulty regex', () => {

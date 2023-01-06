@@ -40,6 +40,11 @@ export class FormFieldResolver {
     if (this.formFieldConfig.handleOnInput) this.field._onInputHandlers.push(this.formFieldConfig.handleOnInput)
   }
 
+  /**
+   * Focuses the input element after having been rendered to the DOM
+   *
+   * Is handled here instead of being called in render(), since render() is reimplemented in all FormField subclasses
+   * */
   focusOnMount() {
     let observer: null|MutationObserver = null;
     const config = { attributes: true, childList: true, subtree: true };

@@ -34,7 +34,7 @@ export class FormField implements FormFieldInterface {
   _onInputHandlers: EventHandler[] = []
 
   constructor(
-    public name: string = '',
+    public name: string,
     public config: FormFieldConfig,
     public _form: Phormal
   ) {
@@ -174,7 +174,9 @@ export class FormField implements FormFieldInterface {
           this.isHidden = result;
           const fieldContainer: HTMLElement | null = document.getElementById(this.id)
           if (fieldContainer instanceof HTMLElement) {
-            fieldContainer.style.display = result ? 'none' : 'flex'
+            const displayNodeType = this.type === 'checkbox' ? 'flex' : 'block'
+
+            fieldContainer.style.display = result ? 'none' : displayNodeType
           }
         }
       }

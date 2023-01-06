@@ -14,5 +14,6 @@
     "noEmit": false,
     "declaration": true,
     "types": ["vite/client"]
-  }
+  },
+  "exclude": ["node_modules", "dist", "tests"]
 }

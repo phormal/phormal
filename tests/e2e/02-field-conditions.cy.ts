@@ -62,6 +62,20 @@ describe('Field conditions', () => {
       .get('#phormal-field-input-hideThisIfField1IsEmpty')
       .should('not.be.visible')
   })
+
+  it('Should hide a field using the hideIf API with a boolean value', () => {
+    cy
+      .get('#phormal-field-input-hideThisIfCheckboxIsChecked')
+      .should('exist')
+
+    cy
+      .get('#phormal-field-input-checkbox')
+      .check()
+
+    cy
+      .get('#phormal-field-input-hideThisIfCheckboxIsChecked')
+      .should('not.be.visible')
+  })
 })
 
 export {}

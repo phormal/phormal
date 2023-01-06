@@ -42,10 +42,23 @@ export default defineComponent({
 
         hideThisIfField1IsEmpty: {
           label: 'Hide this if field1 is empty',
+          type: 'checkbox',
           hideIf: {
-            field1: 'empty'
+            field1: 'empty',
           }
         },
+
+        checkbox: {
+          label: 'Checkbox',
+          type: 'checkbox',
+        },
+
+        hideThisIfCheckboxIsChecked: {
+          label: 'Hide this if checkbox is checked',
+          hideIf: {
+            checkbox: true,
+          }
+        }
       },
     }
   },

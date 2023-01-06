@@ -44,13 +44,18 @@ export default defineComponent({
       },
 
       formValues: {} as Record<string, any>|undefined,
-
-      formConfig: { el: '#phormal' }
     }
   },
 
   mounted() {
-    this.form = new Phormal(this.formFields, this.formConfig)
+    const url = window.location.href
+    const themeQueryString = url.match(/theme=(\w+)/)
+
+    const theme = !themeQueryString || !themeQueryString.length
+      ? 'basic'
+      : (themeQueryString[0].split('=')[1]) as 'basic' | 'material'
+
+    this.form = new Phormal(this.formFields, { el: '#phormal', theme })
   },
 
   render() {

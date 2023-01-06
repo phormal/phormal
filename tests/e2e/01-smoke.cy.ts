@@ -220,7 +220,7 @@ describe('[mobile] Smoke with theme basic', () => {
   runAllTests()
 })
 
-describe('[mobile] Smoke with theme basic', () => {
+describe('[mobile] Smoke with theme material', () => {
   beforeEach(() => {
     cy.viewport(320, 750)
     cy.visit('/#/e2e/smoke?theme=material')

@@ -6,8 +6,8 @@ export default class RadioButton implements MaquetteComponent {
   constructor(
     private option: RadioButtonOption,
     private groupName: string,
-    private checked: boolean = false,
-    private globalInputOptions: Record<string, string|boolean|EventHandler> = {}
+    private checked: boolean,
+    private globalInputOptions: Record<string, string|boolean|EventHandler>
   ) {}
 
   get radioButtonId() {

@@ -28,8 +28,6 @@ export default defineComponent({
 
     const error = errorMatches[0].split('=')[1]
 
-    console.log(error)
-
     if (error === 'elnotconfigured') {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
@@ -47,17 +45,26 @@ export default defineComponent({
     if (error === 'validationinvalid') {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      return this.form = new Phormal(this.formFields, { validation: 'foo', el: '.fjhdf' })
+      return this.form = new Phormal(this.formFields, { validation: 'foo', el: '#phormal' })
     }
 
     if (error === 'themeinvalid') {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      return this.form = new Phormal(this.formFields, { theme: 'foo', el: '.fjhdf' })
+      return this.form = new Phormal(this.formFields, { theme: 'foo', el: '#phormal' })
     }
 
     if (error === 'reservedfieldname') {
-      return this.form = new Phormal({ _init: { label: 'Init' } }, { el: '.phormal' })
+      return this.form = new Phormal({ _init: { label: 'Init' } }, { el: '#phormal' })
+    }
+
+    if (error === 'fieldtypeinvalid') {
+      const formFields = {
+        foo: { label: 'Foo', type: 'foo' },
+        bar: { label: 'Bar', type: 'number' },
+      }
+
+      return this.form = new Phormal(formFields, { el: '#phormal' })
     }
   },
 

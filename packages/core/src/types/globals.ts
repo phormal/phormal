@@ -13,7 +13,7 @@ export type RadioButtonOption = { label: string, value: any, disabled?: boolean 
 
 export type EventHandler = (event: Event, field: FormFieldInterface) => void;
 
-export type ErrorMessageObject = string | { en: string } & Record<string, string>;
+export type ErrorMessageObject = { en: string } & Record<string, string>;
 
 /**
  * Used to describe a condition for a field, for example for disabling or hiding it

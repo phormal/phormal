@@ -30,7 +30,7 @@ export class Phormal {
 
     if (!(mountingElement instanceof HTMLElement)) return
 
-    mountingElement.classList.add('phlib', `phlib-${(this._config as FormConfig).theme || 'basic'}`)
+    mountingElement.classList.add('phlib', `phlib-${(this._config as FormConfig).theme}`)
 
     FormInitializer.renderAllFields(formRows, mountingElement)
 

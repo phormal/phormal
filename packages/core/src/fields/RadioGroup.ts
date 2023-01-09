@@ -1,21 +1,22 @@
 import {h} from 'maquette'
 import {FormField} from "../FormField";
 import {RadioButtonOption} from "../types/globals";
-import {FormFieldConfig} from "../types/interfaces/FormConfig.interface";
+import {RadioGroupConfig} from "../types/interfaces/FormConfig.interface";
 import {Phormal} from "../Phormal";
 import {FIELD_WRAPPER_CLASS} from "../constants/css-selectors";
 import RadioButton from "../components/radio-button";
+import RadioGroupInterface from "../types/interfaces/RadioGroup.interface";
 
-export class RadioGroup extends FormField {
+export class RadioGroup extends FormField implements RadioGroupInterface {
   options: RadioButtonOption[] = []
 
   constructor(
     name: string,
-    formField: FormFieldConfig,
+    formField: RadioGroupConfig,
     form: Phormal
   ) {
     super(name, formField, form)
-    this.options = formField.options ? formField.options : []
+    this.options = formField.options
   }
 
   get globalInputProperties() {
@@ -41,13 +42,14 @@ export class RadioGroup extends FormField {
       options
     )
 
+    const label = h('label', { class: 'phlib__radio-group-label' }, [this.label])
+
     this.projector.append(mountingElement, () => {
-      return this.label
-        ? h('div', { class: 'phlib__radio-group' }, [
-          h('label', { class: 'phlib__radio-group-label' }, [this.label]),
-          radioButtons,
-        ])
-        : radioButtons
+      return h(
+        'div',
+        { class: 'phlib__radio-group' },
+        this.label ? [label, radioButtons] : [radioButtons]
+      )
     })
   }
 }

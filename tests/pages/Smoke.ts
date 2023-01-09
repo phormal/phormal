@@ -38,6 +38,7 @@ export default defineComponent({
           value: '',
           label: 'YYYY',
           row: 'birthdate',
+          placeholder: 'Enter birth year',
         },
         mm: {
           value: '',

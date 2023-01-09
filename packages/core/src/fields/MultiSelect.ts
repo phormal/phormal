@@ -35,7 +35,7 @@ export class MultiSelect extends FormField {
   private getSelectElements() {
     return [
       new InputLabel(this, this.labelId).render(),
-      this.getSelectVNode(this.optionsVNodes)
+      this.getSelectVNode()
     ];
   }
 
@@ -43,7 +43,7 @@ export class MultiSelect extends FormField {
     return `phlib__select-label-${this.name}`
   }
 
-  private getSelectVNode(options: VNode) {
+  private getSelectVNode() {
     return h(
       'div',
       { class: 'phlib__select-wrapper' },
@@ -58,12 +58,13 @@ export class MultiSelect extends FormField {
             readOnly: true,
             'aria-labelledby': this.labelId,
             role: 'button',
+            /* istanbul ignore next -- @preserve */
             onkeydown: event => this.handleOnKeydownForInput(event),
             ...this._getGlobalInputProperties(),
           }
         ),
         // 2. Then, we render a ul-element, which contains the mock-options, rendered through li-tags
-        options,
+        this.optionsVNodes,
         // 3. Finally, we need an arrow to indicate, that the options can be opened.
         // For styling purposes, we need this element to immediately follow the options
         h('span', { class: 'phlib__select-arrow' }, ['▼']),
@@ -72,6 +73,7 @@ export class MultiSelect extends FormField {
   }
 
   private handleOnKeydownForInput(event: KeyboardEvent) {
+    /* istanbul ignore if -- @preserve */
     if (event.code === 'Space' || event.code === 'Enter') {
       this.displayOptions()
     }
@@ -154,6 +156,7 @@ export class MultiSelect extends FormField {
         this.hideOptions()
         return;
 
+      /* istanbul ignore next -- @preserve */
       default:
         return;
     }

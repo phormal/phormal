@@ -1,4 +1,4 @@
-import {FieldCondition, FormFieldType, MultiSelectOption, ValidationType} from '../globals'
+import {FieldCondition, FormFieldType, MultiSelectOption, RadioButtonOption, ValidationType} from '../globals'
 import {HookReturnValue} from './Hook.interface'
 import EventHandlers from './EventHandlers'
 
@@ -22,9 +22,13 @@ type FormFieldConfigBase = {
   focus?: boolean;
 
   // For select fields
-  options?: MultiSelectOption[];
+  options?: MultiSelectOption[] | RadioButtonOption[];
 
   hooks?: HookReturnValue[];
 }
 
 export type FormFieldConfig = FormFieldConfigBase & EventHandlers
+
+export type MultiSelectConfig = Omit<FormFieldConfig, 'options'> & { options: MultiSelectOption[] }
+
+export type RadioGroupConfig = Omit<FormFieldConfig, 'options'> & { options: RadioButtonOption[] }

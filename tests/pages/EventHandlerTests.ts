@@ -1,7 +1,8 @@
-// eslint-disable-file @typescript-eslint/ban-ts-comment
 import {defineComponent, h} from "vue";
 import {Phormal} from "@phormal/core/src";
 import CodeElement from "../components/code-element";
+
+// eslint-disable-file @typescript-eslint/ban-ts-comment
 
 export default defineComponent({
   name: "EventHandlerTests",
@@ -13,7 +14,7 @@ export default defineComponent({
       formFields: {
         foo: {
           label: 'Foo',
-          handleOnClick() {
+          handleOnClick: () => {
             // @ts-ignore
             this.clicked = this.clicked + 1
           },

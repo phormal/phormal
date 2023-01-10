@@ -16,3 +16,11 @@ jobs:
         with:
           browser: chrome
           start: npm run dev
+          command: npm run test:coverage
+      - name: Coverage
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./coverage/lcov.info
+          flags: E2E
+          fail_ci_if_error: true
+          verbose: true

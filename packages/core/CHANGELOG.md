@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.13](https://github.com/phormal/phormal/compare/v0.1.0-alpha.12...v0.1.0-alpha.13) (2023-01-10)
+
+
+### Features
+
+* **core:** add option for focusing a field after mounting it ([96296ec](https://github.com/phormal/phormal/commit/96296ec9fe17e94f9a83707a66306eab0834c487))
+
+
+
+
+
 # [0.1.0-alpha.12](https://github.com/phormal/phormal/compare/v0.1.0-alpha.11...v0.1.0-alpha.12) (2023-01-05)
 
 

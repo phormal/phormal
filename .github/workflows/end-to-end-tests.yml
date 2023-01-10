@@ -6,7 +6,6 @@ on:
       - master
 
 jobs:
-  # 1.
   chrome:
     runs-on: ubuntu-latest
     steps:

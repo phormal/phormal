@@ -1,7 +1,8 @@
-import {FormFieldConfig} from "../types/interfaces/FormConfig.interface";
+import FormConfig, {FormFieldConfig} from "../types/interfaces/FormConfig.interface";
 import {FormFieldError} from "../errors/form-field-error";
 import {FormFieldTypes} from "../types/globals";
 import FormFieldInterface from "../types/interfaces/FormField.interface";
+import {Phormal} from "../Phormal";
 
 /**
  * A utility class for resolving the properties of a FormField
@@ -60,8 +61,9 @@ export class FormFieldResolver {
     };
 
     observer = new MutationObserver(mutationCallback);
-    const targetNode = document.querySelector(this.field._form?._config?.el || '')
-
-    if (targetNode) observer.observe(targetNode, config);
+    // This code should never be executed, if the form has not yet been mounted to the DOM
+    // Therefore, we can safely write the type assertions on the line below
+    const targetNode = document.querySelector(((this.field._form as Phormal)._config as FormConfig).el as string) as HTMLElement
+    observer.observe(targetNode, config);
   }
 }

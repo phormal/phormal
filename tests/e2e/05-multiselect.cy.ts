@@ -110,6 +110,38 @@ const testDisablingField = () => {
   })
 }
 
+const testHidingOptionsOnEscapeKey = () => {
+  it('Hides the options list when pressing the escape key', () => {
+    cy
+      .get('#phormal-field-input-bar')
+      .click()
+
+    // Test that the options are displayed
+    cy
+      .get('#phlib__select-options-bar')
+      .should('be.visible')
+
+    cy.focused().type('{esc}')
+    cy.get('#phlib__select-options-bar').should('not.be.visible')
+  })
+}
+
+const testHidingOptionsOnClickOutside = () => {
+  it('Hides the options list when clicking outside of the field', () => {
+    cy
+      .get('#phormal-field-input-bar')
+      .click()
+
+    // Test that the options are displayed
+    cy
+      .get('#phlib__select-options-bar')
+      .should('be.visible')
+
+    cy.get('#getvalues').click().wait(100)
+    cy.get('#phlib__select-options-bar').should('not.be.visible')
+  })
+}
+
 const runAllTests = () => {
   testRenderingWithLabel()
   testRenderingWithoutLabel()
@@ -120,6 +152,8 @@ const runAllTests = () => {
   testSelectingOptionWithEnterKey()
   testSelectingOptionByClicking()
   testDisablingField()
+  testHidingOptionsOnEscapeKey()
+  testHidingOptionsOnClickOutside()
 
   // TODO: tests getting the correct values, upon calling $values()
   // TODO: test opening the options with space key

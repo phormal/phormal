@@ -6,7 +6,7 @@ export default class ErrorMessage implements MaquetteComponent {
   constructor(
     private readonly errorMsgId: string,
     private readonly errors: string[],
-    private readonly errorMessages: Record<string, string | ErrorMessageObject>,
+    private readonly errorMessages: Record<string, ErrorMessageObject>,
     private readonly language: string,
   ) {}
 
@@ -18,21 +18,17 @@ export default class ErrorMessage implements MaquetteComponent {
         styles: { color: 'red' },
         class: 'phlib__error-message'
       },
-      [this.listOfErrors() as VNodeChild]
+      [this.getErrorMessageElements() as VNodeChild]
     )
   }
 
-  private listOfErrors() {
+  private getErrorMessageElements() {
     return h('ul', {}, this.errors.map(error => {
-      let errorMsg = this.errorMessages[error]
-      if (typeof errorMsg === 'object') {
-        errorMsg = errorMsg[this.language]
-          ? errorMsg[this.language]
-          : errorMsg['en']
-      }
-      if (typeof errorMsg === 'undefined') errorMsg = this.errorMessages[error]
+      // errorMessages here, should represent an object with key-value pairs, where the key is a locale like "en" or "de",
+      // and the value being the translation
+      const errorMessages = this.errorMessages[error]
 
-      return h('li', {}, [errorMsg as VNodeChild])
+      return h('li', {}, [errorMessages[this.language] as VNodeChild])
     }))
   }
 }

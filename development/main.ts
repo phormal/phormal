@@ -9,6 +9,8 @@ import Validation from '../tests/pages/Validation'
 import Vue3Component from '../tests/pages/Vue3Component.vue'
 import MultiSelect from '../tests/pages/MultiSelect'
 import Errors from "../tests/pages/Errors";
+import RadioGroupTests from "../tests/pages/RadioGroupTests";
+import EventHandlerTests from "../tests/pages/EventHandlerTests";
 
 const app = createApp(App)
 
@@ -22,6 +24,8 @@ const router = createRouter({
     { path: '/e2e/component-vue3', component: Vue3Component },
     { path: '/e2e/multiselect', component: MultiSelect },
     { path: '/e2e/errors', component: Errors },
+    { path: '/e2e/radiogroup', component: RadioGroupTests },
+    { path: '/e2e/event-handlers', component: EventHandlerTests },
   ]
 })
 

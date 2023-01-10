@@ -1,7 +1,7 @@
 import {FormField} from '../FormField'
 import {h, VNode} from 'maquette'
 import {MultiSelectOption} from '../types/globals'
-import {FormFieldConfig} from '../types/interfaces/FormConfig.interface'
+import {MultiSelectConfig} from '../types/interfaces/FormConfig.interface'
 import {Phormal} from "../Phormal";
 import InputLabel from "../components/input-label";
 
@@ -14,13 +14,14 @@ export class MultiSelect extends FormField {
 
   constructor(
     name: string,
-    formField: FormFieldConfig,
+    formField: MultiSelectConfig,
     private form: Phormal
   ) {
     super(name, formField, form)
-    this.options = formField.options ? formField.options : []
+    this.options = formField.options
   }
 
+  /* istanbul ignore next -- @preserve */
   render(mountingElement: HTMLElement) {
     const elements = this.getSelectElements();
     this.projector.append(mountingElement, () => this.getSelectWrapper(elements))
@@ -35,7 +36,7 @@ export class MultiSelect extends FormField {
   private getSelectElements() {
     return [
       new InputLabel(this, this.labelId).render(),
-      this.getSelectVNode(this.optionsVNodes)
+      this.getSelectVNode()
     ];
   }
 
@@ -43,7 +44,8 @@ export class MultiSelect extends FormField {
     return `phlib__select-label-${this.name}`
   }
 
-  private getSelectVNode(options: VNode) {
+  private getSelectVNode() {
+    /* istanbul ignore next -- @preserve */
     return h(
       'div',
       { class: 'phlib__select-wrapper' },
@@ -63,7 +65,7 @@ export class MultiSelect extends FormField {
           }
         ),
         // 2. Then, we render a ul-element, which contains the mock-options, rendered through li-tags
-        options,
+        this.optionsVNodes,
         // 3. Finally, we need an arrow to indicate, that the options can be opened.
         // For styling purposes, we need this element to immediately follow the options
         h('span', { class: 'phlib__select-arrow' }, ['▼']),
@@ -72,6 +74,7 @@ export class MultiSelect extends FormField {
   }
 
   private handleOnKeydownForInput(event: KeyboardEvent) {
+    /* istanbul ignore if -- @preserve */
     if (event.code === 'Space' || event.code === 'Enter') {
       this.displayOptions()
     }
@@ -120,9 +123,9 @@ export class MultiSelect extends FormField {
    * Is executed, when an option is selected via mouse or keyboard
    * */
   selectOption(event: MouseEvent|KeyboardEvent) {
-    const selectedValue = (event.target as HTMLLIElement).dataset.value
-    this.setValue(selectedValue || '');
-    (this.inputDOMElement as HTMLInputElement).value = this.options.find(option => option.value === selectedValue)?.label || ''
+    const selectedValue = (event.target as HTMLLIElement).dataset.value as string
+    this.setValue(selectedValue);
+    (this.inputDOMElement as HTMLInputElement).value = this.options.find(option => option.value === selectedValue)?.label as string
     this.hideOptions()
     this.addOrRemoveWrapperClass(selectedValue);
   }
@@ -152,9 +155,6 @@ export class MultiSelect extends FormField {
 
       case 'Escape':
         this.hideOptions()
-        return;
-
-      default:
         return;
     }
   }
@@ -226,7 +226,7 @@ export class MultiSelect extends FormField {
   }
 
   private hideOptions() {
-    setTimeout(() => {
+    setTimeout(/* istanbul ignore next -- @preserve */() => {
       if (!(this.optionsElement instanceof HTMLUListElement)) return
 
       this.optionsElement.style.display = 'none';

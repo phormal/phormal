@@ -1,14 +1,5 @@
 {
   "all": true,
   "extends": "@istanbuljs/nyc-config-typescript",
-  "check-coverage": true,
-  "include": [
-    "packages/**/*.ts"
-  ],
-  "exclude": [
-    "cypress/**/*.*",
-    "**/*.d.ts",
-    "**/*.cy.tsx",
-    "**/*.cy.ts"
-  ]
+  "check-coverage": true
 }

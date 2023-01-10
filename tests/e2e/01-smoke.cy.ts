@@ -102,24 +102,6 @@ const testFieldRowOption = () => {
   })
 }
 
-const testDefaultValueRadioGroup = () => {
-  it('Should set a default value for a radiogroup', () => {
-    // Check that the value of the radiogroup is 'shipping'
-    cy
-      .get('#phlib__radio-button--shipping')
-      .should('be.checked')
-
-    // Negative checks
-    cy
-      .get('#phlib__radio-button--billing')
-      .should('not.be.checked')
-
-    cy
-      .get('#phlib__radio-button--packstation')
-      .should('not.be.checked')
-  })
-}
-
 const testSelectValueRadioGroup = () => {
   it('Should select a new value in the radio button group', () => {
     // 1. Select Packstation, and check that the value is set
@@ -186,11 +168,32 @@ const runAllTests = () => {
   testZipErrorHide()
   testValidZipIfNoCountryPattern()
   testFieldRowOption()
-  testDefaultValueRadioGroup()
   testSelectValueRadioGroup()
   testFocusingFieldOnRender()
   testCapitalizingOneWordInput()
-  testCapitalizingOneWordInput()
+  testCapitalizingMultipleWordInput()
+}
+
+const runBasicThemeSpecificTests = () => {
+  it('Should render a placeholder', () => {
+    cy
+      .get('#phormal-field-input-yyyy')
+      .should('have.attr', 'placeholder', 'Enter birth year')
+  })
+
+  it('Should not render a placeholder', () => {
+    cy
+      .get('#phormal-field-input-firstName')
+      .should('not.have.attr', 'placeholder')
+  })
+}
+
+const runMaterialThemeSpecificTests = () => {
+  it('Should render a placeholder with a default &npsb; value', () => {
+    cy
+      .get('#phormal-field-input-yyyy')
+      .should('have.attr', 'placeholder', '&nbsp;')
+  })
 }
 
 describe('Smoke with theme basic', () => {
@@ -200,6 +203,7 @@ describe('Smoke with theme basic', () => {
   })
 
   runAllTests()
+  runBasicThemeSpecificTests()
 })
 
 describe('Smoke with theme material', () => {
@@ -208,6 +212,7 @@ describe('Smoke with theme material', () => {
     cy.visit('/#/e2e/smoke?theme=material')
   })
 
+  runMaterialThemeSpecificTests()
   runAllTests()
 })
 
@@ -218,6 +223,7 @@ describe('[mobile] Smoke with theme basic', () => {
   })
 
   runAllTests()
+  runBasicThemeSpecificTests()
 })
 
 describe('[mobile] Smoke with theme material', () => {
@@ -227,6 +233,7 @@ describe('[mobile] Smoke with theme material', () => {
   })
 
   runAllTests()
+  runMaterialThemeSpecificTests()
 })
 
 export {}

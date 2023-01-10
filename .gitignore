@@ -29,6 +29,7 @@ docs/.next
 docs/node_modules
 
 tests/videos
+tests/screenshots
 
 instrumented
 coverage

@@ -3,6 +3,7 @@ import useRegex from "../../packages/use-regex/src";
 import {Phormal} from '../../packages/core/src'
 import {defineComponent, h} from "vue";
 import useEmail from "@phormal/use-email/src";
+import CodeElement from "../components/code-element";
 
 export default defineComponent({
   name: 'App',
@@ -35,19 +36,36 @@ export default defineComponent({
         birthdateField: {
           label: 'Birthdate',
           hooks: [useRegex(/^\d{4}-\d{2}-\d{2}$/i, 'YYYY-MM-DD')],
+        },
+        newsletter: {
+          label: 'Newsletter',
+          type: 'checkbox',
+          hooks: [useRegex(/true/i)],
         }
       },
     }
   },
 
   mounted() {
+    const url = window.location.href
+    const validationQueryString = url.match(/type=(\w+)/)
+
+    const validation = !validationQueryString || !validationQueryString.length
+      ? 'active'
+      : (validationQueryString[0].split('=')[1]) as 'active' | 'passive'
+
     this.form = new Phormal(this.formFields, {
       el: '#phormal',
-      validation: 'active'
+      validation,
     })
   },
 
   render() {
-    return h('div', { id: 'phormal' })
+    const phormal = h('div', { id: 'phormal' })
+
+    return h("div",[
+      phormal,
+      h('button', { onClick: () => this.form?.$validate(), id: 'validate-button' }, 'Validate')
+    ])
   }
 })

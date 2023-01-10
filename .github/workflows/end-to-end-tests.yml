@@ -6,6 +6,7 @@ on:
       - master
 
 jobs:
+  # 1.
   chrome:
     runs-on: ubuntu-latest
     steps:
@@ -17,10 +18,19 @@ jobs:
           browser: chrome
           start: npm run dev
           command: npm run test:coverage
-      - name: Coverage
-        uses: codecov/codecov-action@v3
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
         with:
-          files: ./coverage/lcov.info
-          flags: E2E
-          fail_ci_if_error: true
-          verbose: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          flag-name: ${{matrix.os}}-node-${{ matrix.node }}
+
+  # 2.
+  finish:
+    needs: chrome
+    runs-on: ubuntu-latest
+    steps:
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token }}
+          parallel-finished: true

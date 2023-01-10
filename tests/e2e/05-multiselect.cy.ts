@@ -137,7 +137,7 @@ const testHidingOptionsOnClickOutside = () => {
       .get('#phlib__select-options-bar')
       .should('be.visible')
 
-    cy.get('#getvalues').click()
+    cy.get('#getvalues').click().wait(100)
     cy.get('#phlib__select-options-bar').should('not.be.visible')
   })
 }

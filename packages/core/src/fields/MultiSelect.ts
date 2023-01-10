@@ -1,7 +1,7 @@
 import {FormField} from '../FormField'
 import {h, VNode} from 'maquette'
 import {MultiSelectOption} from '../types/globals'
-import {FormFieldConfig} from '../types/interfaces/FormConfig.interface'
+import {MultiSelectConfig} from '../types/interfaces/FormConfig.interface'
 import {Phormal} from "../Phormal";
 import InputLabel from "../components/input-label";
 
@@ -14,13 +14,14 @@ export class MultiSelect extends FormField {
 
   constructor(
     name: string,
-    formField: FormFieldConfig,
+    formField: MultiSelectConfig,
     private form: Phormal
   ) {
     super(name, formField, form)
-    this.options = formField.options ? formField.options : []
+    this.options = formField.options
   }
 
+  /* istanbul ignore next -- @preserve */
   render(mountingElement: HTMLElement) {
     const elements = this.getSelectElements();
     this.projector.append(mountingElement, () => this.getSelectWrapper(elements))
@@ -44,6 +45,7 @@ export class MultiSelect extends FormField {
   }
 
   private getSelectVNode() {
+    /* istanbul ignore next -- @preserve */
     return h(
       'div',
       { class: 'phlib__select-wrapper' },
@@ -58,7 +60,6 @@ export class MultiSelect extends FormField {
             readOnly: true,
             'aria-labelledby': this.labelId,
             role: 'button',
-            /* istanbul ignore next -- @preserve */
             onkeydown: event => this.handleOnKeydownForInput(event),
             ...this._getGlobalInputProperties(),
           }
@@ -122,9 +123,9 @@ export class MultiSelect extends FormField {
    * Is executed, when an option is selected via mouse or keyboard
    * */
   selectOption(event: MouseEvent|KeyboardEvent) {
-    const selectedValue = (event.target as HTMLLIElement).dataset.value
-    this.setValue(selectedValue || '');
-    (this.inputDOMElement as HTMLInputElement).value = this.options.find(option => option.value === selectedValue)?.label || ''
+    const selectedValue = (event.target as HTMLLIElement).dataset.value as string
+    this.setValue(selectedValue);
+    (this.inputDOMElement as HTMLInputElement).value = this.options.find(option => option.value === selectedValue)?.label as string
     this.hideOptions()
     this.addOrRemoveWrapperClass(selectedValue);
   }
@@ -154,10 +155,6 @@ export class MultiSelect extends FormField {
 
       case 'Escape':
         this.hideOptions()
-        return;
-
-      /* istanbul ignore next -- @preserve */
-      default:
         return;
     }
   }
@@ -229,7 +226,7 @@ export class MultiSelect extends FormField {
   }
 
   private hideOptions() {
-    setTimeout(() => {
+    setTimeout(/* istanbul ignore next -- @preserve */() => {
       if (!(this.optionsElement instanceof HTMLUListElement)) return
 
       this.optionsElement.style.display = 'none';

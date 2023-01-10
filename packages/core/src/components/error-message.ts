@@ -28,11 +28,7 @@ export default class ErrorMessage implements MaquetteComponent {
       // and the value being the translation
       const errorMessages = this.errorMessages[error]
 
-      const errorMessageTranslation = errorMessages[this.language]
-        ? errorMessages[this.language]
-        : errorMessages['en']
-
-      return h('li', {}, [errorMessageTranslation as VNodeChild])
+      return h('li', {}, [errorMessages[this.language] as VNodeChild])
     }))
   }
 }

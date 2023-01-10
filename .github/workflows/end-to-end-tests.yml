@@ -19,13 +19,7 @@ jobs:
           start: npm run dev
           command: npm run test:coverage
 
-  # 2.
-  finish:
-    needs: chrome
-    runs-on: ubuntu-latest
-    steps:
-      - name: Coveralls Finished
+      - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
-          github-token: ${{ secrets.github_token }}
-          parallel-finished: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}

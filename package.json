@@ -8,6 +8,7 @@
     "test:e2e": "cypress open --e2e",
     "test:e2e:ci": "cypress run --e2e",
     "test:coverage": "npm run instrument && npm run test:e2e:ci && nyc report",
+    "test:unit": "vitest run --config config/vite.config.ts",
     "lint:ts": "npx eslint -c config/.eslintrc.cjs .",
     "lint:ts:fix": "npx eslint -c config/.eslintrc.cjs . --fix",
     "lint:styles": "npx stylelint --config config/.stylelintrc.json \"**/*.scss\"",
@@ -17,6 +18,7 @@
     "instrument": "npx nyc instrument packages instrumented",
     "release": "npm run clean:packages && npm run build && lerna publish --no-commit-hooks",
     "release:pre": "npm run clean:packages && npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-prerelease",
+    "release:bump:pre": "npm run clean:packages && npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-bump-prerelease",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -58,6 +60,7 @@
     "typescript": "^4.6.4",
     "vite": "^3.2.5",
     "vite-plugin-istanbul": "^3.0.4",
+    "vitest": "^0.27.0",
     "vue": "^3.2.41",
     "vue-router": "^4.1.6",
     "vue-tsc": "^1.0.9"
@@ -66,7 +69,11 @@
     "packages/*"
   ],
   "nyc": {
-    "include": ["packages/*/src/**/*.ts"],
-    "exclude": ["development/**"]
+    "include": [
+      "packages/*/src/**/*.ts"
+    ],
+    "exclude": [
+      "development/**"
+    ]
   }
 }

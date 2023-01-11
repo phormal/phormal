@@ -20,8 +20,17 @@ export const useEmail: Hook = (): HookReturnValue => {
     errorMessages: {
       [ERROR_NAME]: {
         en: 'Invalid email',
-        de: 'Ungültige E-Mail',
+        ru: 'Неверный адрес электронной почты',
         es: 'Correo electrónico no válido',
+        tr: 'Geçersiz e-posta',
+        // fa: 'ایمیل نامعتبر',
+        fr: 'Courriel non valide',
+        de: 'Ungültige E-Mail-Adresse',
+        ja: '無効なメール',
+        it: 'Email non valida',
+        pt: 'E-mail inválido',
+        zh: '无效的电子邮件',
+        vi: 'Email không hợp lệ',
       }
     }
   }

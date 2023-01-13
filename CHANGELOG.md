@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.14](https://github.com/phormal/phormal/compare/v0.1.0-alpha.13...v0.1.0-alpha.14) (2023-01-13)
+
+
+### Features
+
+* add translations for all 12 first supported languages ([#13](https://github.com/phormal/phormal/issues/13)) ([409b40e](https://github.com/phormal/phormal/commit/409b40e539829d57baeca6197423605a6d121bc5))
+* start building react integration ([8bbee35](https://github.com/phormal/phormal/commit/8bbee357e2bc1a8e72643b5c87bc2d497739a35f))
+
+
+
+
+
 # [0.1.0-alpha.13](https://github.com/phormal/phormal/compare/v0.1.0-alpha.12...v0.1.0-alpha.13) (2023-01-10)
 
 

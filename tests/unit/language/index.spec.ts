@@ -1,5 +1,5 @@
 import {describe, expect, it} from "vitest";
-import {Phormal, useRegex, useLength, useRequired, useValidZip, useEmail} from "../../../packages/core/src";
+import {useRegex, useLength, useRequired, useValidZip, useEmail} from "../../../packages/core/src";
 import {ErrorMessageObject} from "@phormal/core/src/types/globals";
 
 const allSupportedLanguages = [

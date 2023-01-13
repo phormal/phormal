@@ -1,8 +1,4 @@
-import useRequired from "../../packages/use-required/src";
-import useLength from "../../packages/use-length/src";
-import useAutoCapitalize from "../../packages/use-auto-capitalize/src";
-import useValidZip from "../../packages/use-valid-zip/src";
-import {Phormal} from '@phormal/core/src'
+import {useLength, useAutoCapitalize, Phormal, useRequired, useValidZip} from "../../packages/core/src";
 import {defineComponent, h} from "vue";
 
 export default defineComponent({

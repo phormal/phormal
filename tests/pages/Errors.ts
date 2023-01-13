@@ -1,4 +1,4 @@
-import {Phormal} from '../../packages/core/src'
+import {Phormal} from "../../packages/core/src";
 import {defineComponent, h} from "vue";
 
 export default defineComponent({

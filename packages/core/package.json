@@ -11,10 +11,7 @@
   "main": "./dist/core.cjs.js",
   "umd": "./dist/core.umd.js",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "src"
-  ],
+  "files": ["dist"],
   "dependencies": {
     "maquette": "^3.5.3"
   },

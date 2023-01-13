@@ -16,10 +16,7 @@
       "require": "./dist/style.css"
     }
   },
-  "files": [
-    "dist",
-    "src"
-  ],
+  "files": ["dist"],
   "devDependencies": {
     "lerna": "^6.1.0",
     "sass": "^1.56.1",

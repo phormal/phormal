@@ -17,8 +17,7 @@
     }
   },
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "devDependencies": {
     "lerna": "^6.1.0",

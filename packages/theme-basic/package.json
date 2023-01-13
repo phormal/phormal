@@ -1,6 +1,6 @@
 {
   "name": "@phormal/theme-basic",
-  "version": "0.1.0-alpha.12",
+  "version": "0.1.0-alpha.15",
   "license": "MIT",
   "author": {
     "name": "Tom Österlund",
@@ -16,7 +16,9 @@
       "require": "./dist/style.css"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "lerna": "^6.1.0",
     "sass": "^1.56.1",

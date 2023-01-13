@@ -1,6 +1,6 @@
 {
   "name": "@phormal/core",
-  "version": "0.1.0-alpha.14",
+  "version": "0.1.0-alpha.15",
   "license": "MIT",
   "author": {
     "name": "Tom Österlund",
@@ -11,7 +11,9 @@
   "main": "./dist/core.cjs.js",
   "umd": "./dist/core.umd.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "maquette": "^3.5.3"
   },

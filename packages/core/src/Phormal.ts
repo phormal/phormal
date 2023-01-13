@@ -15,20 +15,25 @@ export class Phormal {
   ) {
     new ConfigResolver(config, fields, this)
     this._unprocessedFields = fields;
-    this._init()
+    // this._init()
   }
 
-  private _init() {
+  _init() {
     // 1. Initialize all fields, saving them in this._fields[fieldName], and their values in this[fieldName]
     new FormFieldsResolver(this)
+    console.log(1)
 
     // 2. Build a two-dimensional array representation of the form, with first dimension being rows, and second dimension being fields
     const formRows = FormInitializer.getFormRowRepresentation(this._fields)
+
+    console.log(2)
 
     // 3. Render all fields
     const mountingElement = document.querySelector((this._config as FormConfig).el) as HTMLElement
 
     if (!(mountingElement instanceof HTMLElement)) return
+
+    console.log(4)
 
     mountingElement.classList.add('phlib', `phlib-${(this._config as FormConfig).theme}`)
 

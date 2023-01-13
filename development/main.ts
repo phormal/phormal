@@ -12,6 +12,10 @@ import Errors from "../tests/pages/Errors";
 import RadioGroupTests from "../tests/pages/RadioGroupTests";
 import EventHandlerTests from "../tests/pages/EventHandlerTests";
 
+import ReactDOM from 'react-dom'
+// @ts-ignore
+import * as dev from "./Dev.tsx";
+
 const app = createApp(App)
 
 const router = createRouter({

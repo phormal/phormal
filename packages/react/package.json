@@ -1,0 +1,38 @@
+{
+  "name": "@phormal/react",
+  "version": "0.1.0-alpha.12",
+  "license": "MIT",
+  "author": {
+    "name": "Tom Österlund",
+    "email": "tom@oesterlund.de",
+    "url": "https://github.com/tomosterlund"
+  },
+  "types": "./dist/react/src/index.d.ts",
+  "module": "./dist/react.js",
+  "main": "./dist/react.cjs.js",
+  "umd": "./dist/react.umd.js",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "peerDependencies": {
+    "@phormal/core": "^0.1.0-alpha.1",
+    "react": "^16.8.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "gitHead": "20d6849b622722d79a094d105f858f515eb58212",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/phormal/phormal",
+    "directory": "packages/react"
+  },
+  "homepage": "https://phormal.dev/",
+  "keywords": [
+    "form-generator",
+    "form-validation",
+    "form-themes",
+    "react"
+  ]
+}

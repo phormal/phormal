@@ -16,5 +16,6 @@ export default defineConfig({
     specPattern: 'tests/**/*.cy.ts',
     videosFolder: 'tests/videos',
     screenshotsFolder: 'tests/screenshots',
+    video: false,
   },
 });

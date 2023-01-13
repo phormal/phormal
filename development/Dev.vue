@@ -13,19 +13,6 @@ export default {
       form: undefined,
 
       formFields: {
-        newsletter: {
-          type: 'checkbox',
-          label: 'Do you want to receive our newsletter?',
-          hooks: [],
-          hideIf: { acceptTerms: false },
-          disabled: true,
-          value: true,
-        },
-        acceptTerms: {
-          type: 'checkbox',
-          label: 'Accept Terms & conditions for this site',
-          value: true,
-        },
         firstName: {
           // label: 'First name',
           hooks: [useRequired(), useLength(1, 155), useAutoCapitalize()],
@@ -35,6 +22,19 @@ export default {
           // hideIf: {
           //   lastName: 'empty'
           // }
+        },
+        // newsletter: {
+        //   type: 'checkbox',
+        //   label: 'Do you want to receive our newsletter?',
+        //   hooks: [],
+        //   hideIf: { acceptTerms: false },
+        //   disabled: true,
+        //   value: true,
+        // },
+        acceptTerms: {
+          type: 'checkbox',
+          label: 'Accept Terms & conditions for this site',
+          value: false,
         },
         lastName: {
           label: 'Last name',

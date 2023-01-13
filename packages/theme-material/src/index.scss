@@ -84,7 +84,7 @@
 
     input[type="checkbox"] {
       outline: 0;
-      visibility: hidden;
+      opacity: 0;
       width: $md-checkbox-size;
       margin: 0;
       display: block;

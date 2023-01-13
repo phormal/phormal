@@ -1,8 +1,7 @@
 <script lang="ts">
 
-import useRequired from "../../packages/use-required/src";
-import useLength from "../../packages/use-length/src";
 import {Phormal} from "../../packages/component-vue3/src";
+import {useLength, useRequired} from "../../packages/core/src";
 
 export default {
   name: 'Vue3Component',

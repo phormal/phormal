@@ -1,9 +1,5 @@
 import {describe, expect, it} from "vitest";
-import useEmail from "@phormal/use-email/src";
-import useLength from "@phormal/use-length/src";
-import useRegex from "@phormal/use-regex/src";
-import useRequired from "@phormal/use-required/src";
-import useValidZip from "@phormal/use-valid-zip/src";
+import {useRegex, useLength, useRequired, useValidZip, useEmail} from "../../../packages/core/src";
 import {ErrorMessageObject} from "@phormal/core/src/types/globals";
 
 const allSupportedLanguages = [

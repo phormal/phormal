@@ -1,5 +1,5 @@
 import {defineComponent, h} from "vue";
-import {Phormal} from "@phormal/core/src";
+import {Phormal} from "../../packages/core/src";
 import CodeElement from "../components/code-element";
 
 // eslint-disable-file @typescript-eslint/ban-ts-comment

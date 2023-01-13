@@ -1,11 +1,5 @@
 <script lang="ts">
-import {Phormal} from '../packages/core/src'
-import useRequired from "../packages/use-required/src";
-import useLength from "../packages/use-length/src";
-import useAutoCapitalize from "../packages/use-auto-capitalize/src";
-import useValidZip from "../packages/use-valid-zip/src";
-import useEmail from "../packages/use-email/src";
-// import {Phormal} from "../packages/component-vue3/src";
+import {Phormal, useEmail, useLength, useRequired, useValidZip, useAutoCapitalize} from '../packages/core/src'
 
 export default {
   name: 'App',

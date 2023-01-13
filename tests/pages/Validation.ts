@@ -1,8 +1,5 @@
-import useLength from "../../packages/use-length/src";
-import useRegex from "../../packages/use-regex/src";
-import {Phormal} from '../../packages/core/src'
+import {Phormal, useRegex, useLength, useEmail} from '../../packages/core/src'
 import {defineComponent, h} from "vue";
-import useEmail from "@phormal/use-email/src";
 import CodeElement from "../components/code-element";
 
 export default defineComponent({

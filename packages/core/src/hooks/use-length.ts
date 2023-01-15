@@ -1,5 +1,6 @@
 import {HookReturnValue} from "@phormal/core/src/types/interfaces/Hook.interface";
 import {FormField} from "@phormal/core/src/FormField";
+import {ValidationHelper} from "../util/validation-helper";
 
 export const useLength = (minLength: number|undefined|null, maxLength?: number|undefined|null): HookReturnValue => {
   const LENGTH_ERROR_NAME = 'length'
@@ -28,8 +29,7 @@ export const useLength = (minLength: number|undefined|null, maxLength?: number|u
           isValid = thisValue.length <= maxLength
         }
 
-        if (!field.errors.includes(errorName) && !isValid) field.errors.push(errorName)
-        if (field.errors.includes(errorName) && isValid) field.errors.splice(field.errors.indexOf(errorName), 1)
+        ValidationHelper.pushOrSpliceError(field, errorName, isValid)
       }
     },
     errorMessages: {

@@ -1,5 +1,6 @@
-import {Hook, HookReturnValue} from "@phormal/core/src/types/interfaces/Hook.interface";
+import {HookReturnValue} from "@phormal/core/src/types/interfaces/Hook.interface";
 import {FormField} from "@phormal/core/src";
+import {ValidationHelper} from "../util/validation-helper";
 /**
  * This hook requires:
  *
@@ -7,7 +8,7 @@ import {FormField} from "@phormal/core/src";
  * 2. the presence of another field named 'country', which can have a value
  * of any ISO 3166 Alpha-2 Code: https://www.iso.org/obp/ui/#search/code/
  * */
-export const useValidZip: Hook = (): HookReturnValue => {
+export const useValidZip = (): HookReturnValue => {
   const ERROR_NAME = 'zip';
 
   return {
@@ -20,9 +21,7 @@ export const useValidZip: Hook = (): HookReturnValue => {
         currentCountryValue = currentCountryValue.toLowerCase()
         const countryHasPattern = typeof zipCodePatterns[currentCountryValue] !== 'undefined'
         const isValid = countryHasPattern ? zipCodePatterns[currentCountryValue].test(currentValue) : true
-
-        if (!field.errors.includes(ERROR_NAME) && !isValid) field.errors.push(ERROR_NAME)
-        if (field.errors.includes(ERROR_NAME) && isValid) field.errors.splice(field.errors.indexOf(ERROR_NAME), 1)
+        ValidationHelper.pushOrSpliceError(field, ERROR_NAME, isValid)
       }
     },
 

@@ -1,5 +1,5 @@
 import {describe, expect, it} from "vitest";
-import {useRegex, useLength, useRequired, useValidZip, useEmail} from "../../../packages/core/src";
+import {useRegex, useLength, useRequired, useValidZip, useEmail, useUrl, useMinMax} from "../../../packages/core/src";
 import {ErrorMessageObject} from "@phormal/core/src/types/globals";
 
 const allSupportedLanguages = [
@@ -64,6 +64,24 @@ describe('Translations objects', () => {
   it('Has a translation for all languages in use-valid-zip', () => {
     const errorMessages = [
       useValidZip().errorMessages?.zip as ErrorMessageObject,
+    ]
+    testThatAllLanguagesAreTranslated(errorMessages)
+  })
+
+  it('Has a translation for all languages in use-url', () => {
+    const errorMessages = [
+      useUrl().errorMessages?.url as ErrorMessageObject,
+      useUrl({allowedHosts: ['example.com']}).errorMessages?.url_host as ErrorMessageObject,
+      useUrl({allowedProtocols: ['https']}).errorMessages?.url_protocol as ErrorMessageObject,
+    ]
+    testThatAllLanguagesAreTranslated(errorMessages)
+  })
+
+  it('Has a translation for all languages in use-min-max', () => {
+    const errorMessages = [
+      useMinMax(1).errorMessages?.min_value as ErrorMessageObject,
+      useMinMax(undefined, 2).errorMessages?.max_value as ErrorMessageObject,
+      useMinMax(1, 2).errorMessages?.between_values as ErrorMessageObject,
     ]
     testThatAllLanguagesAreTranslated(errorMessages)
   })

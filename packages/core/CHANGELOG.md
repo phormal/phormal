@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.16](https://github.com/phormal/phormal/compare/v0.1.0-alpha.13...v0.1.0-alpha.16) (2023-01-15)
+
+
+### Features
+
+* checkbox accessibility ([#15](https://github.com/phormal/phormal/issues/15)) ([dcb11ab](https://github.com/phormal/phormal/commit/dcb11ab6955f5cb7333ec30bf1e9cdaf4f63aa5b))
+* introduce hooks useUrl and useMinMax, and make radio-button font sizes responsive ([#16](https://github.com/phormal/phormal/issues/16)) ([115f64a](https://github.com/phormal/phormal/commit/115f64a11ce79ae4ff973f4549c34a6bfb912c93))
+
+
+
+
+
 # [0.1.0-alpha.15](https://github.com/phormal/phormal/compare/v0.1.0-alpha.14...v0.1.0-alpha.15) (2023-01-13)
 
 **Note:** Version bump only for package @phormal/core

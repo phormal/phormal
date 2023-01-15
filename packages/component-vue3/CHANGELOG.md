@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.16](https://github.com/phormal/phormal/compare/v0.1.0-alpha.13...v0.1.0-alpha.16) (2023-01-15)
+
+**Note:** Version bump only for package @phormal/component-vue3
+
+
+
+
+
 # [0.1.0-alpha.14](https://github.com/phormal/phormal/compare/v0.1.0-alpha.13...v0.1.0-alpha.14) (2023-01-13)
 
 

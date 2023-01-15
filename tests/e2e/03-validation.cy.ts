@@ -1,9 +1,4 @@
-describe('Active validation', () => {
-
-  beforeEach(() => {
-    cy.visit('/#/e2e/validation')
-  })
-
+function testDisplayingMaxLengthError() {
   it('Should display an error "maxLength"', () => {
     const errorMsgText = `This field must be at most ${10} characters long`
     const errorMsgEl = '#phormal-field-error-field1'
@@ -21,7 +16,9 @@ describe('Active validation', () => {
       .should('exist')
       .should('have.text', errorMsgText)
   })
+}
 
+function testDisplayingMinLengthError() {
   it('Should display an error "minLength"', () => {
     const tooShortMessage = 't'
     const longEnoughMessage = 'testtest'
@@ -44,7 +41,9 @@ describe('Active validation', () => {
       .get('#phormal-field-error-field2')
       .should('not.exist')
   });
+}
 
+function testUseEmail() {
   const faultyEmail = 'test@test'
   const correctEmail = 'test@test.com'
 
@@ -87,7 +86,9 @@ describe('Active validation', () => {
       .get('#phormal-field-error-emailField')
       .should('not.exist')
   })
+}
 
+function testDisplayingErrorForFaultyRegex() {
   it('Should display an error for a faulty regex', () => {
     cy
       .get('#phormal-field-error-field3')
@@ -104,7 +105,9 @@ describe('Active validation', () => {
       .should('exist')
       .should('contain.text', 'Input does not have expected format')
   })
+}
 
+function testDisplayingErrorForRegexWithReadableFormat() {
   it('Should display an error message with a provided format in useRegex', () => {
     cy
       .get('#phormal-field-error-birthdateField')
@@ -128,6 +131,182 @@ describe('Active validation', () => {
 
     cy
       .get('#phormal-field-error-birthdateField')
+      .should('not.exist')
+  })
+}
+
+function testDisplayingErrorForInvalidURL() {
+  it('Shows an error message for an invalid url', () => {
+    cy
+      .get('#phormal-field-error-url')
+      .should('not.exist')
+
+    cy
+      .get('#phormal-field-input-url')
+      .type('test')
+
+    cy
+      .get('#phormal-field-error-url')
+      .should('exist')
+      .should('have.text', 'Not a valid URL')
+
+    cy
+      .get('#phormal-field-input-url')
+      .clear()
+      .type('https://www.google.com')
+
+    cy
+      .get('#phormal-field-error-url')
+      .should('not.exist')
+  })
+}
+
+function testDisplayingErrorForDisallowedURLHost() {
+  it('Shows an error message for an invalid host in a url', () => {
+    cy
+      .get('#phormal-field-error-urlInvalidHost')
+      .should('not.exist')
+
+    cy
+      .get('#phormal-field-input-urlInvalidHost')
+      .type('https://test')
+
+    cy
+      .get('#phormal-field-error-urlInvalidHost')
+      .should('exist')
+      .should('have.text', 'The URL host is not valid. Allowed hosts are: google.com, google.nl, google.be')
+
+    cy
+      .get('#phormal-field-input-urlInvalidHost')
+      .clear()
+      .type('https://google.com')
+
+    cy
+      .get('#phormal-field-error-urlInvalidHost')
+      .should('not.exist')
+  })
+}
+
+function testDisplayingErrorForDisallowedURLProtocol() {
+  it('Shows an error message for an invalid protocol in a url', () => {
+    cy
+      .get('#phormal-field-error-urlInvalidProtocol')
+      .should('not.exist')
+
+    cy
+      .get('#phormal-field-input-urlInvalidProtocol')
+      .type('http://google.com')
+
+    cy
+      .get('#phormal-field-error-urlInvalidProtocol')
+      .should('exist')
+      .should('have.text', 'The URL protocol is not valid. Allowed protocols are: https, file:')
+
+    cy
+      .get('#phormal-field-input-urlInvalidProtocol')
+      .clear()
+      .type('https://google.com')
+
+    cy
+      .get('#phormal-field-error-urlInvalidProtocol')
+      .should('not.exist')
+  })
+}
+
+describe('Active validation', () => {
+
+  beforeEach(() => {
+    cy.visit('/#/e2e/validation')
+  })
+
+  testDisplayingMaxLengthError();
+  testDisplayingMinLengthError();
+  testUseEmail();
+  testDisplayingErrorForFaultyRegex();
+  testDisplayingErrorForRegexWithReadableFormat();
+  testDisplayingErrorForInvalidURL();
+  testDisplayingErrorForDisallowedURLHost();
+  testDisplayingErrorForDisallowedURLProtocol();
+
+  it('Displays an error for value lower than a given numeric minimum value', () => {
+    cy
+      .get('#phormal-field-error-minNumeric')
+      .should('not.exist')
+
+    cy
+      .get('#phormal-field-input-minNumeric')
+      .type('14')
+
+    cy
+      .get('#phormal-field-error-minNumeric')
+      .should('exist')
+      .should('have.text', 'Value is lower than the minimum value of 15')
+
+    cy
+      .get('#phormal-field-input-minNumeric')
+      .clear()
+      .type('15')
+
+    cy
+      .get('#phormal-field-error-minNumeric')
+      .should('not.exist')
+  })
+
+  it('Displays an error for value higher than a given numeric maximum value', () => {
+    cy
+      .get('#phormal-field-error-maxNumeric')
+      .should('not.exist')
+
+    cy
+      .get('#phormal-field-input-maxNumeric')
+      .type('16')
+
+    cy
+      .get('#phormal-field-error-maxNumeric')
+      .should('exist')
+      .should('have.text', 'Value is higher than the maximum value of 15')
+
+    cy
+      .get('#phormal-field-input-maxNumeric')
+      .clear()
+      .type('15')
+
+    cy
+      .get('#phormal-field-error-maxNumeric')
+      .should('not.exist')
+  })
+
+  it('Displays an error for a value not between a given numeric minimum and maximum value', () => {
+    cy
+      .get('#phormal-field-error-minMaxNumeric')
+      .should('not.exist')
+
+    cy
+      .get('#phormal-field-input-minMaxNumeric')
+      .type('14')
+
+    cy
+      .get('#phormal-field-error-minMaxNumeric')
+      .should('exist')
+      .should('have.text', 'Value is not between the minimum value of 15 and the maximum value of 16')
+
+    cy
+      .get('#phormal-field-input-minMaxNumeric')
+      .clear()
+      .type('17')
+
+    cy
+      .get('#phormal-field-error-minMaxNumeric')
+      .should('exist')
+      .should('have.text', 'Value is not between the minimum value of 15 and the maximum value of 16')
+
+    cy
+      .get('#phormal-field-input-minMaxNumeric')
+      .clear()
+      .type('15')
+
+    cy
+      .get('#phormal-field-error-minMaxNumeric')
       .should('not.exist')
   })
 })

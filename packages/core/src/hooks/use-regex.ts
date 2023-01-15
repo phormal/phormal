@@ -1,5 +1,6 @@
 import {HookReturnValue} from "@phormal/core/src/types/interfaces/Hook.interface";
 import {FormField} from "@phormal/core/src";
+import {ValidationHelper} from "../util/validation-helper";
 
 /**
  * @param {RegExp} regex
@@ -15,10 +16,7 @@ export const useRegex = (regex: RegExp, readableExpectedFormat?: string): HookRe
 
         const currentValue = field.getValue() as string
         const isValid = regex.test(currentValue)
-        console.log(isValid)
-
-        if (!field.errors.includes(ERROR_NAME) && !isValid) field.errors.push(ERROR_NAME)
-        if (field.errors.includes(ERROR_NAME) && isValid) field.errors.splice(field.errors.indexOf(ERROR_NAME), 1)
+        ValidationHelper.pushOrSpliceError(field, ERROR_NAME, isValid)
       }
     },
 

@@ -1,15 +1,14 @@
-import {Hook} from "@phormal/core/src/types/interfaces/Hook.interface";
+import {Hook, HookReturnValue} from "@phormal/core/src/types/interfaces/Hook.interface";
 import {FormField} from "@phormal/core/src/FormField";
+import {ValidationHelper} from "../util/validation-helper";
 
 const ERROR_NAME = 'required';
-export const useRequired: Hook = () => {
+export const useRequired = (): HookReturnValue => {
   return {
     validators: {
       checkRequired(field: FormField) {
         const isValid = !!field.getValue() || field.getValue() === '0'
-
-        if (!field.errors.includes(ERROR_NAME) && !isValid) field.errors.push(ERROR_NAME)
-        if (field.errors.includes(ERROR_NAME) && isValid) field.errors.splice(field.errors.indexOf(ERROR_NAME), 1)
+        ValidationHelper.pushOrSpliceError(field, ERROR_NAME, isValid)
       }
     },
 

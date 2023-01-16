@@ -12,6 +12,7 @@ import Errors from "../tests/pages/Errors";
 import RadioGroupTests from "../tests/pages/RadioGroupTests";
 import EventHandlerTests from "../tests/pages/EventHandlerTests";
 import CheckboxTests from "../tests/pages/CheckboxTests";
+import RightToLeftTests from "../tests/pages/RightToLeft";
 
 const app = createApp(App)
 
@@ -28,6 +29,7 @@ const router = createRouter({
     { path: '/e2e/radiogroup', component: RadioGroupTests },
     { path: '/e2e/event-handlers', component: EventHandlerTests },
     { path: '/e2e/checkbox', component: CheckboxTests },
+    { path: '/e2e/right-to-left', component: RightToLeftTests },
   ]
 })
 

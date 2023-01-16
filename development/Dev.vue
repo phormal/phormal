@@ -114,7 +114,7 @@ export default {
       el: '#phormal',
       validation: 'active',
       language: 'de',
-      theme: 'material',
+      // theme: 'material',
       // theme: 'basic',
     })
 

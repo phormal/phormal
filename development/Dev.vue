@@ -115,7 +115,7 @@ export default {
       validation: 'active',
       language: 'de',
       // theme: 'material',
-      // theme: 'basic',
+      theme: 'basic',
     })
 
     this.values = this.form.$values()

@@ -15,7 +15,6 @@ export const useMinMax = (minValue: number|undefined|null, maxValue?: number): H
         if (typeof minValue === 'number' && typeof maxValue !== 'number') errorName = MIN_VALUE_ERROR_NAME
         if (typeof minValue !== 'number' && typeof maxValue === 'number') errorName = MAX_VALUE_ERROR_NAME
         if (typeof minValue === 'number' && typeof maxValue === 'number') errorName = BETWEEN_VALUES_ERROR_NAME
-        if (!errorName) return
 
         const currentValue = field.getValue() as string
 
@@ -23,7 +22,7 @@ export const useMinMax = (minValue: number|undefined|null, maxValue?: number): H
         if (errorName === MAX_VALUE_ERROR_NAME) isValid = +currentValue <= (maxValue as number)
         if (errorName === BETWEEN_VALUES_ERROR_NAME) isValid = +currentValue >= (minValue as number) && +currentValue <= (maxValue as number)
 
-        ValidationHelper.pushOrSpliceError(field, errorName, isValid)
+        ValidationHelper.pushOrSpliceError(field, errorName as string, isValid)
       }
     },
 
@@ -33,7 +32,7 @@ export const useMinMax = (minValue: number|undefined|null, maxValue?: number): H
         ru: `Значение меньше минимального значения ${minValue}`,
         es: `El valor es inferior al valor mínimo de ${minValue}.`,
         tr: `Değer ${minValue} minimum değerinden düşük`,
-        // fa: ``,
+        fa: `مقدار کمتر از مقدار حداقل ${minValue} است`,
         fr: `La valeur est inférieure à la valeur minimale de ${minValue}`,
         de: `Wert ist kleiner als der Mindestwert von ${minValue}`,
         ja: `値が最小値${minValue}より小さい。`,
@@ -47,7 +46,7 @@ export const useMinMax = (minValue: number|undefined|null, maxValue?: number): H
         ru: `Значение больше максимального значения ${maxValue}`,
         es: `El valor es superior al valor máximo de ${maxValue}.`,
         tr: `Değer, ${maxValue} maksimum değerinden yüksek`,
-        // fa: ``,
+        fa: `مقدار بالاتر از حداکثر مقدار ${maxValue} است`,
         fr: `La valeur est supérieure à la valeur maximale de ${maxValue}`,
         de: `Wert ist höher als der Höchstwert von ${maxValue}`,
         ja: `値が${maxValue}の最大値より大きい。`,
@@ -61,7 +60,7 @@ export const useMinMax = (minValue: number|undefined|null, maxValue?: number): H
         ru: `Значение не находится между минимальным значением ${minValue} и максимальным значением ${maxValue}`,
         es: `El valor no está entre el valor mínimo de ${minValue} y el valor máximo de ${maxValue}.`,
         tr: `Değer, ${minValue} minimum değeri ile ${maxValue} maksimum değeri arasında değil`,
-        // fa: ``,
+        fa: `مقدار بین حداقل مقدار ${minValue} و حداکثر مقدار ${maxValue} نیست`,
         fr: `La valeur n'est pas comprise entre la valeur minimale de ${minValue} et la valeur maximale de ${maxValue}`,
         de: `Wert liegt nicht zwischen dem Mindestwert von ${minValue} und dem Höchstwert von ${maxValue}`,
         ja: `値が最小値${minValue}と最大値${maxValue}の間でない。`,

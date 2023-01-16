@@ -27,11 +27,17 @@ const testSettingDefaultValues = () => {
 const testShowingRequiredErrorMessages = () => {
   it('Show an error message for an empty text field that is required', () => {
     // Negative check
-    cy.get(FIRST_NAME_ERROR).should('not.exist')
+    cy
+      .get(FIRST_NAME_ERROR)
+      .should('not.exist')
 
-    cy.get(FIRST_NAME_FIELD)
+    cy
+      .get(FIRST_NAME_FIELD)
       .clear()
       .blur()
+
+    cy
+      .get(FIRST_NAME_ERROR)
       .should('exist')
   })
 }
@@ -235,5 +241,22 @@ describe('[mobile] Smoke with theme material', () => {
   runAllTests()
   runMaterialThemeSpecificTests()
 })
+
+describe('Using a fallback language', () => {
+  it('Uses the fallbackLanguage if no translations exist for the chosen language', () => {
+    cy.visit('/#/e2e/smoke?lang=gd&fallbackLang=de')
+
+    cy
+      .get('#phormal-field-input-firstName')
+      .type('j')
+      .clear()
+
+    cy
+      .get('#phormal-field-error-firstName')
+      .should('contain', 'Dieses Feld ist ein Pflichtfeld')
+      .should('contain', 'Die Eingabe muss zwischen 1 und 155 Zeichen lang sein')
+  })
+})
+
 
 export {}

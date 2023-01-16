@@ -1,5 +1,6 @@
 import {defineComponent, h} from "vue";
 import {Phormal, useLength} from "../../packages/core/src";
+import CodeElement from "../components/code-element";
 
 export default defineComponent({
   name: "RightToLeftTests",
@@ -64,8 +65,8 @@ export default defineComponent({
 
     return h("div", { dir: 'rtl', style: 'max-width: 90%; margin: 20px auto;' }, [
       phormal,
-      // h(CodeElement, { code: this.formValues || {} }),
-      // h('button', { onClick: () => this.formValues = this.form?.$values(), id: 'getvalues' }, 'Get Values')
+      h(CodeElement, { code: this.formValues || {} }),
+      h('button', { onClick: () => this.formValues = this.form?.$values(), id: 'getvalues' }, 'Get Values')
     ])
   }
 })

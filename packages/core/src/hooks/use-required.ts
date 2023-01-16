@@ -18,7 +18,7 @@ export const useRequired = (): HookReturnValue => {
         ru: 'Этот ввод необходим',
         es: 'Esta entrada es necesaria',
         tr: 'Bu girdi gereklidir',
-        // fa: 'این ورودی مورد نیاز است',
+        fa: 'این ورودی مورد نیاز است',
         fr: 'Cette entrée est requise',
         de: 'Dieses Feld ist ein Pflichtfeld',
         ja: 'この入力は必須です',

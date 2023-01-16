@@ -31,7 +31,7 @@ export const useValidZip = (): HookReturnValue => {
         ru: 'Неверный почтовый индекс',
         es: 'Código postal no válido',
         tr: 'Geçersiz posta kodu',
-        // fa: 'کد پستی نادرست',
+        fa: 'کد پستی نادرست',
         fr: 'Code postal non valide',
         de: 'Ungültige Postleitzahl',
         ja: '無効な郵便番号',

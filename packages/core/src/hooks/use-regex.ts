@@ -1,5 +1,6 @@
 import {HookReturnValue} from "@phormal/core/src/types/interfaces/Hook.interface";
 import {FormField} from "@phormal/core/src";
+import {ValidationHelper} from "../util/validation-helper";
 
 /**
  * @param {RegExp} regex
@@ -15,10 +16,7 @@ export const useRegex = (regex: RegExp, readableExpectedFormat?: string): HookRe
 
         const currentValue = field.getValue() as string
         const isValid = regex.test(currentValue)
-        console.log(isValid)
-
-        if (!field.errors.includes(ERROR_NAME) && !isValid) field.errors.push(ERROR_NAME)
-        if (field.errors.includes(ERROR_NAME) && isValid) field.errors.splice(field.errors.indexOf(ERROR_NAME), 1)
+        ValidationHelper.pushOrSpliceError(field, ERROR_NAME, isValid)
       }
     },
 
@@ -28,7 +26,7 @@ export const useRegex = (regex: RegExp, readableExpectedFormat?: string): HookRe
         ru: 'Входные данные не имеют ожидаемого формата',
         es: 'La entrada no tiene el formato esperado',
         tr: 'Girdi beklenen biçime sahip değil',
-        // fa: 'ورودی دارای قالب مورد انتظار نیست',
+        fa: 'ورودی دارای قالب مورد انتظار نیست',
         fr: `L'entrée n'a pas le format attendu`,
         de: 'Die Eingabe hat nicht das erwartete Format',
         ja: '入力が期待された形式でない',
@@ -42,7 +40,7 @@ export const useRegex = (regex: RegExp, readableExpectedFormat?: string): HookRe
         ru: `Входные данные не имеют ожидаемого формата. Ожидаемый формат: ${readableExpectedFormat}`,
         es: `La entrada no tiene el formato esperado. Formato esperado: ${readableExpectedFormat}`,
         tr: `Giriş beklenen biçime sahip değil. Beklenen biçim: ${readableExpectedFormat}`,
-        // fa: `${readableExpectedFormat}ورودی دارای قالب مورد انتظار نیست. قالب مورد انتظار: `,
+        fa: `${readableExpectedFormat}ورودی دارای قالب مورد انتظار نیست. قالب مورد انتظار: `,
         fr: `L'entrée n'a pas le format attendu. Format attendu: ${readableExpectedFormat}`,
         de: `Die Eingabe hat nicht das erwartete Format. Erwartetes Format: ${readableExpectedFormat}`,
         ja: `入力が期待された形式でない。期待される形式： ${readableExpectedFormat}.`,

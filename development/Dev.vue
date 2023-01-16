@@ -1,11 +1,5 @@
 <script lang="ts">
-import {Phormal} from '../packages/core/src'
-import useRequired from "../packages/use-required/src";
-import useLength from "../packages/use-length/src";
-import useAutoCapitalize from "../packages/use-auto-capitalize/src";
-import useValidZip from "../packages/use-valid-zip/src";
-import useEmail from "../packages/use-email/src";
-// import {Phormal} from "../packages/component-vue3/src";
+import {Phormal, useEmail, useLength, useRequired, useValidZip, useAutoCapitalize} from '../packages/core/src'
 
 export default {
   name: 'App',
@@ -19,19 +13,6 @@ export default {
       form: undefined,
 
       formFields: {
-        newsletter: {
-          type: 'checkbox',
-          label: 'Do you want to receive our newsletter?',
-          hooks: [],
-          hideIf: { acceptTerms: false },
-          disabled: true,
-          value: true,
-        },
-        acceptTerms: {
-          type: 'checkbox',
-          label: 'Accept Terms & conditions for this site',
-          value: true,
-        },
         firstName: {
           // label: 'First name',
           hooks: [useRequired(), useLength(1, 155), useAutoCapitalize()],
@@ -41,6 +22,19 @@ export default {
           // hideIf: {
           //   lastName: 'empty'
           // }
+        },
+        // newsletter: {
+        //   type: 'checkbox',
+        //   label: 'Do you want to receive our newsletter?',
+        //   hooks: [],
+        //   hideIf: { acceptTerms: false },
+        //   disabled: true,
+        //   value: true,
+        // },
+        acceptTerms: {
+          type: 'checkbox',
+          label: 'Accept Terms & conditions for this site',
+          value: false,
         },
         lastName: {
           label: 'Last name',
@@ -120,8 +114,8 @@ export default {
       el: '#phormal',
       validation: 'active',
       language: 'de',
-      theme: 'material',
-      // theme: 'basic',
+      // theme: 'material',
+      theme: 'basic',
     })
 
     this.values = this.form.$values()

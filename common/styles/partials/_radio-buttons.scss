@@ -14,19 +14,23 @@
       position: relative;
       cursor: pointer;
       line-height: 20px;
-      font-size: 14px;
+      font-size: 1rem;
       margin: 0.5em 0;
 
       .phlib__radio-button-label {
         position: relative;
         display: block;
         float: left;
-        margin-right: 10px;
+        margin-inline-end: 10px;
         width: 20px;
         height: 20px;
         border: 2px solid $color-border;
         border-radius: 100%;
         -webkit-tap-highlight-color: transparent;
+
+        [dir="rtl"] & {
+          float: right;
+        }
 
         &::after {
           z-index: 1;

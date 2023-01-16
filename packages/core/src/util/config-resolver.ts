@@ -33,7 +33,7 @@ export class ConfigResolver {
 
     if (![undefined, 'active', 'passive'].includes(this.config.validation))
       throw new ConfigError(`Invalid value for config option "validation": ${this.config.validation}`)
-    
+
     if (![undefined, 'basic', 'material'].includes(this.config.theme))
       throw new ConfigError(`Unknown theme name: ${this.config.theme}`)
   }
@@ -43,6 +43,7 @@ export class ConfigResolver {
       ...this.config,
       validation: this.config.validation || 'active',
       language: this.config.language || 'en',
+      fallbackLanguage: this.config.fallbackLanguage || 'en',
       theme: this.config.theme || 'basic'
     };
   }

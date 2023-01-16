@@ -13,6 +13,11 @@
     transform: translateY(-50%) scale(0.59);
     transition: transform 0.23s ease-in-out;
     color: #9ba19e;
+
+    [dir="rtl"] & {
+      left: 0.5em;
+      right: auto;
+    }
   }
 
   .phlib__select-options {

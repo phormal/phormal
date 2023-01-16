@@ -95,7 +95,8 @@ export class FormField implements FormFieldInterface {
       this.errorMsgId,
       this.errors,
       this._errorMessages,
-      (this._form._config as FormConfig).language as string
+      (this._form._config as FormConfig).language as string,
+      (this._form._config as FormConfig).fallbackLanguage as string
     ).render()
 
     // If the error message is already rendered, replace it

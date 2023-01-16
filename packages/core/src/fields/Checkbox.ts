@@ -20,7 +20,10 @@ export class Checkbox extends FormField {
   setValue(value: string|boolean) {
     this._form._setValue(this.name, Boolean(value))
     const inputElement: HTMLInputElement | null | HTMLElement = document.getElementById(this.inputId)
-    if (inputElement instanceof HTMLInputElement) inputElement.checked = Boolean(value)
+    if (inputElement instanceof HTMLInputElement) {
+      inputElement.checked = Boolean(value)
+      inputElement.setAttribute('aria-checked', String(Boolean(value)))
+    }
     if (this.dependants.length) this.updateDependants()
   }
 
@@ -35,6 +38,8 @@ export class Checkbox extends FormField {
           'input',
           {
               checked: Boolean(this.getValue()),
+              ariaChecked: Boolean(this.getValue()),
+              tabIndex: 0,
               ...this._getGlobalInputProperties(),
           }
         ),

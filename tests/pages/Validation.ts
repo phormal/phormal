@@ -1,8 +1,5 @@
-import useLength from "../../packages/use-length/src";
-import useRegex from "../../packages/use-regex/src";
-import {Phormal} from '../../packages/core/src'
+import {Phormal, useRegex, useLength, useEmail, useUrl, useMinMax} from '../../packages/core/src'
 import {defineComponent, h} from "vue";
-import useEmail from "@phormal/use-email/src";
 import CodeElement from "../components/code-element";
 
 export default defineComponent({
@@ -41,6 +38,30 @@ export default defineComponent({
           label: 'Newsletter',
           type: 'checkbox',
           hooks: [useRegex(/true/i)],
+        },
+        url: {
+          label: 'URL',
+          hooks: [useUrl()]
+        },
+        urlInvalidHost: {
+          label: 'URL with invalid host',
+          hooks: [useUrl({allowedHosts: ['google.com', 'google.nl', 'google.be']})]
+        },
+        urlInvalidProtocol: {
+          label: 'URL with invalid protocol',
+          hooks: [useUrl({allowedProtocols: ['https', 'file:']})]
+        },
+        minNumeric: {
+          label: 'Minimum numeric value',
+          hooks: [useMinMax(15)]
+        },
+        maxNumeric: {
+          label: 'Maximum numeric value',
+          hooks: [useMinMax(null, 15)]
+        },
+        minMaxNumeric: {
+          label: 'Minimum and maximum numeric value',
+          hooks: [useMinMax(15, 16)]
         }
       },
     }

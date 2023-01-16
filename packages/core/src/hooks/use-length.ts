@@ -1,5 +1,6 @@
 import {HookReturnValue} from "@phormal/core/src/types/interfaces/Hook.interface";
 import {FormField} from "@phormal/core/src/FormField";
+import {ValidationHelper} from "../util/validation-helper";
 
 export const useLength = (minLength: number|undefined|null, maxLength?: number|undefined|null): HookReturnValue => {
   const LENGTH_ERROR_NAME = 'length'
@@ -28,8 +29,7 @@ export const useLength = (minLength: number|undefined|null, maxLength?: number|u
           isValid = thisValue.length <= maxLength
         }
 
-        if (!field.errors.includes(errorName) && !isValid) field.errors.push(errorName)
-        if (field.errors.includes(errorName) && isValid) field.errors.splice(field.errors.indexOf(errorName), 1)
+        ValidationHelper.pushOrSpliceError(field, errorName, isValid)
       }
     },
     errorMessages: {
@@ -38,7 +38,7 @@ export const useLength = (minLength: number|undefined|null, maxLength?: number|u
         ru: `Этот ввод должен быть длиной от ${minLength} до ${maxLength} символов`,
         es: `Esta entrada debe tener entre ${minLength} y ${maxLength} caracteres`,
         tr: `Bu girdi ${minLength} ile ${maxLength} karakterleri arasında olmalıdır`,
-        // fa: `این ورودی باید بین نویسه ${minLength} و ${maxLength} باشد`,
+        fa: `این ورودی باید بین نویسه ${minLength} و ${maxLength} باشد`,
         fr: `Cette entrée doit avoir une longueur comprise entre ${minLength} et ${maxLength} caractères`,
         de: `Die Eingabe muss zwischen ${minLength} und ${maxLength} Zeichen lang sein`,
         ja: `入力は ${minLength} から ${maxLength} までの文字数でなければなりません。`,
@@ -53,7 +53,7 @@ export const useLength = (minLength: number|undefined|null, maxLength?: number|u
         ru: `Этот ввод должен быть длиной не менее ${minLength} символов`,
         es: `Esta entrada debe tener al menos ${minLength} caracteres`,
         tr: `Bu girdi en az ${minLength} karakter uzunluğunda olmalıdır`,
-        // fa: `این ورودی باید حداقل ${minLength} نویسه داشته باشد`,
+        fa: `این فیلد باید حداقل ${minLength} نویسه داشته باشد`,
         fr: `Cette entrée doit comporter au moins ${minLength} caractères.`,
         de: `Die Eingabe muss mindestens ${minLength} Zeichen lang sein`,
         ja: `入力は少なくとも ${minLength} 文字の長さである必要があります。`,
@@ -68,7 +68,7 @@ export const useLength = (minLength: number|undefined|null, maxLength?: number|u
         ru: `Этот ввод должен быть длиной не более ${maxLength} символов`,
         es: `Esta entrada debe tener como máximo ${maxLength} caracteres`,
         tr: `Bu girdi en fazla ${maxLength} karakter uzunluğunda olmalıdır`,
-        // fa: `این ورودی باید حداکثر ${maxLength} کاراکتر داشته باشد.`,
+        fa: `این ورودی باید حداکثر ${maxLength} کاراکتر داشته باشد.`,
         fr: `Cette entrée doit comporter au maximum ${maxLength} caractères`,
         de: `Die Eingabe darf höchstens ${maxLength} Zeichen lang sein`,
         ja: `入力は最大で ${maxLength} 文字の長さである必要があります。`,

@@ -49,6 +49,10 @@
     position: relative;
     text-align: left;
 
+    [dir="rtl"] & {
+      text-align: initial;
+    }
+
     label {
       user-select: none;
       cursor: pointer;
@@ -56,18 +60,9 @@
       line-height: $md-checkbox-size;
       vertical-align: top;
       clear: both;
-      padding-left: 1px;
 
       &:not(:empty) {
-        padding-left: $md-checkbox-label-padding;
-      }
-
-      &::before,
-      &::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
+        padding-inline-start: $md-checkbox-label-padding;
       }
 
       &::before {
@@ -80,11 +75,28 @@
         cursor: pointer;
         transition: background 0.3s;
       }
+
+      [dir="rtl"] & {
+        padding-inline-start: 2em;
+      }
+
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+
+        [dir="rtl"] & {
+          right: 0;
+          left: initial;
+        }
+      }
     }
 
     input[type="checkbox"] {
       outline: 0;
-      visibility: hidden;
+      opacity: 0;
       width: $md-checkbox-size;
       margin: 0;
       display: block;
@@ -112,6 +124,16 @@
           border: $md-checkmark-width solid $md-checkmark-color;
           border-top-style: none;
           border-right-style: none;
+
+          [dir="rtl"] & {
+            transform:
+              translate(
+                -$md-checkbox-padding,
+                math.div($md-checkbox-size, 2) - math.div($md-checkmark-size, 2.6)
+              ) rotate(
+                -45deg
+              );
+          }
         }
       }
 
@@ -134,6 +156,11 @@
     transform: translate3d(0, 0, 0);
     transition: all 0.2s ease;
     pointer-events: none;
+
+    [dir="rtl"] & {
+      right: 0.75rem;
+      left: auto;
+    }
   }
 
   .phlib__select--small-label {
@@ -215,7 +242,7 @@
         bottom: 0;
       };
 
-      padding-left: 0;
+      padding: 0;
       list-style-type: none;
     }
 
@@ -225,7 +252,7 @@
       &::before {
         content: "–";
         text-indent: -5px;
-        margin-right: 0.5rem;
+        margin-inline-end: 0.5rem;
       }
     }
   }

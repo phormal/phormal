@@ -3,7 +3,7 @@ import {Phormal} from "../../packages/core/src";
 import CodeElement from "../components/code-element";
 
 export default defineComponent({
-  name: "MultiSelect",
+  name: "CheckboxTests",
 
   data() {
     return {
@@ -12,33 +12,25 @@ export default defineComponent({
       formFields: {
         foo: {
           label: 'Foo',
-          value: 'foo',
+          type: 'checkbox',
+          value: true,
         },
         bar: {
           label: 'Bar',
-          type: 'select',
-          value: 'bar',
-          options: [
-            { value: 'bar', label: 'Bar' },
-            { value: 'baz', label: 'Baz' },
-            { value: 'qux', label: 'Qux' },
-          ],
+          type: 'checkbox',
+          value: false,
+
         },
         baz: {
-          type: 'select',
-          value: 'erkjghrejkkhj',
-          options: [
-            { value: 'bar', label: 'Bar' },
-            { value: 'baz', label: 'Baz' },
-            { value: 'qux', label: 'Qux' },
-          ],
+          label: 'Baz',
+          type: 'checkbox',
+          value: true,
+          disabled: true,
         },
         qux: {
           label: 'Qux',
-          type: 'select',
-          options: [
-            { value: 'bar', label: 'Bar' },
-          ],
+          type: 'checkbox',
+          value: false,
           disabled: true,
         }
       },

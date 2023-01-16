@@ -1,8 +1,4 @@
-import useRequired from "../../packages/use-required/src";
-import useLength from "../../packages/use-length/src";
-import useAutoCapitalize from "../../packages/use-auto-capitalize/src";
-import useValidZip from "../../packages/use-valid-zip/src";
-import {Phormal} from '@phormal/core/src'
+import {useLength, useAutoCapitalize, Phormal, useRequired, useValidZip} from "../../packages/core/src";
 import {defineComponent, h} from "vue";
 
 export default defineComponent({
@@ -85,16 +81,26 @@ export default defineComponent({
   mounted() {
     const url = window.location.href
     const themeQueryString = url.match(/theme=(\w+)/)
-
     const theme = !themeQueryString || !themeQueryString.length
       ? 'basic'
       : (themeQueryString[0].split('=')[1]) as 'basic' | 'material'
 
+    const fallbackLangQueryString = url.match(/fallbackLang=(\w+)/)
+    const fallbackLang = !fallbackLangQueryString || !fallbackLangQueryString.length
+      ? undefined
+      : (fallbackLangQueryString[0].split('=')[1]) as string
+
+    const langQueryString = url.match(/lang=(\w+)/)
+    const lang = !langQueryString || !langQueryString.length
+      ? undefined
+      : (langQueryString[0].split('=')[1]) as string
+
     this.form = new Phormal(this.formFields, {
       el: '#phormal',
-      language: 'en',
+      language: lang,
       validation: 'active',
       theme,
+      fallbackLanguage: fallbackLang,
     })
   },
 

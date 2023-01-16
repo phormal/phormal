@@ -8,6 +8,7 @@ export default class ErrorMessage implements MaquetteComponent {
     private readonly errors: string[],
     private readonly errorMessages: Record<string, ErrorMessageObject>,
     private readonly language: string,
+    private readonly fallbackLanguage: string,
   ) {}
 
   render() {
@@ -27,8 +28,9 @@ export default class ErrorMessage implements MaquetteComponent {
       // errorMessages here, should represent an object with key-value pairs, where the key is a locale like "en" or "de",
       // and the value being the translation
       const errorMessages = this.errorMessages[error]
+      const errorMessageTranslation = errorMessages[this.language] || errorMessages[this.fallbackLanguage]
 
-      return h('li', {}, [errorMessages[this.language] as VNodeChild])
+      return h('li', {}, [errorMessageTranslation as VNodeChild])
     }))
   }
 }

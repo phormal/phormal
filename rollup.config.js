@@ -90,7 +90,7 @@ async function build(commandLineArgs) {
         typescript({
           tsconfig: './' + fs.existsSync(`${basePath}/tsconfig.json`)
             ? `${basePath}/tsconfig.json`
-            : 'tsconfig.json',
+            : 'common/package.tsconfig.json',
         }),
       ],
     })

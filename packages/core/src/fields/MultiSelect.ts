@@ -74,7 +74,7 @@ export class MultiSelect extends FormField {
   }
 
   private handleOnKeydownForInput(event: KeyboardEvent) {
-    /* istanbul ignore if -- @preserve */
+    /* istanbul ignore next -- @preserve */
     if (event.code === 'Space' || event.code === 'Enter') {
       this.displayOptions()
     }

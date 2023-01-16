@@ -1,6 +1,6 @@
 {
   "name": "@phormal/core",
-  "version": "0.1.0-alpha.13",
+  "version": "0.1.0-alpha.16",
   "license": "MIT",
   "author": {
     "name": "Tom Österlund",
@@ -12,17 +12,10 @@
   "umd": "./dist/core.umd.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "dependencies": {
     "maquette": "^3.5.3"
-  },
-  "devDependencies": {
-    "lerna": "^6.1.0",
-    "sass": "^1.56.1",
-    "typescript": "^4.6.4",
-    "vite": "^3.1.8"
   },
   "workspaces": [
     "packages/*"
@@ -33,7 +26,7 @@
     "url": "https://github.com/phormal/phormal",
     "directory": "packages/core"
   },
-  "homepage": "https://phormal.dev/",
+  "homepage": "https://phormal.dev",
   "keywords": [
     "form-generator",
     "form-validation",

@@ -1,6 +1,6 @@
-import useRequired from "../../packages/use-required/src";
-import useLength from "../../packages/use-length/src";
-import {Phormal} from '../../packages/core/src'
+import {useRequired} from "../../packages/core/src";
+import {useLength} from "../../packages/core/src";
+import {Phormal} from "../../packages/core/src";
 import {defineComponent, h} from "vue";
 
 export default defineComponent({

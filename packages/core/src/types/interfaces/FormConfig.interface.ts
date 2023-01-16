@@ -7,6 +7,7 @@ export default interface FormConfig {
   validation?: ValidationType;
   language?: string;
   theme?: 'basic' | 'material';
+  fallbackLanguage?: string;
 }
 
 type FormFieldConfigBase = {

@@ -22,7 +22,7 @@ export const useEmail = (): HookReturnValue => {
         ru: 'Неверный адрес электронной почты',
         es: 'Correo electrónico no válido',
         tr: 'Geçersiz e-posta',
-        // fa: 'ایمیل نامعتبر',
+        fa: 'ایمیل نامعتبر',
         fr: 'Courriel non valide',
         de: 'Ungültige E-Mail-Adresse',
         ja: '無効なメール',

@@ -7,7 +7,7 @@ const allSupportedLanguages = [
   'ru', // Russian
   'es', // Spanish
   'tr', // Turkish
-  // 'fa', // Persian
+  'fa', // Persian
   'fr', // French
   'de', // German
   'ja', // Japanese

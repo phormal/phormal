@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.19](https://github.com/phormal/phormal/compare/v0.1.0-alpha.18...v0.1.0-alpha.19) (2023-01-17)
+
+
+### Features
+
+* **core:** turn _destroy into a public method $destroy ([8d0b1bf](https://github.com/phormal/phormal/commit/8d0b1bf5bcc6bac8689d6945d7373d40415135a9))
+
+
+
+
+
 # [0.1.0-alpha.18](https://github.com/phormal/phormal/compare/v0.1.0-alpha.17...v0.1.0-alpha.18) (2023-01-17)
 
 

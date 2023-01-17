@@ -4,13 +4,13 @@
 rm -rf instrumented
 rm -rf .nyc_output
 
-# build all packages, but then remove the dist
-#npm run build
-#npm run clean:packages
-#
-## Run linting
-#npm run lint:styles:fix
-#npm run lint:ts:fix
+# Build all packages, but then remove the dist
+npm run build
+npm run clean:packages
+
+# Run linting
+npm run lint:styles:fix
+npm run lint:ts:fix
 
 # Add changes from linting
-#git add .
+git add .

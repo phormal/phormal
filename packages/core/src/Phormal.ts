@@ -45,10 +45,7 @@ export class Phormal {
     }
   }
 
-  /**
-   * Internal API
-   * */
-  _destroy() {
+  $destroy() {
     for (const [, field] of Object.entries(this._fields)) {
       field.destroy()
     }

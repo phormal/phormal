@@ -17,7 +17,7 @@ const FormContent: React.FC<props> = ({instance}) => {
 
     return () => {
       if (instance) {
-        instance._destroy();
+        instance.$destroy();
       }
     }
   }, [instance]);

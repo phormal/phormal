@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './Dev'
+import ReactTests from "../tests/pages/ReactTests";
 import './style.scss'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ReactTests />
   </React.StrictMode>,
   document.getElementById('app-react') as HTMLElement
 )

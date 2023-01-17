@@ -13,7 +13,7 @@
     "skipLibCheck": true,
     "noEmit": false,
     "declaration": true,
-	"types": ["vite/client", "cypress", "node"]
+    "types": ["vite/client", "cypress", "node"]
   },
   "include": [
 	"packages/**/*.ts",

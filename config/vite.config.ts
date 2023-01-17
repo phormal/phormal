@@ -15,6 +15,7 @@ export default defineConfig({
     istanbulPlugin({
       cypress: true,
       requireEnv: false,
+      include: ["packages/**/*.ts", "packages/**/*.tsx"],
     }),
   ],
 })

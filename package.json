@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite --config config/vite.config.ts",
-    "build": "rollup -c && lerna run build",
+    "build": "npm run clean:packages && rollup -c && lerna run build",
     "test:e2e": "cypress open --e2e",
     "test:e2e:ci": "cypress run --e2e",
     "test:coverage": "npm run instrument && npm run test:e2e:ci && nyc report",
@@ -16,9 +16,9 @@
     "clean:packages": "rm -rf ./packages/*/dist",
     "docs:dev": "cd docs && npm run dev",
     "instrument": "npx nyc instrument packages instrumented",
-    "release": "npm run clean:packages && npm run build && lerna publish --no-commit-hooks",
-    "release:pre": "npm run clean:packages && npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-prerelease",
-    "release:bump:pre": "npm run clean:packages && npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-bump-prerelease",
+    "release": "npm run build && lerna publish --no-commit-hooks",
+    "release:pre": "npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-prerelease",
+    "release:bump:pre": "npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-bump-prerelease",
     "prepare": "husky install"
   },
   "dependencies": {

@@ -16,8 +16,9 @@
     "src"
   ],
   "peerDependencies": {
-    "@phormal/core": "^0.1.0-alpha.1",
-    "react": "^16.8.0"
+    "@phormal/core": "^0.1.0-alpha.16",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
   },
   "workspaces": [
     "packages/*"

@@ -1,7 +1,7 @@
-import {usePhormal} from "./use-phormal";
+import {useForm} from "./use-form";
 import FormContent from "./form-content";
 
 export {
   FormContent,
-  usePhormal,
+  useForm,
 }

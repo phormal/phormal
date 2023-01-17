@@ -44,7 +44,8 @@ export class ConfigResolver {
       validation: this.config.validation || 'active',
       language: this.config.language || 'en',
       fallbackLanguage: this.config.fallbackLanguage || 'en',
-      theme: this.config.theme || 'basic'
+      theme: this.config.theme || 'basic',
+      autoInit: typeof this.config.autoInit === 'boolean' ? this.config.autoInit : true,
     };
   }
 }

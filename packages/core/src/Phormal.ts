@@ -45,6 +45,15 @@ export class Phormal {
     }
   }
 
+  /**
+   * Internal API
+   * */
+  _destroy() {
+    for (const [, field] of Object.entries(this._fields)) {
+      field.destroy()
+    }
+  }
+
   $values() {
     const fieldNames = Object.keys(this._fields)
     type returnValueType = Record<string, string|boolean>

@@ -12,8 +12,8 @@
   },
   "exports": {
     "./dist/index.css": {
-      "import": "./dist/style.css",
-      "require": "./dist/style.css"
+      "import": "./dist/index.css",
+      "require": "./dist/index.css"
     }
   },
   "files": [
@@ -22,7 +22,7 @@
   "workspaces": [
     "packages/*"
   ],
-  "gitHead": "20d6849b622722d79a094d105f858f515eb58212",
+  "gitHead": "93f5603681f3ed45bf152d328e5570dd6d49807d",
   "repository": {
     "type": "git",
     "url": "https://github.com/phormal/phormal",

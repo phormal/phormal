@@ -152,6 +152,7 @@ export default {
 
     <button @click="runValidation">Validate</button>
     <button @click="getValues">Get values</button>
+    <button @click="form._destroy()">Destroy</button>
 
     <p>First name was blurred {{ firstNameBlurN }} times</p>
     <p>Last name was focused {{ lastNameFocusN }} times</p>

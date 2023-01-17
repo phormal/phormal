@@ -4,7 +4,7 @@
 rm -rf instrumented
 rm -rf .nyc_output
 
-# build all packages, but then remove the dist
+# Build all packages, but then remove the dist
 npm run build
 npm run clean:packages
 

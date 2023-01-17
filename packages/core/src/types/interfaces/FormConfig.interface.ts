@@ -8,6 +8,7 @@ export default interface FormConfig {
   language?: string;
   theme?: 'basic' | 'material';
   fallbackLanguage?: string;
+  autoInit?: boolean; // Prevents the form from being initialized automatically (used by react package)
 }
 
 type FormFieldConfigBase = {

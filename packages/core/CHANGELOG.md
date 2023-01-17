@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.17](https://github.com/phormal/phormal/compare/v0.1.0-alpha.16...v0.1.0-alpha.17) (2023-01-17)
+
+
+### Features
+
+* **react:** add package for framework integration ([#18](https://github.com/phormal/phormal/issues/18)) ([fe96027](https://github.com/phormal/phormal/commit/fe96027b70be37058c92263601e4a207ea73a881))
+* support for right-to-left languages ([#17](https://github.com/phormal/phormal/issues/17)) ([b29800c](https://github.com/phormal/phormal/commit/b29800c8d59eb178499adabab5bd9df20a05e6e4))
+
+
+
+
+
 # [0.1.0-alpha.16](https://github.com/phormal/phormal/compare/v0.1.0-alpha.13...v0.1.0-alpha.16) (2023-01-15)
 
 

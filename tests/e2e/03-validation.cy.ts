@@ -213,6 +213,22 @@ function testDisplayingErrorForDisallowedURLProtocol() {
   })
 }
 
+function testUpdatingDependantOnDependencyUpdate() {
+  it('Validates dependant field when updating its dependency', () => {
+    cy
+      .get('#phormal-field-input-country')
+      .click()
+      .get('#phlib__select-option-country-0')
+      .click()
+
+    cy.get('#phormal-field-input-zip')
+      .type('12XXX!!?JH')
+      .blur()
+      .get('#phormal-field-error-zip')
+      .should('exist')
+  });
+}
+
 describe('Active validation', () => {
 
   beforeEach(() => {
@@ -227,6 +243,7 @@ describe('Active validation', () => {
   testDisplayingErrorForInvalidURL();
   testDisplayingErrorForDisallowedURLHost();
   testDisplayingErrorForDisallowedURLProtocol();
+  testUpdatingDependantOnDependencyUpdate();
 
   it('Displays an error for value lower than a given numeric minimum value', () => {
     cy
@@ -376,6 +393,28 @@ describe('Passive validation', () => {
       .get(errorMsgEl)
       .should('exist')
       .should('have.text', errorMsgText)
+  })
+
+  it('Should not display an error message for a dependent field, when the dependency is updated', () => {
+    cy
+      .get('#phormal-field-input-country')
+      .click()
+      .get('#phlib__select-option-country-0')
+      .click()
+
+    cy.get('#phormal-field-input-zip')
+      .type('12XXX!!?JH')
+      .blur()
+      .get('#phormal-field-error-zip')
+      .should('not.exist')
+
+    cy
+      .get('#validate-button')
+      .click()
+
+    cy
+      .get('#phormal-field-error-zip')
+      .should('exist')
   })
 })
 

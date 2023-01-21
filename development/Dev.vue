@@ -14,7 +14,7 @@ export default {
 
       formFields: {
         firstName: {
-          // label: 'First name',
+          label: 'First name',
           hooks: [useRequired(), useLength(1, 155), useAutoCapitalize()],
           value: 'John',
           handleOnBlur: () => this.firstNameBlurN++,
@@ -23,14 +23,13 @@ export default {
           //   lastName: 'empty'
           // }
         },
-        // newsletter: {
-        //   type: 'checkbox',
-        //   label: 'Do you want to receive our newsletter?',
-        //   hooks: [],
-        //   hideIf: { acceptTerms: false },
-        //   disabled: true,
-        //   value: true,
-        // },
+        newsletter: {
+          type: 'checkbox',
+          label: 'Do you want to receive our newsletter?',
+          hooks: [],
+          disabled: true,
+          value: true,
+        },
         acceptTerms: {
           type: 'checkbox',
           label: 'Accept Terms & conditions for this site',
@@ -47,16 +46,19 @@ export default {
           value: '',
           label: 'YYYY',
           row: 'birthdate',
+          placeholder: 'YYYY',
         },
         mm: {
           value: '',
           label: 'MM',
           row: 'birthdate',
+          placeholder: 'MM',
         },
         dd: {
           value: '',
           label: 'DD',
           row: 'birthdate',
+          placeholder: 'DD',
         },
         country: {
           type: 'select',
@@ -87,7 +89,7 @@ export default {
           value: 'packstation',
           options: [
             { label: 'Billing', value: 'billing' },
-            { label: 'Shipping', value: 'shipping' },
+            { label: 'Shipping', value: 'shipping', disabled: true },
             { label: 'Packstation', value: 'packstation' },
           ],
         },
@@ -99,6 +101,7 @@ export default {
             {value: '2', label: 'Two'},
             {value: '3', label: 'Three'},
           ],
+          disabled: true,
           // value: '',
         },
       },
@@ -114,8 +117,8 @@ export default {
       el: '#phormal',
       validation: 'active',
       language: 'de',
-      // theme: 'material',
-      theme: 'basic',
+      theme: 'material',
+      // theme: 'basic',
     })
 
     this.values = this.form.$values()
@@ -152,6 +155,7 @@ export default {
 
     <button @click="runValidation">Validate</button>
     <button @click="getValues">Get values</button>
+    <button @click="form._destroy()">Destroy</button>
 
     <p>First name was blurred {{ firstNameBlurN }} times</p>
     <p>Last name was focused {{ lastNameFocusN }} times</p>

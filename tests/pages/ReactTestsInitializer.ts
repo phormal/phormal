@@ -12,15 +12,12 @@ export default defineComponent({
       const reactApp = document.getElementById('app-react')
 
       if (reactApp instanceof HTMLElement) {
-        console.log('hello')
         reactApp.style.display = 'block'
       }
     }
   },
 
   render() {
-    return h("div",[
-      // h('button', { onClick: this.showReactApp, id: 'show-react-button' }, 'Show React App'),
-    ])
+    return h("div")
   }
 })

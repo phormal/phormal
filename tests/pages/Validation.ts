@@ -1,6 +1,5 @@
-import {Phormal, useRegex, useLength, useEmail, useUrl, useMinMax} from '../../packages/core/src'
+import {Phormal, useRegex, useLength, useEmail, useUrl, useMinMax, useValidZip} from '../../packages/core/src'
 import {defineComponent, h} from "vue";
-import CodeElement from "../components/code-element";
 
 export default defineComponent({
   name: 'App',
@@ -62,7 +61,21 @@ export default defineComponent({
         minMaxNumeric: {
           label: 'Minimum and maximum numeric value',
           hooks: [useMinMax(15, 16)]
-        }
+        },
+        country: {
+          label: 'Country',
+          value: 'NL',
+          type: 'select',
+          options: [
+            {value: 'DE', label: 'Germany'},
+            {value: 'NL', label: 'Netherlands'},
+            {value: 'BE', label: 'Belgium'},
+          ]
+        },
+        zip: {
+          label: 'Zip',
+          hooks: [useValidZip()],
+        },
       },
     }
   },

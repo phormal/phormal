@@ -38,7 +38,7 @@ export class RadioGroup extends FormField implements RadioGroupInterface {
 
     const radioButtons = h(
       'div',
-      { id: this.id, class: FIELD_WRAPPER_CLASS + ' phlib__radio-buttons' },
+      { class: FIELD_WRAPPER_CLASS + ' phlib__radio-buttons' },
       options
     )
 
@@ -47,7 +47,7 @@ export class RadioGroup extends FormField implements RadioGroupInterface {
     this.projector.append(mountingElement, () => {
       return h(
         'div',
-        { class: 'phlib__radio-group' },
+        { class: 'phlib__radio-group', id: this.id },
         this.label ? [label, radioButtons] : [radioButtons]
       )
     })

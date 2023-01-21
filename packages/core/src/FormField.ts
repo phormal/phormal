@@ -207,6 +207,11 @@ export class FormField implements FormFieldInterface {
     this.inputDOMElement = document.getElementById(this.inputId) as HTMLInputElement
   }
 
+  public destroy() {
+    const el = document.getElementById(this.id)
+    if (el instanceof HTMLElement) el.remove()
+  }
+
   _onClick(event: Event) {
     for (const cb of this._onClickHandlers) cb(event, this)
   }

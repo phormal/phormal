@@ -14,6 +14,7 @@ import EventHandlerTests from "../tests/pages/EventHandlerTests";
 import CheckboxTests from "../tests/pages/CheckboxTests";
 import RightToLeftTests from "../tests/pages/RightToLeft";
 import ReactTestsInitializer from "../tests/pages/ReactTestsInitializer";
+import DestroyInstanceTest from "../tests/pages/DestroyInstanceTest";
 
 const app = createApp(App)
 
@@ -32,6 +33,7 @@ const router = createRouter({
     { path: '/e2e/checkbox', component: CheckboxTests },
     { path: '/e2e/right-to-left', component: RightToLeftTests },
     { path: '/e2e/react', component: ReactTestsInitializer },
+    { path: '/e2e/destroy-instance', component: DestroyInstanceTest },
   ]
 })
 

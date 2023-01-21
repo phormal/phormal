@@ -12,7 +12,13 @@ const FormContent: React.FC<props> = ({instance}) => {
   useEffect(() => {
     if (instance) {
       setFormId((instance?._config as FormConfig)?.el?.replace('#', ''));
-      instance?._init();
+      instance._init();
+    }
+
+    return () => {
+      if (instance) {
+        instance.$destroy();
+      }
     }
   }, [instance]);
 

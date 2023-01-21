@@ -6,12 +6,17 @@ const COUNTRY_SELECT = 'input[id="phormal-field-input-country"][role="button"]'
 const ZIP_CODE_FIELD = 'input[id="phormal-field-input-zip"]'
 const FIRST_NAME_ERROR = 'div[id="phormal-field-error-firstName"]'
 const ZIP_CODE_ERROR = 'div[id="phormal-field-error-zip"]'
+const DATE_FIELD = 'input[id="phormal-field-input-date"]'
+const DATETIME_LOCAL_FIELD = 'input[id="phormal-field-input-datetimeLocal"]'
+const TIME_FIELD = 'input[id="phormal-field-input-time"]'
 
 const testRenderingAllFields = () => {
   it('should render all expected fields', () => {
     cy.get(FIRST_NAME_FIELD).should('exist')
     cy.get(LAST_NAME_FIELD).should('exist')
     cy.get(COUNTRY_SELECT).should('exist')
+    cy.get(DATETIME_LOCAL_FIELD).should('exist')
+    cy.get(TIME_FIELD).should('exist')
   })
 }
 
@@ -21,6 +26,9 @@ const testSettingDefaultValues = () => {
     cy.get(LAST_NAME_FIELD).should('have.value', 'Doe')
     cy.get(COUNTRY_SELECT).should('have.value', 'United States')
     cy.get(ZIP_CODE_FIELD).should('have.value', '51378')
+    cy.get(DATE_FIELD).should('have.value', '2020-01-01')
+    cy.get(DATETIME_LOCAL_FIELD).should('have.value', '2020-01-01T12:00')
+    cy.get(TIME_FIELD).should('have.value', '12:00')
   })
 }
 

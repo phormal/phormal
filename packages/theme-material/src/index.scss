@@ -198,18 +198,14 @@
     }
   }
 
-  .phlib__input-text {
-    padding: 0 0.75rem;
-  }
-
-  .phlib__input-select {
-    padding: 0 0.75rem;
-  }
-
   .phlib__input-text,
-  .phlib__input-select, {
+  .phlib__input-select,
+  .phlib__input-date,
+  .phlib__input-datetime-local,
+  .phlib__input-time, {
     appearance: none;
     width: 100%;
+    padding: 0 0.75em;
     border: 0;
     font-family: inherit;
     height: 3.5rem;
@@ -261,7 +257,10 @@
 
   .phlib__has-label {
     .phlib__input-text,
-    .phlib__input-select {
+    .phlib__input-select,
+    .phlib__input-date,
+    .phlib__input-datetime-local,
+    .phlib__input-time {
       padding-top: 1rem;
     }
   }

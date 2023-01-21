@@ -16,6 +16,9 @@ export default class InputElement implements MaquetteComponent {
     if ((this.formField._form._config as FormConfig).theme === 'material') inputProps.placeholder = '&nbsp;'
     else if (this.formField.placeholder) inputProps.placeholder = this.formField.placeholder
 
+    if (this.formField.min) inputProps.min = this.formField.min
+    if (this.formField.max) inputProps.max = this.formField.max
+
     return h(
       'input',
       inputProps

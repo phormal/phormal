@@ -3,7 +3,18 @@
 import FormFieldInterface from './interfaces/FormField.interface'
 import {FormFieldConfig} from "./interfaces/FormConfig.interface";
 
-export const FormFieldTypes = ['email', 'password', 'select', 'checkbox', 'text', 'number', 'radiogroup']
+export const FormFieldTypes = [
+  'email',
+  'password',
+  'select',
+  'checkbox',
+  'text',
+  'number',
+  'radiogroup',
+  'date',
+  'datetime-local',
+  'time'
+]
 export type FormFieldType = typeof FormFieldTypes[number] | string;
 
 export type ValidationType = 'active' | 'passive';

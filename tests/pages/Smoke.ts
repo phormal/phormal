@@ -9,6 +9,21 @@ export default defineComponent({
       form: undefined as undefined|Phormal,
 
       formFields: {
+        date: {
+          type: 'date',
+          label: 'Date',
+          value: '2020-01-01',
+        },
+        datetimeLocal: {
+          type: 'datetime-local',
+          label: 'Datetime',
+          value: '2020-01-01T12:00',
+        },
+        time: {
+          type: 'time',
+          label: 'Time',
+          value: '12:00',
+        },
         delivery: {
           type: 'radiogroup',
           label: 'Delivery to',

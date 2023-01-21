@@ -51,8 +51,11 @@
 
   .phlib__input-text,
   .phlib__input-textarea,
-  .phlib__input-select, {
-    display: block;
+  .phlib__input-date,
+  .phlib__input-select,
+  .phlib__input-datetime-local,
+  .phlib__input-time, {
+    font-family: inherit;
     width: 100%;
     font-size: 1rem;
     padding: 0 0.75rem;

@@ -18,6 +18,10 @@ export default interface FormFieldInterface {
   dependants?: string[];
   isHidden?: boolean;
 
+  // date & time attributes
+  min?: string|null;
+  max?: string|null;
+
   render(mountingEl: HTMLElement): void;
   runAllValidators(): void;
   getValue(): string | number | undefined | boolean;

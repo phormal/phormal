@@ -16,7 +16,7 @@ export class FormFieldResolver {
     this.resolveField()
     if (formFieldConfig.focus) this.focusOnMount()
   }
-  
+
   validateFieldConfig() {
     if (![...FormFieldTypes, undefined].includes(this.formFieldConfig.type)) {
       throw new FormFieldError(
@@ -24,7 +24,7 @@ export class FormFieldResolver {
       )
     }
   }
-  
+
   resolveField() {
     this.field.placeholder = this.formFieldConfig.placeholder ? this.formFieldConfig.placeholder : ''
     this.field.label = this.formFieldConfig.label ? this.formFieldConfig.label : ''
@@ -33,6 +33,8 @@ export class FormFieldResolver {
     this.field.disabledIf = this.formFieldConfig.disabledIf ? this.formFieldConfig.disabledIf : {}
     this.field.hideIf = this.formFieldConfig.hideIf ? this.formFieldConfig.hideIf : {}
     this.field.row = this.formFieldConfig.row ? this.formFieldConfig.row : ''
+    this.field.min = this.formFieldConfig.min ? this.formFieldConfig.min : undefined
+    this.field.max = this.formFieldConfig.max ? this.formFieldConfig.max : undefined
 
     if (this.formFieldConfig.handleOnClick) this.field._onClickHandlers.push(this.formFieldConfig.handleOnClick)
     if (this.formFieldConfig.handleOnChange) this.field._onChangeHandlers.push(this.formFieldConfig.handleOnChange)

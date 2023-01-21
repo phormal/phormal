@@ -23,6 +23,27 @@ export default {
           //   lastName: 'empty'
           // }
         },
+        date: {
+          type: 'date',
+          label: 'Date',
+          hooks: [useRequired()],
+          min: '2023-01-01',
+          max: '2023-01-31',
+        },
+        datetimeLocal: {
+          type: 'datetime-local',
+          label: 'Datetime',
+          hooks: [useRequired()],
+          value: '2023-01-01T00:00',
+          min: '2023-01-01T00:00',
+          max: '2023-03-20T00:00',
+        },
+        time: {
+          type: 'time',
+          label: 'Time',
+          hooks: [useRequired()],
+          value: '00:00',
+        },
         newsletter: {
           type: 'checkbox',
           label: 'Do you want to receive our newsletter?',

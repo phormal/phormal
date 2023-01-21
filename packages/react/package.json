@@ -16,7 +16,7 @@
     "src"
   ],
   "peerDependencies": {
-    "@phormal/core": "^0.1.0-alpha.16",
+    "@phormal/core": "^0.1.0-alpha.19",
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
     "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0"
   },

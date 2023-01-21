@@ -26,6 +26,8 @@ export class FormField implements FormFieldInterface {
   row: undefined|string = undefined
   inputDOMElement: HTMLInputElement | null = null
   isHidden = false
+  min = null;
+  max = null;
   _errorMessages = {}
   _onClickHandlers: EventHandler[] = []
   _onChangeHandlers: EventHandler[] = []

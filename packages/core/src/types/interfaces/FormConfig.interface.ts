@@ -12,6 +12,7 @@ export default interface FormConfig {
 }
 
 type FormFieldConfigBase = {
+  // For all fields
   type?: FormFieldType;
   value?: string|boolean;
   label?: string;
@@ -25,6 +26,10 @@ type FormFieldConfigBase = {
 
   // For select fields
   options?: MultiSelectOption[] | RadioButtonOption[];
+
+  // For date & time fields
+  min?: string;
+  max?: string;
 
   hooks?: HookReturnValue[];
 }

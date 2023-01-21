@@ -7,7 +7,19 @@
   --color-error: #dc3545;
   --color-error-light: #f8d7da;
   --color-border: rgb(209 213 219);
-  --color-control-disabled: rgb(0 0 0 / 26%);
+  --color-label: rgb(17 24 39);
+  --color-background: rgb(249 250 251);
+  --color-text: rgb(17 24 39);
+  --color-background-disabled: #e9ecef;
+
+  @media (prefers-color-scheme: dark) {
+    --color-error-light: #f8d7da;
+    --color-border: transparent;
+    --color-label: #b7b3b3;
+    --color-background: rgb(249 250 251 / 10%);
+    --color-text: #eeeaea;
+    --color-background-disabled: #787b7e;
+  }
 
   * {
     box-sizing: border-box;
@@ -47,7 +59,8 @@
     line-height: 2.75rem;
     border: 1px solid var(--color-border);
     border-radius: 0.35rem;
-    background-color: rgb(249 250 251);
+    color: var(--color-text);
+    background-color: var(--color-background);
     appearance: none;
     margin-bottom: 0;
 
@@ -55,11 +68,15 @@
       border-color: var(--color-primary);
       outline: var(--color-primary) solid 1px;
       background-color: var(--color-primary-light);
+
+      @media (prefers-color-scheme: dark) {
+        background-color: #1a1a1a;
+      }
     }
 
     &:disabled {
-      background-color: #e9ecef;
-      border-color: #e9ecef;
+      background-color: var(--color-background-disabled);
+      border-color: var(--color-background-disabled);
       cursor: not-allowed;
     }
 
@@ -110,9 +127,13 @@
       };
     }
 
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--color-background);
+    }
+
     &:disabled {
       appearance: unset;
-      background-color: var(--color-control-disabled);
+      background-color: var(--color-background-disabled);
       border-color: transparent;
       cursor: not-allowed;
     }
@@ -128,7 +149,7 @@
 
   @mixin label-base {
     font-size: 1rem;
-    color: rgb(17 24 39);
+    color: var(--color-label);
     font-weight: 600;
   }
 
@@ -150,6 +171,7 @@
     ul {
       margin: 0;
       padding: 0;
+      color: var(--color-error);
       list-style-type: none;
     }
 
@@ -164,7 +186,7 @@
     }
   }
 
-  @include radio-buttons.index(var(--color-primary), var(--color-border), var(--color-control-disabled));
+  @include radio-buttons.index(var(--color-primary), var(--color-border), var(--color-background-disabled));
 
   .phlib__radio-group-label {
     @include label-base;

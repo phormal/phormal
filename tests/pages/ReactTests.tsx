@@ -2,7 +2,7 @@ import {FormContent, useForm} from "../../packages/react/src";
 import {useLength} from "../../packages/core/src";
 import React from "react";
 
-export default function () {
+const FormComponent: React.FC = () => {
   const [values, setValues] = React.useState<null|Record<string, any>>(null)
 
   const formSchema = useForm(
@@ -46,6 +46,22 @@ export default function () {
           {JSON.stringify(values, null, 2)}
         </pre>
       </code>
+    </div>
+  </>
+}
+
+export default function () {
+  const [showForm, setShowForm] = React.useState(true);
+
+  return <>
+    <div style={{ display: 'flex', flexFlow: 'column', alignItems: 'center' }}>
+      <h1>React tests</h1>
+
+      {showForm && <FormComponent />}
+
+      <button id={'unmount'} onClick={() => setShowForm(false)}>
+        Unmount form
+      </button>
     </div>
   </>
 }

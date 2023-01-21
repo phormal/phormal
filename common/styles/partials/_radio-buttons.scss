@@ -28,6 +28,12 @@
         border-radius: 100%;
         -webkit-tap-highlight-color: transparent;
 
+        @media (prefers-color-scheme: dark) {
+          --dark-mode-color-gray: #b7b3b3;
+
+          border-color: var(--dark-mode-color-gray);
+        }
+
         [dir="rtl"] & {
           float: right;
         }
@@ -81,6 +87,7 @@
 
     input[type="radio"]:disabled {
       & + .phlib__radio-button-label {
+        cursor: not-allowed;
         border-color: $color-control-disabled;
 
         &::after {

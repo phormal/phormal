@@ -27,4 +27,10 @@ describe('React integration', () => {
     cy.get('#get-values').click()
     cy.get('#values').should('contain', '"agree": true')
   })
+
+  it('Unmounts the form from the DOM, when unmounting the component with useForm()', () => {
+    cy.get('#phormal-field-input-name').should('exist')
+    cy.get('#unmount').click()
+    cy.get('#phormal-field-input-name').should('not.exist')
+  })
 })

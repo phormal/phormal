@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.20](https://github.com/phormal/phormal/compare/v0.1.0-alpha.19...v0.1.0-alpha.20) (2023-01-21)
+
+
+### Features
+
+* make both themes dark mode compatible ([c409360](https://github.com/phormal/phormal/commit/c4093605ea744163ce17cddf4556600daf90df2f))
+
+
+
+
+
 # [0.1.0-alpha.19](https://github.com/phormal/phormal/compare/v0.1.0-alpha.18...v0.1.0-alpha.19) (2023-01-17)
 
 

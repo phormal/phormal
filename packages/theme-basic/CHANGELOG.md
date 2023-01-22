@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.21](https://github.com/phormal/phormal/compare/v0.1.0-alpha.20...v0.1.0-alpha.21) (2023-01-22)
+
+
+### Features
+
+* add support for input types date, datetime-local and time ([#20](https://github.com/phormal/phormal/issues/20)) ([d2fed45](https://github.com/phormal/phormal/commit/d2fed45b6ea1e32dc2c2afb89af2c4499301cd20))
+
+
+
+
+
 # [0.1.0-alpha.20](https://github.com/phormal/phormal/compare/v0.1.0-alpha.19...v0.1.0-alpha.20) (2023-01-21)
 
 

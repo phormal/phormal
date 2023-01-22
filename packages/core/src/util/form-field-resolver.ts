@@ -26,6 +26,7 @@ export class FormFieldResolver {
   }
 
   resolveField() {
+    this.field.initialValue = this.field.getValue()
     this.field.placeholder = this.formFieldConfig.placeholder ? this.formFieldConfig.placeholder : ''
     this.field.label = this.formFieldConfig.label ? this.formFieldConfig.label : ''
     this.field.type = this.formFieldConfig.type ? this.formFieldConfig.type : 'text'

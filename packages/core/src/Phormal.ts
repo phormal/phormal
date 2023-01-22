@@ -35,22 +35,22 @@ export class Phormal {
     FormInitializer.renderAllFields(formRows, mountingElement)
 
     // 4. Resolve all dependencies between fields
-    for (const [, field] of Object.entries(this._fields)) {
-      field.resolveDependencies()
-    }
+    Object.values(this._fields).forEach(field => field.resolveDependencies())
 
     // 5. Run all checks for the newly created dependencies
-    for (const [, field] of Object.entries(this._fields)) {
-      field.checkValueDependencies()
-    }
+    Object.values(this._fields).forEach(field => field.checkValueDependencies())
   }
 
+  /**
+   * Deletes all Markup inserted by the Phormal instance
+   * */
   $destroy() {
-    for (const [, field] of Object.entries(this._fields)) {
-      field.destroy()
-    }
+    Object.values(this._fields).forEach(field => field.destroy())
   }
 
+  /**
+   * Returns an object literal, with key-value pairs of all fields and their values
+   * */
   $values() {
     const fieldNames = Object.keys(this._fields)
     type returnValueType = Record<string, string|boolean>
@@ -62,6 +62,10 @@ export class Phormal {
     }, {} as returnValueType)
   }
 
+  /**
+   * Runs all validator functions for all fields.
+   * Returns true if all fields have valid input, false otherwise.
+   * */
   $validate() {
     for (const field of Object.values(this._fields)) {
       field.runAllValidators()
@@ -72,6 +76,26 @@ export class Phormal {
     return !Object.entries(this._fields).some(([, field]) => {
       return !!field.errors?.length;
     })
+  }
+
+  /**
+   * Resets all or a subset of fields to their initial values.
+   * With no arguments passed, this resets all fields.
+   * For all fields passed as arguments, specified by their names, this resets only those fields.
+   * */
+  $reset(...args: string[]) {
+    if (!args.length) return Object.values(this._fields).forEach(field => field.reset())
+
+    for (const fieldName of args) {
+      if (this._fields[fieldName]) this._fields[fieldName].reset()
+    }
+  }
+
+  /**
+   * Possesses the value true if the form has changed since being initialized, false otherwise
+   * */
+  get $isDirty() {
+    return Object.values(this._fields).some(field => field.isDirty)
   }
 
   /**

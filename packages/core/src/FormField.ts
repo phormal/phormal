@@ -28,6 +28,7 @@ export class FormField implements FormFieldInterface {
   isHidden = false
   min = null;
   max = null;
+  initialValue = ''
   _errorMessages = {}
   _onClickHandlers: EventHandler[] = []
   _onChangeHandlers: EventHandler[] = []
@@ -67,14 +68,88 @@ export class FormField implements FormFieldInterface {
     if (!this.dependants.includes(dependant)) this.dependants.push(dependant)
   }
 
-  get id() { return 'phormal-field-' + this.name }
-  get inputId() { return 'phormal-field-input-' + this.name }
-  get errorMsgId() { return 'phormal-field-error-' + this.name }
+  checkValueDependencies() {
+    // The following two-dimensional array lists all conditions to be tested for the field
+    // Each inner array has two positions: [0] for the condition, [1] for the property to be mutated on this field
+    const conditions = [
+      [this.disabledIf, 'disabled'],
+      [this.hideIf, 'isHidden'],
+    ]
+
+    for (const [condition, internalProperty] of conditions) {
+      for (const [dep, depValueToTest] of Object.entries(condition)) {
+        let actualDepValue = this._form._getValue(dep)
+        let result = false
+
+        // 1. Set the new value of the internal property
+        if (typeof depValueToTest === 'boolean') {
+          result = depValueToTest === this._form._getValue(dep)
+        } else if (depValueToTest === 'empty') {
+          result = this._form._getValue(dep) === ''
+        } else if (depValueToTest === 'not-empty') {
+          result = this._form._getValue(dep) !== ''
+        } else if (depValueToTest instanceof RegExp && typeof actualDepValue === 'string') {
+          actualDepValue = actualDepValue as string
+          result = depValueToTest.test(actualDepValue)
+        }
+
+        // 2. Update the internal property
+        if (internalProperty === 'disabled') {
+          this.disabled = result;
+          (this.inputDOMElement as HTMLInputElement).disabled = result
+        } else if (internalProperty === 'isHidden') {
+          this.isHidden = result;
+          const fieldContainer: HTMLElement | null = document.getElementById(this.id)
+          if (fieldContainer instanceof HTMLElement) {
+            const displayNodeType = this.type === 'checkbox' ? 'flex' : 'block'
+
+            fieldContainer.style.display = result ? 'none' : displayNodeType
+          }
+        }
+      }
+    }
+  }
+
+  render(mountingEl: HTMLElement) {
+    const inputLabel = new InputLabel(this).render()
+    const inputEl = new InputElement(this).render()
+    let wrapperChildren = [inputLabel, inputEl]
+    if ((this._form._config as FormConfig).theme === 'material') {
+      wrapperChildren = wrapperChildren.reverse()
+      // TODO: repair styles for this element
+      wrapperChildren.push(h('span', { class: 'phlib__material-bg-focus' }))
+    }
+
+    this.projector.append(mountingEl, () => h(
+      'div',
+      { id: this.id, class: this.wrapperClasses },
+      wrapperChildren
+    ))
+
+    this.inputDOMElement = document.getElementById(this.inputId) as HTMLInputElement
+  }
+
+  get id() {
+    return 'phormal-field-' + this.name
+  }
+
+  get inputId() {
+    return 'phormal-field-input-' + this.name
+  }
+
+  get errorMsgId() {
+    return 'phormal-field-error-' + this.name
+  }
+
   get inputClass() {
     let type = this.type
     if (['number', 'password', 'email'].includes(type)) type = 'text'
 
     return `phlib__input-${type}`
+  }
+
+  get isDirty() {
+    return this.getValue() !== this.initialValue
   }
 
   get wrapperClasses() {
@@ -135,7 +210,7 @@ export class FormField implements FormFieldInterface {
     }
   }
 
-  update() {
+  public update() {
     this.checkValueDependencies()
 
     if ((this._form._config as FormConfig).validation !== 'active') return
@@ -144,74 +219,17 @@ export class FormField implements FormFieldInterface {
     this.updateErrorMessageInDOM()
   }
 
-  checkValueDependencies() {
-    // The following two-dimensional array lists all conditions to be tested for the field
-    // Each inner array has two positions: [0] for the condition, [1] for the property to be mutated on this field
-    const conditions = [
-      [this.disabledIf, 'disabled'],
-      [this.hideIf, 'isHidden'],
-    ]
+  public destroy() {
+    const el = document.getElementById(this.id)
+    if (el instanceof HTMLElement) el.remove()
+  }
 
-    for (const [condition, internalProperty] of conditions) {
-      for (const [dep, depValueToTest] of Object.entries(condition)) {
-        let actualDepValue = this._form._getValue(dep)
-        let result = false
-
-        // 1. Set the new value of the internal property
-        if (typeof depValueToTest === 'boolean') {
-          result = depValueToTest === this._form._getValue(dep)
-        } else if (depValueToTest === 'empty') {
-          result = this._form._getValue(dep) === ''
-        } else if (depValueToTest === 'not-empty') {
-          result = this._form._getValue(dep) !== ''
-        } else if (depValueToTest instanceof RegExp && typeof actualDepValue === 'string') {
-          actualDepValue = actualDepValue as string
-          result = depValueToTest.test(actualDepValue)
-        }
-
-        // 2. Update the internal property
-        if (internalProperty === 'disabled') {
-          this.disabled = result;
-          (this.inputDOMElement as HTMLInputElement).disabled = result
-        } else if (internalProperty === 'isHidden') {
-          this.isHidden = result;
-          const fieldContainer: HTMLElement | null = document.getElementById(this.id)
-          if (fieldContainer instanceof HTMLElement) {
-            const displayNodeType = this.type === 'checkbox' ? 'flex' : 'block'
-
-            fieldContainer.style.display = result ? 'none' : displayNodeType
-          }
-        }
-      }
-    }
+  public reset() {
+    this.setValue(this.initialValue)
   }
 
   runAllValidators() {
     for (const fn of Object.values(this.validators)) fn(this)
-  }
-
-  render(mountingEl: HTMLElement) {
-    const inputLabel = new InputLabel(this).render()
-    const inputEl = new InputElement(this).render()
-    let wrapperChildren = [inputLabel, inputEl]
-    if ((this._form._config as FormConfig).theme === 'material') {
-      wrapperChildren = wrapperChildren.reverse()
-      // TODO: repair styles for this element
-      wrapperChildren.push(h('span', { class: 'phlib__material-bg-focus' }))
-    }
-
-    this.projector.append(mountingEl, () => h(
-      'div',
-      { id: this.id, class: this.wrapperClasses },
-      wrapperChildren
-    ))
-
-    this.inputDOMElement = document.getElementById(this.inputId) as HTMLInputElement
-  }
-
-  public destroy() {
-    const el = document.getElementById(this.id)
-    if (el instanceof HTMLElement) el.remove()
   }
 
   _onClick(event: Event) {

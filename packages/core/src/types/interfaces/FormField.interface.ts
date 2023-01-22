@@ -17,6 +17,7 @@ export default interface FormFieldInterface {
   errors?: string[];
   dependants?: string[];
   isHidden?: boolean;
+  initialValue?: string|number|boolean;
 
   // date & time attributes
   min?: string|null;

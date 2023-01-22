@@ -90,6 +90,7 @@ export default defineComponent({
 
       lastNameFocusN: 0,
       firstNameBlurN: 0,
+      isDirty: null as null|boolean,
     }
   },
 
@@ -119,8 +120,38 @@ export default defineComponent({
     })
   },
 
+  methods: {
+    getDirtinessStatus() {
+      this.isDirty = this.form!.$isDirty;
+    },
+
+    reset() {
+      this.form!.$reset();
+    },
+
+    resetDates() {
+      this.form!.$reset('yyyy', 'mm', 'dd');
+    }
+  },
+
   render() {
-    return h('div', { id: 'phormal' })
+    const formEl = h(
+      'div',
+      { id: 'phormal' },
+    )
+
+    const otherEls = [
+      h('button', { id: 'get-dirtiness', onClick: () => this.getDirtinessStatus()},['Get dirtiness status']),
+      h('div', { id: 'is-dirty'}, ['is dirty: ' + this.isDirty]),
+      h('br'),
+      h('button', { onClick: () => this.reset(), id: 'reset' }, ['Reset all fields']),
+      h('button', { onClick: () => this.resetDates(), id: 'reset-dates' }, ['Reset dates']),
+    ]
+
+    return h('div', [
+      formEl,
+      otherEls,
+    ])
   }
 })
 

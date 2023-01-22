@@ -125,9 +125,23 @@ export class MultiSelect extends FormField {
   selectOption(event: MouseEvent|KeyboardEvent) {
     const selectedValue = (event.target as HTMLLIElement).dataset.value as string
     this.setValue(selectedValue);
-    (this.inputDOMElement as HTMLInputElement).value = this.options.find(option => option.value === selectedValue)?.label as string
+    this.setInputValueToSelectedOptionLabel(selectedValue);
     this.hideOptions()
     this.addOrRemoveWrapperClass(selectedValue);
+  }
+
+  public reset() {
+    this.setValue(this.initialValue);
+    this.setInputValueToSelectedOptionLabel(this.initialValue);
+  }
+
+  /**
+   * Since the input should not display the value from the selected option, but merely its label,
+   * we need to set the value of the input to the label of the selected option
+   * */
+  private setInputValueToSelectedOptionLabel(value: string) {
+    (this.inputDOMElement as HTMLInputElement).value
+      = this.options.find(option => option.value === value)?.label as string
   }
 
   private addOrRemoveWrapperClass(selectedValue: string|boolean|undefined) {

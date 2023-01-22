@@ -174,6 +174,159 @@ const testCapitalizingMultipleWordInput = () => {
   })
 }
 
+const testFormDirtiness = () => {
+  it('Should be dirty after changing a field', () => {
+    const getDirtiness = () => cy.get('#get-dirtiness').click()
+    getDirtiness()
+
+    cy
+      .get('#is-dirty')
+      .should('have.text', 'is dirty: false')
+
+    cy
+      .get('#phormal-field-input-firstName')
+      .clear()
+
+    getDirtiness()
+
+    cy
+      .get('#is-dirty')
+      .should('have.text', 'is dirty: true')
+
+    cy
+      .get('#phormal-field-input-firstName')
+      .type('John')
+
+    getDirtiness()
+
+    cy
+      .get('#is-dirty')
+      .should('have.text', 'is dirty: false')
+  })
+}
+
+const testResettingAllFields = () => {
+  it('Should reset all fields to their default values', () => {
+    cy
+      .get(FIRST_NAME_FIELD)
+      .clear()
+
+    cy
+      .get(LAST_NAME_FIELD)
+      .clear()
+      .type('Hoola bandoola')
+
+    cy
+      .get(ZIP_CODE_FIELD)
+      .clear()
+      .type('12345')
+
+    cy.get('#reset').click()
+
+    cy
+      .get(FIRST_NAME_FIELD)
+      .should('have.value', 'John')
+
+    cy
+      .get(LAST_NAME_FIELD)
+      .should('have.value', 'Doe')
+
+    cy
+      .get(ZIP_CODE_FIELD)
+      .should('have.value', '51378')
+  })
+}
+
+const testResettingOnlySpecifiedFields = () => {
+  it('Should reset only the specified fields to their default values', () => {
+    // 1. Clear first name field
+    cy
+      .get(FIRST_NAME_FIELD)
+      .clear()
+      .type('Patrick')
+
+    // 2. Enter value in yyyy, mm and dd fields
+    cy
+      .get('#phormal-field-input-yyyy')
+      .type('1999')
+
+    cy
+      .get('#phormal-field-input-mm')
+      .type('12')
+
+    cy
+      .get('#phormal-field-input-dd')
+      .type('31')
+
+    // 3. Reset only date fields, but not first name
+    cy.get('#reset-dates').click()
+
+    // 4. Check that first name is still Patrick
+    cy
+      .get(FIRST_NAME_FIELD)
+      .should('have.value', 'Patrick')
+
+    // 5. Check that date fields are reset
+    cy
+      .get('#phormal-field-input-yyyy')
+      .should('have.value', '')
+
+    cy
+      .get('#phormal-field-input-mm')
+      .should('have.value', '')
+
+    cy
+      .get('#phormal-field-input-dd')
+      .should('have.value', '')
+  })
+}
+
+const testResettingCheckbox = () => {
+  it('Should reset checkbox to its default value', () => {
+    cy
+      .get('#phormal-field-input-newsletter')
+      .click()
+
+    cy
+      .get('#phormal-field-input-newsletter')
+      .should('not.be.checked')
+
+    cy.get('#reset').click()
+
+    cy
+      .get('#phormal-field-input-newsletter')
+      .should('be.checked')
+  })
+}
+
+const testResettingRadiogroup = () => {
+  it('Resets a radiogroup to its initial value', () => {
+    // 1. Select Packstation, and check that the value is set
+    cy
+      .get('[data-cy="phlib__radio-button--packstation"]')
+      .click()
+    cy
+      .get('#phlib__radio-button--packstation')
+      .should('be.checked')
+
+    cy
+      .get('#phlib__radio-button--shipping')
+      .should('not.be.checked')
+
+    // 2. Reset the form
+    cy.get('#reset').click()
+
+    // 3. Check that the value is reset
+    cy
+      .get('#phlib__radio-button--packstation')
+      .should('not.be.checked')
+
+    cy
+      .get('#phlib__radio-button--shipping')
+      .should('be.checked')
+  });
+}
+
 const runAllTests = () => {
   testRenderingAllFields()
   testSettingDefaultValues()
@@ -186,6 +339,10 @@ const runAllTests = () => {
   testFocusingFieldOnRender()
   testCapitalizingOneWordInput()
   testCapitalizingMultipleWordInput()
+  testFormDirtiness()
+  testResettingAllFields()
+  testResettingOnlySpecifiedFields()
+  testResettingRadiogroup()
 }
 
 const runBasicThemeSpecificTests = () => {
@@ -200,6 +357,8 @@ const runBasicThemeSpecificTests = () => {
       .get('#phormal-field-input-firstName')
       .should('not.have.attr', 'placeholder')
   })
+
+  testResettingCheckbox()
 }
 
 const runMaterialThemeSpecificTests = () => {

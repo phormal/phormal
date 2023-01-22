@@ -26,7 +26,21 @@ export class RadioGroup extends FormField implements RadioGroupInterface {
     }
   }
 
+  public reset() {
+    this.setValue(this.initialValue)
+    this.rerender()
+  }
+
   render(mountingElement: HTMLElement) {
+    this.projector.append(mountingElement, () => this.getFullRadioGroupVNode())
+  }
+
+  rerender() {
+    const radioGroupWrapper = document.getElementById(this.id) as HTMLElement
+    this.projector.replace(radioGroupWrapper, () => this.getFullRadioGroupVNode())
+  }
+
+  getFullRadioGroupVNode() {
     const options = this.options.map(option => {
       return new RadioButton(
         option,
@@ -44,12 +58,10 @@ export class RadioGroup extends FormField implements RadioGroupInterface {
 
     const label = h('label', { class: 'phlib__radio-group-label' }, [this.label])
 
-    this.projector.append(mountingElement, () => {
-      return h(
-        'div',
-        { class: 'phlib__radio-group', id: this.id },
-        this.label ? [label, radioButtons] : [radioButtons]
-      )
-    })
+    return h(
+      'div',
+      { class: 'phlib__radio-group', id: this.id },
+      this.label ? [label, radioButtons] : [radioButtons]
+    )
   }
 }

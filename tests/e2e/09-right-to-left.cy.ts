@@ -38,7 +38,7 @@ describe('A form with dir="rtl"', () => {
 
     cy
       .get('#code-element')
-      .should('contain', '"paymentMethod":"cc"')
+      .should('contain', '"paymentMethod": "cc"')
 
     cy
       .get('[data-cy="phlib__radio-button--pp"]')
@@ -50,6 +50,6 @@ describe('A form with dir="rtl"', () => {
 
     cy
       .get('#code-element')
-      .should('contain', '"paymentMethod":"pp"')
+      .should('contain', '"paymentMethod": "pp"')
   })
 })

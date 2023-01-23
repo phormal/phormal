@@ -229,6 +229,36 @@ function testUpdatingDependantOnDependencyUpdate() {
   });
 }
 
+function testAccessingErrorsVia$errorsAPI() {
+  it('Accesses errors via $errors API', () => {
+    cy.get('#validate-button').click()
+    cy.get('#get-errors').click()
+
+    cy
+      .get('#code')
+      .should('contain.text', '"field1": [],')
+      .should('contain.text', '"field2": [\n' +
+        '    "minLength"\n' +
+        '  ],')
+      .should('contain.text', '"field3": [\n' +
+        '    "length",\n' +
+        '    "regex"\n' +
+        '  ],')
+  });
+}
+
+function testGettingNoErrors() {
+  it('Gets no errors from $errors API', () => {
+    cy.get('#get-errors').click()
+
+    cy
+      .get('#code')
+      .should('contain.text', '"field1": [],')
+      .should('contain.text', '"field2": [],')
+      .should('contain.text', '"field3": [],')
+  });
+}
+
 describe('Active validation', () => {
 
   beforeEach(() => {
@@ -244,6 +274,8 @@ describe('Active validation', () => {
   testDisplayingErrorForDisallowedURLHost();
   testDisplayingErrorForDisallowedURLProtocol();
   testUpdatingDependantOnDependencyUpdate();
+  testAccessingErrorsVia$errorsAPI();
+  testGettingNoErrors();
 
   it('Displays an error for value lower than a given numeric minimum value', () => {
     cy

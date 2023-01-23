@@ -98,7 +98,7 @@ const testSelectingOptionByClicking = () => {
     cy.get('#getvalues').click()
     cy
       .get('#code')
-      .should('contain.text', '"bar":"baz"')
+      .should('contain.text', '"bar": "baz",')
   })
 }
 
@@ -164,7 +164,7 @@ describe('The multiselect field with theme basic', () => {
   beforeEach(() => {
     cy.visit('/#/e2e/multiselect')
   })
-  
+
   runAllTests()
 })
 

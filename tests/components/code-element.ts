@@ -5,7 +5,6 @@ export default defineComponent({
 
   props: {
     code: {
-      type: Object,
       required: true,
     },
   },
@@ -15,7 +14,7 @@ export default defineComponent({
       'code',
       {id: 'code-element'},
       [
-        h('pre', { style: { backgroundColor: '#000', color: 'yellow', padding: '1em' }, id: 'code' }, [JSON.stringify(this.code)])
+        h('pre', { style: { backgroundColor: '#000', color: 'yellow', padding: '1em' }, id: 'code' }, [JSON.stringify(this.code, null, 2)])
       ]
     )
   }

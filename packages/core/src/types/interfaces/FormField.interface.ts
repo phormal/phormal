@@ -7,6 +7,7 @@ export default interface FormFieldInterface {
   name: string;
   config: FormFieldConfig|undefined;
   label: string | undefined;
+  errors: string[];
   placeholder?: string;
   dependencies?: ReadonlyArray<string>;
   disabledIf?: FieldCondition;
@@ -14,7 +15,6 @@ export default interface FormFieldInterface {
   row?: string;
   required?: boolean;
   disabled?: boolean;
-  errors?: string[];
   dependants?: string[];
   isHidden?: boolean;
   initialValue?: string|number|boolean;

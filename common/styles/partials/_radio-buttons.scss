@@ -1,4 +1,5 @@
 // Styles mainly from: https://codepen.io/avstorm/pen/jxjKGj
+@use "../util/dark-mode" as dark-mode;
 
 @mixin index($color-primary, $color-border, $color-control-disabled) {
   .phlib__radio-group {
@@ -28,7 +29,7 @@
         border-radius: 100%;
         -webkit-tap-highlight-color: transparent;
 
-        @media (prefers-color-scheme: dark) {
+        @include dark-mode.index {
           --dark-mode-color-gray: #b7b3b3;
 
           border-color: var(--dark-mode-color-gray);

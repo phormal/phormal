@@ -2,6 +2,7 @@
 @use "sass:math";
 @use "../../../common/styles/partials/radio-buttons" as radio-buttons;
 @use "../../../common/styles/partials/select" as select;
+@use "../../../common/styles/util/dark-mode" as dark-mode;
 
 .phlib-material {
   --color-primary: #07f;
@@ -15,7 +16,7 @@
   --md-control-color-disabled: rgb(0 0 0 / 26%);
   --md-checkmark-color: #fff;
 
-  @media (prefers-color-scheme: dark) {
+  @include dark-mode.index {
     --color-dark: #fff;
     --color-label: #b7b3b3;
     --color-background: rgb(249 250 251 / 10%);
@@ -89,7 +90,7 @@
         cursor: pointer;
         transition: background 0.3s;
 
-        @media (prefers-color-scheme: dark) {
+        @include dark-mode.index {
           background-color: transparent;
           border-color: var(--color-label);
         }
@@ -161,7 +162,7 @@
           background: var(--md-control-color-disabled);
           border-color: transparent;
 
-          @media (prefers-color-scheme: dark) {
+          @include dark-mode.index {
             background-color: var(--color-background-disabled);
           }
         }
@@ -226,7 +227,7 @@
       background: rgb(0 0 0 / 4%);
       box-shadow: inset 0 -1px 0 rgb(0 0 0 / 50%);
 
-      @media (prefers-color-scheme: dark) {
+      @include dark-mode.index {
         background-color: var(--color-background);
       }
     }
@@ -236,7 +237,7 @@
       outline: none;
       box-shadow: inset 0 -2px 0 var(--color-primary);
 
-      @media (prefers-color-scheme: dark) {
+      @include dark-mode.index {
         background-color: var(--color-background);
       }
     }

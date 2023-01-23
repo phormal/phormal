@@ -1,10 +1,11 @@
 @use "../util/feature-detection" as feature-detection;
+@use "../util/dark-mode" as dark-mode;
 
 @mixin index($color-primary) {
   --color-options-background: #fff;
   --color-options-text: #000;
 
-  @media (prefers-color-scheme: dark) {
+  @include dark-mode.index {
     --color-options-background: #1a1a1a;
     --color-options-text: #b7b3b3;
   }
@@ -43,7 +44,7 @@
     max-height: 275px;
     overflow-y: auto;
 
-    @media (prefers-color-scheme: dark) {
+    @include dark-mode.index {
       box-shadow: none;
     }
 
@@ -57,7 +58,7 @@
           background-color: $color-primary;
           color: #fff;
 
-          @media (prefers-color-scheme: dark) {
+          @include dark-mode.index {
             background-color: #000;
           }
         }

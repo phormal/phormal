@@ -1,0 +1,9 @@
+@mixin index {
+  @media (prefers-color-scheme: dark) {
+    @content;
+  }
+
+  [style*="color-scheme: dark"] & {
+    @content;
+  }
+}

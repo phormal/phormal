@@ -1,5 +1,6 @@
 @use "../../../common/styles/partials/radio-buttons" as radio-buttons;
 @use "../../../common/styles/partials/select" as select;
+@use "../../../common/styles/util/dark-mode" as dark-mode;
 
 .phlib-basic {
   --color-primary: #007bff;
@@ -12,7 +13,7 @@
   --color-text: rgb(17 24 39);
   --color-background-disabled: #e9ecef;
 
-  @media (prefers-color-scheme: dark) {
+  @include dark-mode.index {
     --color-error-light: #f8d7da;
     --color-border: transparent;
     --color-label: #b7b3b3;
@@ -72,7 +73,7 @@
       outline: var(--color-primary) solid 1px;
       background-color: var(--color-primary-light);
 
-      @media (prefers-color-scheme: dark) {
+      @include dark-mode.index {
         background-color: #1a1a1a;
       }
     }
@@ -130,7 +131,7 @@
       };
     }
 
-    @media (prefers-color-scheme: dark) {
+    @include dark-mode.index {
       background-color: var(--color-background);
     }
 

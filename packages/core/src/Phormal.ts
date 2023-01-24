@@ -92,6 +92,18 @@ export class Phormal {
   }
 
   /**
+   * Return an object with key-value pairs of all fields and their errors,
+   * the key being the name of the field, and the value being an array or errors.
+   */
+  get $errors() {
+    return Object.values(this._fields).reduce((acc, field) => {
+      acc[field.name] = field.errors
+
+      return acc
+    }, {} as Record<string, string[]>)
+  }
+
+  /**
    * Possesses the value true if the form has changed since being initialized, false otherwise
    * */
   get $isDirty() {

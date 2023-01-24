@@ -52,11 +52,14 @@ export class FormField implements FormFieldInterface {
       this.config?.hideIf,
     ]
 
+    // condition here, will be an object, where each key is the name of a field, on which this field depends
     for (const condition of conditions) {
       if (!condition) continue
 
-      for (const [dep,] of Object.entries(condition)) {
-        this._form._fields[dep].addDependant(this.name)
+      // Here, we inform the foreign field, that this field is a dependant. This way, the foreign field can trigger an
+      // update of this field, when its value changes
+      for (const [dependency,] of Object.entries(condition)) {
+        this._form._fields[dependency].addDependant(this.name)
       }
     }
   }

@@ -1,11 +1,14 @@
 import {Phormal, useRegex, useLength, useEmail, useUrl, useMinMax, useValidZip} from '../../packages/core/src'
 import {defineComponent, h} from "vue";
+import CodeElement from "../components/code-element";
 
 export default defineComponent({
   name: 'App',
 
   data() {
     return {
+      errors: null as null | Record<string, string[]>,
+
       form: undefined as undefined|Phormal,
 
       formFields: {
@@ -99,7 +102,9 @@ export default defineComponent({
 
     return h("div",[
       phormal,
-      h('button', { onClick: () => this.form?.$validate(), id: 'validate-button' }, 'Validate')
+      h('button', { onClick: () => this.form?.$validate(), id: 'validate-button' }, 'Validate'),
+      h('button', { onClick: () => this.errors = this.form!.$errors, id: 'get-errors' }, 'Get $errors'),
+      h(CodeElement, { code: this.errors })
     ])
   }
 })

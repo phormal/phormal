@@ -1,5 +1,5 @@
 <script lang="ts">
-import {Phormal, useEmail, useLength, useRequired, useValidZip, useAutoCapitalize} from '../packages/core/src'
+import {Phormal, useEmail, useLength, useRequired, useValidZip, useAutoCapitalize, translationName} from '../packages/core/src'
 
 export default {
   name: 'App',
@@ -14,7 +14,7 @@ export default {
 
       formFields: {
         firstName: {
-          label: 'First name',
+          label: translationName,
           hooks: [useRequired(), useLength(1, 155), useAutoCapitalize()],
           value: 'John',
           handleOnBlur: () => this.firstNameBlurN++,
@@ -137,7 +137,7 @@ export default {
     this.form = new Phormal(this.formFields, {
       el: '#phormal',
       validation: 'active',
-      language: 'de',
+      language: 'es',
       // theme: 'material',
       theme: 'basic',
     })

@@ -5,7 +5,6 @@ export default class RadioButton implements MaquetteComponent {
 
   constructor(
     private option: RadioButtonOption,
-    private groupName: string,
     private checked: boolean,
     private globalInputOptions: Record<string, string|boolean|EventHandler>
   ) {}
@@ -25,7 +24,6 @@ export default class RadioButton implements MaquetteComponent {
             ...this.globalInputOptions,
             value: this.option.value,
             id: this.radioButtonId,
-            name: this.groupName,
             checked: this.checked,
             class: 'phlib_radio-hidden',
             disabled: this.option.disabled,

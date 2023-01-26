@@ -6,6 +6,7 @@ import {Phormal} from "../Phormal";
 import {FIELD_WRAPPER_CLASS} from "../constants/css-selectors";
 import RadioButton from "../components/radio-button";
 import RadioGroupInterface from "../types/interfaces/RadioGroup.interface";
+import InputLabel from "../components/input-label";
 
 export class RadioGroup extends FormField implements RadioGroupInterface {
   options: RadioButtonOption[] = []
@@ -44,7 +45,6 @@ export class RadioGroup extends FormField implements RadioGroupInterface {
     const options = this.options.map(option => {
       return new RadioButton(
         option,
-        this.name,
         this.getValue() === option.value,
         this.globalInputProperties
       ).render()
@@ -56,7 +56,11 @@ export class RadioGroup extends FormField implements RadioGroupInterface {
       options
     )
 
-    const label = h('label', { class: 'phlib__radio-group-label' }, [this.label])
+    const label = new InputLabel(
+      this,
+      undefined,
+      ['phlib__radio-group-label']
+    ).render()
 
     return h(
       'div',

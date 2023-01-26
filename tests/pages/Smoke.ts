@@ -1,4 +1,11 @@
-import {useLength, useAutoCapitalize, Phormal, useRequired, useValidZip} from "../../packages/core/src";
+import {
+  useLength,
+  useAutoCapitalize,
+  Phormal,
+  useRequired,
+  useValidZip,
+  translationName, translationPassword
+} from "../../packages/core/src";
 import {defineComponent, h} from "vue";
 
 export default defineComponent({
@@ -41,7 +48,7 @@ export default defineComponent({
           focus: true
         },
         lastName: {
-          label: 'Last name',
+          label: translationName,
           hooks: [useRequired(), useLength(1, 155)],
           value: 'Doe',
         },
@@ -86,6 +93,10 @@ export default defineComponent({
           hooks: [],
           value: true,
         },
+        password: {
+          label: translationPassword,
+          type: 'password',
+        }
       },
 
       lastNameFocusN: 0,

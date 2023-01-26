@@ -1,38 +1,22 @@
-import {Phormal} from './Phormal'
-import {FormField} from './FormField'
+export {Phormal} from './Phormal'
+export {FormField} from './FormField'
 
-import {useEmail} from './hooks/use-email'
-import {useRequired} from './hooks/use-required'
-import {useLength} from "./hooks/use-length";
-import {useRegex} from "./hooks/use-regex";
-import {useAutoCapitalize} from "./hooks/use-auto-capitalize";
-import {useValidZip} from "./hooks/use-valid-zip";
-import {useUrl} from "./hooks/use-url";
-import {useMinMax} from "./hooks/use-min-max";
+export {useEmail} from './hooks/use-email'
+export {useRequired} from './hooks/use-required'
+export {useLength} from "./hooks/use-length";
+export {useRegex} from "./hooks/use-regex";
+export {useAutoCapitalize} from "./hooks/use-auto-capitalize";
+export {useValidZip} from "./hooks/use-valid-zip";
+export {useUrl} from "./hooks/use-url";
+export {useMinMax} from "./hooks/use-min-max";
 
-import {translationName} from "./texts/labels/name";
-import {translationEmail} from "./texts/labels/email";
-import {translationPassword} from "./texts/labels/password";
-import {translationPasswordRepeat} from "./texts/labels/password-repeat";
-
-export {
-  // Export the main Modules and APIs
-  Phormal,
-  FormField,
-
-  // Export hooks
-  useEmail,
-  useRequired,
-  useLength,
-  useRegex,
-  useAutoCapitalize,
-  useValidZip,
-  useUrl,
-  useMinMax,
-
-  // Export translations
-  translationName,
-  translationEmail,
-  translationPassword,
-  translationPasswordRepeat,
-}
+export {translationName} from './texts/labels/name'
+export {translationEmail} from "./texts/labels/email";
+export {translationPassword} from "./texts/labels/password";
+export {translationPasswordRepeat} from "./texts/labels/password-repeat";
+export {translationStreet} from "./texts/labels/street";
+export {translationHouseNumber} from "./texts/labels/house-number";
+export {translationCity} from "./texts/labels/city";
+export {translationCountry} from "./texts/labels/country";
+export {translationFirstName} from "./texts/labels/first-name";
+export {translationLastName} from "./texts/labels/last-name";

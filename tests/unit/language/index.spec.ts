@@ -11,6 +11,11 @@ import {
   translationPasswordRepeat,
   translationPassword,
   translationEmail,
+  translationStreet,
+  translationHouseNumber,
+  translationCity,
+  translationCountry,
+  translationFirstName, translationLastName,
 } from "../../../packages/core/src";
 import {ErrorMessageObject} from "@phormal/core/src/types/globals";
 
@@ -112,5 +117,29 @@ describe('Translations objects', () => {
 
   it('Has a translation for all languages for "Repeat password"', () => {
     testThatAllLanguagesAreTranslated([translationPasswordRepeat])
+  })
+
+  it('Has a translation for all languages for "Street"', () => {
+    testThatAllLanguagesAreTranslated([translationStreet])
+  })
+
+  it('Has a translation for all languages for "House number"', () => {
+    testThatAllLanguagesAreTranslated([translationHouseNumber])
+  })
+
+  it('Has a translation for all languages for "City"', () => {
+    testThatAllLanguagesAreTranslated([translationCity])
+  })
+
+  it('Has a translation for all languages for "Country"', () => {
+    testThatAllLanguagesAreTranslated([translationCountry])
+  })
+
+  it('Has a translation for all languages for "First name"', () => {
+    testThatAllLanguagesAreTranslated([translationFirstName])
+  })
+
+  it('Has a translation for all languages for "Last name"', () => {
+    testThatAllLanguagesAreTranslated([translationLastName])
   })
 })

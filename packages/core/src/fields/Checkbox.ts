@@ -1,6 +1,7 @@
 import {FormField} from '../FormField'
 import {h} from 'maquette'
 import FormConfig from "../types/interfaces/FormConfig.interface";
+import InputLabel from "../components/input-label";
 
 export class Checkbox extends FormField {
   _onInput(event: Event) {
@@ -49,10 +50,10 @@ export class Checkbox extends FormField {
   }
 
   private getCheckboxLabel() {
-    return h(
-      'label',
-      { for: this.inputId, class: 'phlib__checkbox-label' },
-      [this.label]
-    );
+    return new InputLabel(
+      this,
+      undefined,
+      ['phlib__checkbox-label']
+    ).render()
   }
 }

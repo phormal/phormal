@@ -1,5 +1,17 @@
 import {describe, expect, it} from "vitest";
-import {useRegex, useLength, useRequired, useValidZip, useEmail, useUrl, useMinMax} from "../../../packages/core/src";
+import {
+  useRegex,
+  useLength,
+  useRequired,
+  useValidZip,
+  useEmail,
+  useUrl,
+  useMinMax,
+  translationName,
+  translationPasswordRepeat,
+  translationPassword,
+  translationEmail,
+} from "../../../packages/core/src";
 import {ErrorMessageObject} from "@phormal/core/src/types/globals";
 
 const allSupportedLanguages = [
@@ -84,5 +96,21 @@ describe('Translations objects', () => {
       useMinMax(1, 2).errorMessages?.between_values as ErrorMessageObject,
     ]
     testThatAllLanguagesAreTranslated(errorMessages)
+  })
+
+  it('Has a translation for all languages for "Name"', () => {
+    testThatAllLanguagesAreTranslated([translationName])
+  })
+
+  it('Has a translation for all languages for "Email"', () => {
+    testThatAllLanguagesAreTranslated([translationEmail])
+  })
+
+  it('Has a translation for all languages for "Password"', () => {
+    testThatAllLanguagesAreTranslated([translationPassword])
+  })
+
+  it('Has a translation for all languages for "Repeat password"', () => {
+    testThatAllLanguagesAreTranslated([translationPasswordRepeat])
   })
 })

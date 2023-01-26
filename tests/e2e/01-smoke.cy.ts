@@ -327,6 +327,44 @@ const testResettingRadiogroup = () => {
   });
 }
 
+// Every type of field must at all points have a name attribute,
+// in order to allow for traditional form submission.
+const testNameAttributes = () => {
+  it('Should have a name attribute on all fields', () => {
+    cy
+      .get(FIRST_NAME_FIELD)
+      .should('have.attr', 'name', 'firstName')
+
+    cy
+      .get(LAST_NAME_FIELD)
+      .should('have.attr', 'name', 'lastName')
+
+    cy
+      .get(ZIP_CODE_FIELD)
+      .should('have.attr', 'name', 'zip')
+
+    cy
+      .get('#phormal-field-input-newsletter')
+      .should('have.attr', 'name', 'newsletter')
+
+    cy
+      .get('#phlib__radio-button--packstation')
+      .should('have.attr', 'name', 'delivery')
+
+    cy
+      .get('#phlib__radio-button--shipping')
+      .should('have.attr', 'name', 'delivery')
+
+    cy
+      .get('#phlib__radio-button--billing')
+      .should('have.attr', 'name', 'delivery')
+
+    cy
+      .get(COUNTRY_SELECT)
+      .should('have.attr', 'name', 'country')
+  })
+}
+
 const runAllTests = () => {
   testRenderingAllFields()
   testSettingDefaultValues()
@@ -343,6 +381,7 @@ const runAllTests = () => {
   testResettingAllFields()
   testResettingOnlySpecifiedFields()
   testResettingRadiogroup()
+  testNameAttributes()
 }
 
 const runBasicThemeSpecificTests = () => {
@@ -422,6 +461,25 @@ describe('Using a fallback language', () => {
       .get('#phormal-field-error-firstName')
       .should('contain', 'Dieses Feld ist ein Pflichtfeld')
       .should('contain', 'Die Eingabe muss zwischen 1 und 155 Zeichen lang sein')
+  })
+})
+
+
+describe('Using translations for labels', () => {
+  it('Uses "name" translations for Turkish', () => {
+    cy.visit('/#/e2e/smoke?lang=tr&fallbackLang=de')
+
+    cy
+      .get('#phormal-field-lastName')
+      .should('contain.text', 'İsim')
+  })
+
+  it('Uses "Password" translations for French', () => {
+    cy.visit('/#/e2e/smoke?lang=fr&fallbackLang=de')
+
+    cy
+      .get('#phormal-field-password')
+      .should('contain.text', 'Mot de passe')
   })
 })
 

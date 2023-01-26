@@ -264,6 +264,7 @@ export class FormField implements FormFieldInterface {
   _getGlobalInputProperties() {
     return {
       id: this.inputId,
+      name: this.name,
       class: this.inputClass,
       type: this.type,
       disabled: this.disabled,

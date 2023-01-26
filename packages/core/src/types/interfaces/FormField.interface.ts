@@ -6,7 +6,7 @@ export default interface FormFieldInterface {
   type: FormFieldType;
   name: string;
   config: FormFieldConfig|undefined;
-  label: string | undefined;
+  label: string | undefined | Record<string, string>;
   errors: string[];
   placeholder?: string;
   dependencies?: ReadonlyArray<string>;

@@ -5,7 +5,8 @@ export default class InputLabel implements MaquetteComponent {
 
   constructor(
     private formField: FormField,
-    private labelId?: string
+    private labelId?: string,
+    private classList?: string[]
   ) {}
 
   render() {
@@ -14,11 +15,23 @@ export default class InputLabel implements MaquetteComponent {
         'label',
         {
           for: this.formField.inputId,
-          class: 'phlib__field-label',
+          class: this.classList ? this.classList.join(' ') : 'phlib__field-label',
           id: this.labelId,
         },
-        [this.formField.label]
+        [this.labelText]
       )
       : null;
+  }
+
+  get labelText() {
+    if (typeof this.formField.label === 'object') {
+      const configLanguage = this.formField!._form._config?.language as string
+
+      return this.formField.label[configLanguage]
+        ? this.formField.label[configLanguage]
+        : this.formField.label[this.formField._form._config?.fallbackLanguage as string]
+    }
+
+    return this.formField.label
   }
 }

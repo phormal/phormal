@@ -1,4 +1,4 @@
-import {Hook, HookReturnValue} from "@phormal/core/src/types/interfaces/Hook.interface";
+import {HookReturnValue} from "@phormal/core/src/types/interfaces/Hook.interface";
 import {FormField} from "@phormal/core/src/FormField";
 import {ValidationHelper} from "../util/validation-helper";
 

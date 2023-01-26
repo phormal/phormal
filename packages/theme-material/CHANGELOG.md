@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-beta.0](https://github.com/phormal/phormal/compare/v0.1.0-alpha.21...v0.1.0-beta.0) (2023-01-26)
+
+
+### Features
+
+* add support for dark-mode through style-attribute color-scheme ([#40](https://github.com/phormal/phormal/issues/40)) ([e8ab9d7](https://github.com/phormal/phormal/commit/e8ab9d7c88f5543c078d372add73b23789accc50))
+
+
+
+
+
 # [0.1.0-alpha.21](https://github.com/phormal/phormal/compare/v0.1.0-alpha.20...v0.1.0-alpha.21) (2023-01-22)
 
 

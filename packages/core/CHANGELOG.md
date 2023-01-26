@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-beta.0](https://github.com/phormal/phormal/compare/v0.1.0-alpha.21...v0.1.0-beta.0) (2023-01-26)
+
+
+### Features
+
+* **core:** add $errors API on Phormal instance ([#41](https://github.com/phormal/phormal/issues/41)) ([69347bf](https://github.com/phormal/phormal/commit/69347bf869ecb331182fbc03c28667cddada1ea9))
+* **core:** add label texts for address forms ([#43](https://github.com/phormal/phormal/issues/43)) ([fec7a2a](https://github.com/phormal/phormal/commit/fec7a2a5269f496bb9b3525e5269f099fc115a9f))
+* name attribute for all inputs ([#42](https://github.com/phormal/phormal/issues/42)) ([a0c175f](https://github.com/phormal/phormal/commit/a0c175f0bb1803b28b2cbc7c04f8f5445c78fcad))
+
+
+
+
+
 # [0.1.0-alpha.21](https://github.com/phormal/phormal/compare/v0.1.0-alpha.20...v0.1.0-alpha.21) (2023-01-22)
 
 
